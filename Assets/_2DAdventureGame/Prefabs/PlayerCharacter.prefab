@@ -196,9 +196,28 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
+  launchAction:
+    m_Name: Launch
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 54158471-ebe8-4f5b-801b-af0fb545c9a0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f277b974-b81e-4c08-b9ab-624a70393a3a
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Launch
+      m_Flags: 0
+    m_Flags: 0
   maxHealth: 5
   speed: 3
   timeInvicible: 2
+  projectile: {fileID: 3770429791428993732, guid: 111bb8158e249b14fa293499ef1e6b94,
+    type: 3}
 --- !u!50 &6183278311838019341
 Rigidbody2D:
   serializedVersion: 5

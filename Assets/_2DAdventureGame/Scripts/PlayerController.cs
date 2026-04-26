@@ -3,7 +3,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    // Actions
     public InputAction moveAction;
+    public InputAction launchAction;
+
     private Rigidbody2D rb;
     private Vector2 move;
 
@@ -20,6 +23,9 @@ public class PlayerController : MonoBehaviour
     bool isInvicible;
     float damageCooldown;
 
+    // Projectile
+    public GameObject projectile;
+
     // Animation
     private Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
@@ -28,6 +34,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         moveAction.Enable();
+        launchAction.Enable();
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
@@ -56,6 +64,11 @@ public class PlayerController : MonoBehaviour
                 isInvicible = false;
             }
         }
+
+        if (launchAction.WasPressedThisFrame())
+        {
+            Launch();
+        }
     }
 
     void FixedUpdate()
@@ -78,5 +91,13 @@ public class PlayerController : MonoBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth + "/" + maxHealth);
+    }
+
+    void Launch()
+    {
+        GameObject projectileObject = Instantiate(projectile, rb.position + Vector2.up * 0.5f, Quaternion.identity);
+        Projectile p = projectileObject.GetComponent<Projectile>();
+        p.Launch(moveDirection, 300);
+        animator.SetTrigger("Launch");
     }
 }

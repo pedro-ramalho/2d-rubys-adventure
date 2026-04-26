@@ -24258,6 +24258,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 7527325664591680456, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8438508011305300632, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       propertyPath: m_Enabled
