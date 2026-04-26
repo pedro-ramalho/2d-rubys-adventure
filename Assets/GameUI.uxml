@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="HealthBarBackground" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ruby/UI/UIHealthFrame.png?fileID=21300000&amp;guid=e04807cd45105ec409b00463fe6ab7b1&amp;type=3#UIHealthFrame&quot;); flex-basis: auto; width: 423px; height: 204px; -unity-background-scale-mode: scale-to-fit;">
+        <ui:VisualElement name="HealthBarContainer" style="flex-grow: 1; position: absolute; height: 64px; width: 230px; top: 65px; left: 175px;">
+            <ui:VisualElement name="HealthBar" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ruby/UI/UIHealthBar.png?fileID=21300000&amp;guid=be3322f3a1dbc6e44b25b63f3bb91e16&amp;type=3#UIHealthBar&quot;);"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="CharacterPortrait" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ruby/UI/CharacterPortrait.png?fileID=21300000&amp;guid=374193bc7008fa34ab9b2bbca376937b&amp;type=3#CharacterPortrait&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 171px; width: 169px; top: 5px; left: 19px;"/>
+    </ui:VisualElement>
+</ui:UXML>
