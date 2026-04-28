@@ -24156,74 +24156,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd3dca74c68f00f44aea61e2075d7d6a, type: 3}
---- !u!1001 &1911434331140184543
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 844690113617188872, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_Name
-      value: NPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8934737519890757870, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 454258e503a7c0843bcdf11fdf1cc1a3, type: 3}
 --- !u!1001 &2186746435125249387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24437,41 +24369,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: talkAction.m_Name
-      value: Talk
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: talkAction.m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: talkAction.m_ExpectedControlType
-      value: Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: talkAction.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: talkAction.m_SingletonActionBindings.Array.data[0].m_Id
-      value: c9296e59-b1ca-4388-bdd3-dd6cdad84951
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: talkAction.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/x
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: talkAction.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Talk
       objectReference: {fileID: 0}
     - target: {fileID: 8438508011305300632, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
@@ -24835,4 +24732,3 @@ SceneRoots:
   - {fileID: 839617611}
   - {fileID: 1860917671}
   - {fileID: 2056929448}
-  - {fileID: 1911434331140184543}
