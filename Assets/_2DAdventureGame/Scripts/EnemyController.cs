@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
 
     bool broken = true;
 
+    public bool isBroken { get { return broken; }}
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
