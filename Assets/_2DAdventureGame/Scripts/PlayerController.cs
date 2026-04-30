@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
 
+    // NPC
+    private NPC lastNPC;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -73,7 +76,21 @@ public class PlayerController : MonoBehaviour
         }
 
         RaycastHit2D hit = Physics2D.Raycast(rb.position + Vector2.up * 0.2f, moveDirection, 1.5f, LayerMask.GetMask("NPC"));
-        if (hit.collider != null) FindFriend(hit);
+        if (hit.collider != null)
+        {
+            NPC npc = hit.collider.GetComponent<NPC>();
+            npc.dialogueBubble.SetActive(true);
+            lastNPC = npc;
+            FindFriend();
+        }
+        else
+        {
+            if (lastNPC != null)
+            {
+                lastNPC.dialogueBubble.SetActive(false);
+                lastNPC = null;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -106,11 +123,11 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Launch");
     }
 
-    void FindFriend(RaycastHit2D hit)
+    void FindFriend()
     {
         if (talkAction.WasPressedThisFrame())
         {
-            Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
+            UIHandler.instance.DisplayDialogue();
         }
     }
 }
