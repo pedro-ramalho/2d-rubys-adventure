@@ -4,43 +4,58 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public PlayerController player;
-    EnemyController[] enemies;
     public UIHandler uiHandler;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    EnemyController[] enemies;
+    int enemiesFixed = 0;
+    bool gameEnded = false;
+
     void Start()
     {
-        enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);    
+        enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+
+        foreach (EnemyController enemy in enemies)
+        {
+            enemy.OnFixed += HandleEnemyFixed;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (gameEnded) return;
+
         if (player.health <= 0)
         {
-            uiHandler.DisplayLoseScreen();
-            Invoke(nameof(ReloadScene), 3f);
+            EndGame(win: false);
         }
+    }
 
-        if (AllEnemiesFixed())
+    void HandleEnemyFixed()
+    {
+        if (gameEnded) return;
+
+        enemiesFixed++;
+
+        if (enemiesFixed >= enemies.Length)
         {
-            uiHandler.DisplayWinScreen();
-            Invoke(nameof(ReloadScene), 3f);
+            EndGame(win: true);
         }
+    }
+
+    void EndGame(bool win)
+    {
+        gameEnded = true;
+
+        if (win)
+            uiHandler.DisplayWinScreen();
+        else
+            uiHandler.DisplayLoseScreen();
+
+        Invoke(nameof(ReloadScene), 3f);
     }
 
     void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    bool AllEnemiesFixed()
-    {
-        foreach (EnemyController enemy in enemies)
-        {
-            if (enemy.isBroken) return false;
-        }
-
-        return true;
     }
 }

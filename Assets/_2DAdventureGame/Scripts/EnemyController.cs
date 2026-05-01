@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -14,7 +15,8 @@ public class EnemyController : MonoBehaviour
 
     bool broken = true;
 
-    public bool isBroken { get { return broken; }}
+    public bool isBroken { get { return broken; } }
+    public event Action OnFixed;
 
     AudioSource audioSource;
     public ParticleSystem smokeParticleEffect;
@@ -75,5 +77,6 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("Fixed");
         audioSource.Stop();
         smokeParticleEffect.Stop();
+        OnFixed?.Invoke();
     }
 }
