@@ -4,33 +4,18 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : MonoBehaviour
 {
-    public InputAction launchAction;
-    public InputAction talkAction;
+    [SerializeField] private InputAction launchAction;
+    [SerializeField] private InputAction talkAction;
 
     private Rigidbody2D rb;
     private Animator animator;
     private AudioSource audioSource;
     private PlayerMovement playerMovement;
 
-    // Player health
-    public int maxHealth = 5;
-    public int health { get { return currentHealth; } }
-    int currentHealth;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private AudioClip throwProjectileClip;
 
-    // Invicibility
-    public float timeInvicible = 2.0f;
-    bool isInvicible;
-    float damageCooldown;
-
-    // Projectile
-    public GameObject projectile;
-
-    // NPC
     private NPC lastNPC;
-
-    // Audio
-    public AudioClip throwProjectileClip;
-    public AudioClip playerHitClip;
 
     void Start()
     {
@@ -41,20 +26,10 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
-        currentHealth = maxHealth;
     }
 
     void Update()
     {
-        if (isInvicible)
-        {
-            damageCooldown -= Time.deltaTime;
-            if (damageCooldown < 0)
-            {
-                isInvicible = false;
-            }
-        }
-
         if (launchAction.WasPressedThisFrame())
         {
             Launch();
@@ -66,7 +41,7 @@ public class PlayerController : MonoBehaviour
             NPC npc = hit.collider.GetComponent<NPC>();
             npc.dialogueBubble.SetActive(true);
             lastNPC = npc;
-            FindFriend();
+            TryTalkToNPC();
         }
         else
         {
@@ -78,23 +53,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ChangeHealth(int amount)
-    {
-        if (amount < 0)
-        {
-            if (isInvicible) return;
-
-            isInvicible = true;
-            damageCooldown = timeInvicible;
-
-            animator.SetTrigger("Hit");
-            PlaySound(playerHitClip);
-        }
-
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
-    }
-
     void Launch()
     {
         GameObject projectileObject = Instantiate(projectile, rb.position + Vector2.up * 0.5f, Quaternion.identity);
@@ -104,7 +62,7 @@ public class PlayerController : MonoBehaviour
         PlaySound(throwProjectileClip);
     }
 
-    void FindFriend()
+    void TryTalkToNPC()
     {
         if (talkAction.WasPressedThisFrame())
         {

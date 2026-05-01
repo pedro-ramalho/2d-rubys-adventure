@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour
 {
-    public AudioClip collectedClip;
+    [SerializeField] private AudioClip collectedClip;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerController controller = other.GetComponent<PlayerController>();
-        if (controller == null) return;
+        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+        if (playerHealth == null) return;
 
-        if (controller.health < controller.maxHealth)
+        if (playerHealth.Health < playerHealth.MaxHealth)
         {
-            controller.ChangeHealth(1);
+            playerHealth.ChangeHealth(1);
+            other.GetComponent<AudioSource>().PlayOneShot(collectedClip);
             Destroy(gameObject);
-            controller.PlaySound(collectedClip);
         }
     }
 }
