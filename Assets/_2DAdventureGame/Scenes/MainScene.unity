@@ -4715,7 +4715,39 @@ MonoBehaviour:
   maxHealth: 5
   startingHealth: 3
   invincibilityDuration: 2
-  playerHitClip: {fileID: 0}
+  playerHitClip: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6, type: 3}
+--- !u!114 &1767026583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235406272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ad62084f034f045ad8919ca20fceeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  launchAction:
+    m_Name: Launch
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 61ba5a91-39f0-4c4b-a023-e3493df9a841
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9a26272e-3524-4180-ba79-e5330ec4677f
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Launch
+      m_Flags: 0
+    m_Flags: 0
+  projectile: {fileID: 3770429791428993732, guid: 111bb8158e249b14fa293499ef1e6b94,
+    type: 3}
+  throwProjectileClip: {fileID: 8300000, guid: c87de0cae68cdbb409eec8ba23a860d0, type: 3}
 --- !u!1 &1795759410
 GameObject:
   m_ObjectHideFlags: 0
@@ -25114,6 +25146,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 4
       addedObject: {fileID: 1767026582}
+    - targetCorrespondingSourceObject: {fileID: 7527325664591680456, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 1767026583}
   m_SourcePrefab: {fileID: 100100000, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
 --- !u!1001 &3063683451736310083
 PrefabInstance:
