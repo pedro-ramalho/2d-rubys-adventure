@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     // NPC
     private NPC lastNPC;
 
+    // Audio
+    private AudioSource audioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,6 +47,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -129,5 +134,10 @@ public class PlayerController : MonoBehaviour
         {
             UIHandler.instance.DisplayDialogue();
         }
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }
