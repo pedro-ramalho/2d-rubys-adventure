@@ -25028,21 +25028,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: playerHitClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6, type: 3}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: playerWalkClip
-      value: 
-      objectReference: {fileID: 8300000, guid: a0ccbead04ec99c4e9ddc660333de268, type: 3}
-    - target: {fileID: 7955640558611708656, guid: 9e53bfff606c5e246821c7dcd944fd91,
-        type: 3}
-      propertyPath: throwProjectileClip
-      value: 
-      objectReference: {fileID: 8300000, guid: c87de0cae68cdbb409eec8ba23a860d0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
