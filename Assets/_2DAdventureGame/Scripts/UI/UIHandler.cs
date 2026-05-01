@@ -3,42 +3,46 @@ using UnityEngine.UIElements;
 
 public class UIHandler : MonoBehaviour
 {
-    private VisualElement m_HealthBar;
     public static UIHandler instance { get; private set; }
 
     public float displayTime = 4.0f;
-    private VisualElement m_NonPlayerDialogue;
-    private float m_TimerDisplay;
 
+    private VisualElement m_HealthBar;
+    private VisualElement m_NonPlayerDialogue;
     private VisualElement m_WinScreen;
     private VisualElement m_LoseScreen;
+    private float m_TimerDisplay;
+
+    private PlayerHealth playerHealth;
 
     private void Awake()
     {
-        instance = this;    
+        instance = this;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         UIDocument uiDocument = GetComponent<UIDocument>();
         m_HealthBar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
-        SetHealthValue(1.0f);
-
         m_NonPlayerDialogue = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
+        m_LoseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
+        m_WinScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
+
         m_NonPlayerDialogue.style.display = DisplayStyle.None;
         m_TimerDisplay = -1.0f;
 
-        m_LoseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
-        m_WinScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
+        playerHealth = FindAnyObjectByType<PlayerHealth>();
+        playerHealth.OnHealthChanged += SetHealthValue;
+        SetHealthValue(playerHealth.Health / (float)playerHealth.MaxHealth);
     }
 
-    public void SetHealthValue(float percentage)
+    void OnDestroy()
     {
-        m_HealthBar.style.width = Length.Percent(100 * percentage);
+        if (playerHealth != null)
+            playerHealth.OnHealthChanged -= SetHealthValue;
     }
 
-    private void Update()
+    void Update()
     {
         if (m_TimerDisplay > 0)
         {
@@ -48,6 +52,11 @@ public class UIHandler : MonoBehaviour
                 m_NonPlayerDialogue.style.display = DisplayStyle.None;
             }
         }
+    }
+
+    void SetHealthValue(float percentage)
+    {
+        m_HealthBar.style.width = Length.Percent(100 * percentage);
     }
 
     public void DisplayDialogue()

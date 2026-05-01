@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public PlayerController player;
+    public PlayerHealth player;
     public UIHandler uiHandler;
 
     EnemyController[] enemies;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameEnded) return;
 
-        if (player.health <= 0)
+        if (player.Health <= 0)
         {
             EndGame(win: false);
         }
