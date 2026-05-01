@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3449402523654975538}
   - component: {fileID: 1590192134475356939}
   - component: {fileID: 7955640558611708656}
+  - component: {fileID: 2116686224021831319}
   - component: {fileID: 6183278311838019341}
   - component: {fileID: 8330022176222149082}
   - component: {fileID: 8438508011305300632}
@@ -108,95 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e2f54c89f436647a532a669069764e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: Vector2
-    m_Id: 9b508a4a-0b90-4c88-828d-ed66ff447ee8
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: Arrow Keys
-      m_Id: 80e072c7-ec0a-4bcc-95da-a01a05bca23e
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 4
-    - m_Name: up
-      m_Id: f9a84dec-ccdf-43e9-817c-2f672e2723d0
-      m_Path: <Keyboard>/upArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 786f1cf1-8f4c-4eb1-b6d2-07d52fc77021
-      m_Path: <Keyboard>/downArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 458b1889-f236-4ae9-bf35-e96f13ef5117
-      m_Path: <Keyboard>/leftArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 82b49ea9-3e50-4f88-a2b1-e3f7ededae65
-      m_Path: <Keyboard>/rightArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: WASD Keys
-      m_Id: ea9bfe0e-a2ba-4bdc-a19f-d3de530db63a
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 5c36ea0e-4cdb-44aa-8017-b667c2e8d676
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: down
-      m_Id: dd76a09f-6fdd-445f-9c2f-f58d5d868cb3
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 36db568f-ee6c-482b-80cb-35b48e62b41e
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 628d0692-316b-4426-b8ff-214ddfc259eb
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    m_Flags: 0
   launchAction:
     m_Name: Launch
     m_Type: 1
@@ -232,10 +144,114 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   maxHealth: 5
-  speed: 3
   timeInvicible: 2
   projectile: {fileID: 3770429791428993732, guid: 111bb8158e249b14fa293499ef1e6b94,
     type: 3}
+  throwProjectileClip: {fileID: 8300000, guid: c87de0cae68cdbb409eec8ba23a860d0, type: 3}
+  playerHitClip: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6, type: 3}
+--- !u!114 &2116686224021831319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527325664591680456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3561fe3b3cbf84f839d2834c30775c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 37dba6c1-5e1c-4312-a47f-cf1d9c260fd7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: Arrow Keys
+      m_Id: fdfb9886-e32e-4887-84a5-2957c8ccf08c
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 9c9a1699-f952-4cf7-93b9-6a7deb4ac7c0
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 009b1bf3-62ce-4222-80ef-459ac398c9cb
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: fccde898-00fd-45b5-9fd7-26f7884f4e36
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 1f137377-23a2-442a-b2c1-4d39a15a5610
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: WASD Keys
+      m_Id: 0341ea23-e149-471f-801b-f898869e3d58
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 3cad7408-99d4-4270-bbe5-64dc34cd4414
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: ddda66fc-5587-4236-9a71-0cbe69f4b32b
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 0567b708-6de7-438e-8ba8-071d2ae8cff3
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: ba41f6fb-812d-4c6d-bafd-d6a4d969dc76
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    m_Flags: 0
+  speed: 3
+  playerWalkClip: {fileID: 8300000, guid: a0ccbead04ec99c4e9ddc660333de268, type: 3}
 --- !u!50 &6183278311838019341
 Rigidbody2D:
   serializedVersion: 5
