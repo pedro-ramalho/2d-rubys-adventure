@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
 
     // Audio
     private AudioSource audioSource;
+    public AudioClip playerWalkClip;
+    public AudioClip throwProjectileClip;
+    public AudioClip playerHitClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -102,6 +105,19 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 position = rb.position + move * speed * Time.deltaTime;
         rb.MovePosition(position);
+
+        if (move.magnitude > 0)
+        {
+            if (audioSource.clip != playerWalkClip || !audioSource.isPlaying)
+            {
+                audioSource.clip = playerWalkClip;
+                audioSource.Play();
+            }
+        }
+        else if (audioSource.clip == playerWalkClip && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 
     public void ChangeHealth(int amount)
@@ -114,6 +130,7 @@ public class PlayerController : MonoBehaviour
             damageCooldown = timeInvicible;
 
             animator.SetTrigger("Hit");
+            PlaySound(playerHitClip);
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
@@ -126,6 +143,7 @@ public class PlayerController : MonoBehaviour
         Projectile p = projectileObject.GetComponent<Projectile>();
         p.Launch(moveDirection, 300);
         animator.SetTrigger("Launch");
+        PlaySound(throwProjectileClip);
     }
 
     void FindFriend()
