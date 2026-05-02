@@ -34,5 +34,7 @@ public class Minimap : MonoBehaviour
 
         if (mapOverlay != null)
             mapOverlay.SetActive(show);
+
+        UIHandler.Instance.SetVisible(!show);
     }
 }
