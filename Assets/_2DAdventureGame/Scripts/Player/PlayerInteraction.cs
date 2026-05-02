@@ -38,6 +38,6 @@ public class PlayerInteraction : MonoBehaviour
     void TryTalkToNPC()
     {
         if (talkAction.WasPressedThisFrame())
-            UIHandler.instance.DisplayDialogue();
+            UIHandler.Instance.DisplayDialogue();
     }
 }
