@@ -1,27 +1,30 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private bool vertical;
+    [SerializeField] private float changeTime = 3.0f;
+    [SerializeField] private ParticleSystem smokeParticleEffect;
+
     private Rigidbody2D rb;
     private Animator animator;
-    public float speed = 1.0f;
+    private AudioSource audioSource;
 
-    public bool vertical;
+    private float timer;
+    private int direction = 1;
+    private bool isFixed = false;
 
-    public float changeTime = 3.0f;
-    float timer;
-    int direction = 1;
+    static readonly int MoveXHash = Animator.StringToHash("Move X");
+    static readonly int MoveYHash = Animator.StringToHash("Move Y");
+    static readonly int FixedHash = Animator.StringToHash("Fixed");
 
-    bool broken = true;
-
-    public bool isBroken { get { return broken; } }
     public event Action OnFixed;
 
-    AudioSource audioSource;
-    public ParticleSystem smokeParticleEffect;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,6 +35,8 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if (isFixed) return;
+
         timer -= Time.deltaTime;
         if (timer < 0)
         {
@@ -42,21 +47,21 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!broken) return;
+        if (isFixed) return;
 
         Vector2 position = rb.position;
 
         if (vertical)
         {
             position.y += speed * direction * Time.deltaTime;
-            animator.SetFloat("Move X", 0);
-            animator.SetFloat("Move Y", direction);
+            animator.SetFloat(MoveXHash, 0);
+            animator.SetFloat(MoveYHash, direction);
         }
         else
         {
             position.x += speed * direction * Time.deltaTime;
-            animator.SetFloat("Move X", direction);
-            animator.SetFloat("Move Y", 0);
+            animator.SetFloat(MoveXHash, direction);
+            animator.SetFloat(MoveYHash, 0);
         }
 
         rb.MovePosition(position);
@@ -72,9 +77,9 @@ public class EnemyController : MonoBehaviour
 
     public void Fix()
     {
-        broken = false;
+        isFixed = true;
         rb.simulated = false;
-        animator.SetTrigger("Fixed");
+        animator.SetTrigger(FixedHash);
         audioSource.Stop();
         smokeParticleEffect.Stop();
         OnFixed?.Invoke();
