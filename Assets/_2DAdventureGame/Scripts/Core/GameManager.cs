@@ -3,31 +3,35 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public PlayerHealth player;
-    public UIHandler uiHandler;
+    [SerializeField] private PlayerHealth player;
+    [SerializeField] private UIHandler uiHandler;
+    [SerializeField] private float endGameDelay = 3f;
 
-    EnemyController[] enemies;
-    int enemiesFixed = 0;
-    bool gameEnded = false;
+    private EnemyController[] enemies;
+    private int enemiesFixed = 0;
+    private bool gameEnded = false;
 
     void Start()
     {
         enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
 
         foreach (EnemyController enemy in enemies)
-        {
             enemy.OnFixed += HandleEnemyFixed;
-        }
+
+        player.OnDied += HandlePlayerDied;
     }
 
-    void Update()
+    void OnDestroy()
     {
-        if (gameEnded) return;
+        foreach (EnemyController enemy in enemies)
+            enemy.OnFixed -= HandleEnemyFixed;
 
-        if (player.Health <= 0)
-        {
-            EndGame(win: false);
-        }
+        player.OnDied -= HandlePlayerDied;
+    }
+
+    void HandlePlayerDied()
+    {
+        EndGame(win: false);
     }
 
     void HandleEnemyFixed()
@@ -37,9 +41,7 @@ public class GameManager : MonoBehaviour
         enemiesFixed++;
 
         if (enemiesFixed >= enemies.Length)
-        {
             EndGame(win: true);
-        }
     }
 
     void EndGame(bool win)
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
         else
             uiHandler.DisplayLoseScreen();
 
-        Invoke(nameof(ReloadScene), 3f);
+        Invoke(nameof(ReloadScene), endGameDelay);
     }
 
     void ReloadScene()

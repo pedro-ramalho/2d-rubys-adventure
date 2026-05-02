@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     public int MaxHealth => maxHealth;
 
     public event Action<float> OnHealthChanged;
+    public event Action OnDied;
 
     void Awake()
     {
@@ -56,5 +57,6 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         OnHealthChanged?.Invoke(currentHealth / (float)maxHealth);
+        if (currentHealth == 0) OnDied?.Invoke();
     }
 }
