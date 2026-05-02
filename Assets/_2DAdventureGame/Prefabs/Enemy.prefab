@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3360969911316289131}
   - component: {fileID: 4808783996010769892}
   - component: {fileID: 3948843125931185040}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   speed: 1
-  vertical: 0
+  vertical: 1
   changeTime: 3
   smokeParticleEffect: {fileID: 8752407528217253954}
 --- !u!95 &4808783996010769892
@@ -230,7 +230,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -372,6 +372,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Smoke Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5807947221796141523, guid: c4121383494e94343af7ee66e40abfbd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
