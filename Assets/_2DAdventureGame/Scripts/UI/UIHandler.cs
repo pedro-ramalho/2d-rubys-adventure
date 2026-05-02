@@ -1,35 +1,34 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(UIDocument))]
 public class UIHandler : MonoBehaviour
 {
-    public static UIHandler instance { get; private set; }
+    public static UIHandler Instance { get; private set; }
 
-    public float displayTime = 4.0f;
+    [SerializeField] private float displayTime = 4.0f;
 
-    private VisualElement m_HealthBar;
-    private VisualElement m_NonPlayerDialogue;
-    private VisualElement m_WinScreen;
-    private VisualElement m_LoseScreen;
-    private float m_TimerDisplay;
+    private VisualElement healthBar;
+    private VisualElement dialoguePanel;
+    private VisualElement winScreen;
+    private VisualElement loseScreen;
 
     private PlayerHealth playerHealth;
 
-    private void Awake()
+    void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     void Start()
     {
         UIDocument uiDocument = GetComponent<UIDocument>();
-        m_HealthBar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
-        m_NonPlayerDialogue = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
-        m_LoseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
-        m_WinScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
+        healthBar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
+        dialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
+        loseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
+        winScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
 
-        m_NonPlayerDialogue.style.display = DisplayStyle.None;
-        m_TimerDisplay = -1.0f;
+        dialoguePanel.style.display = DisplayStyle.None;
 
         playerHealth = FindAnyObjectByType<PlayerHealth>();
         playerHealth.OnHealthChanged += SetHealthValue;
@@ -42,36 +41,30 @@ public class UIHandler : MonoBehaviour
             playerHealth.OnHealthChanged -= SetHealthValue;
     }
 
-    void Update()
-    {
-        if (m_TimerDisplay > 0)
-        {
-            m_TimerDisplay -= Time.deltaTime;
-            if (m_TimerDisplay < 0)
-            {
-                m_NonPlayerDialogue.style.display = DisplayStyle.None;
-            }
-        }
-    }
-
     void SetHealthValue(float percentage)
     {
-        m_HealthBar.style.width = Length.Percent(100 * percentage);
+        healthBar.style.width = Length.Percent(100 * percentage);
     }
 
     public void DisplayDialogue()
     {
-        m_NonPlayerDialogue.style.display = DisplayStyle.Flex;
-        m_TimerDisplay = displayTime;
+        dialoguePanel.style.display = DisplayStyle.Flex;
+        CancelInvoke(nameof(HideDialogue));
+        Invoke(nameof(HideDialogue), displayTime);
+    }
+
+    void HideDialogue()
+    {
+        dialoguePanel.style.display = DisplayStyle.None;
     }
 
     public void DisplayWinScreen()
     {
-        m_WinScreen.style.opacity = 1.0f;
+        winScreen.style.opacity = 1.0f;
     }
 
     public void DisplayLoseScreen()
     {
-        m_LoseScreen.style.opacity = 1.0f;
+        loseScreen.style.opacity = 1.0f;
     }
 }
