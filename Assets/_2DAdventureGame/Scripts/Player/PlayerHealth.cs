@@ -59,6 +59,7 @@ public class PlayerHealth : MonoBehaviour
             damageCooldown = invincibilityDuration;
             animator.SetTrigger("Hit");
             audioSource.PlayOneShot(playerHitClip);
+            CameraShake.Instance.Shake(.5f);
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
