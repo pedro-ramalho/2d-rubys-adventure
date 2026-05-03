@@ -7,7 +7,10 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputAction moveAction;
+
     [SerializeField] private float speed = 3.0f;
+    [SerializeField] private float acceleration = 20.0f;
+    [SerializeField] private float decelaration = 25.0f;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -16,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip playerWalkClip;
 
     private Vector2 move;
+    private Vector2 currentVelocity;
     private Vector2 moveDirection = new(1, 0);
 
     static readonly int LookXHash = Animator.StringToHash("Look X");
@@ -63,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + move * (speed * Time.deltaTime));
+        Vector2 targetVelocity = move * speed;
+        float rate = move.magnitude > 0 ? acceleration : decelaration;
+        currentVelocity = Vector2.MoveTowards(currentVelocity, targetVelocity, rate * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + currentVelocity * Time.fixedDeltaTime);
     }
 }
