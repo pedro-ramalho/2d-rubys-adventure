@@ -37925,9 +37925,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2116686224021831319, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
+      propertyPath: dashClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9163c1cf7fc42164f942a4abee033dd3, type: 3}
+    - target: {fileID: 2116686224021831319, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
       propertyPath: dashSpeed
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2116686224021831319, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
+      propertyPath: afterimage
+      value: 
+      objectReference: {fileID: 1500623521988529465, guid: 2ed34625a2460674e982dd3d3cc45e9e,
+        type: 3}
     - target: {fileID: 2116686224021831319, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       propertyPath: dashDuration

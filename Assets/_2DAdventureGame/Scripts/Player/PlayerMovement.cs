@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +41,13 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 MoveDirection => moveDirection;
     public bool IsDashing => isDashing;
 
+    [SerializeField] private GameObject afterimage;
+    [SerializeField] private float afterimageInterval = 0.05f;
+    [SerializeField] private float afterimageDuration = 0.3f;
+    [SerializeField] private Color afterimageColor = new Color(0.5f, 0.8f, 1f, 0.6f);
+
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
         moveAction.Enable();
@@ -49,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         playerHealth = GetComponent<PlayerHealth>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -106,6 +115,25 @@ public class PlayerMovement : MonoBehaviour
         {
             audioSource.Stop();
             audioSource.PlayOneShot(dashClip);
+        }
+
+        StartCoroutine(SpawnAfterimages());
+    }
+
+    IEnumerator SpawnAfterimages()
+    {
+        while (isDashing)
+        {
+            GameObject ghost = Instantiate(afterimage, transform.position, transform.rotation);
+            ghost.GetComponent<DashAfterimage>().Initialize(
+                spriteRenderer.sprite,
+                transform.localScale,
+                spriteRenderer.flipX,
+                afterimageColor,
+                afterimageDuration
+            );
+
+            yield return new WaitForSeconds(afterimageInterval);
         }
     }
 
