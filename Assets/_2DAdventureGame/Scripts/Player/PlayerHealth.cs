@@ -43,6 +43,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void SetInvincible(float duration)
+    {
+        isInvincible = true;
+        damageCooldown = duration;
+    }
+
     public void ChangeHealth(int amount)
     {
         if (amount < 0)
