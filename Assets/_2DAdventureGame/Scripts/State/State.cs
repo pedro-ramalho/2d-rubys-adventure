@@ -18,6 +18,8 @@ public abstract class State<T>
     /// </summary>
     /// <param name="owner">A reference to the owner of the state's context.</param>
     public abstract void Update(T owner);
+    
+    public abstract void FixedUpdate(T owner);
 
     /// <summary>
     /// Method that is executed when a transition happens <b>from</b> this state.
