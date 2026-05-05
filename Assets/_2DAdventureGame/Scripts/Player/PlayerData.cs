@@ -18,6 +18,9 @@ public class PlayerData : ScriptableObject
     public float dashDuration = 0.15f;
     public float dashCooldown = 1f;
 
+    [Header("Combat")]
+    public float projectileLaunchForce = 300f;
+
     [Header("Afterimage")]
     public Color afterimageColor = new Color(0.5f, 0.8f, 1f, 0.6f);
     public float afterimageInterval = 0.05f;

@@ -1,7 +1,5 @@
-using UnityEngine;
-
 /// <summary>
-/// Abstract class for modeling a generic state. 
+/// Abstract class for modeling a generic state.
 /// </summary>
 /// <typeparam name="T">The type of the owner of the state.</typeparam>
 public abstract class State<T>
@@ -19,6 +17,10 @@ public abstract class State<T>
     /// <param name="owner">A reference to the owner of the state's context.</param>
     public abstract void Update(T owner);
     
+    /// <summary>
+    /// Called every fixed timestep while this state is active. Use it for
+    /// physics-driven behaviour such as moving a Rigidbody.
+    /// </summary>
     public abstract void FixedUpdate(T owner);
 
     /// <summary>

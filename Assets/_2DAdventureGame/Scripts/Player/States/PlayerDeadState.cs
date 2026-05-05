@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerDeadState
+public class PlayerDeadState : PlayerState
 {
     
 }

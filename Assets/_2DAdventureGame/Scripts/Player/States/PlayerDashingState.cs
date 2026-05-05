@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerDashingState
+public class PlayerDashingState : PlayerState
 {
     
 }

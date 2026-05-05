@@ -20,6 +20,12 @@ public abstract class PlayerState : State<Player>
         CameraShake.Instance.Shake();
 
         owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth - amount, 0, owner.Data.maxHealth);
-        // TODO
+        owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.maxHealth);
+
+        if (owner.CurrentHealth == 0)
+        {
+            owner.RaiseOnDied();
+            owner.ChangeState(owner.DeadState);
+        }
     }
 }
