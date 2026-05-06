@@ -1,8 +1,10 @@
+using System;
+
 /// <summary>
 /// Abstract class for modeling a generic state.
 /// </summary>
 /// <typeparam name="T">The type of the owner of the state.</typeparam>
-public abstract class State<T>
+public abstract class State<T, TID> where TID : Enum
 {
     /// <summary>
     /// Method that is executed when a transition happens <b>to</b> this state.

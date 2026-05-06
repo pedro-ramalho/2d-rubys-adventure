@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public abstract class PlayerState : State<Player>
+public enum PlayerStateID { Grounded, Dashing, Dead }
+public abstract class PlayerState : State<Player, PlayerStateID>
 {
     public override void Enter(Player owner) { }
     public override void Update(Player owner) { }

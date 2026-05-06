@@ -6,6 +6,8 @@ public class PlayerGroundedState : PlayerState
 
     private static readonly int NPCMaskHash = LayerMask.GetMask("NPC");
 
+    public override PlayerStateID ID => PlayerStateID.Grounded;
+    
     public override void Update(Player owner)
     {
         move = owner.MoveAction.ReadValue<Vector2>();
