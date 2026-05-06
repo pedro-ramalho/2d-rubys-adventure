@@ -6,12 +6,12 @@ public class HealthCollectible : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-        if (playerHealth == null) return;
+        Player player = other.GetComponent<Player>();
+        if (player == null) return;
 
-        if (playerHealth.Health < playerHealth.MaxHealth)
+        if (player.CurrentHealth < player.Data.maxHealth)
         {
-            playerHealth.ChangeHealth(1);
+            player.TakeDamage(-1);
             other.GetComponent<AudioSource>().PlayOneShot(collectedClip);
             Destroy(gameObject);
         }

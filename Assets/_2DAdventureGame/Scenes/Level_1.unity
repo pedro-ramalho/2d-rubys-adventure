@@ -5425,7 +5425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3e00b9d90cdc94c932eb6ca24b2f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  player: {fileID: 1767026582}
+  player: {fileID: 2805295948606414392}
   uiHandler: {fileID: 2056929449}
   endGameDelay: 3
 --- !u!1001 &1532509925
@@ -6318,18 +6318,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2805295948606414390}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1767026582 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7318857376873986068, guid: 9e53bfff606c5e246821c7dcd944fd91,
-    type: 3}
-  m_PrefabInstance: {fileID: 2805295948606414390}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931f296f188dcff42b495771a25abc39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
 --- !u!1 &1795759410
 GameObject:
   m_ObjectHideFlags: 0
@@ -38054,15 +38042,207 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3182049481389897261, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
+    - {fileID: 8364577010632279559, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
+    - {fileID: 2116686224021831319, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
+    - {fileID: 7318857376873986068, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3449402523654975538, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2058835689}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7527325664591680456, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2805295948606414392}
   m_SourcePrefab: {fileID: 100100000, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
+--- !u!1 &2805295948606414391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7527325664591680456, guid: 9e53bfff606c5e246821c7dcd944fd91,
+    type: 3}
+  m_PrefabInstance: {fileID: 2805295948606414390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2805295948606414392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2805295948606414391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278b4f8bb834973488bc15eea09ccadf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  data: {fileID: 11400000, guid: 60f9f239e50913a4a99b1a598ec3577e, type: 2}
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 4f1c839d-7ab7-4a8d-b4d0-3e6f33db3c3a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: WASD
+      m_Id: 3f1fe0b5-33e9-4a08-a76f-0826b4065871
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 50e37014-ff72-4c5d-a381-eb10eaefee21
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 6371aae0-a00d-4799-8a01-4d7e820f51ad
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 4e41c8ab-2bba-471a-831d-932fcf9654a8
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 6311fbe3-8003-4b06-acac-eba5c73ac670
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: Arrows
+      m_Id: d42b80ef-2662-45a3-b935-3bb2d518eb7e
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 43b96489-9632-4eac-b51b-e703dda28c96
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 3d77d45e-fab4-4c9a-a7d2-c231b1fc7cc3
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 792f55ed-ae87-48d4-b991-b8db9cb2e6f1
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 42dbf38c-b210-40a1-b467-744a0c4038ae
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    m_Flags: 0
+  dashAction:
+    m_Name: Dash
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 4bad1c79-ed88-4513-badc-01e68f443e88
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5e85d7d3-6f44-458c-b92a-ed4ad5e98a19
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Dash
+      m_Flags: 0
+    m_Flags: 0
+  shootAction:
+    m_Name: Shoot
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 44f243cd-1335-4a09-bb57-9d9bc7a3a6c7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 38531bb4-5554-4b82-a00a-b8bbc34c2add
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shoot
+      m_Flags: 0
+    m_Flags: 0
+  talkAction:
+    m_Name: Talk
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 53ac0380-2614-41b3-a1cf-4b3a732678c7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6102f2e2-ff3f-4f7a-b1b9-1ecf99e1e855
+      m_Path: <Keyboard>/x
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Talk
+      m_Flags: 0
+    m_Flags: 0
+  pauseAction:
+    m_Name: Pause
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 3c142327-50fc-4608-a7a9-f250f6ef3508
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f534b97f-5301-4a34-ad28-dcf14fdc69d1
+      m_Path: <Keyboard>/p
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
+    m_Flags: 0
+  walkClip: {fileID: 8300000, guid: a0ccbead04ec99c4e9ddc660333de268, type: 3}
+  dashClip: {fileID: 8300000, guid: 9163c1cf7fc42164f942a4abee033dd3, type: 3}
+  hitClip: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6, type: 3}
+  launchClip: {fileID: 8300000, guid: c87de0cae68cdbb409eec8ba23a860d0, type: 3}
+  afterimagePrefab: {fileID: 1500623521988529465, guid: 2ed34625a2460674e982dd3d3cc45e9e,
+    type: 3}
+  projectilePrefab: {fileID: 3770429791428993732, guid: 111bb8158e249b14fa293499ef1e6b94,
+    type: 3}
 --- !u!1001 &3063683451736310083
 PrefabInstance:
   m_ObjectHideFlags: 0
