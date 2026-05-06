@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth player;
+    [SerializeField] private Player player;
     [SerializeField] private UIHandler uiHandler;
     [SerializeField] private float endGameDelay = 3f;
 
