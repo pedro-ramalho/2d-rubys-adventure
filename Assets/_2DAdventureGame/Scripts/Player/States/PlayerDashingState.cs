@@ -22,7 +22,10 @@ public class PlayerDashingState : PlayerState
     public override void Update(Player owner)
     {
         if (dashTimer <= 0)
+        {
             owner.ChangeState(owner.GroundedState);
+            return;
+        }
 
         if (afterimageTimer <= 0)
             SpawnAfterimages(owner);
