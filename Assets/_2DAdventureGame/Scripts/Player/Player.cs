@@ -94,8 +94,26 @@ public class Player : MonoBehaviour
     void OnEnable() => EnableAllActions(true);
     void OnDisable() => EnableAllActions(false);
 
-    void Update() => CurrentState.Update(this);
+    void Update()
+    {
+        UpdateTimers();
+        CurrentState.Update(this);    
+    }
+
     void FixedUpdate() => CurrentState.FixedUpdate(this);
+
+    void UpdateTimers()
+    {
+        if (IsInvincible)
+        {
+            DamageCooldown -= Time.deltaTime;
+            if (DamageCooldown <= 0f)
+                IsInvincible = false;
+        }
+
+        if (DashCooldownTimer > 0f)
+            DashCooldownTimer -= Time.deltaTime;    
+    }
 
     public void ChangeState(PlayerState newState)
     {
