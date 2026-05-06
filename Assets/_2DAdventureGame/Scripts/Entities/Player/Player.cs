@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (CurrentState is PlayerDeadState) return;
+        if (CurrentState.ID == PlayerStateID.Dead) return;
         CurrentState.HandleDamage(this, amount);
     }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public enum PlayerStateID { Grounded, Dashing, Dead }
 public abstract class PlayerState : State<Player, PlayerStateID>
 {
+    public abstract override PlayerStateID ID { get; }
     public override void Enter(Player owner) { }
     public override void Update(Player owner) { }
     public override void FixedUpdate(Player owner) { }

@@ -7,6 +7,11 @@ using System;
 public abstract class State<T, TID> where TID : Enum
 {
     /// <summary>
+    /// 
+    /// </summary>
+    public abstract TID ID { get; }
+
+    /// <summary>
     /// Method that is executed when a transition happens <b>to</b> this state.
     /// It should be used for setting up the necessary context for the state to operate as intended.
     /// </summary>
