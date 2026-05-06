@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     // Components
     public Rigidbody2D Rigidbody { get; private set; }
@@ -122,11 +122,9 @@ public class Player : MonoBehaviour
         CurrentState.Enter(this);
     }
 
-    public void ChangeHealth(int amount)
-    {
-        if (CurrentState.ID == PlayerStateID.Dead) return;
-        CurrentState.HandleDamage(this, amount);
-    }
+    public void Heal(int amount) => CurrentState.HandleHeal(this, amount);
+
+    public void TakeDamage(int amount) => CurrentState.HandleDamage(this, amount);
 
     public void RaiseOnHealthChanged(float percentage) => OnHealthChanged?.Invoke(percentage);
     public void RaiseOnDied() => OnDied?.Invoke();

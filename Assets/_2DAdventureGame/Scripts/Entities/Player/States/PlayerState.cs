@@ -9,6 +9,12 @@ public abstract class PlayerState : State<Player, PlayerStateID>
     public override void FixedUpdate(Player owner) { }
     public override void Exit(Player owner) { }
 
+    public virtual void HandleHeal(Player owner, int amount)
+    {
+        owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth + amount, 0, owner.Data.maxHealth);
+        owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.maxHealth);
+    }
+
     public virtual void HandleDamage(Player owner, int amount)
     {
         if (owner.IsInvincible) return;
@@ -21,7 +27,7 @@ public abstract class PlayerState : State<Player, PlayerStateID>
         
         CameraShake.Instance?.Shake();
 
-        owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth + amount, 0, owner.Data.maxHealth);
+        owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth - amount, 0, owner.Data.maxHealth);
         owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.maxHealth);
 
         if (owner.CurrentHealth == 0)

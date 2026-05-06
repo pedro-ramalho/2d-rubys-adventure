@@ -11,7 +11,7 @@ public class HealthCollectible : MonoBehaviour
 
         if (player.CurrentHealth < player.Data.maxHealth)
         {
-            player.ChangeHealth(1);
+            player.Heal(1);
             other.GetComponent<AudioSource>().PlayOneShot(collectedClip);
             Destroy(gameObject);
         }

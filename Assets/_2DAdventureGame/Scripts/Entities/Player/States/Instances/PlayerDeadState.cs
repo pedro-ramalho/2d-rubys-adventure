@@ -36,7 +36,14 @@ public class PlayerDeadState : PlayerState
     public override void Exit(Player owner) { }
 
     /// <summary>
-    /// Empty, since we want to prevent the Player from taking damge whilst dead.
+    /// Empty, since we want to prevent the Player from healing whilst dead.
+    /// </summary>
+    /// <param name="owner">Unused.</param>
+    /// <param name="amount">Unused.</param>
+    public override void HandleHeal(Player owner, int amount) { }
+
+    /// <summary>
+    /// Empty, since we want to prevent the Player from taking damage whilst dead.
     /// </summary>
     /// <param name="owner">Unused.</param>
     /// <param name="amount">Unused.</param>

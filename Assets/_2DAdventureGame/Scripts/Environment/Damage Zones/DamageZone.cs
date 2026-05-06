@@ -4,9 +4,7 @@ public class DamageZone : MonoBehaviour
 {
     void OnTriggerStay2D(Collider2D other)
     {
-        Player player = other.GetComponent<Player>();
-        if (player == null) return;
-
-        player.ChangeHealth(-1);
+        if (other.TryGetComponent(out IDamageable damageable))
+            damageable.TakeDamage(1);
     }
 }
