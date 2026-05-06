@@ -122,6 +122,18 @@ public class Player : MonoBehaviour
         CurrentState.Enter(this);
     }
 
+    public void ChangeHealth(int amount)
+    {
+        if (CurrentState.ID == PlayerStateID.Dead) return;
+        CurrentState.HandleDamage(this, amount);
+    }
+
+    public void Heal(int amount)
+    {
+        if (CurrentState.ID == PlayerStateID.Dead) return;
+        CurrentState.HandleDamage(this, amount);
+    }
+
     public void TakeDamage(int amount)
     {
         if (CurrentState.ID == PlayerStateID.Dead) return;

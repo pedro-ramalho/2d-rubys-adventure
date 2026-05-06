@@ -21,7 +21,7 @@ public abstract class PlayerState : State<Player, PlayerStateID>
         
         CameraShake.Instance?.Shake();
 
-        owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth - amount, 0, owner.Data.maxHealth);
+        owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth + amount, 0, owner.Data.maxHealth);
         owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.maxHealth);
 
         if (owner.CurrentHealth == 0)

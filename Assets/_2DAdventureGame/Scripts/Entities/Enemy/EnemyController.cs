@@ -72,7 +72,7 @@ public class EnemyController : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player == null) return;
 
-        player.TakeDamage(1);
+        player.ChangeHealth(-1);
     }
 
     public void Fix()
