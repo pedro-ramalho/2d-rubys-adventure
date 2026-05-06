@@ -7,6 +7,6 @@ public class DamageZone : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player == null) return;
 
-        player.ChangeHealth(1);
+        player.ChangeHealth(-1);
     }
 }
