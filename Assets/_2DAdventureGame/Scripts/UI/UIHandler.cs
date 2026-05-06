@@ -13,7 +13,7 @@ public class UIHandler : MonoBehaviour
     private VisualElement winScreen;
     private VisualElement loseScreen;
 
-    private PlayerHealth playerHealth;
+    private Player player;
 
     void Awake()
     {
@@ -30,15 +30,15 @@ public class UIHandler : MonoBehaviour
 
         dialoguePanel.style.display = DisplayStyle.None;
 
-        playerHealth = FindAnyObjectByType<PlayerHealth>();
-        playerHealth.OnHealthChanged += SetHealthValue;
-        SetHealthValue(playerHealth.Health / (float)playerHealth.MaxHealth);
+        player = FindAnyObjectByType<Player>();
+        player.OnHealthChanged += SetHealthValue;
+        SetHealthValue(player.CurrentHealth / (float)player.Data.maxHealth);
     }
 
     void OnDestroy()
     {
-        if (playerHealth != null)
-            playerHealth.OnHealthChanged -= SetHealthValue;
+        if (player != null)
+            player.OnHealthChanged -= SetHealthValue;
     }
 
     void SetHealthValue(float percentage)
