@@ -4,6 +4,8 @@ public class PlayerGroundedState : PlayerState
 {
     private Vector2 move;
 
+    private static readonly int NPCMaskHash = LayerMask.GetMask("NPC");
+
     public override void Update(Player owner)
     {
         move = owner.MoveAction.ReadValue<Vector2>();
@@ -69,7 +71,7 @@ public class PlayerGroundedState : PlayerState
             (Vector2)owner.transform.position + Vector2.up * 0.2f,
             owner.MoveDirection,
             1.5f,
-            LayerMask.GetMask("NPC")
+            NPCMaskHash
         );
 
         if (hit.collider != null && hit.collider.TryGetComponent(out NPC npc))

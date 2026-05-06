@@ -48,13 +48,18 @@ public class PlayerDashingState : PlayerState
             owner.transform.position,
             owner.transform.rotation
         );
-        ghost.GetComponent<DashAfterimage>().Initialize(
-            owner.SpriteRenderer.sprite,
-            owner.transform.localScale,
-            owner.SpriteRenderer.flipX,
-            owner.Data.afterimageColor,
-            owner.Data.afterimageLingerDuration
-        );
+        if (ghost.TryGetComponent(out DashAfterimage afterimage))
+        {
+            afterimage.Initialize(
+                owner.SpriteRenderer.sprite,
+                owner.transform.localScale,
+                owner.SpriteRenderer.flipX,
+                owner.Data.afterimageColor,
+                owner.Data.afterimageLingerDuration
+            );
+        }
+
+
 
         afterimageTimer = owner.Data.afterimageInterval;
     }
