@@ -48,6 +48,7 @@ public class PlayerDashingState : PlayerState
             owner.transform.position,
             owner.transform.rotation
         );
+
         if (ghost.TryGetComponent(out DashAfterimage afterimage))
         {
             afterimage.Initialize(
@@ -58,8 +59,6 @@ public class PlayerDashingState : PlayerState
                 owner.Data.afterimageLingerDuration
             );
         }
-
-
 
         afterimageTimer = owner.Data.afterimageInterval;
     }

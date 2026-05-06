@@ -14,11 +14,11 @@ public class Player : MonoBehaviour
     public AudioSource AudioSource { get; private set; }
     public SpriteRenderer SpriteRenderer { get; private set; }
 
-    // Data
+    [Header("Player Data")]
     [SerializeField] private PlayerData data;
     public PlayerData Data => data;
 
-    // Input Actions
+    [Header("Player Input")]
     [SerializeField] private InputAction moveAction;
     [SerializeField] private InputAction dashAction;
     [SerializeField] private InputAction shootAction;
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     public InputAction TalkAction => talkAction;
     public InputAction PauseAction => pauseAction;
 
-    // Assets
+    [Header("Player Assets")]
     [SerializeField] private AudioClip walkClip;
     [SerializeField] private AudioClip dashClip;
     [SerializeField] private AudioClip hitClip;

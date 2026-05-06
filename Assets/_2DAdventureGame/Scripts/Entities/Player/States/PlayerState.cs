@@ -17,7 +17,7 @@ public abstract class PlayerState : State<Player>
         owner.Animator.SetTrigger(Player.HitHash);
         owner.AudioSource.PlayOneShot(owner.HitClip);
         
-        CameraShake.Instance.Shake();
+        CameraShake.Instance?.Shake();
 
         owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth - amount, 0, owner.Data.maxHealth);
         owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.maxHealth);
