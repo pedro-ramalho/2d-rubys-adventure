@@ -69,10 +69,10 @@ public class EnemyController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-        if (playerHealth == null) return;
+        Player player = other.GetComponent<Player>();
+        if (player == null) return;
 
-        playerHealth.ChangeHealth(-1);
+        player.TakeDamage(1);
     }
 
     public void Fix()
