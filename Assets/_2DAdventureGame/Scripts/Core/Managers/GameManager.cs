@@ -7,15 +7,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIHandler uiHandler;
     [SerializeField] private float endGameDelay = 3f;
 
-    private EnemyController[] enemies;
+    private Enemy[] enemies;
     private int enemiesFixed = 0;
     private bool gameEnded = false;
 
     void Start()
     {
-        enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+        enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
 
-        foreach (EnemyController enemy in enemies)
+        foreach (Enemy enemy in enemies)
             enemy.OnFixed += HandleEnemyFixed;
 
         player.OnDied += HandlePlayerDied;
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy()
     {
-        foreach (EnemyController enemy in enemies)
+        foreach (Enemy enemy in enemies)
             enemy.OnFixed -= HandleEnemyFixed;
 
         player.OnDied -= HandlePlayerDied;

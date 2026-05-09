@@ -1,4 +1,3 @@
-using Beginner2D;
 using UnityEngine;
 
 public enum EnemyStateID { Patrolling, Fixed }
@@ -13,4 +12,6 @@ public abstract class EnemyState : State<Enemy, EnemyStateID>
     public override void FixedUpdate(Enemy owner) { }
 
     public override void Exit(Enemy owner) { }
+
+    public virtual void OnProjectileHit(Enemy owner) { }
 }
