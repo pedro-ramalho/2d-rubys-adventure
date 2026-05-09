@@ -11,6 +11,10 @@ public class EnemyData : ScriptableObject
     [Header("Movement")]
     public float speed;
 
-    [Header("Patrol Direction")] 
-    public PatrolDirection patrolDirection;   
+    [Header("Patrolling Properties")] 
+    public PatrolDirection patrolDirection;
+    public float patrolDuration;
+
+    [Header("Effects")]
+    public ParticleSystem smokeParticleEffect;
 }
