@@ -3,11 +3,25 @@ using UnityEngine;
 
 public class PatrollingState : EnemyState
 {
+    private float directionTimer;
+
     public override EnemyStateID ID => EnemyStateID.Patrolling;
 
-    public override void Enter(Enemy owner) => owner.DirectionTimer = owner.Data.patrolDuration;
+    public override void Enter(Enemy owner)
+    {
+        directionTimer = owner.Data.patrolDuration;
+        owner.Direction = 1;
+    }        
 
-    public override void Update(Enemy owner) { }
+    public override void Update(Enemy owner)
+    {
+        directionTimer -= Time.deltaTime;
+        if (directionTimer < 0)
+        {
+            owner.Direction = -owner.Direction;
+            directionTimer = owner.Data.patrolDuration;
+        }
+    }
 
     public override void FixedUpdate(Enemy owner)
     {
