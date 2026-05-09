@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
 {  
     // Components
@@ -36,7 +39,6 @@ public class Enemy : MonoBehaviour
 
     // Fixed
     public bool IsFixed { get; set; }
-    public float DirectionTimer { get; set; }
 
     void Awake()
     {
@@ -45,7 +47,6 @@ public class Enemy : MonoBehaviour
         AudioSource = GetComponent<AudioSource>();
 
         CurrentHealth = data.maxHealth;
-        Direction = 1;
 
         PatrollingState = new PatrollingState();
         FixedState = new FixedState();
@@ -54,17 +55,7 @@ public class Enemy : MonoBehaviour
         CurrentState.Enter(this);        
     }
 
-    void Update()
-    {
-        if (CurrentState.ID != EnemyStateID.Patrolling || IsFixed) return;
-
-        DirectionTimer -= Time.deltaTime;
-        if (DirectionTimer < 0)
-        {
-            Direction = -Direction;
-            DirectionTimer = Data.patrolDuration;
-        }
-    }
+    void Update() => CurrentState.Update(this);
 
     void FixedUpdate() => CurrentState.FixedUpdate(this);
 
