@@ -28,7 +28,7 @@ public class VendingMachine : Enemy
 
     void Update() => CurrentState.Update(this);
 
-    void FixedUpdate() => CurrentState.Update(this);
+    void FixedUpdate() => CurrentState.FixedUpdate(this);
     
     public void ChangeState(VendingMachineState newState)
     {
