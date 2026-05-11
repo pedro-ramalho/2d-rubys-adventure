@@ -1,26 +1,8 @@
-using UnityEngine;
-
-public class VendingMachineState : State<VendingMachine>
+public abstract class VendingMachineState : State<VendingMachine>
 {
-    public override string ID => throw new System.NotImplementedException();
-
-    public override void Enter(VendingMachine owner)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Exit(VendingMachine owner)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void FixedUpdate(VendingMachine owner)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Update(VendingMachine owner)
-    {
-        throw new System.NotImplementedException();
-    }
+    public abstract override string ID { get; }
+    public override void Enter(VendingMachine owner) { }
+    public override void Exit(VendingMachine owner) { }
+    public override void FixedUpdate(VendingMachine owner) { }
+    public override void Update(VendingMachine owner) { }
 }
