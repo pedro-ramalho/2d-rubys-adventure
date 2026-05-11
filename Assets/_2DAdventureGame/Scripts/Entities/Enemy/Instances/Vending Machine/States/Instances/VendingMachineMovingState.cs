@@ -5,6 +5,7 @@ public class VendingMachineMovingState : VendingMachineState
     public override string ID => "Moving";
 
     private float directionTimer;
+    private float detectionRadius = 5.0f;
 
     public override void Enter(VendingMachine owner)
     {
@@ -20,6 +21,14 @@ public class VendingMachineMovingState : VendingMachineState
             owner.Direction = -owner.Direction;
             directionTimer = owner.Data.patrolDuration;
         }
+
+        float distance = Vector2.Distance(
+            owner.Rigidbody.position, 
+            owner.Player.Rigidbody.position
+        );
+        if (distance <= detectionRadius)
+            owner.ChangeState(owner.ChargingState);
+        
     }
 
     public override void FixedUpdate(VendingMachine owner)
