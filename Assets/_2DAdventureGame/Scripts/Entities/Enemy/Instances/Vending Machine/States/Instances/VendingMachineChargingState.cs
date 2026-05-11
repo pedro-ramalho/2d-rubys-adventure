@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VendingMachineChargingState
+public class VendingMachineChargingState : VendingMachineState
 {
     
 }
