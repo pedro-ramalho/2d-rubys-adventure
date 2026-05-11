@@ -15,6 +15,4 @@ public class EnemyData : ScriptableObject
     public PatrolDirection patrolDirection;
     public float patrolDuration;
 
-    [Header("Effects")]
-    public ParticleSystem smokeParticleEffect;
 }

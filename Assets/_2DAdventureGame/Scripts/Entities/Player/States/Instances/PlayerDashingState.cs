@@ -6,7 +6,7 @@ public class PlayerDashingState : PlayerState
     private float afterimageTimer;
     private Vector2 dashDirection;
 
-    public override PlayerStateID ID => PlayerStateID.Dashing;
+    public override string ID => "Dashing";
 
     public override void Enter(Player owner)
     {

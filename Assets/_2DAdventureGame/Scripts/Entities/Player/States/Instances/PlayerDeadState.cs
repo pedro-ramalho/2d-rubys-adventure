@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerDeadState : PlayerState
 {
-    public override PlayerStateID ID => PlayerStateID.Dead;
+    public override string ID => "Dead";
     
     /// <summary>
     /// <c>Enter</c> shuts everything down.

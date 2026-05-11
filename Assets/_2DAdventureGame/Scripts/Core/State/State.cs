@@ -4,12 +4,12 @@ using System;
 /// Abstract class for modeling a generic state.
 /// </summary>
 /// <typeparam name="T">The type of the owner of the state.</typeparam>
-public abstract class State<T, TID> where TID : Enum
+public abstract class State<T> 
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract TID ID { get; }
+    public abstract string ID { get; }
 
     /// <summary>
     /// Method that is executed when a transition happens <b>to</b> this state.

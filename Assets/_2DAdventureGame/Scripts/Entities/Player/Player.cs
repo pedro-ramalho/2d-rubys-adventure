@@ -124,7 +124,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Heal(int amount) => CurrentState.HandleHeal(this, amount);
 
-    public void TakeDamage(int amount) => CurrentState.HandleDamage(this, amount);
+    public void OnHit(int amount) => CurrentState.HandleDamage(this, amount);
 
     public void RaiseOnHealthChanged(float percentage) => OnHealthChanged?.Invoke(percentage);
     public void RaiseOnDied() => OnDied?.Invoke();
