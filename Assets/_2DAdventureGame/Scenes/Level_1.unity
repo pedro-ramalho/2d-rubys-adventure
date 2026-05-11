@@ -2559,6 +2559,7 @@ GameObject:
   - component: {fileID: 780315240}
   - component: {fileID: 780315241}
   - component: {fileID: 780315242}
+  - component: {fileID: 780315243}
   m_Layer: 0
   m_Name: Vending Machine
   m_TagString: Untagged
@@ -2575,7 +2576,7 @@ Transform:
   m_GameObject: {fileID: 780315236}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.63, y: 0.38, z: 0}
+  m_LocalPosition: {x: -2.47, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2655,7 +2656,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2832,6 +2833,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &780315243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780315236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492bd3f06e6431d4d9dc4d5064089b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VendingMachine
+  data: {fileID: 11400000, guid: a1e0dc0aa758f9647972954f4ad36eb6, type: 2}
+  smokeEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
+    type: 3}
 --- !u!4 &792747121 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6424618229937592462, guid: 11eb2387b0899544b9af952c30e156fb,
