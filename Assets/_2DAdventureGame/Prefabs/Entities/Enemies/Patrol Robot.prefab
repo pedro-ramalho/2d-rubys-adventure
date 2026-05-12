@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4808783996010769892}
   - component: {fileID: 3948843125931185040}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Patrol Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
