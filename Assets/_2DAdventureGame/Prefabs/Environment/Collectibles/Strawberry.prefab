@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8768094381843247960}
   - component: {fileID: 6801472184784057030}
   m_Layer: 0
-  m_Name: CollectibleHealth
+  m_Name: Strawberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
