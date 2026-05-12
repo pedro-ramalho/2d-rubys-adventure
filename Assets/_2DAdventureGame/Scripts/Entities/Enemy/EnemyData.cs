@@ -15,4 +15,8 @@ public class EnemyData : ScriptableObject
     public PatrolDirection patrolDirection;
     public float patrolDuration;
 
+    [Header("Vending Machine Properties")]
+    public AnimationCurve speedCurve;
+    public float maxSpeed;
+    public float chargeDuration;
 }

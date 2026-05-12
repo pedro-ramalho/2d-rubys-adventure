@@ -26,9 +26,9 @@ public class VendingMachineMovingState : VendingMachineState
             owner.Rigidbody.position, 
             owner.Player.Rigidbody.position
         );
+
         if (distance <= detectionRadius)
             owner.ChangeState(owner.ChargingState);
-        
     }
 
     public override void FixedUpdate(VendingMachine owner)
