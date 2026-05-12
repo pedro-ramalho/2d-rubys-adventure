@@ -58,6 +58,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxSpeed: 2
+  maxSpeed: 8
   chargeDuration: 2
-  stunnedDuration: 2
+  stunnedDuration: 1.5
