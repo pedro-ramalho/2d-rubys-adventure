@@ -60,3 +60,4 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxSpeed: 2
   chargeDuration: 2
+  stunnedDuration: 2
