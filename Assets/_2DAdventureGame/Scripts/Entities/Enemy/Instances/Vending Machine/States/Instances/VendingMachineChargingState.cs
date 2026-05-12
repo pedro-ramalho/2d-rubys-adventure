@@ -10,7 +10,7 @@ public class VendingMachineChargingState : VendingMachineState
     public override void Enter(VendingMachine owner)
     {
         timer = 0f;
-        direction = owner.Player.Rigidbody.position - owner.Rigidbody.position;
+        direction = (owner.Player.Rigidbody.position - owner.Rigidbody.position).normalized;
     }
 
     public override void Update(VendingMachine owner)
