@@ -17,9 +17,8 @@ public class VendingMachineChargingState : VendingMachineState
     {
         timer += Time.deltaTime;
         if (timer >= owner.Data.chargeDuration)
-        {
-            owner.ChangeState(owner.MovingState);
-        }
+            owner.ChangeState(owner.StunnedState);
+        
     }
 
     public override void FixedUpdate(VendingMachine owner)

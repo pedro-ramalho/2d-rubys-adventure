@@ -19,4 +19,5 @@ public class EnemyData : ScriptableObject
     public AnimationCurve speedCurve;
     public float maxSpeed;
     public float chargeDuration;
+    public float stunnedDuration;
 }

@@ -13,6 +13,7 @@ public class VendingMachine : Enemy
 
     public VendingMachineState CurrentState { get; private set; }
     public VendingMachineMovingState MovingState { get; private set; }
+    public VendingMachineStunnedState StunnedState { get; private set; }
     public VendingMachineChargingState ChargingState { get; private set; }
 
     public Player Player { get; private set; }
@@ -24,6 +25,7 @@ public class VendingMachine : Enemy
         Player = FindAnyObjectByType<Player>();
 
         MovingState = new VendingMachineMovingState();
+        StunnedState = new VendingMachineStunnedState();
         ChargingState = new VendingMachineChargingState();
 
         CurrentState = MovingState;
