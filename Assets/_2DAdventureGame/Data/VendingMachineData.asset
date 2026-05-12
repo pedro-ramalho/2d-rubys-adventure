@@ -16,5 +16,38 @@ MonoBehaviour:
   speed: 1
   patrolDirection: 1
   patrolDuration: 3
-  smokeParticleEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
-    type: 3}
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1.9990102
+      outSlope: -1.9990102
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.00049489737
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9990102
+      outSlope: 1.9990102
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSpeed: 2
+  chargeDuration: 5
