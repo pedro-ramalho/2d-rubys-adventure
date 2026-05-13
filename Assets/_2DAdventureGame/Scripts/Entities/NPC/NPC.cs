@@ -18,7 +18,12 @@ public class NPC : MonoBehaviour
 
     public void Talk()
     {
+        if (lineIndex >= dialogueLines.Count)
+        {
+            LevelManager.Instance.Load(1);
+            return;
+        }
+
         UIHandler.Instance.DisplayDialogueWithLine(dialogueLines[lineIndex++]);
-        if (lineIndex >= dialogueLines.Count) lineIndex = 0;
     }
 }
