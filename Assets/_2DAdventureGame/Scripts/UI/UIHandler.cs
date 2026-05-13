@@ -10,6 +10,7 @@ public class UIHandler : MonoBehaviour
 
     private VisualElement healthBar;
     private VisualElement dialoguePanel;
+    private Label dialogueText;
     private VisualElement winScreen;
     private VisualElement loseScreen;
 
@@ -24,7 +25,10 @@ public class UIHandler : MonoBehaviour
     {
         UIDocument uiDocument = GetComponent<UIDocument>();
         healthBar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
+        
         dialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
+        dialogueText = dialoguePanel.Q<Label>("DialogueText");
+
         loseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
         winScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
 
@@ -44,6 +48,15 @@ public class UIHandler : MonoBehaviour
     void SetHealthValue(float percentage)
     {
         healthBar.style.width = Length.Percent(100 * percentage);
+    }
+
+    public void DisplayDialogueWithLine(string line)
+    {
+        dialogueText.text = line;
+        dialoguePanel.style.display = DisplayStyle.Flex;
+
+        CancelInvoke(nameof(HideDialogue));
+        Invoke(nameof(HideDialogue), displayTime);
     }
 
     public void DisplayDialogue()

@@ -82,7 +82,7 @@ public class PlayerGroundedState : PlayerState
             owner.LastNPC = npc;
 
             if (owner.TalkAction.WasPressedThisFrame())
-                UIHandler.Instance.DisplayDialogue();
+                npc.Talk();
         }
         else if (owner.LastNPC != null)
         {
