@@ -692,7 +692,7 @@ Transform:
   m_GameObject: {fileID: 113270237}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.026525259, z: 0}
+  m_LocalPosition: {x: -5.53, y: -5.5234747, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1217,7 +1217,7 @@ Transform:
   m_GameObject: {fileID: 317780793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.026525497, z: 0}
+  m_LocalPosition: {x: -5.5300007, y: -5.5234747, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2130,6 +2130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogueBubble: {fileID: 63161005}
+  dialogueLines: []
 --- !u!1 &662501971
 GameObject:
   m_ObjectHideFlags: 0
@@ -38027,12 +38028,12 @@ PrefabInstance:
     - target: {fileID: 3449402523654975538, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -7.53
       objectReference: {fileID: 0}
     - target: {fileID: 3449402523654975538, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5.55
       objectReference: {fileID: 0}
     - target: {fileID: 3449402523654975538, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}

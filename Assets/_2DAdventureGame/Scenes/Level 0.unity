@@ -1119,8 +1119,10 @@ MonoBehaviour:
   dialogueBubble: {fileID: 2590044434856414156, guid: b8ae08010b021e64fa35289c833a4e08,
     type: 3}
   dialogueLines:
-  - Hey! I'm an NPC
-  - My name is Frog
+  - Let's start with the basics...
+  - You can move around using the arrow keys or WASD.
+  - Talk with other NPCs by getting close to them and pressing X. Like you did right
+    now!
 --- !u!1 &1058916877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,6 +1509,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2805295948606414390}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1795843237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795843238}
+  - component: {fileID: 1795843239}
+  m_Layer: 0
+  m_Name: Level Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1795843238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795843237}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2012837022}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1795843239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795843237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15e28bbb25f0ac4f8df11874750bf2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
 --- !u!4 &1864379401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2390709048986743695, guid: bb5a8a177f86e8b46bd4dd00bcfb910b,
@@ -1662,6 +1708,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923946075}
   m_CullTransparentMesh: 1
+--- !u!1 &2012837021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012837022}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2012837022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012837021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.01245, y: 1.09139, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1795843238}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045033470
 GameObject:
   m_ObjectHideFlags: 0
@@ -32200,6 +32278,7 @@ SceneRoots:
   - {fileID: 590409433}
   - {fileID: 1665743784}
   - {fileID: 662501975}
+  - {fileID: 2012837022}
   - {fileID: 804807544}
   - {fileID: 461698722}
   - {fileID: 465916814}
