@@ -9,6 +9,9 @@ public class QuestBinding : MonoBehaviour
     {
         QuestManager.Instance.OnQuestAccepted += HandleAccepted;
         QuestManager.Instance.OnQuestCompleted += HandleCompleted;
+
+        bool active = QuestManager.Instance.ActiveQuest?.Data == boundQuest;
+        gameObject.SetActive(active);
     }
 
     void OnDestroy()
@@ -21,7 +24,7 @@ public class QuestBinding : MonoBehaviour
 
     void HandleAccepted(Quest quest)
     {
-        if (quest.Data.id == boundQuest.id) 
+        if (quest.Data == boundQuest) 
             gameObject.SetActive(true);
     }
 
