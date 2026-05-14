@@ -1,7 +1,11 @@
-using UnityEngine;
-
-public class QuestReport
+public readonly struct QuestReport
 {
-    public QuestObjectiveType Type { get; set; }
-    public string Tag { get; set; }
+    public readonly QuestObjectiveType Type;
+    public readonly string Tag;
+
+    public QuestReport(QuestObjectiveType type, string tag)
+    {
+        Type = type;
+        Tag = tag;
+    }
 }
