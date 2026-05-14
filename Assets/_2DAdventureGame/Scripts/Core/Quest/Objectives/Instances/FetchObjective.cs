@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FetchObjective", menuName = "Scriptable Objects/FetchObjective")]
 public class FetchObjective : QuestObjective
 {
-    private int count;
-    private string item;
+    [SerializeField] private int count;
+    [SerializeField] private string item;
     
     public override QuestObjectiveType Type => QuestObjectiveType.Fetch;
     public override int Count => count;
