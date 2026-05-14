@@ -6,5 +6,5 @@ public class QuestData : ScriptableObject
 {
     public string id;
     public string description;
-    public List<QuestObjective> objectives;
+    public QuestObjective objective;
 }
