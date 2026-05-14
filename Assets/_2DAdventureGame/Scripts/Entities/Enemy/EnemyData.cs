@@ -11,6 +11,9 @@ public class EnemyData : ScriptableObject
     [Header("Movement")]
     public float speed;
 
+    [Header("Quest Report Tag")]
+    public string reportTag;
+
     [Header("Patrolling Properties")] 
     public PatrolDirection patrolDirection;
     public float patrolDuration;
