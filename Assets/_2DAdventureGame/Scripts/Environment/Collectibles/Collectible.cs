@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Collectible : MonoBehaviour
 {
     [SerializeField] protected AudioClip collectibleClip;
-    public abstract void ApplyEffect(Player player);
+    protected abstract void ApplyEffect(Player player);
     protected virtual void OnEffectApplied() => Destroy(gameObject);
 
     void OnTriggerEnter2D(Collider2D other)
