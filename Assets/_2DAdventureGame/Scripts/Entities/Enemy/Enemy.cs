@@ -26,8 +26,7 @@ public abstract class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Projectile"))
-            OnProjectileHit();
+        if (other.TryGetComponent(out Projectile _)) OnProjectileHit();
     }
 
     protected abstract void OnProjectileHit();
