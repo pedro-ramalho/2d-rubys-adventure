@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class QuestReporter
+public class QuestReporter : MonoBehaviour
 {
     [SerializeField] private QuestObjectiveType type;
-    [SerializeField] private string tag;
+    [SerializeField] private string reportTag;
 
-    public void Report() => QuestManager.Instance?.Report(new QuestReport(type, tag));
+    public void Report() => QuestManager.Instance?.Report(new QuestReport(type, reportTag));
 }
