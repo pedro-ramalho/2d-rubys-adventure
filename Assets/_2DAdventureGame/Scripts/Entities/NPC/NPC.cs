@@ -25,24 +25,25 @@ public class NPC : MonoBehaviour
         {
             foreach (DialogueEntry entry in entries)
                 if (entry.Matches(QuestManager.Instance))
+                {
                     currentEntry = entry;
+                    break;
+                }
 
             lineIndex = 0;
-
-            return;
         }
 
-        if (lineIndex >= currentEntry.Lines.Count)
+        if (lineIndex >= currentEntry.lines.Count)
         {
-            if (currentEntry.QuestToGrantAfter != null)
-                QuestManager.Instance.AcceptQuest(new Quest(currentEntry.QuestToGrantAfter));
+            if (currentEntry.questToGrantAfter != null)
+                QuestManager.Instance.AcceptQuest(currentEntry.questToGrantAfter);
             
-            currentEntry.OnExhausted?.Invoke();
+            currentEntry.onExhausted?.Invoke();
             currentEntry = null;
 
             return;
         }
 
-        UIHandler.Instance.DisplayDialogueWithLine(currentEntry.Lines[lineIndex]);
+        UIHandler.Instance.DisplayDialogueWithLine(currentEntry.lines[lineIndex++]);
     }
 }

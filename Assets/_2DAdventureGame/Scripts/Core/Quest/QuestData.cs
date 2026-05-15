@@ -6,5 +6,7 @@ public class QuestData : ScriptableObject
 {
     public string id;
     public string description;
+
+    [SerializeReference]
     public QuestObjective objective;
 }
