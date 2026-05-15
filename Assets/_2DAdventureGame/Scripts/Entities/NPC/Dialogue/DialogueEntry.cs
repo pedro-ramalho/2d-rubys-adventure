@@ -10,4 +10,12 @@ public class DialogueEntry : ScriptableObject
     public DialogueTrigger Trigger { get; set; }
     public List<string> Lines { get; set; }
     public UnityEvent OnExhausted { get; set; }
+
+    public bool Matches(QuestManager manager) => Trigger switch
+    {
+        DialogueTrigger.Before => manager.ActiveQuest?.Data != Quest && manager.IsCompleted(Quest),
+        DialogueTrigger.During => manager.ActiveQuest?.Data == Quest,
+        DialogueTrigger.After => manager.IsCompleted(Quest),
+        _ => throw new System.NotImplementedException(),
+    };
 }
