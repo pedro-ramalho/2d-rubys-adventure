@@ -11,7 +11,6 @@ public class PatrolRobotFixedState : PatrolRobotState
         owner.AudioSource.Stop();
         owner.SmokeEffect.Stop();
         owner.RaiseOnFixed();
-
-        QuestManager.Instance?.Report(new QuestReport(QuestObjectiveType.Kill, owner.Data.reportTag));
+        owner.GetComponent<QuestReporter>()?.Report();
     }
 }
