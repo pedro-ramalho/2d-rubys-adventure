@@ -14,8 +14,9 @@ public class QuestManager : MonoBehaviour
 
     void Awake() => Instance = this;
 
-    public void AcceptQuest(Quest quest)
+    public void AcceptQuest(QuestData data)
     {
+        Quest quest = new Quest(data);
         ActiveQuest = quest;
         OnQuestAccepted?.Invoke(quest);
     }
