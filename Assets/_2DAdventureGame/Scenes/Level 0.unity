@@ -119,6 +119,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &50589871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50589872}
+  m_Layer: 0
+  m_Name: Collectibles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &50589872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50589871}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.78628, y: -0.45415, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2061507732}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &87343037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1116,13 +1148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68dc5fe6796b57c4a95ea7329cd8453a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
+  entries:
+  - {fileID: 11400000, guid: b0c855ba7d057f642aa49200d74e5eb9, type: 2}
+  - {fileID: 11400000, guid: 00a07bd569faa914da38a33a3023f4ed, type: 2}
+  - {fileID: 11400000, guid: 0e3f6ba06a360e543bb2fc70feee79f6, type: 2}
   dialogueBubble: {fileID: 2590044434856414156, guid: b8ae08010b021e64fa35289c833a4e08,
     type: 3}
-  dialogueLines:
-  - Let's start with the basics...
-  - You can move around using the arrow keys or WASD.
-  - Talk with other NPCs by getting close to them and pressing X. Like you did right
-    now!
 --- !u!1 &1058916877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1381,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5a8a177f86e8b46bd4dd00bcfb910b, type: 3}
+--- !u!1 &1260245854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1260245855}
+  - component: {fileID: 1260245856}
+  m_Layer: 0
+  m_Name: Quest Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1260245855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260245854}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2012837022}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1260245856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260245854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b73b6673295e84e43a6e0ea7585db87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestManager
 --- !u!4 &1315845208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5998503289905975740, guid: bd3dca74c68f00f44aea61e2075d7d6a,
@@ -1738,6 +1813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1795843238}
+  - {fileID: 1260245855}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045033470
@@ -31930,6 +32006,127 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &2061507731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 50589872}
+    m_Modifications:
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801472184784057030, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: collectibleClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 173a14cf06354c643b46b235f2a4f974, type: 3}
+    - target: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_Name
+      value: Strawberry
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2061507734}
+    - targetCorrespondingSourceObject: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2061507735}
+  m_SourcePrefab: {fileID: 100100000, guid: 169b9df40363e7849ba6118bce27948c, type: 3}
+--- !u!4 &2061507732 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2061507731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2061507733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2061507731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2061507734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061507733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c396b2add69ab42a3e2ba9c24c18f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestBinding
+  boundQuest: {fileID: 11400000, guid: e564ab7c6608ad9478047e4bdae7111e, type: 2}
+  deactivateOnComplete: 1
+--- !u!114 &2061507735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061507733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
+  type: 0
+  reportTag: Strawberry
 --- !u!1001 &2805295948606414390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32283,3 +32480,4 @@ SceneRoots:
   - {fileID: 461698722}
   - {fileID: 465916814}
   - {fileID: 2805295948606414390}
+  - {fileID: 50589872}

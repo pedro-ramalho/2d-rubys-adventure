@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "KillObjective", menuName = "Scriptable Objects/KillObjective")]
+[CreateAssetMenu(fileName = "KillObjective", menuName = "Game/Quests/Objectives/Kill Objective")]
 public class KillObjective : QuestObjective
 {
     [SerializeField] private int count;
