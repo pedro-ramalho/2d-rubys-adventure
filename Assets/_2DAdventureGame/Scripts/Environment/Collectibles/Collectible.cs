@@ -9,6 +9,8 @@ public abstract class Collectible : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         ApplyEffect(other);
-        OnEffectApplied();
+        
+        if (other.TryGetComponent(out Player _))
+            OnEffectApplied();
     }         
 }
