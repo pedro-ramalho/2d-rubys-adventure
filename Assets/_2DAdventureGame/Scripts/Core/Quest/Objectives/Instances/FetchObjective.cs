@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FetchObjective", menuName = "Scriptable Objects/FetchObjective")]
+[CreateAssetMenu(fileName = "FetchObjective", menuName = "Game/Quests/Objectives/Fetch Objective")]
 public class FetchObjective : QuestObjective
 {
     [SerializeField] private int count;

@@ -9,8 +9,6 @@ public class NPC : MonoBehaviour
     private int lineIndex;
 
     public GameObject dialogueBubble;
-    public List<string> dialogueLines = new List<string>();
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,20 +28,19 @@ public class NPC : MonoBehaviour
                     break;
                 }
 
+            if (currentEntry == null) return;
             lineIndex = 0;
         }
+
+        UIHandler.Instance.DisplayDialogueWithLine(currentEntry.lines[lineIndex++]);
 
         if (lineIndex >= currentEntry.lines.Count)
         {
             if (currentEntry.questToGrantAfter != null)
                 QuestManager.Instance.AcceptQuest(currentEntry.questToGrantAfter);
-            
+
             currentEntry.onExhausted?.Invoke();
             currentEntry = null;
-
-            return;
         }
-
-        UIHandler.Instance.DisplayDialogueWithLine(currentEntry.lines[lineIndex++]);
     }
 }
