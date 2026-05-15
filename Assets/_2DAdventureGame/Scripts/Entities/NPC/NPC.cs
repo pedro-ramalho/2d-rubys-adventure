@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    [SerializeField] private List<DialogueEntry> entries;
+    private DialogueEntry currentEntry;
+    private int lineIndex;
+
     public GameObject dialogueBubble;
     public List<string> dialogueLines = new List<string>();
-    private int lineIndex;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,12 +21,28 @@ public class NPC : MonoBehaviour
 
     public void Talk()
     {
-        if (lineIndex >= dialogueLines.Count)
+        if (currentEntry == null)
         {
-            LevelManager.Instance.Load(1);
+            foreach (DialogueEntry entry in entries)
+                if (entry.Matches(QuestManager.Instance))
+                    currentEntry = entry;
+
+            lineIndex = 0;
+
             return;
         }
 
-        UIHandler.Instance.DisplayDialogueWithLine(dialogueLines[lineIndex++]);
+        if (lineIndex >= currentEntry.Lines.Count)
+        {
+            if (currentEntry.QuestToGrantAfter != null)
+                QuestManager.Instance.AcceptQuest(new Quest(currentEntry.QuestToGrantAfter));
+            
+            currentEntry.OnExhausted?.Invoke();
+            currentEntry = null;
+
+            return;
+        }
+
+        UIHandler.Instance.DisplayDialogueWithLine(currentEntry.Lines[lineIndex]);
     }
 }
