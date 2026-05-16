@@ -1,0 +1,11 @@
+# Imported tutorial assets — not first-party code
+Assets/_2DAdventureGame/Tutorial_Demo/** linguist-vendored
+
+# Unity-serialized data files dominate by byte count but aren't source code
+*.unity      linguist-generated
+*.prefab     linguist-generated
+*.asset      linguist-generated
+*.mat        linguist-generated
+*.anim       linguist-generated
+*.controller linguist-generated
+*.meta       linguist-generated
