@@ -1,46 +1,45 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    [SerializeField] private List<DialogueEntry> entries;
-    private DialogueEntry currentEntry;
+    [SerializeField] private List<QuestDialogue> dialogues;
+    [SerializeField] private GameObject dialogueBubble;
+
+    private DialoguePhase currentPhase;
     private int lineIndex;
 
-    public GameObject dialogueBubble;
+    void Start() => dialogueBubble.SetActive(false);
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        dialogueBubble.SetActive(false);
-        lineIndex = 0;
-    }
+    public void SetBubbleVisible(bool visible) => dialogueBubble.SetActive(visible);
 
     public void Talk()
     {
-        if (currentEntry == null)
+        if (currentPhase == null)
         {
-            foreach (DialogueEntry entry in entries)
-                if (entry.Matches(QuestManager.Instance))
+            foreach (QuestDialogue dialogue in dialogues)
+            {
+                DialoguePhase phase = dialogue.Pick(QuestManager.Instance);
+                if (phase != null)
                 {
-                    currentEntry = entry;
+                    currentPhase = phase;
                     break;
                 }
+            }
 
-            if (currentEntry == null) return;
+            if (currentPhase == null) return;
             lineIndex = 0;
         }
 
-        UIHandler.Instance.DisplayDialogueWithLine(currentEntry.lines[lineIndex++]);
+        UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++]);
 
-        if (lineIndex >= currentEntry.lines.Count)
+        if (lineIndex >= currentPhase.lines.Count)
         {
-            if (currentEntry.questToGrantAfter != null)
-                QuestManager.Instance.AcceptQuest(currentEntry.questToGrantAfter);
+            if (currentPhase.questToGrantAfter != null)
+                QuestManager.Instance.AcceptQuest(currentPhase.questToGrantAfter);
 
-            currentEntry.onExhausted?.Invoke();
-            currentEntry = null;
+            currentPhase.onExhausted?.Invoke();
+            currentPhase = null;
         }
     }
 }

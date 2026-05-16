@@ -78,7 +78,7 @@ public class PlayerGroundedState : PlayerState
 
         if (hit.collider != null && hit.collider.TryGetComponent(out NPC npc))
         {
-            npc.dialogueBubble.SetActive(true);
+            npc.SetBubbleVisible(true);
             owner.LastNPC = npc;
 
             if (owner.TalkAction.WasPressedThisFrame())
@@ -86,7 +86,7 @@ public class PlayerGroundedState : PlayerState
         }
         else if (owner.LastNPC != null)
         {
-            owner.LastNPC.dialogueBubble.SetActive(false);
+            owner.LastNPC.SetBubbleVisible(false);
             owner.LastNPC = null;
         }
     }
