@@ -5,6 +5,8 @@ public class QuestBinding : MonoBehaviour
     [SerializeField] private QuestData boundQuest;
     [SerializeField] private bool deactivateOnComplete = true;
 
+    public QuestData BoundQuest => boundQuest;
+
     void Start()
     {
         QuestManager.Instance.OnQuestAccepted += HandleAccepted;
