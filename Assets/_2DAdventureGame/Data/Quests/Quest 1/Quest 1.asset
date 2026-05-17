@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08f3e1dc421590b469119e7345035d6b, type: 3}
-  m_Name: Q1
+  m_Name: Quest 1
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   id: 1
-  description: Fetch 1 strawberry.
-  objective: {fileID: 11400000, guid: 9e5c37b343f519746be9fc150f4ddb30, type: 2}
+  description: Find the merchant's lost boxes.
+  objective: {fileID: 11400000, guid: 795d3f9f6c1768445ac29b2f895573ad, type: 2}
