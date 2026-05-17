@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
+  m_Name: Quest 1 Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
+  quest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
+  before:
+    lines:
+    - Oh no... what am I going to do...
+    - I can't find them anywhere!
+    - Oh! Ruby! Thank goodness you're here! Could you please help me find my boxes?
+    - The must be nearby...
+    questToGrantAfter: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6,
+      type: 2}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
+  during:
+    lines:
+    - These boxes are really important...
+    questToGrantAfter: {fileID: 0}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
+  after:
+    lines:
+    - Thank you so much for your help Ruby!
+    - Oh, on another note, a friend of mine seems to be in trouble...
+    - If you follow the path through northwest you'll be sure to find him.
+    questToGrantAfter: {fileID: 0}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
