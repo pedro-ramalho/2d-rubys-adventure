@@ -13,8 +13,5 @@ public class CameraShake : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
-    public void Shake(float amplitude = 1f)
-    {
-        impulseSource.GenerateImpulse(amplitude);
-    }
+    public void Shake(float amplitude = 1f) => impulseSource.GenerateImpulse(amplitude);
 }
