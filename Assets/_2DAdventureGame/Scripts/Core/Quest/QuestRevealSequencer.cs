@@ -19,10 +19,7 @@ public class QuestRevealSequencer : MonoBehaviour
 
     private Coroutine running;
 
-    void Awake()
-    {
-        tourCamera.Priority = idlePriority;
-    }
+    void Awake() => tourCamera.Priority = idlePriority;
 
     void Start() => QuestManager.Instance.OnQuestAccepted += HandleAccepted;
 

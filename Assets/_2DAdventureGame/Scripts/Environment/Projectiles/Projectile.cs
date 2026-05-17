@@ -7,10 +7,7 @@ public class Projectile : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    void Awake() => rb = GetComponent<Rigidbody2D>();
 
     public void Launch(Vector2 direction, float force)
     {
@@ -18,13 +15,7 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, maxLifetime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Destroy(gameObject);
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);
-    }
+    void OnTriggerEnter2D(Collider2D other) => Destroy(gameObject);
+    
+    void OnCollisionEnter2D(Collision2D collision) => Destroy(gameObject);
 }

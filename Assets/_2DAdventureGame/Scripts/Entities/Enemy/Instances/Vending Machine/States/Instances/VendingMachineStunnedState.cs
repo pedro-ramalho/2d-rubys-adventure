@@ -6,10 +6,7 @@ public class VendingMachineStunnedState : VendingMachineState
 
     private float timer;
 
-    public override void Enter(VendingMachine owner)
-    {
-        timer = 0f;
-    }
+    public override void Enter(VendingMachine owner) => timer = 0f;
 
     public override void Update(VendingMachine owner)
     {

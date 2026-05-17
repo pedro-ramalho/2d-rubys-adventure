@@ -16,10 +16,7 @@ public class UIHandler : MonoBehaviour
 
     private Player player;
 
-    void Awake()
-    {
-        Instance = this;
-    }
+    void Awake() => Instance = this;
 
     void Start()
     {
@@ -45,11 +42,8 @@ public class UIHandler : MonoBehaviour
             player.OnHealthChanged -= SetHealthValue;
     }
 
-    void SetHealthValue(float percentage)
-    {
-        healthBar.style.width = Length.Percent(100 * percentage);
-    }
-
+    void SetHealthValue(float percentage) => healthBar.style.width = Length.Percent(100 * percentage);
+    
     public void DisplayDialogueWithLine(string line)
     {
         dialogueText.text = line;
@@ -66,23 +60,11 @@ public class UIHandler : MonoBehaviour
         Invoke(nameof(HideDialogue), displayTime);
     }
 
-    void HideDialogue()
-    {
-        dialoguePanel.style.display = DisplayStyle.None;
-    }
+    void HideDialogue() => dialoguePanel.style.display = DisplayStyle.None;
 
-    public void SetVisible(bool visible)
-    {
-        GetComponent<UIDocument>().rootVisualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
-    }
-
-    public void DisplayWinScreen()
-    {
-        winScreen.style.opacity = 1.0f;
-    }
-
-    public void DisplayLoseScreen()
-    {
-        loseScreen.style.opacity = 1.0f;
-    }
+    public void SetVisible(bool visible) => GetComponent<UIDocument>().rootVisualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+    
+    public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;
+    
+    public void DisplayLoseScreen() => loseScreen.style.opacity = 1.0f;
 }

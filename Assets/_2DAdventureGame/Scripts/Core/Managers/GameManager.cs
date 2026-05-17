@@ -29,19 +29,14 @@ public class GameManager : MonoBehaviour
         player.OnDied -= HandlePlayerDied;
     }
 
-    void HandlePlayerDied()
-    {
-        EndGame(win: false);
-    }
-
+    void HandlePlayerDied() => EndGame(win: false);
     void HandleEnemyFixed()
     {
         if (gameEnded) return;
 
         enemiesFixed++;
 
-        if (enemiesFixed >= enemies.Length)
-            EndGame(win: true);
+        if (enemiesFixed >= enemies.Length) EndGame(win: true);
     }
 
     void EndGame(bool win)
@@ -56,8 +51,5 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(ReloadScene), endGameDelay);
     }
 
-    void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }
