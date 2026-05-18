@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public enum PatrolDirection { Horizontal, Vertical }
+
 public class PatrolRobot : Enemy
 {
     public static readonly int MoveXHash = Animator.StringToHash("Move X");
@@ -9,6 +11,12 @@ public class PatrolRobot : Enemy
     [Header("Patrol Robot Assets")]
     [SerializeField] private ParticleSystem smokeEffect;
     public ParticleSystem SmokeEffect => smokeEffect;
+
+    [Header("Patrolling Properties")]
+    [SerializeField] private PatrolDirection patrolDirection;
+    [SerializeField] private float patrolDuration;
+    public PatrolDirection PatrolDirection => patrolDirection;
+    public float PatrolDuration => patrolDuration;
 
     public int Direction { get; set; }
 

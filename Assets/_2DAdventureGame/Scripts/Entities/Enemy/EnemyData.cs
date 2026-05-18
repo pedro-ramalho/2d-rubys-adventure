@@ -1,7 +1,5 @@
 using UnityEngine;
 
-public enum PatrolDirection { Horizontal, Vertical }
-
 [CreateAssetMenu(fileName = "EnemyData", menuName = "Game/Enemy Data")]
 public class EnemyData : ScriptableObject
 {
@@ -13,10 +11,6 @@ public class EnemyData : ScriptableObject
 
     [Header("Quest Report Tag")]
     public string reportTag;
-
-    [Header("Patrolling Properties")] 
-    public PatrolDirection patrolDirection;
-    public float patrolDuration;
 
     [Header("Vending Machine Properties")]
     public AnimationCurve speedCurve;

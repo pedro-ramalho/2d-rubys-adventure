@@ -8,7 +8,7 @@ public class PatrolRobotPatrollingState : PatrolRobotState
 
     public override void Enter(PatrolRobot owner)
     {
-        directionTimer = owner.Data.patrolDuration;
+        directionTimer = owner.PatrolDuration;
         owner.Direction = 1;
     }
 
@@ -18,7 +18,7 @@ public class PatrolRobotPatrollingState : PatrolRobotState
         if (directionTimer <= 0f)
         {
             owner.Direction = -owner.Direction;
-            directionTimer = owner.Data.patrolDuration;
+            directionTimer = owner.PatrolDuration;
         }
     }
 
@@ -27,7 +27,7 @@ public class PatrolRobotPatrollingState : PatrolRobotState
         Vector2 position = owner.Rigidbody.position;
         float offset = owner.Data.speed * owner.Direction * Time.fixedDeltaTime;
 
-        switch (owner.Data.patrolDirection)
+        switch (owner.PatrolDirection)
         {
             case PatrolDirection.Horizontal:
                 position.x += offset;

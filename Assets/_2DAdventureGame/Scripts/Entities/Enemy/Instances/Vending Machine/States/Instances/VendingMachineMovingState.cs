@@ -9,7 +9,7 @@ public class VendingMachineMovingState : VendingMachineState
 
     public override void Enter(VendingMachine owner)
     {
-        directionTimer = owner.Data.patrolDuration;
+        directionTimer = owner.PatrolDuration;
         owner.Direction = 1;
     }
 
@@ -19,7 +19,7 @@ public class VendingMachineMovingState : VendingMachineState
         if (directionTimer <= 0f)
         {
             owner.Direction = -owner.Direction;
-            directionTimer = owner.Data.patrolDuration;
+            directionTimer = owner.PatrolDuration;
         }
 
         float distance = Vector2.Distance(
@@ -36,7 +36,7 @@ public class VendingMachineMovingState : VendingMachineState
         Vector2 position = owner.Rigidbody.position;
         float offset = owner.Data.speed * owner.Direction * Time.fixedDeltaTime;
 
-        switch (owner.Data.patrolDirection)
+        switch (owner.PatrolDirection)
         {
             case PatrolDirection.Horizontal:
                 position.x += offset;
