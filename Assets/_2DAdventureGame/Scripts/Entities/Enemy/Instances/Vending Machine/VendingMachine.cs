@@ -9,6 +9,12 @@ public class VendingMachine : Enemy
     [SerializeField] private ParticleSystem smokeEffect;
     public ParticleSystem SmokeEffect => smokeEffect;
 
+    [Header("Patrolling Properties")]
+    [SerializeField] private PatrolDirection patrolDirection;
+    [SerializeField] private float patrolDuration;
+    public PatrolDirection PatrolDirection => patrolDirection;
+    public float PatrolDuration => patrolDuration;
+
     public int Direction { get; set; }
 
     public VendingMachineState CurrentState { get; private set; }

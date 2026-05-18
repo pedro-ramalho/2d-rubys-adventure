@@ -34,7 +34,7 @@ AnimatorController:
   m_Name: Enemy
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Move  X
+  - m_Name: Move X
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -132,7 +132,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Move  X
     m_Mirror: 0
-  m_BlendParameter: Move  X
+  m_BlendParameter: Move X
   m_BlendParameterY: Move Y
   m_MinThreshold: 0
   m_MaxThreshold: 1

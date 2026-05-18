@@ -10,11 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09250c9317fec9643972f7f02a51c739, type: 3}
-  m_Name: PatrollingRobotData
+  m_Name: Patrol Robot Data
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHealth: 1
   speed: 1
-  patrolDirection: 1
-  patrolDuration: 3
-  smokeParticleEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
-    type: 3}
+  reportTag: Robot
+  speedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSpeed: 0
+  chargeDuration: 0
+  stunnedDuration: 0
