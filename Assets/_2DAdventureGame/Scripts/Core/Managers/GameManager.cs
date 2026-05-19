@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
         enemiesFixed++;
 
-        if (enemiesFixed >= enemies.Length) EndGame(win: true);
+        if (enemiesFixed >= enemies.Length) return; // EndGame(win: true);
     }
 
     void EndGame(bool win)

@@ -13,10 +13,7 @@ GameObject:
   - component: {fileID: 7703455999881025297}
   - component: {fileID: 4430812844398941777}
   - component: {fileID: 1461250853656128103}
-  - component: {fileID: 5421557979147283407}
-  - component: {fileID: 7039932995541837950}
-  - component: {fileID: 201222938855139970}
-  - component: {fileID: 3376820375604038826}
+  - component: {fileID: 2189125344610601575}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -128,7 +125,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -172,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
   type: 0
   reportTag: Box
---- !u!114 &5421557979147283407
+--- !u!114 &2189125344610601575
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,50 +178,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 169062407923011603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a292d1066a6a5144aa5a19a01d99d958, type: 3}
+  m_Script: {fileID: 11500000, guid: a3c396b2add69ab42a3e2ba9c24c18f6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthCollectible
-  collectibleClip: {fileID: 0}
-  healAmount: 0
---- !u!114 &7039932995541837950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169062407923011603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 0
-  reportTag: Box
---- !u!114 &201222938855139970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169062407923011603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a292d1066a6a5144aa5a19a01d99d958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthCollectible
-  collectibleClip: {fileID: 0}
-  healAmount: 0
---- !u!114 &3376820375604038826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169062407923011603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 0
-  reportTag: Box
+  m_EditorClassIdentifier: Assembly-CSharp::QuestBinding
+  boundQuest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
+  deactivateOnComplete: 1
