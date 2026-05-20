@@ -15,6 +15,10 @@ public class VendingMachine : Enemy
     public PatrolDirection PatrolDirection => patrolDirection;
     public float PatrolDuration => patrolDuration;
 
+    [Header("Collision Behavior")]
+    [SerializeField] private string wallTag = "Wall";
+    [SerializeField] private GameObject collisionExplosionPrefab;
+
     public int Direction { get; set; }
 
     public VendingMachineState CurrentState { get; private set; }
@@ -41,7 +45,27 @@ public class VendingMachine : Enemy
     void Update() => CurrentState.Update(this);
 
     void FixedUpdate() => CurrentState.FixedUpdate(this);
-    
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out VendingMachine other))
+        {
+            if (GetInstanceID() < other.GetInstanceID() && collisionExplosionPrefab != null)
+            {
+                Vector2 midpoint = (Rigidbody.position + other.Rigidbody.position) * 0.5f;
+
+                Instantiate(collisionExplosionPrefab, midpoint, Quaternion.identity);
+            }
+
+            Destroy(gameObject);
+
+            return;
+        }
+
+        if (CurrentState == ChargingState && collision.gameObject.CompareTag(wallTag))
+            ChangeState(StunnedState);
+    }
+
     public void ChangeState(VendingMachineState newState)
     {
         CurrentState.Exit(this);
