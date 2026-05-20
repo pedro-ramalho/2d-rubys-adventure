@@ -13,6 +13,7 @@ public class EnemyData : ScriptableObject
     public string reportTag;
 
     [Header("Vending Machine Properties")]
+    public float detectionRadius = 5f;
     public AnimationCurve speedCurve;
     public float maxSpeed;
     public float chargeDuration;

@@ -9,12 +9,6 @@ public class VendingMachine : Enemy
     [SerializeField] private ParticleSystem smokeEffect;
     public ParticleSystem SmokeEffect => smokeEffect;
 
-    [Header("Patrolling Properties")]
-    [SerializeField] private PatrolDirection patrolDirection;
-    [SerializeField] private float patrolDuration;
-    public PatrolDirection PatrolDirection => patrolDirection;
-    public float PatrolDuration => patrolDuration;
-
     [Header("Collision Behavior")]
     [SerializeField] private string wallTag = "Wall";
     [SerializeField] private GameObject collisionExplosionPrefab;

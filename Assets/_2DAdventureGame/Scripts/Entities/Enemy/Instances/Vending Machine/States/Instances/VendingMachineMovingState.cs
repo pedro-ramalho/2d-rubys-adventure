@@ -4,52 +4,25 @@ public class VendingMachineMovingState : VendingMachineState
 {
     public override string ID => "Moving";
 
-    private float directionTimer;
-    private float detectionRadius = 5.0f;
-
-    public override void Enter(VendingMachine owner)
-    {
-        directionTimer = owner.PatrolDuration;
-        owner.Direction = 1;
-    }
-
     public override void Update(VendingMachine owner)
     {
-        directionTimer -= Time.deltaTime;
-        if (directionTimer <= 0f)
-        {
-            owner.Direction = -owner.Direction;
-            directionTimer = owner.PatrolDuration;
-        }
-
         float distance = Vector2.Distance(
-            owner.Rigidbody.position, 
+            owner.Rigidbody.position,
             owner.Player.Rigidbody.position
         );
 
-        if (distance <= detectionRadius)
+        if (distance <= owner.Data.detectionRadius)
             owner.ChangeState(owner.ChargingState);
     }
 
     public override void FixedUpdate(VendingMachine owner)
     {
-        Vector2 position = owner.Rigidbody.position;
-        float offset = owner.Data.speed * owner.Direction * Time.fixedDeltaTime;
+        Vector2 toPlayer = (owner.Player.Rigidbody.position - owner.Rigidbody.position).normalized;
+        Vector2 step = toPlayer * (owner.Data.speed * Time.fixedDeltaTime);
 
-        switch (owner.PatrolDirection)
-        {
-            case PatrolDirection.Horizontal:
-                position.x += offset;
-                owner.Animator.SetFloat(PatrolRobot.MoveXHash, owner.Direction);
-                owner.Animator.SetFloat(PatrolRobot.MoveYHash, 0f);
-                break;
-            case PatrolDirection.Vertical:
-                position.y += offset;
-                owner.Animator.SetFloat(PatrolRobot.MoveXHash, 0f);
-                owner.Animator.SetFloat(PatrolRobot.MoveYHash, owner.Direction);
-                break;
-        }
+        owner.Rigidbody.MovePosition(owner.Rigidbody.position + step);
 
-        owner.Rigidbody.MovePosition(position);
+        owner.Animator.SetFloat(VendingMachine.MoveXHash, toPlayer.x);
+        owner.Animator.SetFloat(VendingMachine.MoveYHash, toPlayer.y);
     }
 }
