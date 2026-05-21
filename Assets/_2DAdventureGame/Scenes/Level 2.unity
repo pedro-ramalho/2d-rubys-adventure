@@ -6464,9 +6464,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1795843237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c15e28bbb25f0ac4f8df11874750bf2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 695dab23de7058748b0d8724307728e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  m_EditorClassIdentifier: Assembly-CSharp::L2Manager
+  player: {fileID: 2805295948606414392}
+  spawner: {fileID: 1665620913}
+  ui: {fileID: 2056929449}
+  endGameDelay: 3
 --- !u!1 &1797336163
 GameObject:
   m_ObjectHideFlags: 0
