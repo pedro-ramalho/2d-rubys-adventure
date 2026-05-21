@@ -8,11 +8,4 @@ public class EnemyData : ScriptableObject
 
     [Header("Movement")]
     public float speed;
-
-    [Header("Vending Machine Properties")]
-    public float detectionRadius = 5f;
-    public AnimationCurve speedCurve;
-    public float maxSpeed;
-    public float chargeDuration;
-    public float stunnedDuration;
 }

@@ -11,7 +11,7 @@ public class VendingMachineStunnedState : VendingMachineState
     public override void Update(VendingMachine owner)
     {
         timer += Time.deltaTime;
-        if (timer >= owner.Data.stunnedDuration)
+        if (timer >= owner.StunnedDuration)
             owner.ChangeState(owner.MovingState);
     }
 }

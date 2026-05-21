@@ -16,15 +16,15 @@ public class VendingMachineChargingState : VendingMachineState
     public override void Update(VendingMachine owner)
     {
         timer += Time.deltaTime;
-        if (timer >= owner.Data.chargeDuration)
+        if (timer >= owner.ChargeDuration)
             owner.ChangeState(owner.StunnedState);
         
     }
 
     public override void FixedUpdate(VendingMachine owner)
     {
-        float progress = timer / owner.Data.chargeDuration;
-        float speed = owner.Data.speedCurve.Evaluate(progress) * owner.Data.maxSpeed;
+        float progress = timer / owner.ChargeDuration;
+        float speed = owner.SpeedCurve.Evaluate(progress) * owner.MaxSpeed;
 
         owner.Rigidbody.MovePosition(
             owner.Rigidbody.position + direction * (speed * Time.deltaTime)

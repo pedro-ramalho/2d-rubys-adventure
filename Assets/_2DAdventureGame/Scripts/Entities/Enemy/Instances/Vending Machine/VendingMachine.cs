@@ -13,6 +13,18 @@ public class VendingMachine : Enemy
     [SerializeField] private string wallTag = "Wall";
     [SerializeField] private GameObject collisionExplosionPrefab;
 
+    [Header("Charging Properties")]
+    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private AnimationCurve speedCurve;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float chargeDuration;
+    [SerializeField] private float stunnedDuration;
+    public float DetectionRadius => detectionRadius;
+    public AnimationCurve SpeedCurve => speedCurve;
+    public float MaxSpeed => maxSpeed;
+    public float ChargeDuration => chargeDuration;
+    public float StunnedDuration => stunnedDuration;
+
     public int Direction { get; set; }
 
     public VendingMachineState CurrentState { get; private set; }
