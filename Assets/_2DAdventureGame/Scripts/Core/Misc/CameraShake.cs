@@ -9,7 +9,7 @@ public class CameraShake : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 

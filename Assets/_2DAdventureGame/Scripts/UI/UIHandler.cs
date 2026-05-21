@@ -16,7 +16,10 @@ public class UIHandler : MonoBehaviour
 
     private Player player;
 
-    void Awake() => Instance = this;
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
     void Start()
     {
