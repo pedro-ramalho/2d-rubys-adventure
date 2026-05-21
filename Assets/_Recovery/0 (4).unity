@@ -6103,9 +6103,6 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
       type: 3}
-    count: 1
-  - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
-      type: 3}
     count: 3
   spawnPoints:
   - {fileID: 2082912690}
