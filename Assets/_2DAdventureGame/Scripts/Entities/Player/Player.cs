@@ -19,16 +19,12 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerData Data => data;
 
     [Header("Player Input")]
-    [SerializeField] private InputAction moveAction;
-    [SerializeField] private InputAction dashAction;
-    [SerializeField] private InputAction shootAction;
-    [SerializeField] private InputAction talkAction;
-    [SerializeField] private InputAction pauseAction;
-    public InputAction MoveAction => moveAction;
-    public InputAction DashAction => dashAction;
-    public InputAction ShootAction => shootAction;
-    public InputAction TalkAction => talkAction;
-    public InputAction PauseAction => pauseAction;
+    private PlayerInputActions inputActions;
+    public InputAction MoveAction => inputActions.Player.Movement;
+    public InputAction DashAction => inputActions.Player.Dash;
+    public InputAction ShootAction => inputActions.Player.Shoot;
+    public InputAction TalkAction => inputActions.Player.Talk;
+    public InputAction PauseAction => inputActions.Player.Pause;
 
     [Header("Player Assets")]
     [SerializeField] private AudioClip walkClip;
@@ -83,6 +79,8 @@ public class Player : MonoBehaviour, IDamageable
 
         CurrentHealth = Mathf.Clamp(data.startingHealth, 0, data.maxHealth);
 
+        inputActions = new PlayerInputActions();
+
         GroundedState = new PlayerGroundedState();
         DashingState = new PlayerDashingState();
         DeadState = new PlayerDeadState();
@@ -91,8 +89,8 @@ public class Player : MonoBehaviour, IDamageable
         CurrentState.Enter(this);
     }
 
-    void OnEnable() => EnableAllActions(true);
-    void OnDisable() => EnableAllActions(false);
+    void OnEnable() => inputActions.Player.Enable();
+    void OnDisable() => inputActions.Player.Disable();
 
     void Update()
     {
@@ -128,24 +126,4 @@ public class Player : MonoBehaviour, IDamageable
 
     public void RaiseOnHealthChanged(float percentage) => OnHealthChanged?.Invoke(percentage);
     public void RaiseOnDied() => OnDied?.Invoke();
-
-    void EnableAllActions(bool enable)
-    {
-        if (enable)
-        {
-            moveAction.Enable();
-            dashAction.Enable();
-            shootAction.Enable();
-            talkAction.Enable();
-            pauseAction.Enable();
-        }
-        else
-        {
-            moveAction.Disable();
-            dashAction.Disable();
-            shootAction.Disable();
-            talkAction.Disable();
-            pauseAction.Disable();
-        }
-    }
 }
