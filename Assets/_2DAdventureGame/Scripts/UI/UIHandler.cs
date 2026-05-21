@@ -53,13 +53,6 @@ public class UIHandler : MonoBehaviour
         Invoke(nameof(HideDialogue), displayTime);
     }
 
-    public void DisplayDialogue()
-    {
-        dialoguePanel.style.display = DisplayStyle.Flex;
-        CancelInvoke(nameof(HideDialogue));
-        Invoke(nameof(HideDialogue), displayTime);
-    }
-
     void HideDialogue() => dialoguePanel.style.display = DisplayStyle.None;
 
     public void SetVisible(bool visible) => GetComponent<UIDocument>().rootVisualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
