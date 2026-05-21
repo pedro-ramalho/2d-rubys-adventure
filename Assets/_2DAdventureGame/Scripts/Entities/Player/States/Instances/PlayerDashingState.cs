@@ -17,7 +17,7 @@ public class PlayerDashingState : PlayerState
         owner.IsInvincible = true;
         owner.DamageCooldown = owner.Data.dashDuration;
         owner.Animator.SetFloat(Player.SpeedHash, 1f);
-        owner.AudioSource.PlayOneShot(owner.DashClip);
+        owner.OneShotSource.PlayOneShot(owner.DashClip);
         owner.CurrentVelocity = Vector2.zero;
     }
 

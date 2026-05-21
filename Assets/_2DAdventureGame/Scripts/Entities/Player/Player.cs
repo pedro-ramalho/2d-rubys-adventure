@@ -27,12 +27,14 @@ public class Player : MonoBehaviour, IDamageable
     public InputAction PauseAction => inputActions.Player.Pause;
 
     [Header("Player Assets")]
+    [SerializeField] private AudioSource oneShotSource;
     [SerializeField] private AudioClip walkClip;
     [SerializeField] private AudioClip dashClip;
     [SerializeField] private AudioClip hitClip;
     [SerializeField] private AudioClip launchClip;
     [SerializeField] private GameObject afterimagePrefab;
     [SerializeField] private GameObject projectilePrefab;
+    public AudioSource OneShotSource => oneShotSource;
     public AudioClip WalkClip => walkClip;
     public AudioClip DashClip => dashClip;
     public AudioClip HitClip => hitClip;
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour, IDamageable
     // State instances
     public PlayerGroundedState GroundedState { get; private set; }
     public PlayerDashingState DashingState { get; private set; }
+    public PlayerShootingState ShootingState { get; private set; }
     public PlayerDeadState DeadState { get; private set; }
 
     void Awake()
@@ -83,6 +86,7 @@ public class Player : MonoBehaviour, IDamageable
 
         GroundedState = new PlayerGroundedState();
         DashingState = new PlayerDashingState();
+        ShootingState = new PlayerShootingState();
         DeadState = new PlayerDeadState();
 
         CurrentState = GroundedState;

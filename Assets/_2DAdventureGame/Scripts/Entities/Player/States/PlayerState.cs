@@ -22,7 +22,7 @@ public abstract class PlayerState : State<Player>
         owner.DamageCooldown = owner.Data.invincibilityDuration;
 
         owner.Animator.SetTrigger(Player.HitHash);
-        owner.AudioSource.PlayOneShot(owner.HitClip);
+        owner.OneShotSource.PlayOneShot(owner.HitClip);
         
         CameraShake.Instance?.Shake();
 

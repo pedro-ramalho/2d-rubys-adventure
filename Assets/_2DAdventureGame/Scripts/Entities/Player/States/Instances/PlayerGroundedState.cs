@@ -18,7 +18,10 @@ public class PlayerGroundedState : PlayerState
         HandleNPCInteraction(owner);
 
         if (owner.ShootAction.WasPressedThisFrame())
-            Shoot(owner);
+        {
+            owner.ChangeState(owner.ShootingState);
+            return;
+        }
 
         if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f)
             owner.ChangeState(owner.DashingState);
@@ -91,18 +94,4 @@ public class PlayerGroundedState : PlayerState
         }
     }
 
-    private void Shoot(Player owner)
-    {
-        owner.Animator.SetTrigger(Player.ShootHash);
-        owner.AudioSource.PlayOneShot(owner.LaunchClip);
-
-        GameObject projectileObj = Object.Instantiate(
-            owner.ProjectilePrefab,
-            owner.Rigidbody.position + Vector2.up * 0.5f,
-            Quaternion.identity
-        );
-
-        if (projectileObj.TryGetComponent(out Projectile projectile))
-            projectile.Launch(owner.MoveDirection, owner.Data.projectileLaunchForce);
-    }
 }
