@@ -12,7 +12,10 @@ public class QuestManager : MonoBehaviour
     public event Action<Quest> OnQuestAccepted;
     public event Action<Quest> OnQuestCompleted;
 
-    void Awake() => Instance = this;
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
     public void AcceptQuest(QuestData data)
     {
