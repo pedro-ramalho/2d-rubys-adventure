@@ -11,7 +11,7 @@ public class VendingMachineMovingState : VendingMachineState
             owner.Player.Rigidbody.position
         );
 
-        if (distance <= owner.Data.detectionRadius)
+        if (distance <= owner.DetectionRadius)
             owner.ChangeState(owner.ChargingState);
     }
 
