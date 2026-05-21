@@ -9,9 +9,6 @@ public class EnemyData : ScriptableObject
     [Header("Movement")]
     public float speed;
 
-    [Header("Quest Report Tag")]
-    public string reportTag;
-
     [Header("Vending Machine Properties")]
     public float detectionRadius = 5f;
     public AnimationCurve speedCurve;
