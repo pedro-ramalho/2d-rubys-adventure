@@ -1311,6 +1311,84 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   mapOverlay: {fileID: 1868950972}
+--- !u!1001 &1112335387
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443473459023436660, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801472184784057030, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: healAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801472184784057030, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: collectibleClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 173a14cf06354c643b46b235f2a4f974, type: 3}
+    - target: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: m_Name
+      value: Strawberry
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 169b9df40363e7849ba6118bce27948c, type: 3}
 --- !u!1 &1123552646
 GameObject:
   m_ObjectHideFlags: 0
@@ -32479,3 +32557,4 @@ SceneRoots:
   - {fileID: 2805295948606414390}
   - {fileID: 1123552647}
   - {fileID: 39154394}
+  - {fileID: 1112335387}

@@ -11,6 +11,10 @@ public abstract class Collectible : MonoBehaviour
         if (other.TryGetComponent(out Player player))
         {
             ApplyEffect(player);
+
+            if (collectibleClip != null)
+                player.OneShotSource.PlayOneShot(collectibleClip);
+
             OnEffectApplied();
             GetComponent<QuestReporter>()?.Report();
         }
