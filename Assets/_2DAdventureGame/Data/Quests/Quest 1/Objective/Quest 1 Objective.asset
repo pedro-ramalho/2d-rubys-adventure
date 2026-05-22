@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124fe86ac8355c6459c85c340c0fa12f, type: 3}
   m_Name: Quest 1 Objective
   m_EditorClassIdentifier: Assembly-CSharp::FetchObjective
-  count: 3
-  item: Box
+  count: 1
+  item: Strawberry

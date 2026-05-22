@@ -15,10 +15,21 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
   before:
     lines:
-    - Oh no... what am I going to do...
-    - I can't find them anywhere!
-    - Oh! Ruby! Thank goodness you're here! Could you please help me find my boxes?
-    - The must be nearby...
+    - Hello, Ruby, welcome!
+    - It appears you've been summoned here to help my friends deal with the recent
+      robot problem...
+    - "They\u2019re malfunctioning like crazy!"
+    - "But first, let\u2019s start with the basics. Have you learned how to move
+      yet?"
+    - Move with WASD or arrow keys. Press X to talk to me or others, just like you
+      did.
+    - 'The top left of the screen contains a small bar that reveals your current
+      health. '
+    - "Don\u2019t let it run empty, or else you\u2019ll die!"
+    - "Now that I\u2019ve taken a good look at you\u2026 You seem not to be in the
+      greatest of shapes\u2026"
+    - The trip here must have been really exhausting.
+    - "Here, please, have this strawberry. It\u2019ll be good for you!"
     questToGrantAfter: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6,
       type: 2}
     onExhausted:
@@ -26,17 +37,33 @@ MonoBehaviour:
         m_Calls: []
   during:
     lines:
-    - These boxes are really important...
+    - Please accept the strawberry I'm giving you.
     questToGrantAfter: {fileID: 0}
     onExhausted:
       m_PersistentCalls:
         m_Calls: []
   after:
     lines:
-    - Thank you so much for your help Ruby!
-    - Oh, on another note, a friend of mine seems to be in trouble...
-    - If you follow the path through northwest you'll be sure to find him.
+    - You look a lot better now! Ready to go.
+    - Not to disappoint you or anything but there isn't much to do in this tiny island.
+    - I live by myself, and as you can tell, there are no robots to interfere with
+      my peace here.
+    - You should visit my friend's island. They're nearby and could really use your
+      help.
+    - Let's get going then.
     questToGrantAfter: {fileID: 0}
     onExhausted:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
