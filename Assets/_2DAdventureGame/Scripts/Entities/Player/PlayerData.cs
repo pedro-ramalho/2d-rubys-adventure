@@ -20,7 +20,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Combat")]
     public float projectileLaunchForce = 300f;
-    public float shootDuration = 0.25f;
+    public float shootDuration = 0.35f;
 
     [Header("Afterimage")]
     public Color afterimageColor = new Color(0.5f, 0.8f, 1f, 0.6f);
