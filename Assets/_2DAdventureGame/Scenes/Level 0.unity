@@ -1260,6 +1260,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1823371468}
+    - targetCorrespondingSourceObject: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1823371473}
   m_SourcePrefab: {fileID: 100100000, guid: 169b9df40363e7849ba6118bce27948c, type: 3}
 --- !u!1 &1123552646
 GameObject:
@@ -1652,6 +1656,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
   type: 0
   reportTag: Strawberry
+--- !u!114 &1823371473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823371463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c396b2add69ab42a3e2ba9c24c18f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestBinding
+  boundQuest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
+  activateOnQuestAccept: 1
+  deactivateOnComplete: 0
+  interactables: []
 --- !u!4 &1864379401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2390709048986743695, guid: bb5a8a177f86e8b46bd4dd00bcfb910b,
@@ -32228,6 +32248,11 @@ PrefabInstance:
     - target: {fileID: 1255086236331088895, guid: 43bbe1555b122fc4d9c9628f07d74643,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488853994069718317, guid: 43bbe1555b122fc4d9c9628f07d74643,
+        type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
