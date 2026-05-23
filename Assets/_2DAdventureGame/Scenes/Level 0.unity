@@ -32306,7 +32306,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFootstep
   source: {fileID: 2805295948606414399}
   clips:
-  - {fileID: 8300000, guid: 2d729ad7c0aac5a49991870c65f4651c, type: 3}
+  - {fileID: 8300000, guid: fe3ab6fcc1d638e468bf5546558120f7, type: 3}
+  - {fileID: 8300000, guid: e198632197af91248965a8ed4e070dba, type: 3}
+  - {fileID: 8300000, guid: f147844988c2c9742b11a76cd9f357c4, type: 3}
+  - {fileID: 8300000, guid: 6b546d157b4f5d1478e449813c016e95, type: 3}
+  - {fileID: 8300000, guid: 46b08d0e00468114f91d25c59982e845, type: 3}
+  - {fileID: 8300000, guid: c2f002d1f373d2d4589480ab160d52a9, type: 3}
+  - {fileID: 8300000, guid: 70fd4bbf61046fe4caa7d2f7ad71a532, type: 3}
+  - {fileID: 8300000, guid: 0f0bea2d854336a4ebe8a54488a02a1b, type: 3}
+  - {fileID: 8300000, guid: 1def77113ef27b9499df054b802e379f, type: 3}
+  - {fileID: 8300000, guid: 94b85a5c226c8d048be514e64d33bf38, type: 3}
+  - {fileID: 8300000, guid: 7045c693a022cdd49ba063d7d2c90372, type: 3}
+  - {fileID: 8300000, guid: 730d51439cd365d46ab2ef9e89d557ba, type: 3}
+  - {fileID: 8300000, guid: 4e291ca95e0fbca4ebfa7657a8ab2676, type: 3}
+  - {fileID: 8300000, guid: f590a12c06aee484caab2cd44c6eb689, type: 3}
+  - {fileID: 8300000, guid: a926516a6836571449e2764f605ef460, type: 3}
+  - {fileID: 8300000, guid: 39a11d8827c4dda4cb9ca2c00822d823, type: 3}
+  - {fileID: 8300000, guid: 9c97fd3fb40ea7348af2211530782bef, type: 3}
+  - {fileID: 8300000, guid: 0c4d4cf3b0e940042818310470c435b8, type: 3}
+  - {fileID: 8300000, guid: 4d4cb0dd258de5c4eb332f66de3d325d, type: 3}
+  - {fileID: 8300000, guid: 5cc50c41f8353954484002eb0dd03796, type: 3}
+  - {fileID: 8300000, guid: c80b64b61519a32478fe400f402ae1f3, type: 3}
   pitchVariation: 0.15
 --- !u!1001 &9217702019384491359
 PrefabInstance:
