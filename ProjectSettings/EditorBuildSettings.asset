@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_2DAdventureGame/Scenes/Level 1.unity
     guid: 8331aeae100f2d945a573758d7b89cc6
+  - enabled: 1
+    path: Assets/_2DAdventureGame/Scenes/Level 2.unity
+    guid: 69fb2d94efb5117488acf0b6c97a6df3
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
