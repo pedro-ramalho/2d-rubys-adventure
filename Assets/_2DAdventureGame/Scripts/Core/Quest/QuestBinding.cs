@@ -3,14 +3,29 @@ using UnityEngine;
 public class QuestBinding : MonoBehaviour
 {
     [SerializeField] private QuestData boundQuest;
+
+    [Tooltip("If true, the SpriteRenderers and Collider2Ds on this GameObject (and its children) are hidden/disabled until the bound quest is accepted. Use for items that should not appear in the world at all before the quest starts.")]
+    [SerializeField] private bool activateOnQuestAccept;
+
     [SerializeField] private bool deactivateOnComplete = true;
 
-    [Tooltip("Components disabled until the bound quest is active (e.g. the trigger Collider2D and/or Collectible script). Visual components like SpriteRenderer should NOT be included — items stay visible at all times.")]
+    [Tooltip("Components disabled until the bound quest is active (e.g. the Collectible script). Use for items that remain visible but should not yet be interactable.")]
     [SerializeField] private Behaviour[] interactables;
 
     public QuestData BoundQuest => boundQuest;
 
-    void Awake() => SetInteractable(false);
+    private SpriteRenderer[] renderers;
+    private Collider2D[] colliders;
+
+    void Awake()
+    {
+        if (activateOnQuestAccept)
+        {
+            renderers = GetComponentsInChildren<SpriteRenderer>(true);
+            colliders = GetComponentsInChildren<Collider2D>(true);
+        }
+        SetInteractable(false);
+    }
 
     void Start()
     {
@@ -45,5 +60,13 @@ public class QuestBinding : MonoBehaviour
     {
         foreach (Behaviour b in interactables)
             if (b != null) b.enabled = value;
+
+        if (activateOnQuestAccept)
+        {
+            foreach (SpriteRenderer r in renderers)
+                if (r != null) r.enabled = value;
+            foreach (Collider2D c in colliders)
+                if (c != null) c.enabled = value;
+        }
     }
 }
