@@ -12,9 +12,8 @@ public class PlayerFootstep : MonoBehaviour
     {
         if (source == null || clips == null || clips.Length == 0) return;
 
-        AudioClip clip = clips[Random.Range(0, clips.Length)];
-        
+        source.clip = clips[Random.Range(0, clips.Length)];
         source.pitch = 1f + Random.Range(-pitchVariation, pitchVariation);
-        source.PlayOneShot(clip);
+        source.Play();
     }
 }
