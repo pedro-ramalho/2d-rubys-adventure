@@ -4,14 +4,12 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Player : MonoBehaviour, IDamageable
 {
     // Components
     public Rigidbody2D Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
-    public AudioSource AudioSource { get; private set; }
     public SpriteRenderer SpriteRenderer { get; private set; }
 
     [Header("Player Data")]
@@ -28,14 +26,12 @@ public class Player : MonoBehaviour, IDamageable
 
     [Header("Player Assets")]
     [SerializeField] private AudioSource oneShotSource;
-    [SerializeField] private AudioClip walkClip;
     [SerializeField] private AudioClip dashClip;
     [SerializeField] private AudioClip hitClip;
     [SerializeField] private AudioClip launchClip;
     [SerializeField] private GameObject afterimagePrefab;
     [SerializeField] private GameObject projectilePrefab;
     public AudioSource OneShotSource => oneShotSource;
-    public AudioClip WalkClip => walkClip;
     public AudioClip DashClip => dashClip;
     public AudioClip HitClip => hitClip;
     public AudioClip LaunchClip => launchClip;
@@ -77,7 +73,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
-        AudioSource = GetComponent<AudioSource>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
 
         CurrentHealth = Mathf.Clamp(data.startingHealth, 0, data.maxHealth);
