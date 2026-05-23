@@ -7,6 +7,7 @@ public class UIHandler : MonoBehaviour
     public static UIHandler Instance { get; private set; }
 
     [SerializeField] private float displayTime = 4.0f;
+    [SerializeField] private AudioClip clickClip;
 
     private VisualElement healthBar;
     private VisualElement dialoguePanel;
@@ -49,6 +50,9 @@ public class UIHandler : MonoBehaviour
     
     public void DisplayDialogueWithLine(string line)
     {
+        if (clickClip != null && player != null)
+            player.OneShotSource.PlayOneShot(clickClip);
+
         dialogueText.text = line;
         dialoguePanel.style.display = DisplayStyle.Flex;
 

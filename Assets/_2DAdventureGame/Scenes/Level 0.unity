@@ -31789,6 +31789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIHandler
   displayTime: 4
+  clickClip: {fileID: 8300000, guid: 188e92d0b1c2dda45b91d76ee93ab378, type: 3}
 --- !u!1 &2058835688
 GameObject:
   m_ObjectHideFlags: 0
