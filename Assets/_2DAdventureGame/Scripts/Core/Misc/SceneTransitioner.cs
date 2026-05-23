@@ -7,6 +7,8 @@ public class SceneTransitioner : MonoBehaviour
     public static SceneTransitioner Instance { get; private set; }
 
     [SerializeField] private Animator transition;
+    [SerializeField] private float preTransitionDelay = 1.5f;
+    [SerializeField] private float transitionDuration = 1f;
 
     void Awake() => Instance = this;
 
@@ -14,9 +16,12 @@ public class SceneTransitioner : MonoBehaviour
 
     IEnumerator LoadScene(string scene)
     {
+        yield return new WaitForSeconds(preTransitionDelay);
+
+        if (UIHandler.Instance != null) UIHandler.Instance.HideDialogue();
         transition.SetTrigger("Start");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(transitionDuration);
 
         SceneManager.LoadScene(scene);
     }
