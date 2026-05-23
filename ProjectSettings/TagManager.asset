@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Projectile
   - Wall
+  - SurfaceWater
+  - SurfaceGrass
+  - SurfaceConcrete
   layers:
   - Default
   - TransparentFX
