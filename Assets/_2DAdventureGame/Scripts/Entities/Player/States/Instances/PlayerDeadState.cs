@@ -13,7 +13,6 @@ public class PlayerDeadState : PlayerState
     public override void Enter(Player owner)
     {
         owner.CurrentVelocity = Vector2.zero;
-        owner.AudioSource.Stop();
         owner.Animator.SetFloat(Player.SpeedHash, 0f);
     }
 
