@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
+  m_Name: L1Q1 Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
+  quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
+  before:
+    lines: []
+    questToGrantAfter: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+      type: 2}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
+  during:
+    lines: []
+    questToGrantAfter: {fileID: 0}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
+  after:
+    lines: []
+    questToGrantAfter: {fileID: 0}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
