@@ -872,7 +872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogues:
-  - {fileID: 11400000, guid: 07a3c356ba09dd045b4210e4fb3c1c43, type: 2}
+  - {fileID: 11400000, guid: 715986190625f844386144d329f7ab11, type: 2}
   dialogueBubble: {fileID: 2590044434856414156, guid: b8ae08010b021e64fa35289c833a4e08,
     type: 3}
 --- !u!1001 &415534270
@@ -6909,7 +6909,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1178486972}
   m_SourcePrefab: {fileID: 100100000, guid: 24916f3a589ccd6438db358b6aee46de, type: 3}
 --- !u!4 &1178486970 stripped
 Transform:
@@ -6917,6 +6921,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1178486969}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1178486971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1178486969}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1178486972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178486971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
+  type: 1
+  reportTag: Patrol Robot
 --- !u!1001 &1224247537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7020,7 +7044,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1224247540}
   m_SourcePrefab: {fileID: 100100000, guid: 24916f3a589ccd6438db358b6aee46de, type: 3}
 --- !u!4 &1224247538 stripped
 Transform:
@@ -7028,6 +7056,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1224247537}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1224247539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1224247537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1224247540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224247539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
+  type: 1
+  reportTag: Patrol Robot
 --- !u!1001 &1314373396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7131,7 +7179,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1314373399}
   m_SourcePrefab: {fileID: 100100000, guid: 24916f3a589ccd6438db358b6aee46de, type: 3}
 --- !u!4 &1314373397 stripped
 Transform:
@@ -7139,6 +7191,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1314373396}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1314373398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1314373396}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1314373399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314373398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
+  type: 1
+  reportTag: Patrol Robot
 --- !u!1 &1329450549
 GameObject:
   m_ObjectHideFlags: 0
@@ -7277,7 +7349,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1338031327}
   m_SourcePrefab: {fileID: 100100000, guid: 24916f3a589ccd6438db358b6aee46de, type: 3}
 --- !u!4 &1338031325 stripped
 Transform:
@@ -7285,6 +7361,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1338031324}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1338031326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1338031324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1338031327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338031326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
+  type: 1
+  reportTag: Patrol Robot
 --- !u!1 &1343173741
 GameObject:
   m_ObjectHideFlags: 0
