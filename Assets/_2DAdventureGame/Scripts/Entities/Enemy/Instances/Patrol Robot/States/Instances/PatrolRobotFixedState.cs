@@ -9,6 +9,7 @@ public class PatrolRobotFixedState : PatrolRobotState
         owner.Rigidbody.simulated = false;
         owner.Animator.SetTrigger(PatrolRobot.FixedHash);
         owner.AudioSource.Stop();
+        if (owner.FixedClip != null) owner.AudioSource.PlayOneShot(owner.FixedClip);
         owner.SmokeEffect.Stop();
         owner.RaiseOnFixed();
         owner.GetComponent<QuestReporter>()?.Report();
