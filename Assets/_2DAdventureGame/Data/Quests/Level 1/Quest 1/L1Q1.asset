@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08f3e1dc421590b469119e7345035d6b, type: 3}
-  m_Name: Quest 1
+  m_Name: L1Q1
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  id: 1
-  description: Accept the strawberry given the friend.
-  objective: {fileID: 11400000, guid: 795d3f9f6c1768445ac29b2f895573ad, type: 2}
+  id: L1Q1
+  description: Find the missing merchandise.
+  objective: {fileID: 11400000, guid: e86596cea9a46c2468f7092bdeddcbc8, type: 2}

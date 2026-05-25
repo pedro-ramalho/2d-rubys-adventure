@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
-  m_Name: Quest 1 Dialogue
+  m_Name: L0Q1 Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
   quest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
   before:
