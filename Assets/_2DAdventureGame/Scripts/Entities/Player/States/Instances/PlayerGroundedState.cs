@@ -14,7 +14,6 @@ public class PlayerGroundedState : PlayerState
 
         UpdateMoveDirection(owner);
         UpdateAnimator(owner);
-        UpdateWalkAudio(owner);
         HandleNPCInteraction(owner);
 
         if (owner.ShootAction.WasPressedThisFrame())
@@ -35,12 +34,6 @@ public class PlayerGroundedState : PlayerState
         owner.Rigidbody.MovePosition(owner.Rigidbody.position + owner.CurrentVelocity * Time.fixedDeltaTime);
     }
 
-    public override void Exit(Player owner)
-    {
-        if (owner.AudioSource.clip == owner.WalkClip)
-            owner.AudioSource.Stop();
-    }
-
     private void UpdateMoveDirection(Player owner)
     {
         if (!Mathf.Approximately(move.x, 0f) || !Mathf.Approximately(move.y, 0f))
@@ -52,22 +45,6 @@ public class PlayerGroundedState : PlayerState
         owner.Animator.SetFloat(Player.LookXHash, owner.MoveDirection.x);
         owner.Animator.SetFloat(Player.LookYHash, owner.MoveDirection.y);
         owner.Animator.SetFloat(Player.SpeedHash, move.magnitude);
-    }
-
-    private void UpdateWalkAudio(Player owner)
-    {
-        if (move.magnitude > 0f)
-        {
-            if (owner.AudioSource.clip != owner.WalkClip || !owner.AudioSource.isPlaying)
-            {
-                owner.AudioSource.clip = owner.WalkClip;
-                owner.AudioSource.Play();
-            }
-        }
-        else if (owner.AudioSource.clip == owner.WalkClip && owner.AudioSource.isPlaying)
-        {
-            owner.AudioSource.Stop();
-        }
     }
 
     private void HandleNPCInteraction(Player owner)
