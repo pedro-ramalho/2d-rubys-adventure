@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 971883343811238661}
   - component: {fileID: 5442306896319605101}
   - component: {fileID: 5352745062959942649}
-  - component: {fileID: 3360969911316289131}
   - component: {fileID: 4808783996010769892}
   - component: {fileID: 3948843125931185040}
+  - component: {fileID: 7355230372868098642}
   m_Layer: 9
   m_Name: Patrol Robot
   m_TagString: Untagged
@@ -170,22 +170,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3360969911316289131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4371289417431343873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39958edcb6e90447904295b66991b8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  speed: 1
-  vertical: 1
-  changeTime: 3
-  smokeParticleEffect: {fileID: 8752407528217253954}
 --- !u!95 &4808783996010769892
 Animator:
   serializedVersion: 7
@@ -305,6 +289,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7355230372868098642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371289417431343873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfeae033ff600f241a1c58a4e2fca108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PatrolRobot
+  data: {fileID: 0}
+  smokeEffect: {fileID: 0}
+  patrolDirection: 0
+  patrolDuration: 0
 --- !u!1001 &8550109639471844839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -386,12 +386,6 @@ PrefabInstance:
 --- !u!4 &3854328226089104849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4887888231570454582, guid: c4121383494e94343af7ee66e40abfbd,
-    type: 3}
-  m_PrefabInstance: {fileID: 8550109639471844839}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8752407528217253954 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
     type: 3}
   m_PrefabInstance: {fileID: 8550109639471844839}
   m_PrefabAsset: {fileID: 0}
