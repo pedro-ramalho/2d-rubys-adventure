@@ -18,10 +18,11 @@ MonoBehaviour:
   speed: 3
   acceleration: 20
   deceleration: 25
-  dashSpeed: 15
-  dashDuration: 0.15
+  dashSpeed: 18
+  dashDuration: 0.18
   dashCooldown: 1
   projectileLaunchForce: 300
+  shootDuration: 0.35
   afterimageColor: {r: 0.5, g: 0.8, b: 1, a: 0.6}
   afterimageInterval: 0.05
   afterimageLingerDuration: 0.3
