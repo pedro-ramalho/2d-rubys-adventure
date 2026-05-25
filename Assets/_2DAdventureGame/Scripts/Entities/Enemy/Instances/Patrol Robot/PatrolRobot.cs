@@ -10,13 +10,22 @@ public class PatrolRobot : Enemy
 
     [Header("Patrol Robot Assets")]
     [SerializeField] private ParticleSystem smokeEffect;
+    [SerializeField] private AudioClip fixedClip;
+    [SerializeField] private AudioClip hitClip;
     public ParticleSystem SmokeEffect => smokeEffect;
+    public AudioClip FixedClip => fixedClip;
+    public AudioClip HitClip => hitClip;
 
     [Header("Patrolling Properties")]
     [SerializeField] private PatrolDirection patrolDirection;
     [SerializeField] private float patrolDuration;
+    [SerializeField] private float speed;
     public PatrolDirection PatrolDirection => patrolDirection;
     public float PatrolDuration => patrolDuration;
+    public float Speed => speed;
+
+    [Header("Combat")]
+    [SerializeField] private int contactDamage = 1;
 
     public int Direction { get; set; }
 
@@ -47,4 +56,14 @@ public class PatrolRobot : Enemy
     }
 
     protected override void OnProjectileHit() => CurrentState.OnProjectileHit(this);
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (CurrentState == FixedState) return;
+        if (!other.TryGetComponent(out Player player)) return;
+        if (player.IsInvincible) return;
+
+        player.ApplyDamage(contactDamage);
+        if (hitClip != null) AudioSource.PlayOneShot(hitClip);
+    }
 }

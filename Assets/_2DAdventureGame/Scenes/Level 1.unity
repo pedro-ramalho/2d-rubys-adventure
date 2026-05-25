@@ -185,7 +185,6 @@ Transform:
   - {fileID: 81180329}
   - {fileID: 1165409529}
   - {fileID: 1949261702}
-  - {fileID: 1343173742}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &81180328
@@ -6833,6 +6832,21 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: fixedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
       propertyPath: smokeEffect
       value: 
       objectReference: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
@@ -6840,7 +6854,7 @@ PrefabInstance:
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: patrolDuration
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8176433548939661540, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
@@ -6922,6 +6936,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: aae692e55a3d5be4293a049968453da6,
         type: 2}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: fixedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: smokeEffect
@@ -7020,6 +7049,21 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: fixedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
       propertyPath: smokeEffect
       value: 
       objectReference: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
@@ -7027,7 +7071,7 @@ PrefabInstance:
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: patrolDuration
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
@@ -7156,6 +7200,21 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
+      propertyPath: speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: fixedClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
       propertyPath: smokeEffect
       value: 
       objectReference: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
@@ -7163,7 +7222,7 @@ PrefabInstance:
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: patrolDuration
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8176433548939661540, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
@@ -7251,7 +7310,7 @@ Transform:
   m_GameObject: {fileID: 1343173741}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.811314, y: -7.3355064, z: 0}
+  m_LocalPosition: {x: 14.260001, y: 14.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7259,7 +7318,7 @@ Transform:
   - {fileID: 1178486970}
   - {fileID: 1338031325}
   - {fileID: 1314373397}
-  m_Father: {fileID: 48257775}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1393758994
 PrefabInstance:
@@ -34171,3 +34230,4 @@ SceneRoots:
   - {fileID: 2805295948606414390}
   - {fileID: 1793048630}
   - {fileID: 531389635}
+  - {fileID: 1343173742}
