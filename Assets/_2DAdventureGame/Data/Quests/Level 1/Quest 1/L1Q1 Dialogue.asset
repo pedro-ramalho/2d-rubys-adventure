@@ -14,20 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
   quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
   before:
-    lines: []
+    lines:
+    - Oh no... Where could they be...
+    - 'Hey, you! You must be Ruby! '
+    - A friend told me someone with green pants and a tail was coming to this island.
+      You fit the description!
+    - I'd actually really appreciate your help right this moment.
+    - You see, I'm a merchant, and a while ago I lost 3 really important boxes with
+      valuable goods.
+    - Could you help me look for them?
+    - By the way, to help you navigate the map, I have a tip for you.
+    - You can dash around by pressing E. While dashing, you are briefly immune to
+      damage, so make the most of it!
     questToGrantAfter: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
       type: 2}
     onExhausted:
       m_PersistentCalls:
         m_Calls: []
   during:
-    lines: []
+    lines:
+    - These boxes are really important...
     questToGrantAfter: {fileID: 0}
     onExhausted:
       m_PersistentCalls:
         m_Calls: []
   after:
-    lines: []
+    lines:
+    - You found them! Thank you so much, Ruby!
+    - I'm aware that you didn't come to this island just to help a merchant find
+      their lost merchandise.
+    - You're probably hearing all of this noise coming from these malfunctioning
+      Patrol Robots that we have here.
+    - "You might want to visit my friend who lives nearby. They\u2019ll be able to
+      guide you on what to do next."
+    - Follow the pavement northwest, and you're sure to meet them eventually.
+    - Take care!
     questToGrantAfter: {fileID: 0}
     onExhausted:
       m_PersistentCalls:
