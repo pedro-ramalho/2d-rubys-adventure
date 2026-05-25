@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
+  m_Name: L1Q2 Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
+  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  before:
+    lines:
+    - Hm... by the looks of it, you must be Ruby.
+    - A friend of mine told me you were coming to this island to help us deal with
+      this whole robot mess we've got going on.
+    - They've been malfunctioning lately. Badly. And they're all in desperate need
+      of repair.
+    - That's your job, far as I understand it.
+    - Sure, they ain't gonna fix themselves.
+    - You'll need to hit them with something first. Go on, try pressing C and look
+      what happens.
+    questToGrantAfter: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f,
+      type: 2}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
+  during:
+    lines:
+    - The robots ain't gonna fix themselves, you know.
+    questToGrantAfter: {fileID: 0}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls: []
+  after:
+    lines:
+    - Good. Finally... maybe I can get some sleep around here.
+    - Well... I think you're ready now.
+    - Listen, here's the thing. Something's definitely going on with technology lately.
+    - It's becoming agressive toward us for some reason...
+    - Maybe it's grown tired of the way we've treated it... using it inappropriately...
+    - It's hard to say. Truth is, we don't really know why this is happening.
+    - I think you're the only one who's up for the task.
+    - Find the source of this scourge and eliminate it.
+    - We're counting on you!
+    questToGrantAfter: {fileID: 0}
+    onExhausted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 00de10106742a0a4a9d66f19712f2af1, type: 2}
+          m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Level 2
+            m_BoolArgument: 0
+          m_CallState: 2
