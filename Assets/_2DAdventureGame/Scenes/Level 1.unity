@@ -547,6 +547,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: boundQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1105,6 +1111,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: boundQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7326,7 +7338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogues:
-  - {fileID: 11400000, guid: 6f7881bece595a14c95d495631269121, type: 2}
+  - {fileID: 11400000, guid: 4f10cc39e4116ed469b7b07b56056577, type: 2}
   dialogueBubble: {fileID: 2590044434856414156, guid: b8ae08010b021e64fa35289c833a4e08,
     type: 3}
 --- !u!1 &1483873408
@@ -7639,6 +7651,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
+    - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: boundQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32075,7 +32093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIHandler
   displayTime: 4
-  clickClip: {fileID: 0}
+  clickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
 --- !u!1 &2058835688
 GameObject:
   m_ObjectHideFlags: 0
