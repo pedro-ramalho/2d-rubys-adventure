@@ -5994,7 +5994,7 @@ GameObject:
   - component: {fileID: 647668494}
   m_Layer: 0
   m_Name: Tilemap Concrete
-  m_TagString: Untagged
+  m_TagString: SurfaceConcrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21072,7 +21072,7 @@ GameObject:
   - component: {fileID: 1627479987}
   m_Layer: 0
   m_Name: Tilemap Water
-  m_TagString: Untagged
+  m_TagString: SurfaceWater
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
