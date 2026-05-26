@@ -64,6 +64,6 @@ public class PatrolRobot : Enemy
         if (player.IsInvincible) return;
 
         player.ApplyDamage(contactDamage);
-        if (hitClip != null) AudioSource.PlayOneShot(hitClip);
+        if (hitClip != null) AudioSource.PlayClipAtPoint(hitClip, transform.position);
     }
 }
