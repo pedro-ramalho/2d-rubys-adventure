@@ -2057,6 +2057,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: boundQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14668,6 +14674,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
+    - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: boundQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14871,6 +14883,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 18.771
       objectReference: {fileID: 0}
+    - target: {fileID: 6801472184784057030, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: healAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801472184784057030, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: collectibleClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 173a14cf06354c643b46b235f2a4f974, type: 3}
     - target: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
         type: 3}
       propertyPath: m_Name
@@ -22498,6 +22520,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: boundQuest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25088,6 +25116,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -24.567
       objectReference: {fileID: 0}
+    - target: {fileID: 6801472184784057030, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: healAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801472184784057030, guid: 169b9df40363e7849ba6118bce27948c,
+        type: 3}
+      propertyPath: collectibleClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 173a14cf06354c643b46b235f2a4f974, type: 3}
     - target: {fileID: 7655622716011761096, guid: 169b9df40363e7849ba6118bce27948c,
         type: 3}
       propertyPath: m_Name
