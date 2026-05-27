@@ -15,9 +15,17 @@ public class QuestTrackerManager : MonoBehaviour
 
     void Awake() => inputActions = new PlayerInputActions();
 
-    void OnEnable() => inputActions.Player.Tracker.performed += OnTrackerPressed;
+    void OnEnable()
+    {
+        inputActions.Player.Enable();
+        inputActions.Player.Tracker.performed += OnTrackerPressed;
+    }
 
-    void OnDisable() => inputActions.Player.Tracker.performed -= OnTrackerPressed;
+    void OnDisable()
+    {
+        inputActions.Player.Tracker.performed -= OnTrackerPressed;
+        inputActions.Player.Disable();
+    }
 
 
     void Start()
@@ -26,6 +34,7 @@ public class QuestTrackerManager : MonoBehaviour
         trackerRoot = root.Q<VisualElement>("TrackerRoot");
         descriptionLabel = root.Q<Label>("Description");
         progressLabel = root.Q<Label>("Progress");
+
 
         SetVisible(false);        
     }
@@ -62,6 +71,7 @@ public class QuestTrackerManager : MonoBehaviour
 
     void SetVisible(bool visible)
     {
-        
+        if (trackerRoot != null)
+            trackerRoot.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
 }

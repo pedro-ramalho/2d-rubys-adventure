@@ -52,8 +52,6 @@ public class PauseManager : MonoBehaviour
 
         SetVisible(false);
 
-        Debug.Log($"PauseManager wired: root={pauseRoot != null}, dropdown={musicDropdown != null}, slider={volumeSlider != null}, button={resumeButton != null}");
-
         if (MusicManager.Instance != null && musicDropdown != null)
         {
             List<string> names = new List<string>();

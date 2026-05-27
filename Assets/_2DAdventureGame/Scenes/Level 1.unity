@@ -13905,8 +13905,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1220290658}
-  - component: {fileID: 1220290659}
   - component: {fileID: 1220290660}
+  - component: {fileID: 1220290659}
   m_Layer: 0
   m_Name: Music Manager
   m_TagString: Untagged
@@ -26678,8 +26678,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132114639}
-  - component: {fileID: 2132114640}
   - component: {fileID: 2132114641}
+  - component: {fileID: 2132114640}
   m_Layer: 0
   m_Name: Quest Tracker Manager
   m_TagString: Untagged
