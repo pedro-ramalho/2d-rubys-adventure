@@ -7,6 +7,7 @@ public class NPC : MonoBehaviour
     [SerializeField] private GameObject dialogueBubble;
 
     private DialoguePhase currentPhase;
+    private QuestDialogue currentDialogue;
     private int lineIndex;
 
     void Start() => dialogueBubble.SetActive(false);
@@ -22,6 +23,7 @@ public class NPC : MonoBehaviour
                 DialoguePhase phase = dialogue.Pick(QuestManager.Instance);
                 if (phase != null)
                 {
+                    currentDialogue = dialogue;
                     currentPhase = phase;
                     break;
                 }
@@ -29,6 +31,9 @@ public class NPC : MonoBehaviour
 
             if (currentPhase == null) return;
             lineIndex = 0;
+
+            if (currentPhase == currentDialogue.after && currentDialogue.quest != null)
+                QuestManager.Instance.ConcludeQuest(currentDialogue.quest);
         }
 
         UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++]);
@@ -40,6 +45,7 @@ public class NPC : MonoBehaviour
 
             currentPhase.onExhausted?.Invoke();
             currentPhase = null;
+            currentDialogue = null;
         }
     }
 }

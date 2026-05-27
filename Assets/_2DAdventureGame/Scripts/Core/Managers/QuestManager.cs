@@ -11,6 +11,7 @@ public class QuestManager : MonoBehaviour
 
     public event Action<Quest> OnQuestAccepted;
     public event Action<Quest> OnQuestCompleted;
+    public event Action<QuestData> OnQuestConcluded;
 
     void Awake()
     {
@@ -40,4 +41,6 @@ public class QuestManager : MonoBehaviour
     }
 
     public bool IsCompleted(QuestData data) => completed.Contains(data);
+
+    public void ConcludeQuest(QuestData data) => OnQuestConcluded?.Invoke(data);
 }
