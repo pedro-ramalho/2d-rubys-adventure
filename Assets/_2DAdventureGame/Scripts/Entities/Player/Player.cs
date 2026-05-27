@@ -93,8 +93,9 @@ public class Player : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (PauseManager.IsPaused) return;
         UpdateTimers();
-        CurrentState.Update(this);    
+        CurrentState.Update(this);
     }
 
     void FixedUpdate() => CurrentState.FixedUpdate(this);

@@ -7,6 +7,6 @@
         </ui:VisualElement>
         <ui:VisualElement name="CharacterPortrait" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ruby/UI/CharacterPortrait.png?fileID=21300000&amp;guid=374193bc7008fa34ab9b2bbca376937b&amp;type=3#CharacterPortrait&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 171px; width: 169px; top: 5px; left: 19px;"/>
     </ui:VisualElement>
-    <ui:Instance template="NPCDialogue" name="NPCDialogue" __unity-builder-selected-element="selected" style="position: absolute; top: auto; right: 106px; left: 106px; bottom: 20px;"/>
-    <ui:Instance template="EndScreen" name="EndScreen" __unity-builder-selected-element="" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"/>
+    <ui:Instance template="NPCDialogue" name="NPCDialogue" style="position: absolute; top: auto; right: 106px; left: 106px; bottom: 20px;"/>
+    <ui:Instance template="EndScreen" name="EndScreen" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"/>
 </ui:UXML>

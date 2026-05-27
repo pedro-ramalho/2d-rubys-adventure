@@ -46,11 +46,15 @@ public class PauseManager : MonoBehaviour
     {
         VisualElement root = pauseDocument.rootVisualElement;
         pauseRoot = root.Q<VisualElement>("PauseRoot");
-        musicDropdown = root.Q<DropdownField>("MusicDropdown");
+        musicDropdown = root.Q("MusicDropdown") as DropdownField;
         volumeSlider = root.Q<Slider>("VolumeSlider");
         resumeButton = root.Q<Button>("ResumeButton");
 
-        if (MusicManager.Instance != null)
+        SetVisible(false);
+
+        Debug.Log($"PauseManager wired: root={pauseRoot != null}, dropdown={musicDropdown != null}, slider={volumeSlider != null}, button={resumeButton != null}");
+
+        if (MusicManager.Instance != null && musicDropdown != null)
         {
             List<string> names = new List<string>();
             foreach (AudioClip clip in MusicManager.Instance.Tracks) names.Add(clip.name);
@@ -59,14 +63,16 @@ public class PauseManager : MonoBehaviour
             musicDropdown.index = MusicManager.Instance.CurrentTrackIndex;
             musicDropdown.RegisterValueChangedCallback(evt =>
                 MusicManager.Instance.Play(musicDropdown.index));
+        }
 
+        if (MusicManager.Instance != null && volumeSlider != null)
+        {
             volumeSlider.value = MusicManager.Instance.Volume;
             volumeSlider.RegisterValueChangedCallback(evt =>
                 MusicManager.Instance.Volume = evt.newValue);
         }
 
-        resumeButton.clicked += Resume;
-        SetVisible(false);
+        if (resumeButton != null) resumeButton.clicked += Resume;
     }
 
     void OnPausePressed(InputAction.CallbackContext ctx)
@@ -88,6 +94,9 @@ public class PauseManager : MonoBehaviour
         SetVisible(false);
     }
 
-    void SetVisible(bool visible) =>
-        pauseRoot.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+    void SetVisible(bool visible)
+    {
+        if (pauseRoot != null)
+            pauseRoot.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+    }
 }
