@@ -16,13 +16,13 @@ public class PlayerGroundedState : PlayerState
         UpdateAnimator(owner);
         HandleNPCInteraction(owner);
 
-        if (owner.ShootAction.WasPressedThisFrame())
+        if (owner.ShootAction.WasPressedThisFrame() && AbilityManager.Instance != null && AbilityManager.Instance.CanShoot)
         {
             owner.ChangeState(owner.ShootingState);
             return;
         }
 
-        if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f)
+        if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f && AbilityManager.Instance != null && AbilityManager.Instance.CanDash)
             owner.ChangeState(owner.DashingState);
     }
 

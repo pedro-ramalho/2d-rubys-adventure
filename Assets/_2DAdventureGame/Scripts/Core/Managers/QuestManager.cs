@@ -23,6 +23,9 @@ public class QuestManager : MonoBehaviour
         Quest quest = new Quest(data);
         ActiveQuest = quest;
         OnQuestAccepted?.Invoke(quest);
+
+        if (AbilityManager.Instance != null)
+            AbilityManager.Instance.Unlock(data.unlockOnAccept);
     }
 
     public void Report(QuestReport report)

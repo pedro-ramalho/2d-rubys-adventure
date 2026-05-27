@@ -25,8 +25,9 @@ public class PauseManager : MonoBehaviour
         }
 
         Instance = this;
+        transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
-        
+
         inputActions = new PlayerInputActions();
     }
 
