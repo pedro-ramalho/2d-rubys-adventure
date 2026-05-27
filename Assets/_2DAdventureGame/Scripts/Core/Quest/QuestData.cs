@@ -6,4 +6,8 @@ public class QuestData : ScriptableObject
     public string id;
     public string description;
     public QuestObjective objective;
+
+    [Header("Progression")]
+    [Tooltip("Abilities unlocked when this quest is accepted.")]
+    public AbilityFlag unlockOnAccept = AbilityFlag.None;
 }

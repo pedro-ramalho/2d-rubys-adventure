@@ -15,3 +15,4 @@ MonoBehaviour:
   id: L1Q1
   description: Find the missing merchandise.
   objective: {fileID: 11400000, guid: e86596cea9a46c2468f7092bdeddcbc8, type: 2}
+  unlockOnAccept: 1

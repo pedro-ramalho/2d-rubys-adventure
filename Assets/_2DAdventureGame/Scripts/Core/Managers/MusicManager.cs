@@ -25,6 +25,7 @@ public class MusicManager : MonoBehaviour
         }
 
         Instance = this;
+        transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
         if (tracks.Length > 0) Play(0);
     }
