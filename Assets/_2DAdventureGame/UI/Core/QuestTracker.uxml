@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
-  <ui:VisualElement name="TrackerRoot" style="position: absolute; top: 80px; right: 40px; background-color: rgba(20, 20, 20, 0.85); padding-top: 20px; padding-right: 24px; padding-bottom: 20px; padding-left: 24px; min-width: 300px; max-width: 360px;">
-    <ui:Label name="Description" text="Quest description goes here" style="color: rgb(255, 255, 255); font-size: 16px; margin-bottom: 12px; white-space: normal;" />
-    <ui:Label name="Progress" text="0/0" style="color: rgb(255, 220, 100); font-size: 28px; -unity-text-align: middle-right; -unity-font-style: bold;" />
-  </ui:VisualElement>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="TrackerRoot" style="position: absolute; top: 80px; right: 40px; background-color: rgba(255, 255, 255, 0); padding-top: 20px; padding-right: 24px; padding-bottom: 20px; padding-left: 24px; min-width: 450px; max-width: 450px; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ducko/UI/UIDialogueBox.png?fileID=2800000&amp;guid=924827a9385ec3544b572966c8853b0a&amp;type=3#UIDialogueBox&quot;);">
+        <ui:Label name="Description" text="Quest description goes here" style="color: rgb(29, 29, 29); font-size: 24px; margin-bottom: 12px; white-space: normal;"/>
+        <ui:Label name="Progress" text="0/0" style="color: rgb(0, 86, 209); font-size: 28px; -unity-text-align: middle-right; -unity-font-style: bold;"/>
+    </ui:VisualElement>
 </ui:UXML>
