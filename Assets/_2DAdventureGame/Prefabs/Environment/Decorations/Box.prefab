@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5227713236456716150}
   - component: {fileID: 7604672879584326555}
   - component: {fileID: 7703455999881025297}
-  - component: {fileID: 4430812844398941777}
   - component: {fileID: 1461250853656128103}
   - component: {fileID: 2189125344610601575}
+  - component: {fileID: 3469440624432549009}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -141,20 +141,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.90765023, y: 0.98}
   m_EdgeRadius: 0
---- !u!114 &4430812844398941777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169062407923011603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a292d1066a6a5144aa5a19a01d99d958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthCollectible
-  collectibleClip: {fileID: 0}
-  healAmount: 0
 --- !u!114 &1461250853656128103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,5 +167,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c396b2add69ab42a3e2ba9c24c18f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestBinding
-  boundQuest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
+  boundQuest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
+  activateOnQuestAccept: 0
   deactivateOnComplete: 1
+  interactables: []
+--- !u!114 &3469440624432549009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169062407923011603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99284a66907b994ea02f5b550f2f749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collectible
+  collectibleClip: {fileID: 8300000, guid: 4dff61464e818dd40a8b56129e4258cd, type: 3}

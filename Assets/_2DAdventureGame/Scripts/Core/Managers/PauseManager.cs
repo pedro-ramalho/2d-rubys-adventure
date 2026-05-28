@@ -9,6 +9,8 @@ public class PauseManager : MonoBehaviour
     public static bool IsPaused { get; private set; }
 
     [SerializeField] private UIDocument pauseDocument;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip toggleClip;
 
     private PlayerInputActions inputActions;
     private VisualElement pauseRoot;
@@ -84,6 +86,7 @@ public class PauseManager : MonoBehaviour
         IsPaused = true;
         Time.timeScale = 0f;
         SetVisible(true);
+        PlayToggleSfx();
     }
 
     public void Resume()
@@ -91,6 +94,13 @@ public class PauseManager : MonoBehaviour
         IsPaused = false;
         Time.timeScale = 1f;
         SetVisible(false);
+        PlayToggleSfx();
+    }
+
+    void PlayToggleSfx()
+    {
+        if (sfxSource != null && toggleClip != null)
+            sfxSource.PlayOneShot(toggleClip);
     }
 
     void SetVisible(bool visible)
