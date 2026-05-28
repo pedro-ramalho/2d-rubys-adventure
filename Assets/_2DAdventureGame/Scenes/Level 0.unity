@@ -621,8 +621,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
   tracks:
-  - {fileID: 8300000, guid: 51f9c072fc5b9c040abdbd275716b454, type: 3}
-  - {fileID: 8300000, guid: 996c85fcf9bc6ff47a8bf446f62cb33c, type: 3}
+  - {fileID: 8300000, guid: d8a0f74d48bf95b429c132fee7ec656d, type: 3}
+  - {fileID: 8300000, guid: 6678ba8fa32abfa4999f21ec80ecaaca, type: 3}
   source: {fileID: 398598935}
 --- !u!82 &398598935
 AudioSource:
