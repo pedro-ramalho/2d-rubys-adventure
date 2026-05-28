@@ -16,3 +16,4 @@ MonoBehaviour:
   description: Fix the Patrol Robots that have been causing a ruckus.
   objective: {fileID: 11400000, guid: 160a7786c96a5224abd3e130a0e2aa37, type: 2}
   unlockOnAccept: 2
+  backgroundTrack: {fileID: 8300000, guid: ad6d68efc3e6bcc44b95d48ddba95ed1, type: 3}
