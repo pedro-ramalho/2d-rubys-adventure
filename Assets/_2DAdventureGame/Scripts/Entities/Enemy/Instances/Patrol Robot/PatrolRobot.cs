@@ -10,9 +10,11 @@ public class PatrolRobot : Enemy
 
     [Header("Patrol Robot Assets")]
     [SerializeField] private ParticleSystem smokeEffect;
+    [SerializeField] private GameObject fixedEffectPrefab;
     [SerializeField] private AudioClip fixedClip;
     [SerializeField] private AudioClip hitClip;
     public ParticleSystem SmokeEffect => smokeEffect;
+    public GameObject FixedEffectPrefab => fixedEffectPrefab;
     public AudioClip FixedClip => fixedClip;
     public AudioClip HitClip => hitClip;
 

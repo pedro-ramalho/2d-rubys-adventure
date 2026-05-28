@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   maxLifetime: 5
+  hitEffectPrefab: {fileID: 248914935275198694, guid: c086d04d968400e4b8b14945758a9da6,
+    type: 3}
 --- !u!1 &7478076516091646131
 GameObject:
   m_ObjectHideFlags: 0
