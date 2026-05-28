@@ -4,6 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float maxLifetime = 3f;
+    [SerializeField] private GameObject hitEffectPrefab;
 
     private Rigidbody2D rb;
 
@@ -15,7 +16,14 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, maxLifetime);
     }
 
-    void OnTriggerEnter2D(Collider2D other) => Destroy(gameObject);
-    
-    void OnCollisionEnter2D(Collision2D collision) => Destroy(gameObject);
+    void OnTriggerEnter2D(Collider2D other) => HandleImpact();
+
+    void OnCollisionEnter2D(Collision2D collision) => HandleImpact();
+
+    void HandleImpact()
+    {
+        if (hitEffectPrefab != null)
+            Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 }
