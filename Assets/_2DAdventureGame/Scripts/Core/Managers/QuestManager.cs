@@ -6,6 +6,8 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance;
 
+    [SerializeField] private AudioClip questCompletionSfx;
+
     public Quest ActiveQuest { get; private set; }
     private readonly HashSet<QuestData> completed = new();
 
@@ -45,7 +47,12 @@ public class QuestManager : MonoBehaviour
             OnQuestCompleted?.Invoke(finished);
 
             if (MusicManager.Instance != null && SceneMusicConfigManager.Instance != null && SceneMusicConfigManager.Instance.DefaultTrack != null)
-                MusicManager.Instance.Play(SceneMusicConfigManager.Instance.DefaultTrack);
+            {
+                if (questCompletionSfx != null)
+                    MusicManager.Instance.PlayWithStinger(questCompletionSfx, SceneMusicConfigManager.Instance.DefaultTrack);
+                else
+                    MusicManager.Instance.Play(SceneMusicConfigManager.Instance.DefaultTrack);
+            }
         }
     }
 

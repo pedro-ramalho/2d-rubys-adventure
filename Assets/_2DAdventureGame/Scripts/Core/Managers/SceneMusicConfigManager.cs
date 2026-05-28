@@ -21,10 +21,4 @@ public class SceneMusicConfigManager : MonoBehaviour
         if (MusicManager.Instance != null && defaultTrack != null)
             MusicManager.Instance.Play(defaultTrack);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

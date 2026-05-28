@@ -1104,6 +1104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73b6673295e84e43a6e0ea7585db87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
+  questCompletionSfx: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
 --- !u!1001 &112318932
 PrefabInstance:
   m_ObjectHideFlags: 0
