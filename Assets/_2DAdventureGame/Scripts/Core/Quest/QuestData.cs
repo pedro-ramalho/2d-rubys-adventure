@@ -10,4 +10,8 @@ public class QuestData : ScriptableObject
     [Header("Progression")]
     [Tooltip("Abilities unlocked when this quest is accepted.")]
     public AbilityFlag unlockOnAccept = AbilityFlag.None;
+
+    [Header("Audio")]
+    [Tooltip("Background track played while this quest is active. Leave empty to keep the scene's default track.")]
+    public AudioClip backgroundTrack;
 }

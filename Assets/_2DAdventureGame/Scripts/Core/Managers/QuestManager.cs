@@ -26,6 +26,9 @@ public class QuestManager : MonoBehaviour
 
         if (AbilityManager.Instance != null)
             AbilityManager.Instance.Unlock(data.unlockOnAccept);
+
+        if (MusicManager.Instance != null && data.backgroundTrack != null)
+            MusicManager.Instance.Play(data.backgroundTrack);
     }
 
     public void Report(QuestReport report)
@@ -40,6 +43,9 @@ public class QuestManager : MonoBehaviour
             completed.Add(finished.Data);
             ActiveQuest = null;
             OnQuestCompleted?.Invoke(finished);
+
+            if (MusicManager.Instance != null && SceneMusicConfigManager.Instance != null && SceneMusicConfigManager.Instance.DefaultTrack != null)
+                MusicManager.Instance.Play(SceneMusicConfigManager.Instance.DefaultTrack);
         }
     }
 
