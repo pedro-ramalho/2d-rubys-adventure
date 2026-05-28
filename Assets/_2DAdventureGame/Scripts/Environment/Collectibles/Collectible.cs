@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public abstract class Collectible : MonoBehaviour
+public class Collectible : MonoBehaviour
 {
     [SerializeField] protected AudioClip collectibleClip;
-    protected abstract void ApplyEffect(Player player);
+    protected virtual void ApplyEffect(Player player) { }
     protected virtual void OnEffectApplied() => Destroy(gameObject);
 
     void OnTriggerEnter2D(Collider2D other)
