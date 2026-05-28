@@ -13021,7 +13021,7 @@ AudioSource:
   MinDistance: 1.5
   MaxDistance: 3.1577039
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -13379,6 +13379,27 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MinDistance
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7355603927822205875, guid: 5cf4539cf7187af46b3744f35d1298b8,
+        type: 2}
     - target: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: m_Name
@@ -14038,6 +14059,27 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MinDistance
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7355603927822205875, guid: 5cf4539cf7187af46b3744f35d1298b8,
+        type: 2}
     - target: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: m_Name
@@ -14435,6 +14477,27 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MinDistance
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7355603927822205875, guid: 5cf4539cf7187af46b3744f35d1298b8,
+        type: 2}
     - target: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: m_Name
@@ -18745,6 +18808,27 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1343173742}
     m_Modifications:
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: MinDistance
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7355603927822205875, guid: 5cf4539cf7187af46b3744f35d1298b8,
+        type: 2}
     - target: {fileID: 4371289417431343873, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: m_Name
@@ -22470,7 +22554,7 @@ AudioSource:
   MinDistance: 1.1072788
   MaxDistance: 1.5494175
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
