@@ -122,8 +122,6 @@ public class UIHandler : MonoBehaviour
         }
         dialoguePanel.style.display = DisplayStyle.None;
     }
-
-    public void SetVisible(bool visible) => GetComponent<UIDocument>().rootVisualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     
     public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;
     

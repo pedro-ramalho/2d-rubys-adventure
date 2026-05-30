@@ -22,7 +22,6 @@ public class Player : MonoBehaviour, IDamageable
     public InputAction DashAction => inputActions.Player.Dash;
     public InputAction ShootAction => inputActions.Player.Shoot;
     public InputAction TalkAction => inputActions.Player.Talk;
-    public InputAction PauseAction => inputActions.Player.Pause;
 
     [Header("Player Assets")]
     [SerializeField] private AudioSource oneShotSource;
