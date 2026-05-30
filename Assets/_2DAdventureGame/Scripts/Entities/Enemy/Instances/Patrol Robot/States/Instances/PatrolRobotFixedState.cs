@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PatrolRobotFixedState : PatrolRobotState
 {
-    public override string ID => "Fixed";
-
     public override void Enter(PatrolRobot owner)
     {
         owner.Rigidbody.simulated = false;

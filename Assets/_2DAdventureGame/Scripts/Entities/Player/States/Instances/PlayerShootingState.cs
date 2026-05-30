@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerShootingState : PlayerState
 {
-    public override string ID => "Shooting";
-
     private float timer;
 
     public override void Enter(Player owner)

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerDeadState : PlayerState
 {
-    public override string ID => "Dead";
-    
     /// <summary>
     /// <c>Enter</c> shuts everything down.
     /// This includes clearing the player's current velocity to 0 (preventing them from walking),

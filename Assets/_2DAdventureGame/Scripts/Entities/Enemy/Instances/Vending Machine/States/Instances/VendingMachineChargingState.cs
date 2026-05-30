@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class VendingMachineChargingState : VendingMachineState
 {
-    public override string ID => "Charging";
-
     private float timer;
     private Vector2 direction;
 
