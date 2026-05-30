@@ -46,13 +46,9 @@ public class QuestManager : MonoBehaviour
             ActiveQuest = null;
             OnQuestCompleted?.Invoke(finished);
 
-            if (MusicManager.Instance != null && SceneMusicConfigManager.Instance != null && SceneMusicConfigManager.Instance.DefaultTrack != null)
-            {
-                if (questCompletionSfx != null)
-                    MusicManager.Instance.PlayWithStinger(questCompletionSfx, SceneMusicConfigManager.Instance.DefaultTrack);
-                else
-                    MusicManager.Instance.Play(SceneMusicConfigManager.Instance.DefaultTrack);
-            }
+            AudioClip defaultTrack = SceneMusicConfigManager.Instance?.DefaultTrack;
+            if (MusicManager.Instance != null && defaultTrack != null)
+                MusicManager.Instance.PlayWithStinger(questCompletionSfx, defaultTrack);
         }
     }
 
