@@ -1,10 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="PauseRoot" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
-        <ui:VisualElement name="PausePanel" style="background-color: rgba(20, 20, 20, 0.95); padding-top: 60px; padding-right: 60px; padding-bottom: 60px; padding-left: 60px; width: 700px; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/UICounterBar.png?fileID=2800000&amp;guid=4bb9e5210d4bc484ab335c62e1e0ffd3&amp;type=3#UICounterBar&quot;);">
-            <ui:Label text="Robot Repair" style="font-size: 56px; color: rgb(255, 255, 255); -unity-text-align: middle-center; margin-bottom: 24px; align-items: center; justify-content: flex-start;"/>
-            <ui:DropdownField name="MusicDropdown" label="Track" style="margin-bottom: 16px; color: rgb(255, 255, 255); font-size: 22px;"/>
-            <ui:Slider name="VolumeSlider" label="Volume" low-value="0" high-value="1" value="0.5" style="margin-bottom: 24px; color: rgb(255, 255, 255); font-size: 22px;"/>
-            <ui:Button name="ResumeButton" text="Resume" style="height: 60px; width: 280px; align-self: center; font-size: 22px;"/>
-        </ui:VisualElement>
+        <ui:Label text="||" emoji-fallback-support="false" name="PauseSymbol" style="font-size: 56px; color: rgb(255, 255, 255); -unity-text-align: middle-center; margin-bottom: 24px; align-items: center; justify-content: flex-start; -unity-font-definition: url(&quot;project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&amp;guid=b2bf5b4298c8a314a9bc3eee05797056&amp;type=3#PatrickHand-Regular&quot;); -unity-font-style: bold;"/>
     </ui:VisualElement>
 </ui:UXML>
