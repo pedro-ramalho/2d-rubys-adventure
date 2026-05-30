@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   id: 1
   description: Accept the strawberry given the friend.
-  objective: {fileID: 11400000, guid: 795d3f9f6c1768445ac29b2f895573ad, type: 2}
+  objective:
+    type: 0
+    targetTag: Strawberry
+    count: 1
+  unlockOnAccept: 0
+  backgroundTrack: {fileID: 0}

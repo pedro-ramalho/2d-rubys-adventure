@@ -7,7 +7,7 @@ public class Quest
 
     public Quest(QuestData data) => Data = data;
 
-    public bool IsComplete => Count >= Data.objective.Count;
+    public bool IsComplete => Count >= Data.objective.count;
 
     public void ApplyProgress(QuestReport report)
     {

@@ -1,10 +1,13 @@
-using UnityEngine;
+using System;
 
 public enum QuestObjectiveType { Fetch, Kill }
 
-public abstract class QuestObjective : ScriptableObject
+[Serializable]
+public class QuestObjective
 {
-    public abstract QuestObjectiveType Type { get; }
-    public abstract int Count { get; }
-    public abstract bool Matches(QuestReport report);
+    public QuestObjectiveType type;
+    public string targetTag;
+    public int count;
+
+    public bool Matches(QuestReport report) => report.Type == type && report.Tag == targetTag;
 }
