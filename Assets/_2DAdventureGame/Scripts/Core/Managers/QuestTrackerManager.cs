@@ -105,7 +105,7 @@ public class QuestTrackerManager : MonoBehaviour
             descriptionLabel.text = quest.Data.description;
 
         if (progressLabel != null)
-            progressLabel.text = $"{quest.Count} / {quest.Data.objective.Count}";
+            progressLabel.text = $"{quest.Count} / {quest.Data.objective.count}";
 
         SetVisible(true);
     }
