@@ -39,6 +39,5 @@ public class AbilityManager : MonoBehaviour
     public void Unlock(AbilityFlag abilities)
     {
         unlocked |= abilities;
-        Debug.Log($"[AbilityManager] Unlock called with {abilities}. Now unlocked = {unlocked}");
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,13 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private float displayTime = 4.0f;
     [SerializeField] private AudioClip clickClip;
 
+    [Header("Typewriter")]
+    [SerializeField] private float typeInterval = 0.03f;
+    [SerializeField] private AudioClip typeClip;
+    [Tooltip("Play the type SFX every Nth visible character.")]
+    [SerializeField] private int typeClipEveryNChars = 2;
+    [SerializeField] private float typeClipPitchJitter = 0.08f;
+
     private VisualElement healthBar;
     private VisualElement dialoguePanel;
     private Label dialogueText;
@@ -16,6 +24,10 @@ public class UIHandler : MonoBehaviour
     private VisualElement loseScreen;
 
     private Player player;
+    private Coroutine typeRoutine;
+    private string currentLine;
+
+    public bool IsTyping => typeRoutine != null;
 
     void Awake()
     {
@@ -53,16 +65,61 @@ public class UIHandler : MonoBehaviour
         if (clickClip != null && player != null)
             player.OneShotSource.PlayOneShot(clickClip);
 
-        dialogueText.text = line;
-        dialoguePanel.style.display = DisplayStyle.Flex;
-
         CancelInvoke(nameof(HideDialogue));
+        if (typeRoutine != null) StopCoroutine(typeRoutine);
+
+        currentLine = line;
+        dialogueText.text = string.Empty;
+        dialoguePanel.style.display = DisplayStyle.Flex;
+        typeRoutine = StartCoroutine(TypeLine(line));
+    }
+
+    public void Skip()
+    {
+        if (typeRoutine == null) return;
+        StopCoroutine(typeRoutine);
+        typeRoutine = null;
+        dialogueText.text = currentLine;
+        Invoke(nameof(HideDialogue), displayTime);
+    }
+
+    private IEnumerator TypeLine(string line)
+    {
+        player.OneShotSource.volume = 0.75f;
+
+        int visibleCount = 0;
+        for (int i = 1; i <= line.Length; i++)
+        {
+            dialogueText.text = line.Substring(0, i);
+            char c = line[i - 1];
+
+            if (!char.IsWhiteSpace(c))
+            {
+                visibleCount++;
+                if (typeClip != null && player != null && visibleCount % typeClipEveryNChars == 0)
+                {
+                    float pitch = 1f + Random.Range(-typeClipPitchJitter, typeClipPitchJitter);
+                    player.OneShotSource.pitch = pitch;
+                    player.OneShotSource.PlayOneShot(typeClip);
+                }
+            }
+
+            yield return new WaitForSeconds(typeInterval);
+        }
+        if (player != null) player.OneShotSource.pitch = 1f;
+        typeRoutine = null;
         Invoke(nameof(HideDialogue), displayTime);
     }
 
     public void HideDialogue()
     {
         CancelInvoke(nameof(HideDialogue));
+        if (typeRoutine != null)
+        {
+            StopCoroutine(typeRoutine);
+            typeRoutine = null;
+            if (player != null) player.OneShotSource.pitch = 1f;
+        }
         dialoguePanel.style.display = DisplayStyle.None;
     }
 
