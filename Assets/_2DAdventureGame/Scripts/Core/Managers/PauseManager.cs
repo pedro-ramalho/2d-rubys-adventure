@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -14,9 +13,6 @@ public class PauseManager : MonoBehaviour
 
     private PlayerInputActions inputActions;
     private VisualElement pauseRoot;
-    private DropdownField musicDropdown;
-    private Slider volumeSlider;
-    private Button resumeButton;
 
     void Awake()
     {
@@ -47,33 +43,8 @@ public class PauseManager : MonoBehaviour
 
     void Start()
     {
-        VisualElement root = pauseDocument.rootVisualElement;
-        pauseRoot = root.Q<VisualElement>("PauseRoot");
-        musicDropdown = root.Q("MusicDropdown") as DropdownField;
-        volumeSlider = root.Q<Slider>("VolumeSlider");
-        resumeButton = root.Q<Button>("ResumeButton");
-
+        pauseRoot = pauseDocument.rootVisualElement.Q<VisualElement>("PauseRoot");
         SetVisible(false);
-
-        if (MusicManager.Instance != null && musicDropdown != null)
-        {
-            List<string> names = new List<string>();
-            foreach (AudioClip clip in MusicManager.Instance.Tracks) names.Add(clip.name);
-
-            musicDropdown.choices = names;
-            musicDropdown.index = MusicManager.Instance.CurrentTrackIndex;
-            musicDropdown.RegisterValueChangedCallback(evt =>
-                MusicManager.Instance.Play(musicDropdown.index));
-        }
-
-        if (MusicManager.Instance != null && volumeSlider != null)
-        {
-            volumeSlider.value = MusicManager.Instance.Volume;
-            volumeSlider.RegisterValueChangedCallback(evt =>
-                MusicManager.Instance.Volume = evt.newValue);
-        }
-
-        if (resumeButton != null) resumeButton.clicked += Resume;
     }
 
     void OnPausePressed(InputAction.CallbackContext ctx)

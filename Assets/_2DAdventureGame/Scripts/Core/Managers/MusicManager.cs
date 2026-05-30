@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,23 +5,13 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance { get; private set; }
 
-    [SerializeField] private AudioClip[] tracks;
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioSource stingerSource;
     [SerializeField] private float fadeOutDuration = 0.6f;
     [SerializeField] private float fadeInDuration = 0.6f;
     [SerializeField] private float transitionDelay = 1.0f;
 
-    public AudioClip[] Tracks => tracks;
-    public int CurrentTrackIndex { get; private set; } = -1;
-
     private Coroutine transition;
-
-    public float Volume
-    {
-        get => source.volume;
-        set => source.volume = Mathf.Clamp01(value);
-    }
 
     void Awake()
     {
@@ -42,24 +31,14 @@ public class MusicManager : MonoBehaviour
         if (clip == null) return;
         if (source.clip == clip && source.isPlaying) return;
 
-        CurrentTrackIndex = Array.IndexOf(tracks, clip);
-
         if (transition != null) StopCoroutine(transition);
         transition = StartCoroutine(SwitchTo(clip));
-    }
-
-    public void Play(int index)
-    {
-        if (index < 0 || index >= tracks.Length) return;
-        Play(tracks[index]);
     }
 
     public void PlayWithStinger(AudioClip stinger, AudioClip nextTrack)
     {
         if (stinger == null) { Play(nextTrack); return; }
         if (nextTrack == null) return;
-
-        CurrentTrackIndex = Array.IndexOf(tracks, nextTrack);
 
         if (transition != null) StopCoroutine(transition);
         transition = StartCoroutine(StingerThenTrack(stinger, nextTrack));
