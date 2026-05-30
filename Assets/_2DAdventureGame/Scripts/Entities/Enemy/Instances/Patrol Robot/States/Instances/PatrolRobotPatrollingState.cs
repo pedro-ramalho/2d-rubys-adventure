@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PatrolRobotPatrollingState : PatrolRobotState
 {
-    public override string ID => "Patrolling";
-
     private float directionTimer;
 
     public override void Enter(PatrolRobot owner)

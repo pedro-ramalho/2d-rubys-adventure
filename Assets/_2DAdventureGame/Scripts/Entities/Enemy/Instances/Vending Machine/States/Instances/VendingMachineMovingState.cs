@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class VendingMachineMovingState : VendingMachineState
 {
-    public override string ID => "Moving";
-
     public override void Update(VendingMachine owner)
     {
         float distance = Vector2.Distance(
