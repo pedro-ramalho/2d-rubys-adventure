@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Player : MonoBehaviour, IDamageable
 {
+    public static Player Instance { get; private set; }
+
     // Components
     public Rigidbody2D Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
@@ -70,6 +72,8 @@ public class Player : MonoBehaviour, IDamageable
 
     void Awake()
     {
+        if (Instance == null) Instance = this;
+
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();

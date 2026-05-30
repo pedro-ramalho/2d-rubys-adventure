@@ -23,19 +23,11 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private float initialDelay = 2f;
     [SerializeField] private float breatherDuration = 2f;
 
-    [Header("References")]
-    [SerializeField] private Player player;
-
     private readonly List<GameObject> aliveEnemies = new();
 
     public event Action OnAllWavesCleared;
 
-    void Start()
-    {
-        if (player == null) player = FindAnyObjectByType<Player>();
-
-        StartCoroutine(RunWaves());
-    }
+    void Start() => StartCoroutine(RunWaves());
 
     IEnumerator RunWaves()
     {
@@ -91,8 +83,9 @@ public class WaveSpawner : MonoBehaviour
 
     bool IsTooCloseToPlayer(Vector3 pos)
     {
-        if (player == null) return false;
-        return Vector2.Distance(pos, player.transform.position) < minDistanceFromPlayer;
+        Player p = Player.Instance;
+        if (p == null) return false;
+        return Vector2.Distance(pos, p.transform.position) < minDistanceFromPlayer;
     }
 
     bool IsTooCloseToAlive(Vector3 pos)

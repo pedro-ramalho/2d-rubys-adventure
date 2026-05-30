@@ -32,13 +32,9 @@ public class VendingMachine : Enemy
     public VendingMachineStunnedState StunnedState { get; private set; }
     public VendingMachineChargingState ChargingState { get; private set; }
 
-    public Player Player { get; private set; }
-
     protected override void Awake()
     {
         base.Awake();
-
-        Player = FindAnyObjectByType<Player>();
 
         MovingState = new VendingMachineMovingState();
         StunnedState = new VendingMachineStunnedState();

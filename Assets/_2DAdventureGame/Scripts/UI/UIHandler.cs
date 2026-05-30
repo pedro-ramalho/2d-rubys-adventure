@@ -47,7 +47,7 @@ public class UIHandler : MonoBehaviour
 
         dialoguePanel.style.display = DisplayStyle.None;
 
-        player = FindAnyObjectByType<Player>();
+        player = Player.Instance;
         player.OnHealthChanged += SetHealthValue;
         SetHealthValue(player.CurrentHealth / (float)player.Data.maxHealth);
     }
