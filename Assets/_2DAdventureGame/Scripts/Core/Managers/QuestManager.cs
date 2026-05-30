@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager Instance;
+    public static QuestManager Instance { get; private set; }
 
     [SerializeField] private AudioClip questCompletionSfx;
 
