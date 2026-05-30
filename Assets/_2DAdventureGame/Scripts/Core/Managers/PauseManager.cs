@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class PauseManager : MonoBehaviour
+public class PauseManager : PersistentSingleton<PauseManager>
 {
-    public static PauseManager Instance { get; private set; }
     public static bool IsPaused { get; private set; }
 
     [SerializeField] private UIDocument pauseDocument;
@@ -14,17 +13,10 @@ public class PauseManager : MonoBehaviour
     private PlayerInputActions inputActions;
     private VisualElement pauseRoot;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
+        if (Instance != this) return;
 
         inputActions = new PlayerInputActions();
     }

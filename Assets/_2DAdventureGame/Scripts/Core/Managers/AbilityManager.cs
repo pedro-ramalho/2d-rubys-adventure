@@ -9,10 +9,8 @@ public enum AbilityFlag
     Shoot = 1 << 1    
 }
 
-public class AbilityManager : MonoBehaviour
+public class AbilityManager : PersistentSingleton<AbilityManager>
 {
-    public static AbilityManager Instance { get; private set; }
-
     [SerializeField] private AbilityFlag startingAbilities = AbilityFlag.None;
 
     private AbilityFlag unlocked;
@@ -20,18 +18,10 @@ public class AbilityManager : MonoBehaviour
     public bool CanDash => unlocked.HasFlag(AbilityFlag.Dash);
     public bool CanShoot => unlocked.HasFlag(AbilityFlag.Shoot);
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Debug.Log($"[AbilityManager] Duplicate destroyed in scene '{gameObject.scene.name}'");
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
+        if (Instance != this) return;
 
         unlocked = startingAbilities;
     }

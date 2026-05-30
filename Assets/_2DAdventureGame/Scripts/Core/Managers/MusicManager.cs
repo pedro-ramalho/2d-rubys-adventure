@@ -1,10 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class MusicManager : PersistentSingleton<MusicManager>
 {
-    public static MusicManager Instance { get; private set; }
-
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioSource stingerSource;
     [SerializeField] private float fadeOutDuration = 0.6f;
@@ -12,19 +10,6 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private float transitionDelay = 1.0f;
 
     private Coroutine transition;
-
-    void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
-    }
 
     public void Play(AudioClip clip)
     {
