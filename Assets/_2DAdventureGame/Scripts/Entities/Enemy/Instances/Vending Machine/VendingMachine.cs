@@ -21,7 +21,7 @@ public class VendingMachine : Enemy
 
     [Header("Collision Behavior")]
     [SerializeField] private string wallTag = "Wall";
-    [SerializeField] private GameObject collisionExplosionPrefab;
+    [SerializeField] private GameObject explosionPrefab;
 
     [Header("Charging Properties")]
     [SerializeField] private float detectionRadius = 5f;
@@ -69,22 +69,24 @@ public class VendingMachine : Enemy
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out VendingMachine other))
+        if (collision.gameObject.TryGetComponent(out VendingMachine _))
         {
-            if (GetInstanceID() < other.GetInstanceID() && collisionExplosionPrefab != null)
-            {
-                Vector2 midpoint = (Rigidbody.position + other.Rigidbody.position) * 0.5f;
-
-                Instantiate(collisionExplosionPrefab, midpoint, Quaternion.identity);
-            }
-
+            SpawnExplosion(transform.position);
             Destroy(gameObject);
-
             return;
         }
 
         if (CurrentState == ChargingState && collision.gameObject.CompareTag(wallTag))
+        {
+            SpawnExplosion(collision.GetContact(0).point);
             ChangeState(StunnedState);
+        }
+    }
+
+    void SpawnExplosion(Vector2 position)
+    {
+        if (explosionPrefab != null)
+            Instantiate(explosionPrefab, position, Quaternion.identity);
     }
 
     public void ChangeState(VendingMachineState newState)
@@ -94,5 +96,9 @@ public class VendingMachine : Enemy
         CurrentState.Enter(this);
     }
 
-    protected override void OnProjectileHit() => Destroy(gameObject);
+    protected override void OnProjectileHit()
+    {
+        SpawnExplosion(transform.position);
+        Destroy(gameObject);
+    }
 }
