@@ -12,6 +12,12 @@ public class VendingMachineChargingState : VendingMachineState
 
         owner.Animator.SetFloat(VendingMachine.MoveXHash, direction.x);
         owner.Animator.SetFloat(VendingMachine.MoveYHash, direction.y);
+        owner.Animator.SetBool(VendingMachine.ChargingHorizontalHash, owner.IsChargeHorizontal);
+    }
+
+    public override void Exit(VendingMachine owner)
+    {
+        owner.Animator.SetBool(VendingMachine.ChargingHorizontalHash, false);
     }
 
     public override void Update(VendingMachine owner)
