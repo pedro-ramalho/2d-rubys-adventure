@@ -6628,7 +6628,7 @@ GameObject:
   - component: {fileID: 2045033472}
   m_Layer: 0
   m_Name: Arena
-  m_TagString: Untagged
+  m_TagString: SurfaceGrass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
