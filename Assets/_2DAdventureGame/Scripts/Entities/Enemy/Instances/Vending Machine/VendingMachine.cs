@@ -15,30 +15,35 @@ public class VendingMachine : Enemy
 
     [Header("Charging Properties")]
     [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float windupDuration = 0.3f;
     [SerializeField] private AnimationCurve speedCurve;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float chargeDuration;
     [SerializeField] private float stunnedDuration;
     public float DetectionRadius => detectionRadius;
+    public float WindupDuration => windupDuration;
     public AnimationCurve SpeedCurve => speedCurve;
     public float MaxSpeed => maxSpeed;
     public float ChargeDuration => chargeDuration;
     public float StunnedDuration => stunnedDuration;
 
     public int Direction { get; set; }
+    public Vector2 ChargeDirection { get; set; }
 
     public VendingMachineState CurrentState { get; private set; }
     public VendingMachineMovingState MovingState { get; private set; }
-    public VendingMachineStunnedState StunnedState { get; private set; }
+    public VendingMachineWindupState WindupState { get; private set; }
     public VendingMachineChargingState ChargingState { get; private set; }
+    public VendingMachineStunnedState StunnedState { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
         MovingState = new VendingMachineMovingState();
-        StunnedState = new VendingMachineStunnedState();
+        WindupState = new VendingMachineWindupState();
         ChargingState = new VendingMachineChargingState();
+        StunnedState = new VendingMachineStunnedState();
 
         CurrentState = MovingState;
         CurrentState.Enter(this);

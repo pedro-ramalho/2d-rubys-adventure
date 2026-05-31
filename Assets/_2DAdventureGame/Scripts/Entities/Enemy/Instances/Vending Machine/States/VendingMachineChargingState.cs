@@ -8,7 +8,10 @@ public class VendingMachineChargingState : VendingMachineState
     public override void Enter(VendingMachine owner)
     {
         timer = 0f;
-        direction = (Player.Instance.Rigidbody.position - owner.Rigidbody.position).normalized;
+        direction = owner.ChargeDirection;
+
+        owner.Animator.SetFloat(VendingMachine.MoveXHash, direction.x);
+        owner.Animator.SetFloat(VendingMachine.MoveYHash, direction.y);
     }
 
     public override void Update(VendingMachine owner)
@@ -25,7 +28,7 @@ public class VendingMachineChargingState : VendingMachineState
         float speed = owner.SpeedCurve.Evaluate(progress) * owner.MaxSpeed;
 
         owner.Rigidbody.MovePosition(
-            owner.Rigidbody.position + direction * (speed * Time.deltaTime)
+            owner.Rigidbody.position + direction * (speed * Time.fixedDeltaTime)
         );
     }
 }

@@ -159,7 +159,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.012804449, y: 1.1133449}
+  m_Offset: {x: -0.015494049, y: 1.1644483}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -169,7 +169,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.8746473, y: 2.2618794}
+  m_Size: {x: 1.5680267, y: 2.3102932}
   m_EdgeRadius: 0
 --- !u!61 &-7024397536285490026
 BoxCollider2D:
@@ -205,7 +205,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1.245}
+  m_Offset: {x: -0.0026896596, y: 1.1858276}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -215,7 +215,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.31, y: 2.49}
+  m_Size: {x: 1.2610348, y: 1.9843447}
   m_EdgeRadius: 0
 --- !u!95 &9060940688754314159
 Animator:
@@ -351,8 +351,37 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: a1e0dc0aa758f9647972954f4ad36eb6, type: 2}
   smokeEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
     type: 3}
-  patrolDirection: 0
-  patrolDuration: 0
+  wallTag: Wall
+  collisionExplosionPrefab: {fileID: 0}
+  detectionRadius: 5
+  windupDuration: 0.5
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxSpeed: 8
+  chargeDuration: 1
+  stunnedDuration: 2
 --- !u!1001 &8060109874823039533
 PrefabInstance:
   m_ObjectHideFlags: 0
