@@ -56,9 +56,6 @@ public class Player : MonoBehaviour, IDamageable
     public Vector2 CurrentVelocity { get; set; }
     public float DashCooldownTimer { get; set; }
 
-    // Interaction
-    public NPC LastNPC { get; set; }
-
     // State
     public PlayerState CurrentState { get; private set; }
     public event Action<float> OnHealthChanged;
