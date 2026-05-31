@@ -10,7 +10,7 @@ public class VendingMachineMovingState : VendingMachineState
         );
 
         if (distance <= owner.DetectionRadius)
-            owner.ChangeState(owner.ChargingState);
+            owner.ChangeState(owner.WindupState);
     }
 
     public override void FixedUpdate(VendingMachine owner)

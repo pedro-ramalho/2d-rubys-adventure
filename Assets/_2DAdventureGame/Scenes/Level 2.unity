@@ -2151,6 +2151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73b6673295e84e43a6e0ea7585db87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
+  questCompletionSfx: {fileID: 0}
 --- !u!1 &1268812803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,6 +2223,51 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329450549}
   m_Enabled: 1
+--- !u!1 &1431637299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1431637300}
+  - component: {fileID: 1431637301}
+  m_Layer: 0
+  m_Name: Ability Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1431637300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431637299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2012837022}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1431637301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431637299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50920f81f80be7e4483e60c73f39f8ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityManager
+  startingAbilities: -1
 --- !u!1 &1540412820
 GameObject:
   m_ObjectHideFlags: 0
@@ -5865,7 +5911,6 @@ MonoBehaviour:
   spawnInterval: 0.3
   initialDelay: 2
   breatherDuration: 2
-  player: {fileID: 2805295948606414392}
 --- !u!1 &1665743783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6195,7 +6240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695dab23de7058748b0d8724307728e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::L2Manager
-  player: {fileID: 2805295948606414392}
+  player: {fileID: 2805295948606414401}
   spawner: {fileID: 1665620913}
   ui: {fileID: 2056929449}
   endGameDelay: 3
@@ -6567,6 +6612,7 @@ Transform:
   - {fileID: 1795843238}
   - {fileID: 1260245855}
   - {fileID: 1665620912}
+  - {fileID: 1431637300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045033470
@@ -9579,6 +9625,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIHandler
   displayTime: 4
   clickClip: {fileID: 0}
+  typeInterval: 0.03
+  typeClip: {fileID: 0}
+  typeClipEveryNChars: 2
+  typeClipPitchJitter: 0.08
 --- !u!1 &2058835688
 GameObject:
   m_ObjectHideFlags: 0
@@ -9908,6 +9958,7 @@ PrefabInstance:
     - {fileID: 8364577010632279559, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
     - {fileID: 2116686224021831319, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
     - {fileID: 7318857376873986068, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
+    - {fileID: 5248492928327933422, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3449402523654975538, guid: 9e53bfff606c5e246821c7dcd944fd91,
@@ -9918,7 +9969,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7527325664591680456, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2805295948606414392}
+      addedObject: {fileID: 2805295948606414401}
   m_SourcePrefab: {fileID: 100100000, guid: 9e53bfff606c5e246821c7dcd944fd91, type: 3}
 --- !u!1 &2805295948606414391 stripped
 GameObject:
@@ -9926,7 +9977,13 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2805295948606414390}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2805295948606414392
+--- !u!82 &2805295948606414395 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 704799532469471727, guid: 9e53bfff606c5e246821c7dcd944fd91,
+    type: 3}
+  m_PrefabInstance: {fileID: 2805295948606414390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2805295948606414401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9939,7 +9996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   data: {fileID: 11400000, guid: 60f9f239e50913a4a99b1a598ec3577e, type: 2}
-  oneShotSource: {fileID: 0}
+  oneShotSource: {fileID: 2805295948606414395}
   dashClip: {fileID: 8300000, guid: 9163c1cf7fc42164f942a4abee033dd3, type: 3}
   hitClip: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6, type: 3}
   launchClip: {fileID: 8300000, guid: c87de0cae68cdbb409eec8ba23a860d0, type: 3}
