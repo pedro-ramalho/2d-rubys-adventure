@@ -4,6 +4,7 @@ public class VendingMachine : Enemy
 {  
     public static readonly int MoveXHash = Animator.StringToHash("Move X");
     public static readonly int MoveYHash = Animator.StringToHash("Move Y");
+    public static readonly int ChargingHorizontalHash = Animator.StringToHash("ChargingHorizontal");
 
     [Header("Vending Machine Assets")]
     [SerializeField] private ParticleSystem smokeEffect;
@@ -38,6 +39,7 @@ public class VendingMachine : Enemy
 
     public int Direction { get; set; }
     public Vector2 ChargeDirection { get; set; }
+    public bool IsChargeHorizontal => Mathf.Abs(ChargeDirection.x) > Mathf.Abs(ChargeDirection.y);
 
     public VendingMachineState CurrentState { get; private set; }
     public VendingMachineMovingState MovingState { get; private set; }
