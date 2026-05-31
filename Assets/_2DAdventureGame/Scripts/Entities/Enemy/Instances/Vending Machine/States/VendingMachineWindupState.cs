@@ -19,6 +19,10 @@ public class VendingMachineWindupState : VendingMachineState
     public override void Update(VendingMachine owner)
     {
         timer += Time.deltaTime;
+
+        float t = Mathf.Clamp01(timer / owner.WindupDuration);
+        owner.SpriteRenderer.color = Color.Lerp(owner.BaseColor, owner.ChargeTint, t);
+
         if (timer >= owner.WindupDuration)
             owner.ChangeState(owner.ChargingState);
     }
