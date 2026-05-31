@@ -9,6 +9,15 @@ public class VendingMachine : Enemy
     [SerializeField] private ParticleSystem smokeEffect;
     public ParticleSystem SmokeEffect => smokeEffect;
 
+    [Header("Tint")]
+    [SerializeField] private Color chargeTint = new Color(1f, 0.35f, 0.35f, 1f);
+    [SerializeField] private Color stunnedTint = new Color(0.5f, 0.5f, 0.5f, 1f);
+    public Color ChargeTint => chargeTint;
+    public Color StunnedTint => stunnedTint;
+
+    public SpriteRenderer SpriteRenderer { get; private set; }
+    public Color BaseColor { get; private set; }
+
     [Header("Collision Behavior")]
     [SerializeField] private string wallTag = "Wall";
     [SerializeField] private GameObject collisionExplosionPrefab;
@@ -39,6 +48,9 @@ public class VendingMachine : Enemy
     protected override void Awake()
     {
         base.Awake();
+
+        SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        BaseColor = SpriteRenderer.color;
 
         MovingState = new VendingMachineMovingState();
         WindupState = new VendingMachineWindupState();

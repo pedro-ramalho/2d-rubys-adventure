@@ -351,6 +351,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: a1e0dc0aa758f9647972954f4ad36eb6, type: 2}
   smokeEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
     type: 3}
+  chargeTint: {r: 0.990566, g: 0.4532307, b: 0.4532307, a: 1}
+  stunnedTint: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
   wallTag: Wall
   collisionExplosionPrefab: {fileID: 0}
   detectionRadius: 5
