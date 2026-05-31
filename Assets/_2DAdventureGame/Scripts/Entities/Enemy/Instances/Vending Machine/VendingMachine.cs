@@ -19,6 +19,16 @@ public class VendingMachine : Enemy
     public SpriteRenderer SpriteRenderer { get; private set; }
     public Color BaseColor { get; private set; }
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip walkingClip;
+    [SerializeField] private AudioClip windupClip;
+    [SerializeField] private AudioClip chargeClip;
+    [SerializeField] private AudioClip stunnedClip;
+    public AudioClip WalkingClip => walkingClip;
+    public AudioClip WindupClip => windupClip;
+    public AudioClip ChargeClip => chargeClip;
+    public AudioClip StunnedClip => stunnedClip;
+
     [Header("Collision Behavior")]
     [SerializeField] private string wallTag = "Wall";
     [SerializeField] private GameObject explosionPrefab;

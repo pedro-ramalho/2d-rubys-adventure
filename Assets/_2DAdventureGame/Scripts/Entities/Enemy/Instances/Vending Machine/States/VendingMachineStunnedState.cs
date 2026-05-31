@@ -8,6 +8,8 @@ public class VendingMachineStunnedState : VendingMachineState
     {
         timer = 0f;
         owner.SpriteRenderer.color = owner.StunnedTint;
+
+        owner.AudioSource.PlayOneShot(owner.StunnedClip);
     }
 
     public override void Update(VendingMachine owner)

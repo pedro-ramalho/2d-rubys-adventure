@@ -14,6 +14,8 @@ public class VendingMachineWindupState : VendingMachineState
         owner.Animator.SetFloat(VendingMachine.MoveYHash, owner.ChargeDirection.y);
 
         owner.Rigidbody.linearVelocity = Vector2.zero;
+
+        owner.AudioSource.PlayOneShot(owner.WindupClip);
     }
 
     public override void Update(VendingMachine owner)

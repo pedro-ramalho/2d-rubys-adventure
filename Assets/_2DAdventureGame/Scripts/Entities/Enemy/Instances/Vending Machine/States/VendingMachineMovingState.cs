@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class VendingMachineMovingState : VendingMachineState
 {
+    public override void Enter(VendingMachine owner)
+    {
+        owner.AudioSource.clip = owner.WalkingClip;
+        owner.AudioSource.loop = true;
+        owner.AudioSource.Play();
+    }
+
+    public override void Exit(VendingMachine owner)
+    {
+        owner.AudioSource.Stop();
+    }
+
     public override void Update(VendingMachine owner)
     {
         float distance = Vector2.Distance(
