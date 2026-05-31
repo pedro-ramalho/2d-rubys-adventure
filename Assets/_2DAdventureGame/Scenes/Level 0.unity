@@ -830,9 +830,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce3329097a8650408d5e643e450a197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
-  tracks:
-  - {fileID: 8300000, guid: d8a0f74d48bf95b429c132fee7ec656d, type: 3}
-  - {fileID: 8300000, guid: 6678ba8fa32abfa4999f21ec80ecaaca, type: 3}
   source: {fileID: 398598935}
   stingerSource: {fileID: 398598936}
   fadeOutDuration: 1.5
@@ -1447,8 +1444,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogues:
   - {fileID: 11400000, guid: 6f7881bece595a14c95d495631269121, type: 2}
-  dialogueBubble: {fileID: 2590044434856414156, guid: b8ae08010b021e64fa35289c833a4e08,
-    type: 3}
 --- !u!1 &1025729130
 GameObject:
   m_ObjectHideFlags: 0
@@ -8195,6 +8190,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7355603927822205875, guid: 5cf4539cf7187af46b3744f35d1298b8,
         type: 2}
+    - target: {fileID: 1590192134475356939, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 1946448323260040029, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       propertyPath: OutputAudioMixerGroup

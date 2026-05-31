@@ -3425,8 +3425,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogues:
   - {fileID: 11400000, guid: 715986190625f844386144d329f7ab11, type: 2}
-  dialogueBubble: {fileID: 2590044434856414156, guid: b8ae08010b021e64fa35289c833a4e08,
-    type: 3}
 --- !u!1001 &343054088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19360,8 +19358,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogues:
   - {fileID: 11400000, guid: 4f10cc39e4116ed469b7b07b56056577, type: 2}
-  dialogueBubble: {fileID: 2590044434856414156, guid: b8ae08010b021e64fa35289c833a4e08,
-    type: 3}
 --- !u!1001 &1396050039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25893,6 +25889,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIHandler
   displayTime: 4
   clickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
+  typeInterval: 0.08
+  typeClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
+  typeClipEveryNChars: 2
+  typeClipPitchJitter: 0.06
 --- !u!1 &2058835688
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,15 +4,10 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     [SerializeField] private List<QuestDialogue> dialogues;
-    [SerializeField] private GameObject dialogueBubble;
 
     private DialoguePhase currentPhase;
     private QuestDialogue currentDialogue;
     private int lineIndex;
-
-    void Start() => dialogueBubble.SetActive(false);
-
-    public void SetBubbleVisible(bool visible) => dialogueBubble.SetActive(visible);
 
     public void Talk()
     {
