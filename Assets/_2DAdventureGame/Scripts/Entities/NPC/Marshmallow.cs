@@ -9,6 +9,7 @@ public class Marshmallow : MonoBehaviour
     [SerializeField] private Transform exitPoint;
     [SerializeField] private float walkSpeed = 2f;
     [SerializeField] private Vector2 idleFacing = Vector2.down;
+    [SerializeField] private FollowTargetCutscene exitCutscene;
 
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
     private static readonly int LookXHash = Animator.StringToHash("Look X");
@@ -49,6 +50,7 @@ public class Marshmallow : MonoBehaviour
     IEnumerator WalkTo(Vector2 target)
     {
         SetCollidersEnabled(false);
+        if (exitCutscene != null) exitCutscene.Begin();
 
         Vector2 direction = (target - rb.position).normalized;
         SetFacing(direction);
@@ -59,13 +61,14 @@ public class Marshmallow : MonoBehaviour
         {
             Vector2 next = Vector2.MoveTowards(rb.position, target, walkSpeed * Time.fixedDeltaTime);
             rb.MovePosition(next);
-            
+
             yield return wait;
         }
 
         SetFacing(idleFacing);
         animator.SetFloat(SpeedHash, 0f);
 
+        if (exitCutscene != null) exitCutscene.Finish();
         SetCollidersEnabled(true);
     }
 
