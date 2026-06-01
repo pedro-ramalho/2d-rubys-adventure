@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class CutsceneManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static CutsceneManager Instance { get; private set; }
+    public static bool Active => Instance != null && Instance.IsActive;
+
+    public bool IsActive { get; set; }
+
+    void Awake()
     {
-        
+        if (Instance == null) Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDestroy()
     {
-        
+        if (Instance == this) Instance = null;
     }
 }
