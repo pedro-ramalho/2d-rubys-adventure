@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
   m_Name: L2Q1 Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
-  quest: {fileID: 0}
+  quest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
   before:
     lines:
     - You can't stop me!
-    questToGrantAfter: {fileID: 0}
+    questToGrantAfter: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13,
+      type: 2}
     onExhausted:
       m_PersistentCalls:
         m_Calls: []
