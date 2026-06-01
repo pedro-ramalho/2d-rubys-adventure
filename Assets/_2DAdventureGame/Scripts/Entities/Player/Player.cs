@@ -93,12 +93,16 @@ public class Player : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (PauseManager.IsPaused) return;
+        if (PauseManager.IsPaused || CutsceneManager.Active) return;
         UpdateTimers();
         CurrentState.Update(this);
     }
 
-    void FixedUpdate() => CurrentState.FixedUpdate(this);
+    void FixedUpdate()
+    {
+        if (PauseManager.IsPaused || CutsceneManager.Active) return;
+        CurrentState.FixedUpdate(this);
+    }
 
     void UpdateTimers()
     {
