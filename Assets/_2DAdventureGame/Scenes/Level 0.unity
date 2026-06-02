@@ -2609,17 +2609,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1305543195065910225, guid: 57f580d440ca8fb4db263abe5bad0d88,
-        type: 3}
-      propertyPath: dialogues.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1305543195065910225, guid: 57f580d440ca8fb4db263abe5bad0d88,
-        type: 3}
-      propertyPath: 'dialogues.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 6f7881bece595a14c95d495631269121,
-        type: 2}
     - target: {fileID: 8471144021380122241, guid: 57f580d440ca8fb4db263abe5bad0d88,
         type: 3}
       propertyPath: m_Name
