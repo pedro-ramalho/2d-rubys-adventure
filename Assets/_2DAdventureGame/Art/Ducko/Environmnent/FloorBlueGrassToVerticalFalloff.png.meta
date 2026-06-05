@@ -76,7 +76,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -145,7 +145,7 @@ TextureImporter:
       physicsShape:
       - - {x: -32, y: -32}
         - {x: -2, y: -32}
-        - {x: -2, y: 2}
+        - {x: -1, y: -2}
         - {x: 32, y: 2}
         - {x: 32, y: 32}
         - {x: -32, y: 32}
@@ -198,7 +198,7 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -32, y: 2}
-        - {x: 1, y: 2}
+        - {x: -2, y: 0}
         - {x: 1, y: -32}
         - {x: 32, y: -32}
         - {x: 32, y: 32}
@@ -250,7 +250,11 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 32, y: 32}
+        - {x: -32, y: 32}
+        - {x: -32, y: -32}
+        - {x: 32, y: -32}
       tessellationDetail: 0
       bones: []
       spriteID: 868d04f68e8186a488c619ada742b9a4
@@ -302,7 +306,7 @@ TextureImporter:
       - - {x: -32, y: -32}
         - {x: 32, y: -32}
         - {x: 32, y: 0}
-        - {x: -1, y: 0}
+        - {x: 4, y: 2}
         - {x: -1, y: 32}
         - {x: -32, y: 32}
       tessellationDetail: 0
@@ -353,7 +357,7 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: 1, y: -1}
+      - - {x: -3, y: 1}
         - {x: -32, y: -1}
         - {x: -32, y: -32}
         - {x: 32, y: -32}
