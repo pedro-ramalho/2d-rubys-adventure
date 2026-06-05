@@ -917,6 +917,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightray (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1628715868068009248, guid: 4a0ac3d8bde068943b66b2b5ea0c28a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6532713702755638818, guid: 4a0ac3d8bde068943b66b2b5ea0c28a0,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -8047,7 +8052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1688350612
 Transform:
   m_ObjectHideFlags: 0
@@ -19650,7 +19655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1984019994
 Animator:
   serializedVersion: 7
@@ -19990,6 +19995,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lightray (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628715868068009248, guid: 4a0ac3d8bde068943b66b2b5ea0c28a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6532713702755638818, guid: 4a0ac3d8bde068943b66b2b5ea0c28a0,
         type: 3}
@@ -20733,6 +20743,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lightray
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628715868068009248, guid: 4a0ac3d8bde068943b66b2b5ea0c28a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6532713702755638818, guid: 4a0ac3d8bde068943b66b2b5ea0c28a0,
         type: 3}
