@@ -17,6 +17,6 @@ MonoBehaviour:
   objective:
     type: 0
     targetTag: Box
-    count: 3
+    count: 6
   unlockOnAccept: 1
   backgroundTrack: {fileID: 8300000, guid: 5a6826292d457644abaaee2ebfd1ff43, type: 3}
