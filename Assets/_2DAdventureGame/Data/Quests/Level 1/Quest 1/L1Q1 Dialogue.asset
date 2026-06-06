@@ -16,12 +16,11 @@ MonoBehaviour:
   before:
     lines:
     - Oh no... Where could they be...
-    - 'Hey, you! You must be Ruby! '
-    - A friend told me someone with green pants and a tail was coming to this island.
-      You fit the description!
-    - I'd actually really appreciate your help right this moment.
-    - You see, I'm a merchant, and a while ago I lost 3 really important boxes with
-      valuable goods.
+    - Hm?
+    - Wait a second... You must be Ruby!
+    - A friend told me to expect someone wearing green pants and a tail.
+    - You see, I'm a merchant, and a while ago I lost six really important boxes
+      with valuable goods.
     - Could you help me look for them?
     - By the way, to help you navigate the map, I have a tip for you.
     - You can dash around by pressing E. While dashing, you are briefly immune to
@@ -41,13 +40,13 @@ MonoBehaviour:
   after:
     lines:
     - You found them! Thank you so much, Ruby!
-    - I'm aware that you didn't come to this island just to help a merchant find
-      their lost merchandise.
-    - You're probably hearing all of this noise coming from these malfunctioning
-      Patrol Robots that we have here.
-    - "You might want to visit my friend who lives nearby. They\u2019ll be able to
-      guide you on what to do next."
-    - Follow the pavement northwest, and you're sure to meet them eventually.
+    - I suppose you didn't come all this way just to help a merchant recover their
+      lost cargo.
+    - We have some Patrol Robots around here that have been causing a lot of trouble
+      for us.
+    - A friend of mine leaves nearby and knows much more about what's going on that
+      I do.
+    - Head east and follow the pavement. You should run into them before long!
     - Take care!
     questToGrantAfter: {fileID: 0}
     onExhausted:

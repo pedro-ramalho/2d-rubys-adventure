@@ -11231,6 +11231,16 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
+        type: 3}
+      propertyPath: preTransitionDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
+        type: 3}
+      propertyPath: transitionDuration
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28033,6 +28043,7 @@ MonoBehaviour:
   typeClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.06
+  promptFadeDuration: 0.15
 --- !u!1001 &2061339073
 PrefabInstance:
   m_ObjectHideFlags: 0

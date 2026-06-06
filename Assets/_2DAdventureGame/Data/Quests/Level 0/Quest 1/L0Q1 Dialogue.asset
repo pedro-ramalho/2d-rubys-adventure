@@ -16,18 +16,18 @@ MonoBehaviour:
   before:
     lines:
     - Hello, Ruby. Welcome.
-    - This island is falling apart as you can see.
-    - Machines are breaking down, malfunctioning...
-    - Releasing so many gaxes and toxins into the air...
-    - We need your help to find out what's causing all of this!
+    - Did you come to help us?
+    - I'm afraid there's not much left to do in this place.
+    - This island is falling apart...
+    - Still... there may be time to help my friends.
     - Let's start with the basics. Have you learned how to move yet?
-    - Move with WASD or arrow keys. Press X to talk to me or others, just like you
-      did.
-    - 'The top left of the screen shows your health bar. '
-    - Don't let it run empty, or else you'll die!
-    - Now that I've taken a good look at you... You don't seem to be in good shape...
-    - 'Fruit is scarce around here, but please, take this piece. It should help you
-      recover. '
+    - Use WASD or the arrow keys to move. Press X to talk to me or others, just like
+      you did.
+    - The bar in the top-left corner of the screen shows your health.
+    - Don't let it run empty, or you'll die!
+    - Now that I've taken a good look at you... You seem exhausted.
+    - Fruit is scarce around here, but please, take this piece. It should help you
+      recover.
     questToGrantAfter: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6,
       type: 2}
     onExhausted:
@@ -35,20 +35,18 @@ MonoBehaviour:
         m_Calls: []
   during:
     lines:
-    - Please accept the strawberry I'm giving you.
+    - Please accept the kiwi I'm giving you.
     questToGrantAfter: {fileID: 0}
     onExhausted:
       m_PersistentCalls:
         m_Calls: []
   after:
     lines:
-    - You look a lot better now! Ready to go.
-    - Not to disappoint you or anything but there isn't much to do in this tiny island.
-    - I live by myself, and as you can tell, there are no robots to interfere with
-      my peace here.
-    - You should visit my friend's island. They're nearby and could really use your
-      help.
-    - Let's get going then.
+    - You look a bit better now. That's a relief.
+    - Well, that's about all I can do for you.
+    - My friends aren't far from here.
+    - If anyone still needs your help, it's them.
+    - Come on. I'll show you the way.
     questToGrantAfter: {fileID: 0}
     onExhausted:
       m_PersistentCalls:
