@@ -82,6 +82,7 @@ public class VendingMachine : Enemy
         if (collision.gameObject.TryGetComponent(out VendingMachine _))
         {
             SpawnExplosion(transform.position);
+            GetComponent<QuestReporter>()?.Report();
             Destroy(gameObject);
             return;
         }
@@ -121,6 +122,7 @@ public class VendingMachine : Enemy
     protected override void OnProjectileHit()
     {
         SpawnExplosion(transform.position);
+        GetComponent<QuestReporter>()?.Report();
         Destroy(gameObject);
     }
 }

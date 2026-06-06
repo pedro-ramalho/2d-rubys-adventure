@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,8 +7,10 @@ public class L2Manager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private WaveSpawner spawner;
     [SerializeField] private UIHandler ui;
+    [SerializeField] private Marshmallow marshmallow;
     [SerializeField] private QuestData winQuest;
     [SerializeField] private float endGameDelay = 3f;
+    [SerializeField] private float epilogueReadDelay = 3f;
 
     private bool gameEnded = false;
 
@@ -15,6 +18,7 @@ public class L2Manager : MonoBehaviour
     void Start()
     {
         player.OnDied += HandlePlayerDied;
+        spawner.OnAllWavesCleared += HandleAllWavesCleared;
         if (QuestManager.Instance != null)
             QuestManager.Instance.OnQuestEpilogueFinished += HandleQuestEpilogueFinished;
     }
@@ -24,15 +28,31 @@ public class L2Manager : MonoBehaviour
         if (player != null)
             player.OnDied -= HandlePlayerDied;
 
+        if (spawner != null)
+            spawner.OnAllWavesCleared -= HandleAllWavesCleared;
+
         if (QuestManager.Instance != null)
             QuestManager.Instance.OnQuestEpilogueFinished -= HandleQuestEpilogueFinished;
     }
 
     void HandlePlayerDied() => EndGame(win: false);
 
+    void HandleAllWavesCleared()
+    {
+        if (marshmallow != null) marshmallow.WalkBack();
+    }
+
     void HandleQuestEpilogueFinished(QuestData data)
     {
-        if (data == winQuest) EndGame(win: true);
+        if (data == winQuest) StartCoroutine(DelayedWin());
+    }
+
+    IEnumerator DelayedWin()
+    {
+        while (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
+            yield return null;
+        yield return new WaitForSeconds(epilogueReadDelay);
+        EndGame(win: true);
     }
 
     void EndGame(bool win)

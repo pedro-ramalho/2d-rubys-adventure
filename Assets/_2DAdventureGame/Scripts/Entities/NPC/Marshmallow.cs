@@ -16,24 +16,32 @@ public class Marshmallow : MonoBehaviour
 
     private Animator animator;
     private Rigidbody2D rb;
+    private Vector2 startPosition;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        startPosition = transform.position;
         SetFacing(idleFacing);
     }
 
     void OnEnable()
     {
         if (QuestManager.Instance != null)
+        {
             QuestManager.Instance.OnQuestAccepted += HandleQuestAccepted;
+            QuestManager.Instance.OnQuestEpilogueFinished += HandleQuestEpilogueFinished;
+        }
     }
 
     void OnDisable()
     {
         if (QuestManager.Instance != null)
+        {
             QuestManager.Instance.OnQuestAccepted -= HandleQuestAccepted;
+            QuestManager.Instance.OnQuestEpilogueFinished -= HandleQuestEpilogueFinished;
+        }
     }
 
     void HandleQuestAccepted(Quest quest)
@@ -41,10 +49,17 @@ public class Marshmallow : MonoBehaviour
         if (quest.Data == boundQuest) WalkOffscreen();
     }
 
+    void HandleQuestEpilogueFinished(QuestData data)
+    {
+        if (data == boundQuest) SetCollidersEnabled(false);
+    }
+
     public void WalkOffscreen()
     {
         if (exitPoint != null) StartCoroutine(WalkTo(exitPoint.position));
     }
+
+    public void WalkBack() => StartCoroutine(WalkTo(startPosition));
 
     IEnumerator WalkTo(Vector2 target)
     {

@@ -23,11 +23,32 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private float initialDelay = 2f;
     [SerializeField] private float breatherDuration = 2f;
 
+    [Header("Trigger")]
+    [SerializeField] private QuestData triggerQuest;
+
     private readonly List<GameObject> aliveEnemies = new();
+    private bool started;
 
     public event Action OnAllWavesCleared;
 
-    void Start() => StartCoroutine(RunWaves());
+    void Start()
+    {
+        if (QuestManager.Instance != null)
+            QuestManager.Instance.OnQuestAccepted += HandleQuestAccepted;
+    }
+
+    void OnDestroy()
+    {
+        if (QuestManager.Instance != null)
+            QuestManager.Instance.OnQuestAccepted -= HandleQuestAccepted;
+    }
+
+    void HandleQuestAccepted(Quest quest)
+    {
+        if (started || quest.Data != triggerQuest) return;
+        started = true;
+        StartCoroutine(RunWaves());
+    }
 
     IEnumerator RunWaves()
     {
