@@ -6016,10 +6016,16 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
       type: 3}
-    count: 1
+    count: 2
   - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
       type: 3}
-    count: 3
+    count: 4
+  - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
+      type: 3}
+    count: 8
+  - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
+      type: 3}
+    count: 16
   spawnPoints:
   - {fileID: 2082912690}
   - {fileID: 1075918642}

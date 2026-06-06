@@ -17,6 +17,6 @@ MonoBehaviour:
   objective:
     type: 1
     targetTag: VM
-    count: 20
+    count: 30
   unlockOnAccept: 0
   backgroundTrack: {fileID: 0}
