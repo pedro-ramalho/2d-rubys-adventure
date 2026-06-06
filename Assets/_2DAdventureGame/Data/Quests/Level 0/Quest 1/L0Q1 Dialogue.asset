@@ -15,21 +15,19 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
   before:
     lines:
-    - Hello, Ruby, welcome!
-    - It appears you've been summoned here to help my friends deal with the recent
-      robot problem...
-    - "They\u2019re malfunctioning like crazy!"
-    - "But first, let\u2019s start with the basics. Have you learned how to move
-      yet?"
+    - Hello, Ruby. Welcome.
+    - This island is falling apart as you can see.
+    - Machines are breaking down, malfunctioning...
+    - Releasing so many gaxes and toxins into the air...
+    - We need your help to find out what's causing all of this!
+    - Let's start with the basics. Have you learned how to move yet?
     - Move with WASD or arrow keys. Press X to talk to me or others, just like you
       did.
-    - 'The top left of the screen contains a small bar that reveals your current
-      health. '
-    - "Don\u2019t let it run empty, or else you\u2019ll die!"
-    - "Now that I\u2019ve taken a good look at you\u2026 You seem not to be in the
-      greatest of shapes\u2026"
-    - The trip here must have been really exhausting.
-    - "Here, please, have this strawberry. It\u2019ll be good for you!"
+    - 'The top left of the screen shows your health bar. '
+    - Don't let it run empty, or else you'll die!
+    - Now that I've taken a good look at you... You don't seem to be in good shape...
+    - 'Fruit is scarce around here, but please, take this piece. It should help you
+      recover. '
     questToGrantAfter: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6,
       type: 2}
     onExhausted:

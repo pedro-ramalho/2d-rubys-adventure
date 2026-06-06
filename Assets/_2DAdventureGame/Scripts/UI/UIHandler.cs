@@ -26,6 +26,7 @@ public class UIHandler : MonoBehaviour
     private Player player;
     private Coroutine typeRoutine;
     private string currentLine;
+    private bool isShowingPrompt;
 
     public bool IsTyping => typeRoutine != null;
 
@@ -68,10 +69,28 @@ public class UIHandler : MonoBehaviour
         CancelInvoke(nameof(HideDialogue));
         if (typeRoutine != null) StopCoroutine(typeRoutine);
 
+        isShowingPrompt = false;
         currentLine = line;
         dialogueText.text = string.Empty;
         dialoguePanel.style.display = DisplayStyle.Flex;
         typeRoutine = StartCoroutine(TypeLine(line));
+    }
+
+    public void ShowInteractPrompt(string text)
+    {
+        if (!isShowingPrompt && dialoguePanel.style.display == DisplayStyle.Flex) return;
+        if (isShowingPrompt && dialogueText.text == text) return;
+
+        dialogueText.text = text;
+        dialoguePanel.style.display = DisplayStyle.Flex;
+        isShowingPrompt = true;
+    }
+
+    public void HideInteractPrompt()
+    {
+        if (!isShowingPrompt) return;
+        dialoguePanel.style.display = DisplayStyle.None;
+        isShowingPrompt = false;
     }
 
     public void Skip()
@@ -121,6 +140,7 @@ public class UIHandler : MonoBehaviour
             if (player != null) player.OneShotSource.pitch = 1f;
         }
         dialoguePanel.style.display = DisplayStyle.None;
+        isShowingPrompt = false;
     }
     
     public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;

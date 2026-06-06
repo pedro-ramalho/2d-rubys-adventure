@@ -47,8 +47,6 @@ public class PlayerGroundedState : PlayerState
 
     private void HandleNPCInteraction(Player owner)
     {
-        if (!owner.TalkAction.WasPressedThisFrame()) return;
-
         RaycastHit2D hit = Physics2D.Raycast(
             (Vector2)owner.transform.position + Vector2.up * 0.2f,
             owner.MoveDirection,
@@ -56,7 +54,16 @@ public class PlayerGroundedState : PlayerState
             NPCMaskHash
         );
 
-        if (hit.collider == null || !hit.collider.TryGetComponent(out NPC npc)) return;
+        NPC npc = null;
+        if (hit.collider != null) hit.collider.TryGetComponent(out npc);
+
+        if (UIHandler.Instance != null)
+        {
+            if (npc != null) UIHandler.Instance.ShowInteractPrompt("Press X to talk");
+            else UIHandler.Instance.HideInteractPrompt();
+        }
+
+        if (!owner.TalkAction.WasPressedThisFrame() || npc == null) return;
 
         if (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
             UIHandler.Instance.Skip();
