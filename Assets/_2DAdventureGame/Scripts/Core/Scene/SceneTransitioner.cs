@@ -10,12 +10,16 @@ public class SceneTransitioner : MonoBehaviour
     [SerializeField] private float preTransitionDelay = 1.5f;
     [SerializeField] private float transitionDuration = 1f;
 
+    public bool IsTransitioning { get; private set; }
+
     void Awake() => Instance = this;
 
     public void LoadSceneWithCrossfade(string sceneName) => StartCoroutine(LoadScene(sceneName));
 
     IEnumerator LoadScene(string scene)
     {
+        IsTransitioning = true;
+
         yield return new WaitForSeconds(preTransitionDelay);
 
         if (UIHandler.Instance != null) UIHandler.Instance.HideDialogue();
