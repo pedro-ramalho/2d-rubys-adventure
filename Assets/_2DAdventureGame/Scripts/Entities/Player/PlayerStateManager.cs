@@ -1,16 +1,7 @@
-using UnityEngine;
-
-public class PlayerStateManager : MonoBehaviour
+public class PlayerStateManager : PersistentSingleton<PlayerStateManager>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public int? StoredHealth { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void StoreHealth(int health) => StoredHealth = health;
+    public void Clear() => StoredHealth = null;
 }
