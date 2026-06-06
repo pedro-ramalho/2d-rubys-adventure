@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   maxHealth: 5
-  startingHealth: 3
+  startingHealth: 1
   invincibilityDuration: 2
   speed: 3
   acceleration: 20

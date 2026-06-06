@@ -16925,6 +16925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1025729131}
   - component: {fileID: 1025729132}
+  - component: {fileID: 1025729133}
   m_Layer: 0
   m_Name: Ability Manager
   m_TagString: Untagged
@@ -16960,6 +16961,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityManager
   startingAbilities: -1
+--- !u!114 &1025729133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025729130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d653ced21c092949960a0849de7a89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateManager
 --- !u!1001 &1030648674
 PrefabInstance:
   m_ObjectHideFlags: 0
