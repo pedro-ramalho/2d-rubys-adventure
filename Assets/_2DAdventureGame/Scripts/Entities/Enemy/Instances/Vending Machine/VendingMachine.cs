@@ -86,6 +86,18 @@ public class VendingMachine : Enemy
             return;
         }
 
+        if (collision.gameObject.TryGetComponent(out Player player))
+        {
+            player.ApplyDamage(Data.contactDamage);
+
+            if (CurrentState == ChargingState)
+            {
+                SpawnExplosion(collision.GetContact(0).point);
+                ChangeState(StunnedState);
+            }
+            return;
+        }
+
         if (CurrentState == ChargingState && collision.gameObject.CompareTag(wallTag))
         {
             SpawnExplosion(collision.GetContact(0).point);
