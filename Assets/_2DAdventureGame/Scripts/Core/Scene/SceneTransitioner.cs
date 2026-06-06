@@ -22,7 +22,11 @@ public class SceneTransitioner : MonoBehaviour
 
         yield return new WaitForSeconds(preTransitionDelay);
 
-        if (UIHandler.Instance != null) UIHandler.Instance.HideDialogue();
+        if (UIHandler.Instance != null)
+        {
+            UIHandler.Instance.HideDialogue();
+            UIHandler.Instance.HideHUD();
+        }
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionDuration);

@@ -20,6 +20,7 @@ public class UIHandler : MonoBehaviour
     [Header("Prompt Fade")]
     [SerializeField] private float promptFadeDuration = 0.15f;
 
+    private VisualElement hud;
     private VisualElement healthBar;
     private VisualElement dialoguePanel;
     private Label dialogueText;
@@ -43,6 +44,7 @@ public class UIHandler : MonoBehaviour
     void Start()
     {
         UIDocument uiDocument = GetComponent<UIDocument>();
+        hud = uiDocument.rootVisualElement.Q<VisualElement>("HealthBarBackground");
         healthBar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
         
         dialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
@@ -65,6 +67,11 @@ public class UIHandler : MonoBehaviour
     }
 
     void SetHealthValue(float percentage) => healthBar.style.width = Length.Percent(100 * percentage);
+
+    public void HideHUD()
+    {
+        if (hud != null) hud.style.display = DisplayStyle.None;
+    }
     
     public void DisplayDialogueWithLine(string line)
     {
