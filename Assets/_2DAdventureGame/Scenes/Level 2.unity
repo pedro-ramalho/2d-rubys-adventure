@@ -5985,7 +5985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1665620912
 Transform:
   m_ObjectHideFlags: 0
@@ -9799,6 +9799,7 @@ MonoBehaviour:
   typeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.08
+  promptFadeDuration: 0.15
 --- !u!1 &2058835688
 GameObject:
   m_ObjectHideFlags: 0

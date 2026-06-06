@@ -354,16 +354,16 @@ MonoBehaviour:
   smokeEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
     type: 3}
   chargeTint: {r: 0.990566, g: 0.4532307, b: 0.4532307, a: 1}
-  stunnedTint: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+  stunnedTint: {r: 0.6084906, g: 1, b: 0.9317475, a: 1}
   walkingClip: {fileID: 8300000, guid: f2bd042fedd3e02449fe7ce851241323, type: 3}
-  windupClip: {fileID: 8300000, guid: a146f919d2e926745a6eea48efd8c809, type: 3}
-  chargeClip: {fileID: 8300000, guid: 7950660bac798274988a0cbff515ba0f, type: 3}
+  windupClip: {fileID: 8300000, guid: 46455a1048fa7474ba99a4e875f62055, type: 3}
+  chargeClip: {fileID: 8300000, guid: f42b991edb4392d41bc46af3c2144e71, type: 3}
   stunnedClip: {fileID: 8300000, guid: 53e15805f3efe69499a4997b6bc50ba5, type: 3}
   wallTag: Wall
   explosionPrefab: {fileID: 3768179546986632569, guid: 7b74849dd50677e40b8f73b1d57de7de,
     type: 3}
   detectionRadius: 5
-  windupDuration: 0.5
+  windupDuration: 0.75
   speedCurve:
     serializedVersion: 2
     m_Curve:
