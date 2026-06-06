@@ -15,7 +15,11 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
   before:
     lines:
-    - You can't stop me!
+    - Ruby! What are you doing here!
+    - Marshmallow did nothing wrong!
+    - Marshmallow was just playing with the machines!
+    - No! Marshmallow is not stopping!
+    - Ruby can't stop Marshmallow!
     questToGrantAfter: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13,
       type: 2}
     onExhausted:
@@ -30,7 +34,11 @@ MonoBehaviour:
         m_Calls: []
   after:
     lines:
-    - Maybe... You can... Stop... Me...
+    - Marshmallow is sad!
+    - Marshmallow understands...
+    - Marshmallow will stop tinkering with the machines!
+    - No more malfunctioning!
+    - Everything normal!
     questToGrantAfter: {fileID: 0}
     onExhausted:
       m_PersistentCalls:
