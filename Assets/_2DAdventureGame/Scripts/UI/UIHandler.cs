@@ -17,6 +17,9 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private int typeClipEveryNChars = 2;
     [SerializeField] private float typeClipPitchJitter = 0.08f;
 
+    [Header("Prompt Fade")]
+    [SerializeField] private float promptFadeDuration = 0.15f;
+
     private VisualElement healthBar;
     private VisualElement dialoguePanel;
     private Label dialogueText;
@@ -27,6 +30,8 @@ public class UIHandler : MonoBehaviour
     private Coroutine typeRoutine;
     private string currentLine;
     private bool isShowingPrompt;
+    private bool dialogueActive;
+    private Coroutine promptFadeRoutine;
 
     public bool IsTyping => typeRoutine != null;
 
@@ -68,29 +73,66 @@ public class UIHandler : MonoBehaviour
 
         CancelInvoke(nameof(HideDialogue));
         if (typeRoutine != null) StopCoroutine(typeRoutine);
+        StopPromptFade();
 
         isShowingPrompt = false;
+        dialogueActive = true;
         currentLine = line;
         dialogueText.text = string.Empty;
+        dialoguePanel.style.opacity = 1f;
         dialoguePanel.style.display = DisplayStyle.Flex;
         typeRoutine = StartCoroutine(TypeLine(line));
     }
 
     public void ShowInteractPrompt(string text)
     {
-        if (!isShowingPrompt && dialoguePanel.style.display == DisplayStyle.Flex) return;
-        if (isShowingPrompt && dialogueText.text == text) return;
+        if (dialogueActive) return;
+        if (isShowingPrompt && dialogueText.text == text && promptFadeRoutine == null) return;
 
         dialogueText.text = text;
+        if (dialoguePanel.style.display == DisplayStyle.None)
+            dialoguePanel.style.opacity = 0f;
         dialoguePanel.style.display = DisplayStyle.Flex;
         isShowingPrompt = true;
+        StartPromptFade(1f, hideAfter: false);
     }
 
     public void HideInteractPrompt()
     {
         if (!isShowingPrompt) return;
-        dialoguePanel.style.display = DisplayStyle.None;
         isShowingPrompt = false;
+        StartPromptFade(0f, hideAfter: true);
+    }
+
+    private void StartPromptFade(float targetOpacity, bool hideAfter)
+    {
+        StopPromptFade();
+        promptFadeRoutine = StartCoroutine(FadePrompt(targetOpacity, hideAfter));
+    }
+
+    private void StopPromptFade()
+    {
+        if (promptFadeRoutine != null)
+        {
+            StopCoroutine(promptFadeRoutine);
+            promptFadeRoutine = null;
+        }
+    }
+
+    private IEnumerator FadePrompt(float targetOpacity, bool hideAfter)
+    {
+        float startOpacity = dialoguePanel.resolvedStyle.opacity;
+        float elapsed = 0f;
+        while (elapsed < promptFadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / promptFadeDuration);
+            dialoguePanel.style.opacity = Mathf.Lerp(startOpacity, targetOpacity, t);
+            yield return null;
+        }
+        dialoguePanel.style.opacity = targetOpacity;
+        if (hideAfter) dialoguePanel.style.display = DisplayStyle.None;
+        promptFadeRoutine = null;
     }
 
     public void Skip()
@@ -139,8 +181,11 @@ public class UIHandler : MonoBehaviour
             typeRoutine = null;
             if (player != null) player.OneShotSource.pitch = 1f;
         }
+        StopPromptFade();
         dialoguePanel.style.display = DisplayStyle.None;
+        dialoguePanel.style.opacity = 1f;
         isShowingPrompt = false;
+        dialogueActive = false;
     }
     
     public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;

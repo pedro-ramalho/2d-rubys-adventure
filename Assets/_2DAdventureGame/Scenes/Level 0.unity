@@ -35542,6 +35542,7 @@ MonoBehaviour:
   typeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.06
+  promptFadeDuration: 0.05
 --- !u!1001 &2058613176
 PrefabInstance:
   m_ObjectHideFlags: 0
