@@ -47,8 +47,9 @@ public class PlayerGroundedState : PlayerState
 
     private void HandleNPCInteraction(Player owner)
     {
-        RaycastHit2D hit = Physics2D.Raycast(
+        RaycastHit2D hit = Physics2D.CircleCast(
             (Vector2)owner.transform.position + Vector2.up * 0.2f,
+            0.4f,
             owner.MoveDirection,
             1.5f,
             NPCMaskHash
