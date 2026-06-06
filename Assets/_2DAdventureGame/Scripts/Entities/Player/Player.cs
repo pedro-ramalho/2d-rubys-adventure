@@ -75,7 +75,10 @@ public class Player : MonoBehaviour, IDamageable
         Animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
 
-        CurrentHealth = Mathf.Clamp(data.startingHealth, 0, data.maxHealth);
+        int health = PlayerStateManager.Instance != null && PlayerStateManager.Instance.StoredHealth.HasValue
+            ? PlayerStateManager.Instance.StoredHealth.Value
+            : data.startingHealth;
+        CurrentHealth = Mathf.Clamp(health, 0, data.maxHealth);
 
         inputActions = new PlayerInputActions();
 
@@ -90,6 +93,12 @@ public class Player : MonoBehaviour, IDamageable
 
     void OnEnable() => inputActions.Player.Enable();
     void OnDisable() => inputActions.Player.Disable();
+
+    void OnDestroy()
+    {
+        if (Instance == this && PlayerStateManager.Instance != null && CurrentHealth > 0)
+            PlayerStateManager.Instance.StoreHealth(CurrentHealth);
+    }
 
     void Update()
     {
