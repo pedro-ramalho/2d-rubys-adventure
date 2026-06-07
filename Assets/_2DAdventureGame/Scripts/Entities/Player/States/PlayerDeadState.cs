@@ -1,7 +1,11 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeadState : PlayerState
 {
+    private const float ReloadDelay = 5f;
+
     /// <summary>
     /// <c>Enter</c> shuts everything down.
     /// This includes clearing the player's current velocity to 0 (preventing them from walking),
@@ -12,6 +16,18 @@ public class PlayerDeadState : PlayerState
     {
         owner.CurrentVelocity = Vector2.zero;
         owner.Animator.SetFloat(Player.SpeedHash, 0f);
+
+        Time.timeScale = 0f;
+
+        if (UIHandler.Instance != null) UIHandler.Instance.DisplayLoseScreen();
+        owner.StartCoroutine(ReloadAfterDelay());
+    }
+
+    private IEnumerator ReloadAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(ReloadDelay);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>

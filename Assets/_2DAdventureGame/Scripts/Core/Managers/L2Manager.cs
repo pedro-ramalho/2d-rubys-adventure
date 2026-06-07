@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class L2Manager : MonoBehaviour
 {
-    [SerializeField] private Player player;
     [SerializeField] private WaveSpawner spawner;
     [SerializeField] private UIHandler ui;
     [SerializeField] private Marshmallow marshmallow;
@@ -17,7 +16,6 @@ public class L2Manager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player.OnDied += HandlePlayerDied;
         spawner.OnAllWavesCleared += HandleAllWavesCleared;
         if (QuestManager.Instance != null)
             QuestManager.Instance.OnQuestEpilogueFinished += HandleQuestEpilogueFinished;
@@ -25,17 +23,12 @@ public class L2Manager : MonoBehaviour
 
     void OnDestroy()
     {
-        if (player != null)
-            player.OnDied -= HandlePlayerDied;
-
         if (spawner != null)
             spawner.OnAllWavesCleared -= HandleAllWavesCleared;
 
         if (QuestManager.Instance != null)
             QuestManager.Instance.OnQuestEpilogueFinished -= HandleQuestEpilogueFinished;
     }
-
-    void HandlePlayerDied() => EndGame(win: false);
 
     void HandleAllWavesCleared()
     {
@@ -52,19 +45,15 @@ public class L2Manager : MonoBehaviour
         while (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
             yield return null;
         yield return new WaitForSeconds(epilogueReadDelay);
-        EndGame(win: true);
+        Win();
     }
 
-    void EndGame(bool win)
+    void Win()
     {
         if (gameEnded) return;
         gameEnded = true;
 
-        if (win) 
-            ui.DisplayWinScreen();
-        else
-            ui.DisplayLoseScreen();
-
+        ui.DisplayWinScreen();
         Invoke(nameof(ReloadScene), endGameDelay);
     }
 
