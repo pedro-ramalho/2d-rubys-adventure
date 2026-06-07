@@ -772,6 +772,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuHandler
   firstLevelSceneName: Level 0
+  backgroundPanSpeed: 0.15
+  backgroundPanAmplitudeX: 40
+  backgroundPanAmplitudeY: 20
+  backgroundScale: 1.15
+  titleBobSpeed: 0.5
+  titleBobAmplitude: 8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
