@@ -23,18 +23,21 @@ public class PauseManager : PersistentSingleton<PauseManager>
 
     void OnEnable()
     {
+        if (Instance != this) return;
         inputActions.Player.Enable();
         inputActions.Player.Pause.performed += OnPausePressed;
     }
 
     void OnDisable()
     {
+        if (Instance != this) return;
         inputActions.Player.Pause.performed -= OnPausePressed;
         inputActions.Player.Disable();
     }
 
     void Start()
     {
+        if (Instance != this) return;
         pauseRoot = pauseDocument.rootVisualElement.Q<VisualElement>("PauseRoot");
         SetVisible(false);
     }
