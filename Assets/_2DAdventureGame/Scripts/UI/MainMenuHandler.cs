@@ -58,7 +58,13 @@ public class MainMenuHandler : MonoBehaviour
         }
     }
 
-    void StartGame() => SceneManager.LoadScene(firstLevelSceneName);
+    void StartGame()
+    {
+        if (SceneTransitioner.Instance != null)
+            SceneTransitioner.Instance.LoadSceneWithCrossfade(firstLevelSceneName);
+        else
+            SceneManager.LoadScene(firstLevelSceneName);
+    }
 
     void QuitGame()
     {

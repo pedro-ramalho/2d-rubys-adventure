@@ -1,0 +1,34 @@
+.menu-button {
+    width: 360px;
+    height: 80px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
+    background-color: rgba(40, 40, 40, 0.85);
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-width: 2px;
+    border-left-color: rgba(255, 255, 255, 0.6);
+    border-right-color: rgba(255, 255, 255, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.6);
+    border-bottom-color: rgba(255, 255, 255, 0.6);
+    transition-property: scale, background-color;
+    transition-duration: 0.12s, 0.12s;
+    transition-timing-function: ease-out, ease-out;
+}
+
+.menu-button:hover {
+    scale: 1.05 1.05;
+    background-color: rgba(80, 80, 80, 0.95);
+}
+
+.menu-button:active {
+    scale: 0.98 0.98;
+}
+
+.menu-button:disabled {
+    opacity: 0.5;
+}

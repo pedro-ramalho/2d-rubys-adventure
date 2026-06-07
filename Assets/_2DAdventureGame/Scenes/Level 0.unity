@@ -40040,6 +40040,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene Music Config Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 6907903252240997560, guid: 6b97241559900a446a23375be753c87d,
+        type: 3}
+      propertyPath: defaultTrack
+      value: 
+      objectReference: {fileID: 8300000, guid: 582bf361260f93a47b51e347fc74001b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -9804,10 +9804,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIHandler
   displayTime: 4
   clickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
-  typeInterval: 0.03
+  typeInterval: 0.08
   typeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
   typeClipEveryNChars: 2
-  typeClipPitchJitter: 0.08
+  typeClipPitchJitter: 0.06
   promptFadeDuration: 0.15
 --- !u!1 &2058835688
 GameObject:
