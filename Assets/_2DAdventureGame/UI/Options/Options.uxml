@@ -71,6 +71,7 @@
                 <ui:Slider name="AmbientVolumeSlider" label="Ambient" low-value="0" high-value="1" value="1" class="volume-slider"/>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Button name="ResetDefaultsButton" text="Reset to Defaults" class="menu-button"/>
         <ui:Button name="OptionsBackButton" text="Back" class="menu-button"/>
     </ui:VisualElement>
 </ui:UXML>
