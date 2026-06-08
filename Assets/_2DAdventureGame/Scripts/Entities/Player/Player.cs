@@ -80,7 +80,7 @@ public class Player : MonoBehaviour, IDamageable
             : data.startingHealth;
         CurrentHealth = Mathf.Clamp(health, 0, data.maxHealth);
 
-        inputActions = new PlayerInputActions();
+        inputActions = InputManager.Instance.Actions;
 
         GroundedState = new PlayerGroundedState();
         DashingState = new PlayerDashingState();
@@ -90,9 +90,6 @@ public class Player : MonoBehaviour, IDamageable
         CurrentState = GroundedState;
         CurrentState.Enter(this);
     }
-
-    void OnEnable() => inputActions.Player.Enable();
-    void OnDisable() => inputActions.Player.Disable();
 
     void OnDestroy()
     {

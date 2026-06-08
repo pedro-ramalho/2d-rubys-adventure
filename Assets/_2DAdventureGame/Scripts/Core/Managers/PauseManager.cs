@@ -18,13 +18,12 @@ public class PauseManager : PersistentSingleton<PauseManager>
         base.Awake();
         if (Instance != this) return;
 
-        inputActions = new PlayerInputActions();
+        inputActions = InputManager.Instance.Actions;
     }
 
     void OnEnable()
     {
         if (Instance != this) return;
-        inputActions.Player.Enable();
         inputActions.Player.Pause.performed += OnPausePressed;
     }
 
@@ -32,7 +31,6 @@ public class PauseManager : PersistentSingleton<PauseManager>
     {
         if (Instance != this) return;
         inputActions.Player.Pause.performed -= OnPausePressed;
-        inputActions.Player.Disable();
     }
 
     void Start()

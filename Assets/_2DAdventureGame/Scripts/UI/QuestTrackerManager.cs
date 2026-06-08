@@ -16,18 +16,16 @@ public class QuestTrackerManager : MonoBehaviour
 
     private const string CompletionMessage = "Quest complete! Return and speak with the NPC.";
 
-    void Awake() => inputActions = new PlayerInputActions();
+    void Awake() => inputActions = InputManager.Instance.Actions;
 
     void OnEnable()
     {
-        inputActions.Player.Enable();
         inputActions.Player.Tracker.performed += OnTrackerPressed;
     }
 
     void OnDisable()
     {
         inputActions.Player.Tracker.performed -= OnTrackerPressed;
-        inputActions.Player.Disable();
     }
 
 
