@@ -9,61 +9,66 @@
     <ui:VisualElement name="OptionsRoot" style="align-items: center; display: none;">
         <ui:Label name="OptionsTitle" text="Options" class="options-title"/>
         <ui:VisualElement name="OptionsContent" class="options-content">
-            <ui:Slider name="MasterVolumeSlider" label="Master" low-value="0" high-value="1" value="1" class="volume-slider"/>
-            <ui:Slider name="MusicVolumeSlider" label="Music" low-value="0" high-value="1" value="1" class="volume-slider"/>
-            <ui:Slider name="SfxVolumeSlider" label="SFX" low-value="0" high-value="1" value="1" class="volume-slider"/>
-            <ui:Slider name="AmbientVolumeSlider" label="Ambient" low-value="0" high-value="1" value="1" class="volume-slider"/>
+            <ui:VisualElement class="options-column options-column-left">
+                <ui:Label text="Controls" class="options-section-header"/>
 
-            <ui:Label text="Controls" class="options-section-header"/>
+                <ui:VisualElement class="rebind-row">
+                    <ui:Label text="Dash" class="rebind-label"/>
+                    <ui:Button name="DashRebindButton" text="" class="rebind-button"/>
+                </ui:VisualElement>
 
-            <ui:VisualElement class="rebind-row">
-                <ui:Label text="Dash" class="rebind-label"/>
-                <ui:Button name="DashRebindButton" text="" class="rebind-button"/>
-            </ui:VisualElement>
+                <ui:VisualElement class="rebind-row">
+                    <ui:Label text="Shoot" class="rebind-label"/>
+                    <ui:Button name="ShootRebindButton" text="" class="rebind-button"/>
+                </ui:VisualElement>
 
-            <ui:VisualElement class="rebind-row">
-                <ui:Label text="Shoot" class="rebind-label"/>
-                <ui:Button name="ShootRebindButton" text="" class="rebind-button"/>
-            </ui:VisualElement>
+                <ui:VisualElement class="rebind-row">
+                    <ui:Label text="" class="rebind-label"/>
+                    <ui:VisualElement class="rebind-buttons">
+                        <ui:Label text="Primary" class="rebind-column-header"/>
+                        <ui:Label text="Secondary" class="rebind-column-header"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
 
-            <ui:VisualElement class="rebind-row">
-                <ui:Label text="" class="rebind-label"/>
-                <ui:VisualElement class="rebind-buttons">
-                    <ui:Label text="Primary" class="rebind-column-header"/>
-                    <ui:Label text="Secondary" class="rebind-column-header"/>
+                <ui:VisualElement class="rebind-row">
+                    <ui:Label text="Up" class="rebind-label"/>
+                    <ui:VisualElement class="rebind-buttons">
+                        <ui:Button name="UpPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                        <ui:Button name="UpSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="rebind-row">
+                    <ui:Label text="Down" class="rebind-label"/>
+                    <ui:VisualElement class="rebind-buttons">
+                        <ui:Button name="DownPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                        <ui:Button name="DownSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="rebind-row">
+                    <ui:Label text="Left" class="rebind-label"/>
+                    <ui:VisualElement class="rebind-buttons">
+                        <ui:Button name="LeftPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                        <ui:Button name="LeftSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="rebind-row">
+                    <ui:Label text="Right" class="rebind-label"/>
+                    <ui:VisualElement class="rebind-buttons">
+                        <ui:Button name="RightPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                        <ui:Button name="RightSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
 
-            <ui:VisualElement class="rebind-row">
-                <ui:Label text="Up" class="rebind-label"/>
-                <ui:VisualElement class="rebind-buttons">
-                    <ui:Button name="UpPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                    <ui:Button name="UpSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                </ui:VisualElement>
-            </ui:VisualElement>
-
-            <ui:VisualElement class="rebind-row">
-                <ui:Label text="Down" class="rebind-label"/>
-                <ui:VisualElement class="rebind-buttons">
-                    <ui:Button name="DownPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                    <ui:Button name="DownSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                </ui:VisualElement>
-            </ui:VisualElement>
-
-            <ui:VisualElement class="rebind-row">
-                <ui:Label text="Left" class="rebind-label"/>
-                <ui:VisualElement class="rebind-buttons">
-                    <ui:Button name="LeftPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                    <ui:Button name="LeftSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                </ui:VisualElement>
-            </ui:VisualElement>
-
-            <ui:VisualElement class="rebind-row">
-                <ui:Label text="Right" class="rebind-label"/>
-                <ui:VisualElement class="rebind-buttons">
-                    <ui:Button name="RightPrimaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                    <ui:Button name="RightSecondaryRebindButton" text="" class="rebind-button rebind-button-half"/>
-                </ui:VisualElement>
+            <ui:VisualElement class="options-column options-column-right">
+                <ui:Label text="Audio" class="options-section-header"/>
+                <ui:Slider name="MasterVolumeSlider" label="Master" low-value="0" high-value="1" value="1" class="volume-slider"/>
+                <ui:Slider name="MusicVolumeSlider" label="Music" low-value="0" high-value="1" value="1" class="volume-slider"/>
+                <ui:Slider name="SfxVolumeSlider" label="SFX" low-value="0" high-value="1" value="1" class="volume-slider"/>
+                <ui:Slider name="AmbientVolumeSlider" label="Ambient" low-value="0" high-value="1" value="1" class="volume-slider"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Button name="OptionsBackButton" text="Back" class="menu-button"/>
