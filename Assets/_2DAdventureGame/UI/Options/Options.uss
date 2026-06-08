@@ -12,3 +12,17 @@
     align-items: center;
     margin-bottom: 24px;
 }
+
+.volume-slider {
+    width: 480px;
+    margin-bottom: 16px;
+}
+
+.volume-slider .unity-base-field__label {
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+    min-width: 180px;
+    -unity-text-align: middle-left;
+}
