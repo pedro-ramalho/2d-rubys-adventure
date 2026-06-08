@@ -32,6 +32,7 @@ public class OptionsHandler : MonoBehaviour
 
         PlayerInputActions actions = InputManager.Instance.Actions;
         WireRebindButton(root, "DashRebindButton", actions.Player.Dash, 0);
+        WireRebindButton(root, "ShootRebindButton", actions.Player.Shoot, 0);
     }
 
     void WireVolumeSlider(VisualElement root, string sliderName, string mixerParam)

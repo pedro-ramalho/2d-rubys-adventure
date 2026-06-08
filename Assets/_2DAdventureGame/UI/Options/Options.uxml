@@ -20,6 +20,11 @@
                 <ui:Label text="Dash" class="rebind-label"/>
                 <ui:Button name="DashRebindButton" text="" class="rebind-button"/>
             </ui:VisualElement>
+
+            <ui:VisualElement class="rebind-row">
+                <ui:Label text="Shoot" class="rebind-label"/>
+                <ui:Button name="ShootRebindButton" text="" class="rebind-button"/>
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:Button name="OptionsBackButton" text="Back" class="menu-button"/>
     </ui:VisualElement>
