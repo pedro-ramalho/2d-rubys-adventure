@@ -31,6 +31,9 @@ public class SceneTransitioner : MonoBehaviour
 
         yield return new WaitForSeconds(transitionDuration);
 
+        if (scene != "Main Menu" && SaveManager.Instance != null)
+            SaveManager.Instance.Save(scene);
+
         SceneManager.LoadScene(scene);
     }
 }

@@ -47,7 +47,24 @@ public class MainMenuHandler : MonoBehaviour
         optionsHandler.Opened += () => buttonContainer.style.display = DisplayStyle.None;
         optionsHandler.Closed += () => buttonContainer.style.display = DisplayStyle.Flex;
 
-        continueButton.SetEnabled(false);
+        if (SaveManager.Instance != null && SaveManager.Instance.HasSave)
+        {
+            continueButton.SetEnabled(true);
+            continueButton.clicked += ContinueGame;
+        }
+        else
+        {
+            continueButton.SetEnabled(false);
+        }
+    }
+
+    void ContinueGame()
+    {
+        string scene = SaveManager.Instance.Current.sceneName;
+        if (SceneTransitioner.Instance != null)
+            SceneTransitioner.Instance.LoadSceneWithCrossfade(scene);
+        else
+            SceneManager.LoadScene(scene);
     }
 
     void Update()
