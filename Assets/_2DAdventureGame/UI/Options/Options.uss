@@ -54,7 +54,7 @@
 }
 
 .rebind-button {
-    min-width: 140px;
+    width: 140px;
     height: 44px;
     font-size: 22px;
     -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
@@ -85,4 +85,24 @@
 
 .rebind-button:disabled {
     opacity: 0.6;
+}
+
+.rebind-buttons {
+    flex-direction: row;
+    align-items: center;
+}
+
+.rebind-button-half {
+    width: 130px;
+    margin-left: 8px;
+}
+
+.rebind-column-header {
+    width: 130px;
+    margin-left: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.85);
+    -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
+    -unity-text-align: middle-center;
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -33,6 +34,18 @@ public class OptionsHandler : MonoBehaviour
         PlayerInputActions actions = InputManager.Instance.Actions;
         WireRebindButton(root, "DashRebindButton", actions.Player.Dash, 0);
         WireRebindButton(root, "ShootRebindButton", actions.Player.Shoot, 0);
+
+        WireMovementRebind(root, "Up", 1, 6);
+        WireMovementRebind(root, "Down", 2, 7);
+        WireMovementRebind(root, "Left", 3, 8);
+        WireMovementRebind(root, "Right", 4, 9);
+    }
+
+    void WireMovementRebind(VisualElement root, string direction, int primaryIndex, int secondaryIndex)
+    {
+        InputAction movement = InputManager.Instance.Actions.Player.Movement;
+        WireRebindButton(root, $"{direction}PrimaryRebindButton", movement, primaryIndex);
+        WireRebindButton(root, $"{direction}SecondaryRebindButton", movement, secondaryIndex);
     }
 
     void WireVolumeSlider(VisualElement root, string sliderName, string mixerParam)
@@ -58,7 +71,7 @@ public class OptionsHandler : MonoBehaviour
     void WireRebindButton(VisualElement root, string buttonName, InputAction action, int bindingIndex)
     {
         Button button = root.Q<Button>(buttonName);
-        button.text = action.GetBindingDisplayString(bindingIndex);
+        button.text = GetBindingDisplayName(action, bindingIndex);
         button.clicked += () => StartRebind(action, bindingIndex, button);
     }
 
@@ -76,7 +89,7 @@ public class OptionsHandler : MonoBehaviour
                 op.Dispose();
                 action.Enable();
                 button.SetEnabled(true);
-                button.text = action.GetBindingDisplayString(bindingIndex);
+                button.text = GetBindingDisplayName(action, bindingIndex);
                 InputManager.Instance.SaveBindings();
             })
             .OnCancel(op =>
@@ -84,9 +97,31 @@ public class OptionsHandler : MonoBehaviour
                 op.Dispose();
                 action.Enable();
                 button.SetEnabled(true);
-                button.text = action.GetBindingDisplayString(bindingIndex);
+                button.text = GetBindingDisplayName(action, bindingIndex);
             })
             .Start();
+    }
+
+    static string GetBindingDisplayName(InputAction action, int bindingIndex)
+    {
+        string path = action.bindings[bindingIndex].effectivePath;
+        if (string.IsNullOrEmpty(path)) return string.Empty;
+        int slashIdx = path.LastIndexOf('/');
+        string keyName = slashIdx >= 0 ? path.Substring(slashIdx + 1) : path;
+        return FormatKeyName(keyName);
+    }
+
+    static string FormatKeyName(string raw)
+    {
+        if (string.IsNullOrEmpty(raw)) return raw;
+        StringBuilder sb = new StringBuilder();
+        sb.Append(char.ToUpperInvariant(raw[0]));
+        for (int i = 1; i < raw.Length; i++)
+        {
+            if (char.IsUpper(raw[i])) sb.Append(' ');
+            sb.Append(raw[i]);
+        }
+        return sb.ToString();
     }
 
     public void Open()
