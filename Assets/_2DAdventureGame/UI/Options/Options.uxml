@@ -13,6 +13,13 @@
             <ui:Slider name="MusicVolumeSlider" label="Music" low-value="0" high-value="1" value="1" class="volume-slider"/>
             <ui:Slider name="SfxVolumeSlider" label="SFX" low-value="0" high-value="1" value="1" class="volume-slider"/>
             <ui:Slider name="AmbientVolumeSlider" label="Ambient" low-value="0" high-value="1" value="1" class="volume-slider"/>
+
+            <ui:Label text="Controls" class="options-section-header"/>
+
+            <ui:VisualElement class="rebind-row">
+                <ui:Label text="Dash" class="rebind-label"/>
+                <ui:Button name="DashRebindButton" text="" class="rebind-button"/>
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:Button name="OptionsBackButton" text="Back" class="menu-button"/>
     </ui:VisualElement>

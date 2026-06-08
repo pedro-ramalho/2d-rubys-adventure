@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
@@ -28,6 +29,9 @@ public class OptionsHandler : MonoBehaviour
         WireVolumeSlider(root, "MusicVolumeSlider", "MusicVolume");
         WireVolumeSlider(root, "SfxVolumeSlider", "SfxVolume");
         WireVolumeSlider(root, "AmbientVolumeSlider", "AmbientVolume");
+
+        PlayerInputActions actions = InputManager.Instance.Actions;
+        WireRebindButton(root, "DashRebindButton", actions.Player.Dash, 0);
     }
 
     void WireVolumeSlider(VisualElement root, string sliderName, string mixerParam)
@@ -48,6 +52,40 @@ public class OptionsHandler : MonoBehaviour
     {
         float dB = linear > 0.0001f ? Mathf.Log10(linear) * 20f : MinDb;
         audioMixer.SetFloat(mixerParam, dB);
+    }
+
+    void WireRebindButton(VisualElement root, string buttonName, InputAction action, int bindingIndex)
+    {
+        Button button = root.Q<Button>(buttonName);
+        button.text = action.GetBindingDisplayString(bindingIndex);
+        button.clicked += () => StartRebind(action, bindingIndex, button);
+    }
+
+    void StartRebind(InputAction action, int bindingIndex, Button button)
+    {
+        action.Disable();
+        button.SetEnabled(false);
+        button.text = "Press a key...";
+
+        action.PerformInteractiveRebinding(bindingIndex)
+            .WithControlsExcluding("Mouse")
+            .WithCancelingThrough("<Keyboard>/escape")
+            .OnComplete(op =>
+            {
+                op.Dispose();
+                action.Enable();
+                button.SetEnabled(true);
+                button.text = action.GetBindingDisplayString(bindingIndex);
+                InputManager.Instance.SaveBindings();
+            })
+            .OnCancel(op =>
+            {
+                op.Dispose();
+                action.Enable();
+                button.SetEnabled(true);
+                button.text = action.GetBindingDisplayString(bindingIndex);
+            })
+            .Start();
     }
 
     public void Open()
