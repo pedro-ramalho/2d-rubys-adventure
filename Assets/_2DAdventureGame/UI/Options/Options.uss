@@ -26,3 +26,63 @@
     min-width: 180px;
     -unity-text-align: middle-left;
 }
+
+.options-section-header {
+    font-size: 36px;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
+    -unity-font-style: bold;
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.rebind-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 480px;
+    margin-bottom: 12px;
+}
+
+.rebind-label {
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
+    min-width: 180px;
+}
+
+.rebind-button {
+    min-width: 140px;
+    height: 44px;
+    font-size: 22px;
+    -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
+    background-color: rgba(40, 40, 40, 0.85);
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-width: 2px;
+    border-left-color: rgba(255, 255, 255, 0.6);
+    border-right-color: rgba(255, 255, 255, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.6);
+    border-bottom-color: rgba(255, 255, 255, 0.6);
+    transition-property: scale, background-color;
+    transition-duration: 0.12s, 0.12s;
+    transition-timing-function: ease-out, ease-out;
+}
+
+.rebind-button:hover {
+    scale: 1.05 1.05;
+    background-color: rgba(80, 80, 80, 0.95);
+}
+
+.rebind-button:active {
+    scale: 0.98 0.98;
+}
+
+.rebind-button:disabled {
+    opacity: 0.6;
+}
