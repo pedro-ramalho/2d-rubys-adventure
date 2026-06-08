@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
+[RequireComponent(typeof(OptionsHandler))]
 public class MainMenuHandler : MonoBehaviour
 {
     [SerializeField] private string firstLevelSceneName = "Level 0";
@@ -19,13 +20,17 @@ public class MainMenuHandler : MonoBehaviour
 
     private VisualElement background;
     private Label title;
+    private VisualElement buttonContainer;
+    private OptionsHandler optionsHandler;
 
     void Start()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        optionsHandler = GetComponent<OptionsHandler>();
 
         background = root.Q<VisualElement>("Background");
         title = root.Q<Label>("Title");
+        buttonContainer = root.Q<VisualElement>("ButtonContainer");
 
         if (background != null)
             background.style.scale = new Scale(new Vector3(backgroundScale, backgroundScale, 1f));
@@ -36,10 +41,13 @@ public class MainMenuHandler : MonoBehaviour
         Button quitButton = root.Q<Button>("QuitButton");
 
         startButton.clicked += StartGame;
+        optionsButton.clicked += optionsHandler.Open;
         quitButton.clicked += QuitGame;
 
+        optionsHandler.Opened += () => buttonContainer.style.display = DisplayStyle.None;
+        optionsHandler.Closed += () => buttonContainer.style.display = DisplayStyle.Flex;
+
         continueButton.SetEnabled(false);
-        optionsButton.SetEnabled(false);
     }
 
     void Update()

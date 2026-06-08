@@ -1,1 +1,14 @@
-VisualElement {}
+.options-title {
+    font-size: 56px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&guid=b2bf5b4298c8a314a9bc3eee05797056&type=3#PatrickHand-Regular");
+    -unity-font-style: bold;
+    margin-bottom: 24px;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.options-content {
+    align-items: center;
+    margin-bottom: 24px;
+}
