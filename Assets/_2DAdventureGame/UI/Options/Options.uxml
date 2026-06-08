@@ -5,5 +5,10 @@
     xmlns:uie="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
 >
-    
+    <Style src="project://database/Assets/_2DAdventureGame/UI/Options/Options.uss?fileID=7433441132597879392&amp;guid=7b5964fa57eb683479b98105ce371eba&amp;type=3#Options"/>
+    <ui:VisualElement name="OptionsRoot" style="align-items: center; display: none;">
+        <ui:Label name="OptionsTitle" text="Options" class="options-title"/>
+        <ui:VisualElement name="OptionsContent" class="options-content"/>
+        <ui:Button name="OptionsBackButton" text="Back" class="menu-button"/>
+    </ui:VisualElement>
 </ui:UXML>
