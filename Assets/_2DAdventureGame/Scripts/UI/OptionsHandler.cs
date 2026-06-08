@@ -26,6 +26,9 @@ public class OptionsHandler : MonoBehaviour
         Button backButton = root.Q<Button>("OptionsBackButton");
         backButton.clicked += Close;
 
+        Button resetButton = root.Q<Button>("ResetDefaultsButton");
+        resetButton.clicked += ResetToDefaults;
+
         WireVolumeSlider(root, "MasterVolumeSlider", "MasterVolume");
         WireVolumeSlider(root, "MusicVolumeSlider", "MusicVolume");
         WireVolumeSlider(root, "SfxVolumeSlider", "SfxVolume");
@@ -46,6 +49,45 @@ public class OptionsHandler : MonoBehaviour
         InputAction movement = InputManager.Instance.Actions.Player.Movement;
         WireRebindButton(root, $"{direction}PrimaryRebindButton", movement, primaryIndex);
         WireRebindButton(root, $"{direction}SecondaryRebindButton", movement, secondaryIndex);
+    }
+
+    void ResetToDefaults()
+    {
+        ResetVolumeSlider("MasterVolumeSlider", "MasterVolume");
+        ResetVolumeSlider("MusicVolumeSlider", "MusicVolume");
+        ResetVolumeSlider("SfxVolumeSlider", "SfxVolume");
+        ResetVolumeSlider("AmbientVolumeSlider", "AmbientVolume");
+
+        InputManager.Instance.ResetBindings();
+
+        PlayerInputActions actions = InputManager.Instance.Actions;
+        RefreshRebindLabel("DashRebindButton", actions.Player.Dash, 0);
+        RefreshRebindLabel("ShootRebindButton", actions.Player.Shoot, 0);
+        RefreshMovementLabels("Up", 1, 6);
+        RefreshMovementLabels("Down", 2, 7);
+        RefreshMovementLabels("Left", 3, 8);
+        RefreshMovementLabels("Right", 4, 9);
+    }
+
+    void ResetVolumeSlider(string sliderName, string mixerParam)
+    {
+        Slider slider = optionsRoot.Q<Slider>(sliderName);
+        slider.SetValueWithoutNotify(DefaultVolume);
+        ApplyVolume(mixerParam, DefaultVolume);
+        PlayerPrefs.DeleteKey(mixerParam);
+    }
+
+    void RefreshRebindLabel(string buttonName, InputAction action, int bindingIndex)
+    {
+        Button button = optionsRoot.Q<Button>(buttonName);
+        button.text = GetBindingDisplayName(action, bindingIndex);
+    }
+
+    void RefreshMovementLabels(string direction, int primaryIndex, int secondaryIndex)
+    {
+        InputAction movement = InputManager.Instance.Actions.Player.Movement;
+        RefreshRebindLabel($"{direction}PrimaryRebindButton", movement, primaryIndex);
+        RefreshRebindLabel($"{direction}SecondaryRebindButton", movement, secondaryIndex);
     }
 
     void WireVolumeSlider(VisualElement root, string sliderName, string mixerParam)
