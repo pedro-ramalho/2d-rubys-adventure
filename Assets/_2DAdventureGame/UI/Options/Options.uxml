@@ -8,7 +8,12 @@
     <Style src="project://database/Assets/_2DAdventureGame/UI/Options/Options.uss?fileID=7433441132597879392&amp;guid=7b5964fa57eb683479b98105ce371eba&amp;type=3#Options"/>
     <ui:VisualElement name="OptionsRoot" style="align-items: center; display: none;">
         <ui:Label name="OptionsTitle" text="Options" class="options-title"/>
-        <ui:VisualElement name="OptionsContent" class="options-content"/>
+        <ui:VisualElement name="OptionsContent" class="options-content">
+            <ui:Slider name="MasterVolumeSlider" label="Master" low-value="0" high-value="1" value="1" class="volume-slider"/>
+            <ui:Slider name="MusicVolumeSlider" label="Music" low-value="0" high-value="1" value="1" class="volume-slider"/>
+            <ui:Slider name="SfxVolumeSlider" label="SFX" low-value="0" high-value="1" value="1" class="volume-slider"/>
+            <ui:Slider name="AmbientVolumeSlider" label="Ambient" low-value="0" high-value="1" value="1" class="volume-slider"/>
+        </ui:VisualElement>
         <ui:Button name="OptionsBackButton" text="Back" class="menu-button"/>
     </ui:VisualElement>
 </ui:UXML>
