@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestBinding : MonoBehaviour
@@ -17,16 +18,16 @@ public class QuestBinding : MonoBehaviour
 
     public QuestData BoundQuest => boundQuest;
 
-    private SpriteRenderer[] renderers;
-    private Collider2D[] colliders;
+    private readonly List<SpriteRenderer> renderers = new();
+    private readonly List<Collider2D> colliders = new();
 
     void Awake()
     {
         if (activateOnQuestAccept || enableTriggerOnQuestAccept)
-            colliders = GetComponentsInChildren<Collider2D>(true);
+            GetComponentsInChildren(true, colliders);
 
         if (activateOnQuestAccept)
-            renderers = GetComponentsInChildren<SpriteRenderer>(true);
+            GetComponentsInChildren(true, renderers);
 
         SetInteractable(false);
     }

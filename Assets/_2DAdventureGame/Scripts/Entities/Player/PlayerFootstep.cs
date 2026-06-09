@@ -23,13 +23,11 @@ public class PlayerFootstep : MonoBehaviour
 
     private readonly List<(Tilemap tilemap, AudioClip[] clips)> resolved = new();
 
-    void OnEnable()
-    {
-        ResolveSurfaces();
-        SceneManager.sceneLoaded += OnSceneLoaded;    
-    }
+    void Awake() => SceneManager.sceneLoaded += OnSceneLoaded;
 
-    void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+    void Start() => ResolveSurfaces();
+
+    void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) => ResolveSurfaces();
 

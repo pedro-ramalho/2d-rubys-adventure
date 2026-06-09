@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class Save
@@ -8,5 +9,5 @@ public class Save
     public int playerHealth;
     public string activeQuestId;
     public int activeQuestCount;
-    public string[] completedQuestIds;
+    public List<string> completedQuestIds;
 }

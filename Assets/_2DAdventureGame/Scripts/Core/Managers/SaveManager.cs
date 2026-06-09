@@ -75,9 +75,6 @@ public class SaveManager : PersistentSingleton<SaveManager>
             foreach (string id in QuestManager.Instance.GetCompletedQuestIds())
                 mergedCompleted.Add(id);
 
-        string[] completedArray = new string[mergedCompleted.Count];
-        mergedCompleted.CopyTo(completedArray);
-
         Save save = new Save
         {
             version = CurrentSaveVersion,
@@ -85,7 +82,7 @@ public class SaveManager : PersistentSingleton<SaveManager>
             playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth,
             activeQuestId = activeQuestId,
             activeQuestCount = activeQuestCount,
-            completedQuestIds = completedArray
+            completedQuestIds = new List<string>(mergedCompleted)
         };
 
         try

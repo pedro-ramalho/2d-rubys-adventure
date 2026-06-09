@@ -15,8 +15,8 @@ public class AbilityManager : PersistentSingleton<AbilityManager>
 
     private AbilityFlag unlocked;
 
-    public bool CanDash => unlocked.HasFlag(AbilityFlag.Dash);
-    public bool CanShoot => unlocked.HasFlag(AbilityFlag.Shoot);
+    public bool CanDash  => (unlocked & AbilityFlag.Dash)  != 0;
+    public bool CanShoot => (unlocked & AbilityFlag.Shoot) != 0;
 
     protected override void Awake()
     {

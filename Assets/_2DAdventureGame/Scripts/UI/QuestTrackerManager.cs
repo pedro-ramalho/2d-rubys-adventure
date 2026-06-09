@@ -14,6 +14,9 @@ public class QuestTrackerManager : MonoBehaviour
     private bool isOpen;
     private QuestData completionPendingQuest;
 
+    private int lastCount = -1;
+    private QuestData lastQuest;
+
     private const string CompletionMessage = "Quest complete! Return and speak with the NPC.";
 
     void Awake() => inputActions = InputManager.Instance.Actions;
@@ -99,11 +102,17 @@ public class QuestTrackerManager : MonoBehaviour
             return;
         }
 
-        if (descriptionLabel != null)
+        if (descriptionLabel != null && quest.Data != lastQuest)
+        {
             descriptionLabel.text = quest.Data.description;
+            lastQuest = quest.Data;
+        }
 
-        if (progressLabel != null)
+        if (progressLabel != null && quest.Count != lastCount)
+        {
             progressLabel.text = $"{quest.Count} / {quest.Data.objective.count}";
+            lastCount = quest.Count;
+        }
 
         SetVisible(true);
     }

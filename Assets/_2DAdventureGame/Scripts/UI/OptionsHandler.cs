@@ -41,17 +41,15 @@ public class OptionsHandler : MonoBehaviour
         WireRebindButton(root, "DashRebindButton", actions.Player.Dash, 0);
         WireRebindButton(root, "ShootRebindButton", actions.Player.Shoot, 0);
 
-        WireMovementRebind(root, "Up", 1, 6);
-        WireMovementRebind(root, "Down", 2, 7);
-        WireMovementRebind(root, "Left", 3, 8);
-        WireMovementRebind(root, "Right", 4, 9);
-    }
-
-    void WireMovementRebind(VisualElement root, string direction, int primaryIndex, int secondaryIndex)
-    {
-        InputAction movement = InputManager.Instance.Actions.Player.Movement;
-        WireRebindButton(root, $"{direction}PrimaryRebindButton", movement, primaryIndex);
-        WireRebindButton(root, $"{direction}SecondaryRebindButton", movement, secondaryIndex);
+        InputAction movement = actions.Player.Movement;
+        WireRebindButton(root, "UpPrimaryRebindButton", movement, 1);
+        WireRebindButton(root, "UpSecondaryRebindButton", movement, 6);
+        WireRebindButton(root, "DownPrimaryRebindButton", movement, 2);
+        WireRebindButton(root, "DownSecondaryRebindButton", movement, 7);
+        WireRebindButton(root, "LeftPrimaryRebindButton", movement, 3);
+        WireRebindButton(root, "LeftSecondaryRebindButton", movement, 8);
+        WireRebindButton(root, "RightPrimaryRebindButton", movement, 4);
+        WireRebindButton(root, "RightSecondaryRebindButton", movement, 9);
     }
 
     void ResetToDefaults()
@@ -66,10 +64,16 @@ public class OptionsHandler : MonoBehaviour
         PlayerInputActions actions = InputManager.Instance.Actions;
         RefreshRebindLabel("DashRebindButton", actions.Player.Dash, 0);
         RefreshRebindLabel("ShootRebindButton", actions.Player.Shoot, 0);
-        RefreshMovementLabels("Up", 1, 6);
-        RefreshMovementLabels("Down", 2, 7);
-        RefreshMovementLabels("Left", 3, 8);
-        RefreshMovementLabels("Right", 4, 9);
+
+        InputAction movement = actions.Player.Movement;
+        RefreshRebindLabel("UpPrimaryRebindButton", movement, 1);
+        RefreshRebindLabel("UpSecondaryRebindButton", movement, 6);
+        RefreshRebindLabel("DownPrimaryRebindButton", movement, 2);
+        RefreshRebindLabel("DownSecondaryRebindButton", movement, 7);
+        RefreshRebindLabel("LeftPrimaryRebindButton", movement, 3);
+        RefreshRebindLabel("LeftSecondaryRebindButton", movement, 8);
+        RefreshRebindLabel("RightPrimaryRebindButton", movement, 4);
+        RefreshRebindLabel("RightSecondaryRebindButton", movement, 9);
     }
 
     void ResetVolumeSlider(string sliderName, string mixerParam)
@@ -84,13 +88,6 @@ public class OptionsHandler : MonoBehaviour
     {
         Button button = optionsRoot.Q<Button>(buttonName);
         button.text = GetBindingDisplayName(action, bindingIndex);
-    }
-
-    void RefreshMovementLabels(string direction, int primaryIndex, int secondaryIndex)
-    {
-        InputAction movement = InputManager.Instance.Actions.Player.Movement;
-        RefreshRebindLabel($"{direction}PrimaryRebindButton", movement, primaryIndex);
-        RefreshRebindLabel($"{direction}SecondaryRebindButton", movement, secondaryIndex);
     }
 
     void WireVolumeSlider(VisualElement root, string sliderName, string mixerParam)
