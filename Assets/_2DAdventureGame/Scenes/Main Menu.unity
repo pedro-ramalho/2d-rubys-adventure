@@ -477,6 +477,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quest Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5453084247387611736, guid: 0f5547b27424469469effdb43a11811a,
+        type: 3}
+      propertyPath: knownQuests.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453084247387611736, guid: 0f5547b27424469469effdb43a11811a,
+        type: 3}
+      propertyPath: 'knownQuests.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

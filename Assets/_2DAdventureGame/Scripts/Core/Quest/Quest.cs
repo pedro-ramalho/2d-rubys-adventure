@@ -5,7 +5,11 @@ public class Quest
     public QuestData Data { get; }
     public int Count { get; private set; }
 
-    public Quest(QuestData data) => Data = data;
+    public Quest(QuestData data, int initialCount = 0)
+    {
+        Data = data;
+        Count = initialCount;
+    }
 
     public bool IsComplete => Count >= Data.objective.count;
 

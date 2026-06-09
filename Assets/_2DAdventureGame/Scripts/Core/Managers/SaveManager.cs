@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class SaveManager : PersistentSingleton<SaveManager>
 {
     private const string SaveFileName = "save.json";
-    private const int CurrentSaveVersion = 2;
+    private const int CurrentSaveVersion = 3;
     private const int NoStoredHealth = -1;
 
     public bool HasSave { get; private set; }
@@ -55,11 +56,33 @@ public class SaveManager : PersistentSingleton<SaveManager>
 
     public void Save(string sceneName)
     {
+        string activeQuestId = string.Empty;
+        int activeQuestCount = 0;
+        if (QuestManager.Instance != null && QuestManager.Instance.ActiveQuest != null)
+        {
+            activeQuestId = QuestManager.Instance.ActiveQuest.Data.id;
+            activeQuestCount = QuestManager.Instance.ActiveQuest.Count;
+        }
+
+        HashSet<string> mergedCompleted = new();
+        if (Current != null && Current.completedQuestIds != null)
+            foreach (string id in Current.completedQuestIds)
+                mergedCompleted.Add(id);
+        if (QuestManager.Instance != null)
+            foreach (string id in QuestManager.Instance.GetCompletedQuestIds())
+                mergedCompleted.Add(id);
+
+        string[] completedArray = new string[mergedCompleted.Count];
+        mergedCompleted.CopyTo(completedArray);
+
         Save save = new Save
         {
             version = CurrentSaveVersion,
             sceneName = sceneName,
-            playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth
+            playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth,
+            activeQuestId = activeQuestId,
+            activeQuestCount = activeQuestCount,
+            completedQuestIds = completedArray
         };
 
         try
