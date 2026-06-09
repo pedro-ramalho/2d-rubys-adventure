@@ -27,7 +27,7 @@ public class NPC : MonoBehaviour
             if (currentPhase == null) return;
             lineIndex = 0;
 
-            if (currentPhase == currentDialogue.after && currentDialogue.quest != null)
+            if (currentDialogue.IsAfterPhase(currentPhase))
                 QuestManager.Instance.ConcludeQuest(currentDialogue.quest);
         }
 

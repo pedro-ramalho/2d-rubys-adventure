@@ -24,4 +24,6 @@ public class QuestDialogue : ScriptableObject
 
         return phase != null && !phase.IsEmpty ? phase : null;
     }
+
+    public bool IsAfterPhase(DialoguePhase phase) => phase == after && quest != null;
 }
