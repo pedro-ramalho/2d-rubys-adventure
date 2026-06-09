@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class L2Manager : MonoBehaviour
+public class ArenaManager : MonoBehaviour
 {
     [SerializeField] private WaveSpawner spawner;
     [SerializeField] private UIHandler ui;
@@ -13,7 +13,6 @@ public class L2Manager : MonoBehaviour
 
     private bool gameEnded = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spawner.OnAllWavesCleared += HandleAllWavesCleared;
