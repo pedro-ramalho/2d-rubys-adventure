@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 977262264848954610}
   - component: {fileID: 1305543195065910225}
   m_Layer: 8
-  m_Name: NPC Ducko
+  m_Name: Martha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
