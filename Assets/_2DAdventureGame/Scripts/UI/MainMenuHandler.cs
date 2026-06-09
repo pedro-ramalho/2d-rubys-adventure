@@ -21,6 +21,7 @@ public class MainMenuHandler : MonoBehaviour
     private VisualElement background;
     private Label title;
     private VisualElement buttonContainer;
+    private Button continueButton;
     private OptionsHandler optionsHandler;
 
     void Start()
@@ -36,7 +37,7 @@ public class MainMenuHandler : MonoBehaviour
             background.style.scale = new Scale(new Vector3(backgroundScale, backgroundScale, 1f));
 
         Button startButton = root.Q<Button>("StartButton");
-        Button continueButton = root.Q<Button>("ContinueButton");
+        continueButton = root.Q<Button>("ContinueButton");
         Button optionsButton = root.Q<Button>("OptionsButton");
         Button quitButton = root.Q<Button>("QuitButton");
 
@@ -56,10 +57,28 @@ public class MainMenuHandler : MonoBehaviour
         {
             continueButton.SetEnabled(false);
         }
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveDeleted += OnSaveDeleted;
+    }
+
+    void OnDestroy()
+    {
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveDeleted -= OnSaveDeleted;
+    }
+
+    void OnSaveDeleted()
+    {
+        if (continueButton == null) return;
+        continueButton.SetEnabled(false);
+        continueButton.clicked -= ContinueGame;
     }
 
     void ContinueGame()
     {
+        if (SaveManager.Instance == null || !SaveManager.Instance.HasSave) return;
+
         Save save = SaveManager.Instance.Current;
 
         if (save.playerHealth >= 0 && PlayerStateManager.Instance != null)

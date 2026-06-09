@@ -116,3 +116,14 @@
     -unity-text-align: middle-center;
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.7);
 }
+
+.options-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.options-actions > .menu-button {
+    margin-left: 8px;
+    margin-right: 8px;
+}

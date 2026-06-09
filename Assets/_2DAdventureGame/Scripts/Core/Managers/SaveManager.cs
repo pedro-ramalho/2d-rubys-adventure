@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class SaveManager : PersistentSingleton<SaveManager>
 
     public bool HasSave { get; private set; }
     public Save Current { get; private set; }
+
+    public event Action SaveDeleted;
 
     private string SavePath => Path.Combine(Application.persistentDataPath, SaveFileName);
 
@@ -104,5 +107,6 @@ public class SaveManager : PersistentSingleton<SaveManager>
             File.Delete(SavePath);
         Current = null;
         HasSave = false;
+        SaveDeleted?.Invoke();
     }
 }

@@ -26,6 +26,9 @@ public class OptionsHandler : MonoBehaviour
         Button backButton = root.Q<Button>("OptionsBackButton");
         backButton.clicked += Close;
 
+        Button deleteSaveButton = root.Q<Button>("DeleteSaveButton");
+        deleteSaveButton.clicked += DeleteSave;
+
         Button resetButton = root.Q<Button>("ResetDefaultsButton");
         resetButton.clicked += ResetToDefaults;
 
@@ -169,7 +172,22 @@ public class OptionsHandler : MonoBehaviour
     public void Open()
     {
         optionsRoot.style.display = DisplayStyle.Flex;
+        RefreshDeleteSaveButton();
         Opened?.Invoke();
+    }
+
+    void DeleteSave()
+    {
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.DeleteSave();
+        RefreshDeleteSaveButton();
+    }
+
+    void RefreshDeleteSaveButton()
+    {
+        Button button = optionsRoot.Q<Button>("DeleteSaveButton");
+        bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasSave;
+        button.SetEnabled(hasSave);
     }
 
     public void Close()
