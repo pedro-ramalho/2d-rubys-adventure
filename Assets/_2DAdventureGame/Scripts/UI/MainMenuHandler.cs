@@ -60,11 +60,15 @@ public class MainMenuHandler : MonoBehaviour
 
     void ContinueGame()
     {
-        string scene = SaveManager.Instance.Current.sceneName;
+        Save save = SaveManager.Instance.Current;
+
+        if (save.playerHealth >= 0 && PlayerStateManager.Instance != null)
+            PlayerStateManager.Instance.StoreHealth(save.playerHealth);
+
         if (SceneTransitioner.Instance != null)
-            SceneTransitioner.Instance.LoadSceneWithCrossfade(scene);
+            SceneTransitioner.Instance.LoadSceneWithCrossfade(save.sceneName);
         else
-            SceneManager.LoadScene(scene);
+            SceneManager.LoadScene(save.sceneName);
     }
 
     void Update()

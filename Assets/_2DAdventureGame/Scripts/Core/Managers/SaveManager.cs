@@ -4,7 +4,8 @@ using UnityEngine;
 public class SaveManager : PersistentSingleton<SaveManager>
 {
     private const string SaveFileName = "save.json";
-    private const int CurrentSaveVersion = 1;
+    private const int CurrentSaveVersion = 2;
+    private const int NoStoredHealth = -1;
 
     public bool HasSave { get; private set; }
     public Save Current { get; private set; }
@@ -57,7 +58,8 @@ public class SaveManager : PersistentSingleton<SaveManager>
         Save save = new Save
         {
             version = CurrentSaveVersion,
-            sceneName = sceneName
+            sceneName = sceneName,
+            playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth
         };
 
         try

@@ -5,4 +5,5 @@ public class Save
 {
     public int version;
     public string sceneName;
+    public int playerHealth;
 }
