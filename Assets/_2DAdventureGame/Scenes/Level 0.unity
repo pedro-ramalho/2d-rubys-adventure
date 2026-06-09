@@ -18770,6 +18770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
   questCompletionSfx: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
+  knownQuests: []
 --- !u!1001 &1261569036
 PrefabInstance:
   m_ObjectHideFlags: 0
