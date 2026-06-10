@@ -51,9 +51,14 @@ public class QuestManager : MonoBehaviour
             RestoreActiveQuest(activeData, save.activeQuestCount);
     }
 
-    void RestoreActiveQuest(QuestData data, int count)
+    public void AcceptQuest(QuestData data) => StartQuest(data, initialCount: 0, raiseAccepted: true);
+
+    private void RestoreActiveQuest(QuestData data, int count) => StartQuest(data, count, raiseAccepted: false);
+
+    private void StartQuest(QuestData data, int initialCount, bool raiseAccepted)
     {
-        ActiveQuest = new Quest(data, count);
+        ActiveQuest = new Quest(data, initialCount);
+        if (raiseAccepted) OnQuestAccepted?.Invoke(ActiveQuest);
 
         if (AbilityManager.Instance != null)
             AbilityManager.Instance.Unlock(data.unlockOnAccept);
@@ -68,26 +73,15 @@ public class QuestManager : MonoBehaviour
             yield return data.id;
     }
 
-    public void AcceptQuest(QuestData data)
+    public void SubmitReport(QuestReport report)
     {
-        Quest quest = new Quest(data);
-        ActiveQuest = quest;
-        OnQuestAccepted?.Invoke(quest);
-
-        if (AbilityManager.Instance != null)
-            AbilityManager.Instance.Unlock(data.unlockOnAccept);
-
-        if (MusicManager.Instance != null && data.backgroundTrack != null)
-            MusicManager.Instance.Play(data.backgroundTrack);
-    }
-
-    public void Report(QuestReport report)
-    {
-        if (ActiveQuest == null || ActiveQuest.IsComplete) return;
+        if (ActiveQuest == null || ActiveQuest.IsComplete) 
+            return;
 
         ActiveQuest.ApplyProgress(report);
 
-        if (ActiveQuest.IsComplete) CompleteActiveQuest();
+        if (ActiveQuest.IsComplete) 
+            CompleteActiveQuest();
     }
 
     private void CompleteActiveQuest()
@@ -108,5 +102,5 @@ public class QuestManager : MonoBehaviour
 
     public void ConcludeQuest(QuestData data) => OnQuestConcluded?.Invoke(data);
 
-    public void RaiseQuestEpilogueFinished(QuestData data) => OnQuestEpilogueFinished?.Invoke(data);
+    public void NotifyEpilogueFinished(QuestData data) => OnQuestEpilogueFinished?.Invoke(data);
 }
