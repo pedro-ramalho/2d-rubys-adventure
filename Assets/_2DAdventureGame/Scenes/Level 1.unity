@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7defd65e1bb7b3e4abb3342171f59bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMusicConfigManager
-  defaultTrack: {fileID: 8300000, guid: e6f17eb0091bec347af53f6226e933e1, type: 3}
+  defaultTrack: {fileID: 8300000, guid: 00ed200faa45d024dba3c47cb1db49ab, type: 3}
 --- !u!4 &108008129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2324887274116712341, guid: 0f5547b27424469469effdb43a11811a,
