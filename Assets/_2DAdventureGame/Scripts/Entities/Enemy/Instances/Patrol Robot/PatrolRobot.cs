@@ -4,10 +4,6 @@ public enum PatrolDirection { Horizontal, Vertical }
 
 public class PatrolRobot : Enemy
 {
-    public static readonly int MoveXHash = Animator.StringToHash("Move X");
-    public static readonly int MoveYHash = Animator.StringToHash("Move Y");
-    public static readonly int FixedHash = Animator.StringToHash("Fixed");
-
     [Header("Patrol Robot Assets")]
     [SerializeField] private ParticleSystem smokeEffect;
     [SerializeField] private GameObject fixedEffectPrefab;

@@ -39,13 +39,6 @@ public class Player : MonoBehaviour, IDamageable
     public GameObject AfterimagePrefab => afterimagePrefab;
     public GameObject ProjectilePrefab => projectilePrefab;
 
-    // Animator Hashes
-    public static readonly int LookXHash = Animator.StringToHash("Look X");
-    public static readonly int LookYHash = Animator.StringToHash("Look Y");
-    public static readonly int SpeedHash = Animator.StringToHash("Speed");
-    public static readonly int HitHash = Animator.StringToHash("Hit");
-    public static readonly int ShootHash = Animator.StringToHash("Launch");
-
     // Health
     public int CurrentHealth { get; set; }
     public bool IsInvincible { get; set; }

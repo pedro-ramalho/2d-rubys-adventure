@@ -29,13 +29,13 @@ public class PatrolRobotPatrollingState : PatrolRobotState
         {
             case PatrolDirection.Horizontal:
                 position.x += offset;
-                owner.Animator.SetFloat(PatrolRobot.MoveXHash, owner.Direction);
-                owner.Animator.SetFloat(PatrolRobot.MoveYHash, 0f);
+                owner.Animator.SetFloat(AnimatorHashes.MoveX, owner.Direction);
+                owner.Animator.SetFloat(AnimatorHashes.MoveY, 0f);
                 break;
             case PatrolDirection.Vertical:
                 position.y += offset;
-                owner.Animator.SetFloat(PatrolRobot.MoveXHash, 0f);
-                owner.Animator.SetFloat(PatrolRobot.MoveYHash, owner.Direction);
+                owner.Animator.SetFloat(AnimatorHashes.MoveX, 0f);
+                owner.Animator.SetFloat(AnimatorHashes.MoveY, owner.Direction);
                 break;
         }
 

@@ -15,7 +15,7 @@ public class PlayerDeadState : PlayerState
     public override void Enter(Player owner)
     {
         owner.CurrentVelocity = Vector2.zero;
-        owner.Animator.SetFloat(Player.SpeedHash, 0f);
+        owner.Animator.SetFloat(AnimatorHashes.Speed, 0f);
 
         Time.timeScale = 0f;
 

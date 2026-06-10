@@ -10,16 +10,16 @@ public class VendingMachineChargingState : VendingMachineState
         timer = 0f;
         direction = owner.ChargeDirection;
 
-        owner.Animator.SetFloat(VendingMachine.MoveXHash, direction.x);
-        owner.Animator.SetFloat(VendingMachine.MoveYHash, direction.y);
-        owner.Animator.SetBool(VendingMachine.ChargingHorizontalHash, owner.IsChargeHorizontal);
+        owner.Animator.SetFloat(AnimatorHashes.MoveX, direction.x);
+        owner.Animator.SetFloat(AnimatorHashes.MoveY, direction.y);
+        owner.Animator.SetBool(AnimatorHashes.ChargingHorizontal, owner.IsChargeHorizontal);
 
         owner.AudioSource.PlayOneShot(owner.ChargeClip);
     }
 
     public override void Exit(VendingMachine owner)
     {
-        owner.Animator.SetBool(VendingMachine.ChargingHorizontalHash, false);
+        owner.Animator.SetBool(AnimatorHashes.ChargingHorizontal, false);
     }
 
     public override void Update(VendingMachine owner)

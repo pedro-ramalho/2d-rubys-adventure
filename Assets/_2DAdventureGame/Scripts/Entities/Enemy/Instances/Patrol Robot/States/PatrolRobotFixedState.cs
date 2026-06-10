@@ -5,7 +5,7 @@ public class PatrolRobotFixedState : PatrolRobotState
     public override void Enter(PatrolRobot owner)
     {
         owner.Rigidbody.simulated = false;
-        owner.Animator.SetTrigger(PatrolRobot.FixedHash);
+        owner.Animator.SetTrigger(AnimatorHashes.Fixed);
         owner.AudioSource.Stop();
         if (owner.FixedClip != null) owner.AudioSource.PlayOneShot(owner.FixedClip);
         if (owner.FixedEffectPrefab != null)

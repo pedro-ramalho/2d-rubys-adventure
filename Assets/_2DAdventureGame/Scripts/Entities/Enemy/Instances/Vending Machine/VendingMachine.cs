@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class VendingMachine : Enemy
 {  
-    public static readonly int MoveXHash = Animator.StringToHash("Move X");
-    public static readonly int MoveYHash = Animator.StringToHash("Move Y");
-    public static readonly int ChargingHorizontalHash = Animator.StringToHash("ChargingHorizontal");
-
     [Header("Tint")]
     [SerializeField] private Color chargeTint = new Color(1f, 0.35f, 0.35f, 1f);
     [SerializeField] private Color stunnedTint = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -26,7 +22,6 @@ public class VendingMachine : Enemy
     public AudioClip StunnedClip => stunnedClip;
 
     [Header("Collision Behavior")]
-    [SerializeField] private string wallTag = "Wall";
     [SerializeField] private GameObject explosionPrefab;
 
     [Header("Charging Properties")]
@@ -94,7 +89,7 @@ public class VendingMachine : Enemy
             return;
         }
 
-        if (CurrentState == ChargingState && collision.gameObject.CompareTag(wallTag))
+        if (CurrentState == ChargingState && collision.gameObject.CompareTag(Tags.Wall))
         {
             SpawnExplosion(collision.GetContact(0).point);
             ChangeState(StunnedState);

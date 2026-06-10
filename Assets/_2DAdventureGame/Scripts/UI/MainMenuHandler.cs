@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(OptionsHandler))]
 public class MainMenuHandler : MonoBehaviour
 {
-    [SerializeField] private string firstLevelSceneName = "Level 0";
+    [SerializeField] private string firstLevelSceneName = SceneNames.Level0;
 
     [Header("Background Pan")]
     [SerializeField] private float backgroundPanSpeed = 0.15f;

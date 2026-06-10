@@ -10,8 +10,8 @@ public class VendingMachineWindupState : VendingMachineState
 
         owner.ChargeDirection = (Player.Instance.Rigidbody.position - owner.Rigidbody.position).normalized;
 
-        owner.Animator.SetFloat(VendingMachine.MoveXHash, owner.ChargeDirection.x);
-        owner.Animator.SetFloat(VendingMachine.MoveYHash, owner.ChargeDirection.y);
+        owner.Animator.SetFloat(AnimatorHashes.MoveX, owner.ChargeDirection.x);
+        owner.Animator.SetFloat(AnimatorHashes.MoveY, owner.ChargeDirection.y);
 
         owner.Rigidbody.linearVelocity = Vector2.zero;
 

@@ -32,7 +32,7 @@ public class VendingMachineMovingState : VendingMachineState
 
         owner.Rigidbody.MovePosition(owner.Rigidbody.position + step);
 
-        owner.Animator.SetFloat(VendingMachine.MoveXHash, toPlayer.x);
-        owner.Animator.SetFloat(VendingMachine.MoveYHash, toPlayer.y);
+        owner.Animator.SetFloat(AnimatorHashes.MoveX, toPlayer.x);
+        owner.Animator.SetFloat(AnimatorHashes.MoveY, toPlayer.y);
     }
 }

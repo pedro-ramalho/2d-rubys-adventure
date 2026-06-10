@@ -9,7 +9,7 @@ public class PlayerShootingState : PlayerState
         timer = owner.Data.shootDuration;
         owner.CurrentVelocity = Vector2.zero;
 
-        owner.Animator.SetTrigger(Player.ShootHash);
+        owner.Animator.SetTrigger(AnimatorHashes.Launch);
         owner.OneShotSource.PlayOneShot(owner.LaunchClip);
 
         GameObject projectileObj = Object.Instantiate(

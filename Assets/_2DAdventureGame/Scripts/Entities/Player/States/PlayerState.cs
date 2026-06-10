@@ -20,7 +20,7 @@ public abstract class PlayerState : State<Player>
         owner.IsInvincible = true;
         owner.DamageCooldown = owner.Data.invincibilityDuration;
 
-        owner.Animator.SetTrigger(Player.HitHash);
+        owner.Animator.SetTrigger(AnimatorHashes.Hit);
         owner.OneShotSource.PlayOneShot(owner.HitClip);
         
         CameraShake.Instance?.Shake();

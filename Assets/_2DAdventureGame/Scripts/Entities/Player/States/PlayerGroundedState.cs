@@ -40,9 +40,9 @@ public class PlayerGroundedState : PlayerState
 
     private void UpdateAnimator(Player owner)
     {
-        owner.Animator.SetFloat(Player.LookXHash, owner.MoveDirection.x);
-        owner.Animator.SetFloat(Player.LookYHash, owner.MoveDirection.y);
-        owner.Animator.SetFloat(Player.SpeedHash, move.magnitude);
+        owner.Animator.SetFloat(AnimatorHashes.LookX, owner.MoveDirection.x);
+        owner.Animator.SetFloat(AnimatorHashes.LookY, owner.MoveDirection.y);
+        owner.Animator.SetFloat(AnimatorHashes.Speed, move.magnitude);
     }
 
     private void HandleNPCInteraction(Player owner)
