@@ -3,30 +3,28 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Marshmallow : MonoBehaviour
+public class Marshmallow : NPC
 {
     [SerializeField] private QuestData boundQuest;
     [SerializeField] private Transform exitPoint;
     [SerializeField] private float walkSpeed = 2f;
     [SerializeField] private Vector2 idleFacing = Vector2.down;
 
-    private static readonly int SpeedHash = Animator.StringToHash("Speed");
-    private static readonly int LookXHash = Animator.StringToHash("Look X");
-    private static readonly int LookYHash = Animator.StringToHash("Look Y");
-
     private Animator animator;
     private Rigidbody2D rb;
+    private Collider2D[] colliders;
     private Vector2 startPosition;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        colliders = GetComponents<Collider2D>();
         startPosition = transform.position;
         SetFacing(idleFacing);
     }
 
-    void OnEnable()
+    void Start()
     {
         if (QuestManager.Instance != null)
         {
@@ -35,7 +33,7 @@ public class Marshmallow : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         if (QuestManager.Instance != null)
         {
@@ -46,7 +44,7 @@ public class Marshmallow : MonoBehaviour
 
     void HandleQuestAccepted(Quest quest)
     {
-        if (quest.Data == boundQuest) WalkOffscreen();
+        if (quest.Data == boundQuest) WalkToExit();
     }
 
     void HandleQuestEpilogueFinished(QuestData data)
@@ -54,7 +52,7 @@ public class Marshmallow : MonoBehaviour
         if (data == boundQuest) SetCollidersEnabled(false);
     }
 
-    public void WalkOffscreen()
+    public void WalkToExit()
     {
         if (exitPoint != null) StartCoroutine(WalkTo(exitPoint.position));
     }
@@ -67,32 +65,32 @@ public class Marshmallow : MonoBehaviour
 
         Vector2 direction = (target - rb.position).normalized;
         SetFacing(direction);
-        animator.SetFloat(SpeedHash, 1f);
+        animator.SetFloat(AnimatorHashes.Speed, 1f);
 
         WaitForFixedUpdate wait = new();
         while (Vector2.Distance(rb.position, target) > 0.01f)
         {
             Vector2 next = Vector2.MoveTowards(rb.position, target, walkSpeed * Time.fixedDeltaTime);
             rb.MovePosition(next);
-            
+
             yield return wait;
         }
 
         SetFacing(idleFacing);
-        animator.SetFloat(SpeedHash, 0f);
+        animator.SetFloat(AnimatorHashes.Speed, 0f);
 
         SetCollidersEnabled(true);
     }
 
     void SetFacing(Vector2 direction)
     {
-        animator.SetFloat(LookXHash, direction.x);
-        animator.SetFloat(LookYHash, direction.y);
+        animator.SetFloat(AnimatorHashes.LookX, direction.x);
+        animator.SetFloat(AnimatorHashes.LookY, direction.y);
     }
 
     void SetCollidersEnabled(bool value)
     {
-        foreach (Collider2D collider in GetComponents<Collider2D>())
+        foreach (Collider2D collider in colliders)
             collider.enabled = value;
     }
 }

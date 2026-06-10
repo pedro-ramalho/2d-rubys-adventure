@@ -38,7 +38,7 @@ public class NPC : MonoBehaviour
             if (currentPhase.questToGrantAfter != null)
                 QuestManager.Instance.AcceptQuest(currentPhase.questToGrantAfter);
 
-            if (currentPhase == currentDialogue.after && currentDialogue.quest != null)
+            if (currentDialogue.IsAfterPhase(currentPhase))
                 QuestManager.Instance.NotifyEpilogueFinished(currentDialogue.quest);
 
             currentPhase.onExhausted?.Invoke();
