@@ -52,7 +52,7 @@ public class SaveManager : PersistentSingleton<SaveManager>
         }
     }
 
-    public void Save(string sceneName)
+    public void WriteSave(string sceneName)
     {
         string activeQuestId = string.Empty;
         int activeQuestCount = 0;
