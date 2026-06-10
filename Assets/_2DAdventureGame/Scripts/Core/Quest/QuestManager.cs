@@ -87,17 +87,21 @@ public class QuestManager : MonoBehaviour
 
         ActiveQuest.ApplyProgress(report);
 
-        if (ActiveQuest.IsComplete)
-        {
-            Quest finished = ActiveQuest;
-            completed.Add(finished.Data);
-            ActiveQuest = null;
-            OnQuestCompleted?.Invoke(finished);
+        if (ActiveQuest.IsComplete) CompleteActiveQuest();
+    }
 
-            AudioClip defaultTrack = SceneMusicConfigManager.Instance?.DefaultTrack;
-            if (MusicManager.Instance != null && defaultTrack != null)
-                MusicManager.Instance.PlayWithStinger(questCompletionSfx, defaultTrack);
-        }
+    private void CompleteActiveQuest()
+    {
+        Quest finished = ActiveQuest;
+        completed.Add(finished.Data);
+
+        ActiveQuest = null;
+
+        OnQuestCompleted?.Invoke(finished);
+
+        AudioClip defaultTrack = SceneMusicConfigManager.Instance?.DefaultTrack;
+        if (MusicManager.Instance != null && defaultTrack != null)
+            MusicManager.Instance.PlayWithStinger(questCompletionSfx, defaultTrack);
     }
 
     public bool IsCompleted(QuestData data) => completed.Contains(data);
