@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7017880486855503375}
   - component: {fileID: 7380631897718337746}
   - component: {fileID: 1504769160024481169}
-  - component: {fileID: 1798346995875732860}
   m_Layer: 0
   m_Name: Telegraph Effect
   m_TagString: Untagged
@@ -4895,16 +4894,3 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &1798346995875732860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7695376012639680604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175dc59ed7f0d214ba67945b1e587f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnTelegraph
-  lifetime: 0.6

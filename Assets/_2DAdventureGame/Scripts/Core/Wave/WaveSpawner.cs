@@ -57,7 +57,7 @@ public class WaveSpawner : MonoBehaviour
         foreach (Wave wave in waves)
         {
             yield return StartCoroutine(SpawnWave(wave));
-            yield return new WaitUntil(IsCurrentWaveCleared);
+            yield return new WaitUntil(IsWaveCleared);
             yield return new WaitForSeconds(breatherDuration);
         }
 
@@ -66,7 +66,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave(Wave wave)
     {
-        for (int i = 0; i < wave.count; i++)
+        for (int i = 0; i < wave.enemyCount; i++)
         {
             yield return StartCoroutine(SpawnOne(wave.enemyPrefab));
             yield return new WaitForSeconds(spawnInterval);
@@ -78,10 +78,13 @@ public class WaveSpawner : MonoBehaviour
         Transform point = PickSpawnPoint();
         if (point == null) yield break;
 
-        if (telegraphPrefab != null)
-            Instantiate(telegraphPrefab, point.position, Quaternion.identity);
+        GameObject telegraph = telegraphPrefab != null
+            ? Instantiate(telegraphPrefab, point.position, Quaternion.identity)
+            : null;
 
         yield return new WaitForSeconds(telegraphDuration);
+
+        if (telegraph != null) Destroy(telegraph);
 
         GameObject enemy = Instantiate(enemyPrefab, point.position, Quaternion.identity);
         aliveEnemies.Add(enemy);
@@ -122,9 +125,10 @@ public class WaveSpawner : MonoBehaviour
         return false;
     }
 
-    bool IsCurrentWaveCleared()
+    bool IsWaveCleared()
     {
-        aliveEnemies.RemoveAll(e => e == null);
+        for (int i = aliveEnemies.Count - 1; i >= 0; i--)
+            if (aliveEnemies[i] == null) aliveEnemies.RemoveAt(i);
         return aliveEnemies.Count == 0;
     }
 }

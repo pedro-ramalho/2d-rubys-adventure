@@ -5,5 +5,5 @@ using UnityEngine;
 public class Wave
 {
     public GameObject enemyPrefab;
-    public int count;
+    public int enemyCount;
 }
