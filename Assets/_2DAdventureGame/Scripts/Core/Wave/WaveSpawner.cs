@@ -61,6 +61,9 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(breatherDuration);
         }
 
+        yield return StartCoroutine(SpawnBonusWave());
+        yield return new WaitUntil(IsWaveCleared);
+
         OnAllWavesCleared?.Invoke();
     }
 
@@ -73,11 +76,28 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnBonusWave()
+    {
+        if (waves.Count == 0) yield break;
+
+        GameObject prefab = waves[^1].enemyPrefab;
+
+        foreach (Transform point in spawnPoints)
+        {
+            yield return StartCoroutine(SpawnAt(point, prefab));
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
     IEnumerator SpawnOne(GameObject enemyPrefab)
     {
         Transform point = PickSpawnPoint();
         if (point == null) yield break;
+        yield return StartCoroutine(SpawnAt(point, enemyPrefab));
+    }
 
+    IEnumerator SpawnAt(Transform point, GameObject enemyPrefab)
+    {
         GameObject telegraph = telegraphPrefab != null
             ? Instantiate(telegraphPrefab, point.position, Quaternion.identity)
             : null;
