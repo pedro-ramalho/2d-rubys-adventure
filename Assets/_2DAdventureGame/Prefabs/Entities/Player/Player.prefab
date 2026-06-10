@@ -403,13 +403,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   data: {fileID: 11400000, guid: 60f9f239e50913a4a99b1a598ec3577e, type: 2}
-  oneShotSource: {fileID: 1946448323260040029}
-  dashClip: {fileID: 8300000, guid: 9163c1cf7fc42164f942a4abee033dd3, type: 3}
-  hitClip: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6, type: 3}
-  launchClip: {fileID: 8300000, guid: c87de0cae68cdbb409eec8ba23a860d0, type: 3}
-  afterimagePrefab: {fileID: 1500623521988529465, guid: 2ed34625a2460674e982dd3d3cc45e9e,
+  <OneShotSource>k__BackingField: {fileID: 704799532469471727}
+  <DashClip>k__BackingField: {fileID: 8300000, guid: eade2b41632d9dd4dba8a63b3384f50f,
     type: 3}
-  projectilePrefab: {fileID: 3770429791428993732, guid: 111bb8158e249b14fa293499ef1e6b94,
+  <HitClip>k__BackingField: {fileID: 8300000, guid: c7d3a91ac32abbe47a8931a8ffc37bc6,
+    type: 3}
+  <LaunchClip>k__BackingField: {fileID: 8300000, guid: c87de0cae68cdbb409eec8ba23a860d0,
+    type: 3}
+  <AfterimagePrefab>k__BackingField: {fileID: 1500623521988529465, guid: 2ed34625a2460674e982dd3d3cc45e9e,
+    type: 3}
+  <ProjectilePrefab>k__BackingField: {fileID: 3770429791428993732, guid: 111bb8158e249b14fa293499ef1e6b94,
     type: 3}
 --- !u!114 &128603318453481198
 MonoBehaviour:

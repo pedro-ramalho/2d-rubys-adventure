@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -26,18 +27,23 @@ public class Player : MonoBehaviour, IDamageable
     public InputAction TalkAction => inputActions.Player.Talk;
 
     [Header("Player Assets")]
-    [SerializeField] private AudioSource oneShotSource;
-    [SerializeField] private AudioClip dashClip;
-    [SerializeField] private AudioClip hitClip;
-    [SerializeField] private AudioClip launchClip;
-    [SerializeField] private GameObject afterimagePrefab;
-    [SerializeField] private GameObject projectilePrefab;
-    public AudioSource OneShotSource => oneShotSource;
-    public AudioClip DashClip => dashClip;
-    public AudioClip HitClip => hitClip;
-    public AudioClip LaunchClip => launchClip;
-    public GameObject AfterimagePrefab => afterimagePrefab;
-    public GameObject ProjectilePrefab => projectilePrefab;
+    [field: SerializeField]
+    public AudioSource OneShotSource { get; private set; }
+
+    [field: SerializeField]
+    public AudioClip DashClip { get; private set; }
+    
+    [field: SerializeField]
+    public AudioClip HitClip { get; private set; }
+    
+    [field: SerializeField]
+    public AudioClip LaunchClip { get; private set; }
+    
+    [field: SerializeField]
+    public GameObject AfterimagePrefab { get; private set; }
+    
+    [field: SerializeField]
+    public GameObject ProjectilePrefab { get; private set; }
 
     // Health
     public int CurrentHealth { get; set; }
@@ -86,7 +92,9 @@ public class Player : MonoBehaviour, IDamageable
 
     void OnDestroy()
     {
-        if (Instance == this && PlayerStateManager.Instance != null && CurrentHealth > 0)
+        if (Instance == this) Instance = null;
+
+        if (PlayerStateManager.Instance != null && CurrentHealth > 0)
             PlayerStateManager.Instance.StoreHealth(CurrentHealth);
     }
 
