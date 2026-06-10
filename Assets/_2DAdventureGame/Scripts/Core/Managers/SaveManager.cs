@@ -28,28 +28,18 @@ public class SaveManager : PersistentSingleton<SaveManager>
 
     void ReadFromDisk()
     {
-        if (!File.Exists(SavePath))
-        {
-            HasSave = false;
-            return;
-        }
+        HasSave = false;
+        if (!File.Exists(SavePath)) return;
 
         try
         {
-            string json = File.ReadAllText(SavePath);
-            Save loaded = JsonUtility.FromJson<Save>(json);
-            if (loaded == null || loaded.version != CurrentSaveVersion)
-            {
-                HasSave = false;
-                return;
-            }
+            Save loaded = JsonUtility.FromJson<Save>(File.ReadAllText(SavePath));
+            if (loaded?.version != CurrentSaveVersion) return;
+
             Current = loaded;
             HasSave = true;
         }
-        catch
-        {
-            HasSave = false;
-        }
+        catch { }
     }
 
     public void WriteSave(string sceneName)

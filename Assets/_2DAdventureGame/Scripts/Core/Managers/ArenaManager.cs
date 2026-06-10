@@ -11,7 +11,7 @@ public class ArenaManager : MonoBehaviour
     [SerializeField] private float endGameDelay = 3f;
     [SerializeField] private float epilogueReadDelay = 3f;
 
-    private bool gameEnded = false;
+    private bool gameEnded;
 
     void Start()
     {
