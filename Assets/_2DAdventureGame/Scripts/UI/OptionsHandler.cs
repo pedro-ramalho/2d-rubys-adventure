@@ -13,10 +13,19 @@ public class OptionsHandler : MonoBehaviour
     private const float DefaultVolume = 1f;
     private const float MinDb = -80f;
 
+    private static readonly (string Slider, string Param)[] VolumeEntries =
+    {
+        ("MasterVolumeSlider",  "MasterVolume"),
+        ("MusicVolumeSlider",   "MusicVolume"),
+        ("SfxVolumeSlider",     "SfxVolume"),
+        ("AmbientVolumeSlider", "AmbientVolume"),
+    };
+
     public event Action Opened;
     public event Action Closed;
 
     private VisualElement optionsRoot;
+    private (string Button, InputAction Action, int Index)[] rebindEntries;
 
     void Start()
     {
@@ -32,48 +41,38 @@ public class OptionsHandler : MonoBehaviour
         Button resetButton = root.Q<Button>("ResetDefaultsButton");
         resetButton.clicked += ResetToDefaults;
 
-        WireVolumeSlider(root, "MasterVolumeSlider", "MasterVolume");
-        WireVolumeSlider(root, "MusicVolumeSlider", "MusicVolume");
-        WireVolumeSlider(root, "SfxVolumeSlider", "SfxVolume");
-        WireVolumeSlider(root, "AmbientVolumeSlider", "AmbientVolume");
+        foreach ((string slider, string param) in VolumeEntries)
+            WireVolumeSlider(root, slider, param);
 
-        PlayerInputActions actions = InputManager.Instance.Actions;
-        WireRebindButton(root, "DashRebindButton", actions.Player.Dash, 0);
-        WireRebindButton(root, "ShootRebindButton", actions.Player.Shoot, 0);
-
-        InputAction movement = actions.Player.Movement;
-        WireRebindButton(root, "UpPrimaryRebindButton", movement, 1);
-        WireRebindButton(root, "UpSecondaryRebindButton", movement, 6);
-        WireRebindButton(root, "DownPrimaryRebindButton", movement, 2);
-        WireRebindButton(root, "DownSecondaryRebindButton", movement, 7);
-        WireRebindButton(root, "LeftPrimaryRebindButton", movement, 3);
-        WireRebindButton(root, "LeftSecondaryRebindButton", movement, 8);
-        WireRebindButton(root, "RightPrimaryRebindButton", movement, 4);
-        WireRebindButton(root, "RightSecondaryRebindButton", movement, 9);
+        PlayerInputActions a = InputManager.Instance.Actions;
+        InputAction move = a.Player.Movement;
+        // Movement composite indices: 1-4 = primary WASD, 6-9 = secondary arrows (0 and 5 are composite roots).
+        rebindEntries = new (string, InputAction, int)[]
+        {
+            ("DashRebindButton",           a.Player.Dash,  0),
+            ("ShootRebindButton",          a.Player.Shoot, 0),
+            ("UpPrimaryRebindButton",      move, 1),
+            ("DownPrimaryRebindButton",    move, 2),
+            ("LeftPrimaryRebindButton",    move, 3),
+            ("RightPrimaryRebindButton",   move, 4),
+            ("UpSecondaryRebindButton",    move, 6),
+            ("DownSecondaryRebindButton",  move, 7),
+            ("LeftSecondaryRebindButton",  move, 8),
+            ("RightSecondaryRebindButton", move, 9),
+        };
+        foreach ((string button, InputAction action, int index) in rebindEntries)
+            WireRebindButton(root, button, action, index);
     }
 
     void ResetToDefaults()
     {
-        ResetVolumeSlider("MasterVolumeSlider", "MasterVolume");
-        ResetVolumeSlider("MusicVolumeSlider", "MusicVolume");
-        ResetVolumeSlider("SfxVolumeSlider", "SfxVolume");
-        ResetVolumeSlider("AmbientVolumeSlider", "AmbientVolume");
+        foreach ((string slider, string param) in VolumeEntries)
+            ResetVolumeSlider(slider, param);
 
         InputManager.Instance.ResetBindings();
 
-        PlayerInputActions actions = InputManager.Instance.Actions;
-        RefreshRebindLabel("DashRebindButton", actions.Player.Dash, 0);
-        RefreshRebindLabel("ShootRebindButton", actions.Player.Shoot, 0);
-
-        InputAction movement = actions.Player.Movement;
-        RefreshRebindLabel("UpPrimaryRebindButton", movement, 1);
-        RefreshRebindLabel("UpSecondaryRebindButton", movement, 6);
-        RefreshRebindLabel("DownPrimaryRebindButton", movement, 2);
-        RefreshRebindLabel("DownSecondaryRebindButton", movement, 7);
-        RefreshRebindLabel("LeftPrimaryRebindButton", movement, 3);
-        RefreshRebindLabel("LeftSecondaryRebindButton", movement, 8);
-        RefreshRebindLabel("RightPrimaryRebindButton", movement, 4);
-        RefreshRebindLabel("RightSecondaryRebindButton", movement, 9);
+        foreach ((string button, InputAction action, int index) in rebindEntries)
+            RefreshRebindLabel(button, action, index);
     }
 
     void ResetVolumeSlider(string sliderName, string mixerParam)

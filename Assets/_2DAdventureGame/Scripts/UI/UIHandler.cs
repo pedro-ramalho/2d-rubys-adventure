@@ -33,6 +33,7 @@ public class UIHandler : MonoBehaviour
     private bool isShowingPrompt;
     private bool dialogueActive;
     private Coroutine promptFadeRoutine;
+    private float originalOneShotVolume = 1f;
 
     public bool IsTyping => typeRoutine != null;
 
@@ -66,7 +67,18 @@ public class UIHandler : MonoBehaviour
             player.OnHealthChanged -= SetHealthValue;
     }
 
-    void SetHealthValue(float percentage) => healthBar.style.width = Length.Percent(100 * percentage);
+    void SetHealthValue(float percentage)
+    {
+        if (healthBar != null)
+            healthBar.style.width = Length.Percent(100 * percentage);
+    }
+
+    void RestoreTypingAudio()
+    {
+        if (player == null) return;
+        player.OneShotSource.pitch = 1f;
+        player.OneShotSource.volume = originalOneShotVolume;
+    }
 
     public void HideHUD()
     {
@@ -147,12 +159,14 @@ public class UIHandler : MonoBehaviour
         if (typeRoutine == null) return;
         StopCoroutine(typeRoutine);
         typeRoutine = null;
+        RestoreTypingAudio();
         dialogueText.text = currentLine;
         Invoke(nameof(HideDialogue), displayTime);
     }
 
     private IEnumerator TypeLine(string line)
     {
+        originalOneShotVolume = player.OneShotSource.volume;
         player.OneShotSource.volume = 0.75f;
 
         int visibleCount = 0;
@@ -174,7 +188,7 @@ public class UIHandler : MonoBehaviour
 
             yield return new WaitForSeconds(typeInterval);
         }
-        if (player != null) player.OneShotSource.pitch = 1f;
+        RestoreTypingAudio();
         typeRoutine = null;
         Invoke(nameof(HideDialogue), displayTime);
     }
@@ -186,7 +200,7 @@ public class UIHandler : MonoBehaviour
         {
             StopCoroutine(typeRoutine);
             typeRoutine = null;
-            if (player != null) player.OneShotSource.pitch = 1f;
+            RestoreTypingAudio();
         }
         StopPromptFade();
         dialoguePanel.style.display = DisplayStyle.None;
