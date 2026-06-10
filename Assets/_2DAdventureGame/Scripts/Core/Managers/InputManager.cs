@@ -8,12 +8,7 @@ public class InputManager : PersistentSingleton<InputManager>
     public PlayerInputActions Actions { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Bootstrap()
-    {
-        if (Instance != null) return;
-        GameObject go = new GameObject("InputManager");
-        go.AddComponent<InputManager>();
-    }
+    static void Bootstrap() => BootstrapIfMissing();
 
     protected override void Awake()
     {

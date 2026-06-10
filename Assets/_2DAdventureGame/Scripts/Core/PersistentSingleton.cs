@@ -16,4 +16,11 @@ public abstract class PersistentSingleton<T> : MonoBehaviour where T : Persisten
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
     }
+
+    protected static void BootstrapIfMissing()
+    {
+        if (Instance != null) return;
+        
+        new GameObject(typeof(T).Name).AddComponent<T>();
+    }
 }
