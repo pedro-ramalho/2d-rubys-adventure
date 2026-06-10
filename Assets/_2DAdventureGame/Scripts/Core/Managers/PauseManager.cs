@@ -45,19 +45,14 @@ public class PauseManager : PersistentSingleton<PauseManager>
         if (IsPaused) Resume(); else Pause();
     }
 
-    public void Pause()
-    {
-        IsPaused = true;
-        Time.timeScale = 0f;
-        SetVisible(true);
-        PlayToggleSfx();
-    }
+    public void Pause() => SetPaused(true);
+    public void Resume() => SetPaused(false);
 
-    public void Resume()
+    void SetPaused(bool paused)
     {
-        IsPaused = false;
-        Time.timeScale = 1f;
-        SetVisible(false);
+        IsPaused = paused;
+        Time.timeScale = paused ? 0f : 1f;
+        SetVisible(paused);
         PlayToggleSfx();
     }
 

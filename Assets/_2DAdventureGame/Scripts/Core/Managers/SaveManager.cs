@@ -17,12 +17,7 @@ public class SaveManager : PersistentSingleton<SaveManager>
     private string SavePath => Path.Combine(Application.persistentDataPath, SaveFileName);
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Bootstrap()
-    {
-        if (Instance != null) return;
-        GameObject go = new GameObject("SaveManager");
-        go.AddComponent<SaveManager>();
-    }
+    static void Bootstrap() => BootstrapIfMissing();
 
     protected override void Awake()
     {
