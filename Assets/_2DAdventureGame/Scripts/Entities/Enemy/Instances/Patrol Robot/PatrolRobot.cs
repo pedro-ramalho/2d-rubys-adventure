@@ -26,9 +26,6 @@ public class PatrolRobot : Enemy
     public float PatrolDuration => patrolDuration;
     public float Speed => speed;
 
-    [Header("Combat")]
-    [SerializeField] private int contactDamage = 1;
-
     public int Direction { get; set; }
 
     public PatrolRobotState CurrentState { get; private set; }
@@ -65,7 +62,7 @@ public class PatrolRobot : Enemy
         if (!other.TryGetComponent(out Player player)) return;
         if (player.IsInvincible) return;
 
-        player.ApplyDamage(contactDamage);
+        player.ApplyDamage(Data.contactDamage);
         if (hitClip != null) AudioSource.PlayOneShot(hitClip);
     }
 }

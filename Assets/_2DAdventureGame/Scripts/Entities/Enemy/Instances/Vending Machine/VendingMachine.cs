@@ -6,10 +6,6 @@ public class VendingMachine : Enemy
     public static readonly int MoveYHash = Animator.StringToHash("Move Y");
     public static readonly int ChargingHorizontalHash = Animator.StringToHash("ChargingHorizontal");
 
-    [Header("Vending Machine Assets")]
-    [SerializeField] private ParticleSystem smokeEffect;
-    public ParticleSystem SmokeEffect => smokeEffect;
-
     [Header("Tint")]
     [SerializeField] private Color chargeTint = new Color(1f, 0.35f, 0.35f, 1f);
     [SerializeField] private Color stunnedTint = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -47,7 +43,6 @@ public class VendingMachine : Enemy
     public float ChargeDuration => chargeDuration;
     public float StunnedDuration => stunnedDuration;
 
-    public int Direction { get; set; }
     public Vector2 ChargeDirection { get; set; }
     public bool IsChargeHorizontal => Mathf.Abs(ChargeDirection.x) > Mathf.Abs(ChargeDirection.y);
 

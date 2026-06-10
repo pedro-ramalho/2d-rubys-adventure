@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -15,8 +14,6 @@ public abstract class Enemy : MonoBehaviour
     public Animator Animator { get; private set; }
     public AudioSource AudioSource { get; private set; }
 
-    public event Action OnFixed;
-
     protected virtual void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
@@ -30,6 +27,4 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected abstract void OnProjectileHit();
-
-    public void RaiseOnFixed() => OnFixed?.Invoke();
 }

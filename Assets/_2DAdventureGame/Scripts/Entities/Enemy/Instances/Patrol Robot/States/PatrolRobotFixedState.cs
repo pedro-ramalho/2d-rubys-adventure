@@ -11,7 +11,6 @@ public class PatrolRobotFixedState : PatrolRobotState
         if (owner.FixedEffectPrefab != null)
             Object.Instantiate(owner.FixedEffectPrefab, owner.transform.position, Quaternion.identity);
         owner.SmokeEffect.Stop();
-        owner.RaiseOnFixed();
         owner.GetComponent<QuestReporter>()?.Report();
     }
 }
