@@ -858,6 +858,7 @@ MonoBehaviour:
   titleBobAmplitude: 8
   clickAudioSource: {fileID: 1702979294}
   clickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
+  startGameFadeDuration: 5
 --- !u!114 &1702979293
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -22,11 +23,18 @@ public class MainMenuHandler : MonoBehaviour
     [SerializeField] private AudioSource clickAudioSource;
     [SerializeField] private AudioClip clickClip;
 
+    [Header("Start Game")]
+    [SerializeField] private float startGameFadeDuration = 3f;
+
     private VisualElement background;
     private Label title;
     private VisualElement buttonContainer;
+    private Button startButton;
     private Button continueButton;
+    private Button optionsButton;
+    private Button quitButton;
     private OptionsHandler optionsHandler;
+    private bool isStartingGame;
 
     void Start()
     {
@@ -40,10 +48,10 @@ public class MainMenuHandler : MonoBehaviour
         if (background != null)
             background.style.scale = new Scale(new Vector3(backgroundScale, backgroundScale, 1f));
 
-        Button startButton = root.Q<Button>("StartButton");
+        startButton = root.Q<Button>("StartButton");
         continueButton = root.Q<Button>("ContinueButton");
-        Button optionsButton = root.Q<Button>("OptionsButton");
-        Button quitButton = root.Q<Button>("QuitButton");
+        optionsButton = root.Q<Button>("OptionsButton");
+        quitButton = root.Q<Button>("QuitButton");
 
         startButton.clicked += PlayClick;
         optionsButton.clicked += PlayClick;
@@ -123,10 +131,39 @@ public class MainMenuHandler : MonoBehaviour
 
     void StartGame()
     {
-        if (SceneTransitioner.Instance != null)
-            SceneTransitioner.Instance.LoadSceneWithCrossfade(firstLevelSceneName);
-        else
-            SceneManager.LoadScene(firstLevelSceneName);
+        if (isStartingGame) return;
+        isStartingGame = true;
+
+        startButton.SetEnabled(false);
+        continueButton.SetEnabled(false);
+        optionsButton.SetEnabled(false);
+        quitButton.SetEnabled(false);
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.FadeOutAndStop(startGameFadeDuration);
+
+        StartCoroutine(FadeOutAndLoad());
+    }
+
+    IEnumerator FadeOutAndLoad()
+    {
+        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        VisualElement overlay = root.Q<VisualElement>("FadeOverlay");
+
+        float elapsed = 0f;
+        while (elapsed < startGameFadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            if (overlay != null)
+                overlay.style.opacity = Mathf.Lerp(0f, 1f, elapsed / startGameFadeDuration);
+            yield return null;
+        }
+        if (overlay != null) overlay.style.opacity = 1f;
+
+        if (firstLevelSceneName != SceneNames.MainMenu && SaveManager.Instance != null)
+            SaveManager.Instance.WriteSave(firstLevelSceneName);
+
+        SceneManager.LoadScene(firstLevelSceneName);
     }
 
     void QuitGame()

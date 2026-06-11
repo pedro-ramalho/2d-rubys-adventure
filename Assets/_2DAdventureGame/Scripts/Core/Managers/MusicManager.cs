@@ -38,6 +38,22 @@ public class MusicManager : PersistentSingleton<MusicManager>
         transition = StartCoroutine(StingerThenTrack(stinger, nextTrack));
     }
 
+    public void FadeOutAndStop(float duration)
+    {
+        if (transition != null) StopCoroutine(transition);
+        transition = StartCoroutine(FadeOutAndStopRoutine(duration));
+    }
+
+    IEnumerator FadeOutAndStopRoutine(float duration)
+    {
+        float restoreVolume = source.volume;
+        yield return FadeVolumeTo(0f, duration);
+        source.Stop();
+        source.clip = null;
+        source.volume = restoreVolume;
+        transition = null;
+    }
+
     IEnumerator SwitchTo(AudioClip clip)
     {
         float originalVolume = source.volume;
