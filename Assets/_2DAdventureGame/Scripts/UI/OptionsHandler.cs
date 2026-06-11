@@ -26,19 +26,24 @@ public class OptionsHandler : MonoBehaviour
 
     private VisualElement optionsRoot;
     private (string Button, InputAction Action, int Index)[] rebindEntries;
+    private MainMenuHandler clickPlayer;
 
     void Start()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         optionsRoot = root.Q<VisualElement>("OptionsRoot");
+        clickPlayer = GetComponent<MainMenuHandler>();
 
         Button backButton = root.Q<Button>("OptionsBackButton");
+        backButton.clicked += PlayClick;
         backButton.clicked += Close;
 
         Button deleteSaveButton = root.Q<Button>("DeleteSaveButton");
+        deleteSaveButton.clicked += PlayClick;
         deleteSaveButton.clicked += DeleteSave;
 
         Button resetButton = root.Q<Button>("ResetDefaultsButton");
+        resetButton.clicked += PlayClick;
         resetButton.clicked += ResetToDefaults;
 
         foreach ((string slider, string param) in VolumeEntries)
@@ -113,8 +118,11 @@ public class OptionsHandler : MonoBehaviour
     {
         Button button = root.Q<Button>(buttonName);
         button.text = GetBindingDisplayName(action, bindingIndex);
+        button.clicked += PlayClick;
         button.clicked += () => StartRebind(action, bindingIndex, button);
     }
+
+    void PlayClick() => clickPlayer?.PlayClick();
 
     void StartRebind(InputAction action, int bindingIndex, Button button)
     {

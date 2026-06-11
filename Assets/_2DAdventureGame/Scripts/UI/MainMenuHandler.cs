@@ -18,6 +18,10 @@ public class MainMenuHandler : MonoBehaviour
     [SerializeField] private float titleBobSpeed = 1.5f;
     [SerializeField] private float titleBobAmplitude = 12f;
 
+    [Header("Click Sound")]
+    [SerializeField] private AudioSource clickAudioSource;
+    [SerializeField] private AudioClip clickClip;
+
     private VisualElement background;
     private Label title;
     private VisualElement buttonContainer;
@@ -40,6 +44,11 @@ public class MainMenuHandler : MonoBehaviour
         continueButton = root.Q<Button>("ContinueButton");
         Button optionsButton = root.Q<Button>("OptionsButton");
         Button quitButton = root.Q<Button>("QuitButton");
+
+        startButton.clicked += PlayClick;
+        optionsButton.clicked += PlayClick;
+        quitButton.clicked += PlayClick;
+        continueButton.clicked += PlayClick;
 
         startButton.clicked += StartGame;
         optionsButton.clicked += optionsHandler.Open;
@@ -73,6 +82,12 @@ public class MainMenuHandler : MonoBehaviour
         if (continueButton == null) return;
         continueButton.SetEnabled(false);
         continueButton.clicked -= ContinueGame;
+    }
+
+    public void PlayClick()
+    {
+        if (clickAudioSource != null && clickClip != null)
+            clickAudioSource.PlayOneShot(clickClip);
     }
 
     void ContinueGame()
