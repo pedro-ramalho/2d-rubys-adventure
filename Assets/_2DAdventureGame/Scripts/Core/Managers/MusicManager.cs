@@ -17,6 +17,15 @@ public class MusicManager : PersistentSingleton<MusicManager>
         if (source.clip == clip && source.isPlaying) return;
 
         if (transition != null) StopCoroutine(transition);
+
+        if (source.clip == null)
+        {
+            source.clip = clip;
+            source.loop = true;
+            source.Play();
+            return;
+        }
+
         transition = StartCoroutine(SwitchTo(clip));
     }
 
