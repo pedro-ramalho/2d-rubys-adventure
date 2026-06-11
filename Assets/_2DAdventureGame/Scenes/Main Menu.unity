@@ -853,7 +853,7 @@ MonoBehaviour:
   backgroundPanAmplitudeX: 40
   backgroundPanAmplitudeY: 20
   backgroundScale: 1.15
-  titleBobSpeed: 0.5
+  titleBobSpeed: 2
   titleBobAmplitude: 8
 --- !u!114 &1702979293
 MonoBehaviour:
