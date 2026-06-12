@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
                 QuestManager.Instance.ConcludeQuest(currentDialogue.quest);
         }
 
-        UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++]);
+        UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++], transform);
 
         if (lineIndex >= currentPhase.lines.Count)
         {

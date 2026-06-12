@@ -27,6 +27,9 @@ public class UIHandler : MonoBehaviour
     private VisualElement winScreen;
     private VisualElement loseScreen;
 
+    [Header("Dialogue Range")]
+    [SerializeField] private float dialogueMaxDistance = 5f;
+
     private Player player;
     private Coroutine typeRoutine;
     private string currentLine;
@@ -34,6 +37,7 @@ public class UIHandler : MonoBehaviour
     private bool dialogueActive;
     private Coroutine promptFadeRoutine;
     private float originalOneShotVolume = 1f;
+    private Transform currentSpeaker;
 
     public bool IsTyping => typeRoutine != null;
 
@@ -42,6 +46,20 @@ public class UIHandler : MonoBehaviour
     void Awake()
     {
         if (Instance == null) Instance = this;
+    }
+
+    void Update()
+    {
+        if (!dialogueActive || currentSpeaker == null)
+            return;
+
+        Player player = Player.Instance;
+        if (player == null)
+            return;
+
+        float distance = (player.transform.position - currentSpeaker.position).sqrMagnitude;
+        if (distance > dialogueMaxDistance * dialogueMaxDistance)
+            HideDialogue();
     }
 
     void Start()
@@ -88,8 +106,11 @@ public class UIHandler : MonoBehaviour
         if (hud != null) hud.style.display = DisplayStyle.None;
     }
     
-    public void DisplayDialogueWithLine(string line)
+    public void DisplayDialogueWithLine(string line) => DisplayDialogueWithLine(line, null);
+    public void DisplayDialogueWithLine(string line, Transform speaker) 
     {
+        currentSpeaker = speaker;
+
         AudioSource audio = OneShot();
         if (clickClip != null && audio != null)
             audio.PlayOneShot(clickClip);
@@ -215,6 +236,7 @@ public class UIHandler : MonoBehaviour
         dialoguePanel.style.opacity = 1f;
         isShowingPrompt = false;
         dialogueActive = false;
+        currentSpeaker = null;
     }
     
     public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;
