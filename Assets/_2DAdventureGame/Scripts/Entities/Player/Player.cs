@@ -74,8 +74,8 @@ public class Player : MonoBehaviour, IDamageable
         Animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
 
-        int health = PlayerStateManager.Instance != null && PlayerStateManager.Instance.StoredHealth.HasValue
-            ? PlayerStateManager.Instance.StoredHealth.Value
+        int health = SaveManager.Instance != null && SaveManager.Instance.HasSave && SaveManager.Instance.Current.playerHealth >= 0
+            ? SaveManager.Instance.Current.playerHealth
             : data.startingHealth;
         CurrentHealth = Mathf.Clamp(health, 0, data.maxHealth);
 
@@ -93,9 +93,6 @@ public class Player : MonoBehaviour, IDamageable
     void OnDestroy()
     {
         if (Instance == this) Instance = null;
-
-        if (PlayerStateManager.Instance != null && CurrentHealth > 0)
-            PlayerStateManager.Instance.StoreHealth(CurrentHealth);
     }
 
     void Update()
