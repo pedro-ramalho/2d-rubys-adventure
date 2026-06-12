@@ -29601,7 +29601,8 @@ MonoBehaviour:
   typeClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.06
-  promptFadeDuration: 0.15
+  promptFadeDuration: 0.05
+  dialogueMaxDistance: 5
 --- !u!1001 &2061339073
 PrefabInstance:
   m_ObjectHideFlags: 0

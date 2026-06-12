@@ -15,9 +15,9 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
   before:
     lines:
-    - Hm... by the looks of it, you must be Ruby.
-    - A friend of mine told me you were coming to this island to help us deal with
-      this whole robot mess we've got going on.
+    - My, Martha said someone was coming...
+    - But I didn't think they'd be so small...
+    - Well then, I suppose you came here to deal with these Patrol Robots.
     - They've been malfunctioning lately. Badly. And they're all in desperate need
       of repair.
     - That's your job, far as I understand it.
@@ -38,17 +38,16 @@ MonoBehaviour:
         m_Calls: []
   after:
     lines:
-    - Good... Maybe things will finally get back to normal around here.
+    - Much quieter now... Good.
     - You seem ready.
-    - There's definitely something strange going on with our machines lately.
+    - Something strange's going on with our machines lately.
     - It's almost as if someone's been tinkering with them...
     - Deliberately pressing all the wrong buttons.
     - This feels like Marshmallow's doing...
-    - But why? What is there to gain from this?
-    - Are they doing all of this just for fun?
-    - Whatever the reason, you have to put a stop to it!
-    - Marshmallow is from Sugar Land.
-    - It's far from here, but I can take you there.
+    - Marshmallow is from Sugar Land. They've done something like this in the past
+      before.
+    - Whatever it is they're plotting, you have to stop them!
+    - Don't let their looks deceive you!
     - Come with me!
     questToGrantAfter: {fileID: 0}
     onExhausted:

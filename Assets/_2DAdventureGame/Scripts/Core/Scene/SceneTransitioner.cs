@@ -20,6 +20,9 @@ public class SceneTransitioner : MonoBehaviour
     {
         IsTransitioning = true;
 
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.FadeOutAndStop(preTransitionDelay + transitionDuration);
+
         yield return new WaitForSeconds(preTransitionDelay);
 
         if (UIHandler.Instance != null)

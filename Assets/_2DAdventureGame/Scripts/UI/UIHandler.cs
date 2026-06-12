@@ -101,10 +101,16 @@ public class UIHandler : MonoBehaviour
         audio.volume = originalOneShotVolume;
     }
 
-    public void HideHUD()
+    public void SetHUDVisible(bool visible)
     {
-        if (hud != null) hud.style.display = DisplayStyle.None;
+        if (hud == null)
+            return;
+        
+        hud.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
+
+    public void HideHUD() => SetHUDVisible(false);
+    public void ShowHUD() => SetHUDVisible(true);
     
     public void DisplayDialogueWithLine(string line) => DisplayDialogueWithLine(line, null);
     public void DisplayDialogueWithLine(string line, Transform speaker) 

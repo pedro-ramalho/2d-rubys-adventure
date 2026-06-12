@@ -15,16 +15,17 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
   before:
     lines:
-    - Oh no... Where could they be...
+    - Oh no... My boxes... Where could they be...
     - Hm?
-    - Wait a second... You must be Ruby!
-    - A friend told me to expect someone wearing green pants and a tail.
+    - Wait a second... You're not stealing them, are you?
+    - I'll trust you then!
     - You see, I'm a merchant, and a while ago I lost six really important boxes
       with valuable goods.
     - Could you help me look for them?
     - By the way, to help you navigate the map, I have a tip for you.
     - You can dash around by pressing E. While dashing, you are briefly immune to
       damage, so make the most of it!
+    - Lastly, if you'd like to see how many boxes you've found, press TAB!
     questToGrantAfter: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
       type: 2}
     onExhausted:
@@ -39,13 +40,13 @@ MonoBehaviour:
         m_Calls: []
   after:
     lines:
-    - You found them! Thank you so much, Ruby!
+    - You found them! Thank you so much!
     - I suppose you didn't come all this way just to help a merchant recover their
       lost cargo.
-    - We have some Patrol Robots around here that have been causing a lot of trouble
-      for us.
-    - A friend of mine leaves nearby and knows much more about what's going on that
-      I do.
+    - You came to deal with this machine fuss, yes?
+    - Find out what's been going on? Then I know just the person!
+    - I have a friend who leaves nearby.
+    - They know much more about the situation than I do.
     - Head east and follow the pavement. You should run into them before long!
     - Take care!
     questToGrantAfter: {fileID: 0}
