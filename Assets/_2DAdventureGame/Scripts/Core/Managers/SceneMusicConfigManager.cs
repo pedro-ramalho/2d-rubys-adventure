@@ -18,7 +18,11 @@ public class SceneMusicConfigManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (MusicManager.Instance != null && defaultTrack != null)
+        if (MusicManager.Instance == null) return;
+
+        if (defaultTrack != null)
             MusicManager.Instance.Play(defaultTrack);
+        else
+            MusicManager.Instance.FadeOutAndStop(5f);
     }
 }
