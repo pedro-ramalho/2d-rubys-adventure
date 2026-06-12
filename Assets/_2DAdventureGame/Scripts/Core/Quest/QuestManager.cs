@@ -94,8 +94,14 @@ public class QuestManager : MonoBehaviour
         OnQuestCompleted?.Invoke(finished);
 
         AudioClip defaultTrack = SceneMusicConfigManager.Instance?.DefaultTrack;
-        if (MusicManager.Instance != null && defaultTrack != null)
+        if (MusicManager.Instance == null)
+            return;
+        
+        if (defaultTrack != null)
             MusicManager.Instance.PlayWithStinger(questCompletionSfx, defaultTrack);
+        else
+            MusicManager.Instance.FadeOutAndStop(5f);
+        
     }
 
     public bool IsCompleted(QuestData data) => completed.Contains(data);
