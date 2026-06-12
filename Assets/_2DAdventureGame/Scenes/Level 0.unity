@@ -40045,7 +40045,7 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultTrack
       value: 
-      objectReference: {fileID: 8300000, guid: 582bf361260f93a47b51e347fc74001b, type: 3}
+      objectReference: {fileID: 8300000, guid: ebce5765fa2afbb48aa640530325a19e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40689,7 +40689,7 @@ PrefabInstance:
     - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
         type: 3}
       propertyPath: transitionDuration
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

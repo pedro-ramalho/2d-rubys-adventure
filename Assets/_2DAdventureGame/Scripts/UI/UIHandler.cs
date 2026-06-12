@@ -37,6 +37,8 @@ public class UIHandler : MonoBehaviour
 
     public bool IsTyping => typeRoutine != null;
 
+    AudioSource OneShot() => player != null ? player.OneShotSource : null;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -75,9 +77,10 @@ public class UIHandler : MonoBehaviour
 
     void RestoreTypingAudio()
     {
-        if (player == null) return;
-        player.OneShotSource.pitch = 1f;
-        player.OneShotSource.volume = originalOneShotVolume;
+        AudioSource audio = OneShot();
+        if (audio == null) return;
+        audio.pitch = 1f;
+        audio.volume = originalOneShotVolume;
     }
 
     public void HideHUD()
@@ -87,8 +90,9 @@ public class UIHandler : MonoBehaviour
     
     public void DisplayDialogueWithLine(string line)
     {
-        if (clickClip != null && player != null)
-            player.OneShotSource.PlayOneShot(clickClip);
+        AudioSource audio = OneShot();
+        if (clickClip != null && audio != null)
+            audio.PlayOneShot(clickClip);
 
         CancelInvoke(nameof(HideDialogue));
         if (typeRoutine != null) StopCoroutine(typeRoutine);
@@ -166,8 +170,12 @@ public class UIHandler : MonoBehaviour
 
     private IEnumerator TypeLine(string line)
     {
-        originalOneShotVolume = player.OneShotSource.volume;
-        player.OneShotSource.volume = 0.75f;
+        AudioSource audio = OneShot();
+        if (audio != null)
+        {
+            originalOneShotVolume = audio.volume;
+            audio.volume = 0.75f;
+        }
 
         int visibleCount = 0;
         for (int i = 1; i <= line.Length; i++)
@@ -178,11 +186,11 @@ public class UIHandler : MonoBehaviour
             if (!char.IsWhiteSpace(c))
             {
                 visibleCount++;
-                if (typeClip != null && player != null && visibleCount % typeClipEveryNChars == 0)
+                if (typeClip != null && audio != null && visibleCount % typeClipEveryNChars == 0)
                 {
                     float pitch = 1f + Random.Range(-typeClipPitchJitter, typeClipPitchJitter);
-                    player.OneShotSource.pitch = pitch;
-                    player.OneShotSource.PlayOneShot(typeClip);
+                    audio.pitch = pitch;
+                    audio.PlayOneShot(typeClip);
                 }
             }
 
