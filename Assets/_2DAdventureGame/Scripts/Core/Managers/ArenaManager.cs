@@ -10,6 +10,8 @@ public class ArenaManager : MonoBehaviour
     [SerializeField] private QuestData winQuest;
     [SerializeField] private float endGameDelay = 3f;
     [SerializeField] private float epilogueReadDelay = 3f;
+    [SerializeField] private AudioSource stingerSource;
+    [SerializeField] private AudioClip victoryStinger;
 
     private bool gameEnded;
 
@@ -49,12 +51,18 @@ public class ArenaManager : MonoBehaviour
 
     void Win()
     {
-        if (gameEnded) return;
+        if (gameEnded) 
+            return;
+        
         gameEnded = true;
+
+        MusicManager.Instance?.FadeOutAndStop(2f);
+        if (stingerSource != null && victoryStinger != null)
+            stingerSource.PlayOneShot(victoryStinger);
 
         ui.DisplayWinScreen();
         Invoke(nameof(ReloadScene), endGameDelay);
     }
 
-    void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    void ReloadScene() => SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu);
 }
