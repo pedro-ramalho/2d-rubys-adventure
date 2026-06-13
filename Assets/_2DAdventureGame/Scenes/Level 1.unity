@@ -274,6 +274,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8342598319919170739, guid: a0be86ace3be2d94c9a264c20a946e00,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -823,6 +828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342598319919170739, guid: a0be86ace3be2d94c9a264c20a946e00,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11042,6 +11052,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8342598319919170739, guid: a0be86ace3be2d94c9a264c20a946e00,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11426,6 +11441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
         type: 3}
+      propertyPath: fadeOutClipName
+      value: CrossfadeStart_Animation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
+        type: 3}
       propertyPath: preTransitionDelay
       value: 4
       objectReference: {fileID: 0}
@@ -11794,6 +11814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342598319919170739, guid: a0be86ace3be2d94c9a264c20a946e00,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30517,6 +30542,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8342598319919170739, guid: a0be86ace3be2d94c9a264c20a946e00,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30590,6 +30620,11 @@ PrefabInstance:
       propertyPath: dashClip
       value: 
       objectReference: {fileID: 8300000, guid: eade2b41632d9dd4dba8a63b3384f50f, type: 3}
+    - target: {fileID: 6183278311838019341, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7527325664591680456, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
       propertyPath: m_Name

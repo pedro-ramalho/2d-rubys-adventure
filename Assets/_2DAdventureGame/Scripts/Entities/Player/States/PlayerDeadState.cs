@@ -21,7 +21,12 @@ public class PlayerDeadState : PlayerState
     {
         yield return new WaitForSecondsRealtime(ReloadDelay);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (SceneTransitioner.Instance != null)
+            SceneTransitioner.Instance.LoadSceneWithCrossfade(currentScene, 0f);
+        else
+            SceneManager.LoadScene(currentScene);
     }
 
     public override void HandleHeal(Player owner, int amount) { }

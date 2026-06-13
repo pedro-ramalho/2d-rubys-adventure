@@ -3,9 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SceneLoader", menuName = "Game/Scene Loader")]
 public class SceneLoader : ScriptableObject
 {
-    public void LoadScene(string sceneName)
+    [SerializeField] private string sceneName;
+    [SerializeField] private float preTransitionDelay = 4f;
+
+    public void Load()
     {
         if (SceneTransitioner.Instance != null)
-            SceneTransitioner.Instance.LoadSceneWithCrossfade(sceneName);
+            SceneTransitioner.Instance.LoadSceneWithCrossfade(sceneName, preTransitionDelay);
     }
 }

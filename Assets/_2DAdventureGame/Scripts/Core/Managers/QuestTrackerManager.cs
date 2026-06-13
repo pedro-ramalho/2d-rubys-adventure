@@ -73,7 +73,15 @@ public class QuestTrackerManager : MonoBehaviour
 
     void Update()
     {
-        if (isOpen) Refresh();
+        if (PauseManager.IsPaused)
+        {
+            SetVisible(false);
+            
+            return;
+        }
+
+        if (isOpen || completionPendingQuest != null) 
+            Refresh();
     }
 
     void OnTrackerPressed(InputAction.CallbackContext ctx)

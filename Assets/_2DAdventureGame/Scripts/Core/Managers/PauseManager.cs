@@ -55,7 +55,7 @@ public class PauseManager : PersistentSingleton<PauseManager>
         returnButton.clicked += () =>
         {
             Resume();
-            SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu);
+            SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu, 0f);
         };
 
         SetVisible(false);
@@ -85,6 +85,7 @@ public class PauseManager : PersistentSingleton<PauseManager>
     void OnPausePressed(InputAction.CallbackContext ctx)
     {
         if (SceneManager.GetActiveScene().name == SceneNames.MainMenu) return;
+        
         if (IsPaused) Resume(); else Pause();
     }
 

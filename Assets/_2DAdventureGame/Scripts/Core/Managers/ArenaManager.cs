@@ -64,5 +64,5 @@ public class ArenaManager : MonoBehaviour
         Invoke(nameof(ReloadScene), endGameDelay);
     }
 
-    void ReloadScene() => SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu);
+    void ReloadScene() => SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu, 0f);
 }

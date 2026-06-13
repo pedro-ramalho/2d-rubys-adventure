@@ -1168,6 +1168,11 @@ PrefabInstance:
       propertyPath: exitPoint
       value: 
       objectReference: {fileID: 2042272448}
+    - target: {fileID: 2181834033830045229, guid: e8e80d325ebfde4438e45ac48c0829ca,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3607571905773036296, guid: e8e80d325ebfde4438e45ac48c0829ca,
         type: 3}
       propertyPath: m_Name
@@ -1918,6 +1923,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
+        type: 3}
+      propertyPath: fadeOutClipName
+      value: CrossfadeStart_Animation
       objectReference: {fileID: 0}
     - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
         type: 3}
@@ -9456,8 +9466,8 @@ MonoBehaviour:
   typeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.06
-  promptFadeDuration: 0.15
-  dialogueMaxDistance: 5
+  promptFadeDuration: 0.05
+  dialogueMaxDistance: 10
 --- !u!1 &2058835688
 GameObject:
   m_ObjectHideFlags: 0
@@ -9776,6 +9786,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183278311838019341, guid: 9e53bfff606c5e246821c7dcd944fd91,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7527325664591680456, guid: 9e53bfff606c5e246821c7dcd944fd91,
         type: 3}
