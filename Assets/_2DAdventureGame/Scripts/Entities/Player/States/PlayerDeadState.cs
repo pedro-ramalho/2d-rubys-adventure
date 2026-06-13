@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDeadState : PlayerState
 {
-    private const float ReloadDelay = 5f;
+    private const float ReloadDelay = 3f;
 
     public override void Enter(Player owner)
     {
@@ -21,6 +21,9 @@ public class PlayerDeadState : PlayerState
     {
         yield return new WaitForSecondsRealtime(ReloadDelay);
         Time.timeScale = 1f;
+
+        if (Player.Instance != null)
+            Player.Instance.CurrentHealth = Player.Instance.Data.maxHealth;
 
         string currentScene = SceneManager.GetActiveScene().name;
         if (SceneTransitioner.Instance != null)

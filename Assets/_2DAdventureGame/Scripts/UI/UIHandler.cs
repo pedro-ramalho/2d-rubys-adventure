@@ -30,6 +30,11 @@ public class UIHandler : MonoBehaviour
     [Header("Dialogue Range")]
     [SerializeField] private float dialogueMaxDistance = 5f;
 
+    [Header("End Screens")]
+    [SerializeField] private AudioSource stingerSource;
+    [SerializeField] private AudioClip defeatSting;
+    [SerializeField] private float musicFadeOnEndScreen = 2f;
+
     private Player player;
     private Coroutine typeRoutine;
     private string currentLine;
@@ -247,5 +252,13 @@ public class UIHandler : MonoBehaviour
     
     public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;
     
-    public void DisplayLoseScreen() => loseScreen.style.opacity = 1.0f;
+    public void DisplayLoseScreen()
+    {
+        if (loseScreen != null) loseScreen.style.opacity = 1.0f;
+
+        MusicManager.Instance?.FadeOutAndStop(musicFadeOnEndScreen);
+
+        if (stingerSource != null && defeatSting != null)
+            stingerSource.PlayOneShot(defeatSting);
+    }
 }

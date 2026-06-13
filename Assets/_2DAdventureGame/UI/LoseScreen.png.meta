@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 314f952d03044784c9a7cefe92cd920d
+guid: ca226be49c2cdd346a6b86dac26f597a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8472394060608049892
-    second: VictoryScreen_0
+      213: -8697964458621741418
+    second: LoseScreen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: VictoryScreen_0
+      name: LoseScreen_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e21cab628df39570800000000000000
-      internalID: 8472394060608049892
+      spriteID: 696d0ee986f9a4780800000000000000
+      internalID: -8697964458621741418
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      VictoryScreen_0: 8472394060608049892
+      LoseScreen_0: -8697964458621741418
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
