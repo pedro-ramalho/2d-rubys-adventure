@@ -12,6 +12,7 @@ public class PlayerDeadState : PlayerState
         owner.Animator.SetFloat(AnimatorHashes.Speed, 0f);
 
         Time.timeScale = 0f;
+        AudioListener.pause = true;
 
         if (UIHandler.Instance != null) UIHandler.Instance.DisplayLoseScreen();
         owner.StartCoroutine(ReloadAfterDelay());
@@ -21,6 +22,7 @@ public class PlayerDeadState : PlayerState
     {
         yield return new WaitForSecondsRealtime(ReloadDelay);
         Time.timeScale = 1f;
+        AudioListener.pause = false;
 
         if (Player.Instance != null)
             Player.Instance.CurrentHealth = Player.Instance.Data.maxHealth;

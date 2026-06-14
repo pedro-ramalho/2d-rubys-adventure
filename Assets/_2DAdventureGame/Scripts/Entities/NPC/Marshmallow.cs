@@ -26,11 +26,10 @@ public class Marshmallow : NPC
 
     void Start()
     {
-        if (QuestManager.Instance != null)
-        {
-            QuestManager.Instance.OnQuestAccepted += HandleQuestAccepted;
-            QuestManager.Instance.OnQuestEpilogueFinished += HandleQuestEpilogueFinished;
-        }
+        if (QuestManager.Instance == null) return;
+
+        QuestManager.Instance.OnQuestAccepted += HandleQuestAccepted;
+        QuestManager.Instance.OnQuestEpilogueFinished += HandleQuestEpilogueFinished;
     }
 
     void OnDestroy()

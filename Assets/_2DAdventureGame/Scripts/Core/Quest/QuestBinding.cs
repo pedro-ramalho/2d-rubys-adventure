@@ -29,17 +29,38 @@ public class QuestBinding : MonoBehaviour
         if (activateOnQuestAccept)
             GetComponentsInChildren(true, renderers);
 
+        Debug.Log($"[Binding:{name}] Awake. boundQuest='{(boundQuest != null ? boundQuest.id : "<null>")}' activateOnQuestAccept={activateOnQuestAccept} enableTriggerOnQuestAccept={enableTriggerOnQuestAccept} deactivateOnComplete={deactivateOnComplete} interactables={(interactables != null ? interactables.Length : 0)} renderers={renderers.Count} colliders={colliders.Count}");
+
         SetInteractable(false);
     }
 
     void Start()
     {
-        if (QuestManager.Instance == null) return;
+        if (QuestManager.Instance == null)
+        {
+            Debug.LogWarning($"[Binding:{name}] Start: QuestManager.Instance is null. Aborting.");
+            return;
+        }
+
+        QuestReporter reporter = GetComponent<QuestReporter>();
+        bool consumed = reporter != null && reporter.IsAlreadyConsumed();
+        string reporterWorld = reporter != null ? reporter.WorldId : "<no-reporter>";
+        string activeId = QuestManager.Instance.ActiveQuest?.Data.id ?? "<none>";
+
+        Debug.Log($"[Binding:{name}] Start. reporter.worldId='{reporterWorld}' IsAlreadyConsumed={consumed} activeQuest='{activeId}' boundQuest='{(boundQuest != null ? boundQuest.id : "<null>")}'");
+
+        if (consumed)
+        {
+            Debug.Log($"[Binding:{name}] -> SetActive(false) because already consumed.");
+            gameObject.SetActive(false);
+            return;
+        }
 
         QuestManager.Instance.OnQuestAccepted += HandleAccepted;
         QuestManager.Instance.OnQuestCompleted += HandleCompleted;
 
         bool interactable = QuestManager.Instance.ActiveQuest?.Data == boundQuest;
+        Debug.Log($"[Binding:{name}] -> SetInteractable({interactable})");
         SetInteractable(interactable);
     }
 
@@ -53,12 +74,16 @@ public class QuestBinding : MonoBehaviour
 
     void HandleAccepted(Quest quest)
     {
-        if (quest.Data == boundQuest) SetInteractable(true);
+        bool matches = quest.Data == boundQuest;
+        Debug.Log($"[Binding:{name}] HandleAccepted('{quest.Data.id}') matches={matches}");
+        if (matches) SetInteractable(true);
     }
 
     void HandleCompleted(Quest quest)
     {
-        if (quest.Data == boundQuest && deactivateOnComplete) SetInteractable(false);
+        bool matches = quest.Data == boundQuest;
+        Debug.Log($"[Binding:{name}] HandleCompleted('{quest.Data.id}') matches={matches} deactivateOnComplete={deactivateOnComplete}");
+        if (matches && deactivateOnComplete) SetInteractable(false);
     }
 
     void SetInteractable(bool value)

@@ -20,3 +20,4 @@ MonoBehaviour:
     count: 47
   unlockOnAccept: 0
   backgroundTrack: {fileID: 8300000, guid: 437eb9bb2227efc4da40a05c2bcd0021, type: 3}
+  resetIfActiveOnReload: 1

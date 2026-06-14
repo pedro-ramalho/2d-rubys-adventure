@@ -103,7 +103,7 @@ public class MainMenuHandler : MonoBehaviour
         if (isStartingGame) return;
         if (SaveManager.Instance == null || !SaveManager.Instance.HasSave) return;
 
-        BeginSceneFadeAndLoad(SaveManager.Instance.Current.sceneName);
+        BeginSceneFadeAndLoad(SaveManager.Instance.Current.sceneName, writeSave: false);
     }
 
     void Update()
@@ -125,10 +125,10 @@ public class MainMenuHandler : MonoBehaviour
     void StartGame()
     {
         if (isStartingGame) return;
-        BeginSceneFadeAndLoad(firstLevelSceneName);
+        BeginSceneFadeAndLoad(firstLevelSceneName, writeSave: true);
     }
 
-    void BeginSceneFadeAndLoad(string sceneName)
+    void BeginSceneFadeAndLoad(string sceneName, bool writeSave)
     {
         isStartingGame = true;
 
@@ -140,10 +140,10 @@ public class MainMenuHandler : MonoBehaviour
         if (MusicManager.Instance != null)
             MusicManager.Instance.FadeOutAndStop(startGameFadeDuration);
 
-        StartCoroutine(FadeOutAndLoad(sceneName));
+        StartCoroutine(FadeOutAndLoad(sceneName, writeSave));
     }
 
-    IEnumerator FadeOutAndLoad(string sceneName)
+    IEnumerator FadeOutAndLoad(string sceneName, bool writeSave)
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         VisualElement overlay = root.Q<VisualElement>("FadeOverlay");
@@ -158,7 +158,7 @@ public class MainMenuHandler : MonoBehaviour
         }
         if (overlay != null) overlay.style.opacity = 1f;
 
-        if (sceneName != SceneNames.MainMenu && SaveManager.Instance != null)
+        if (writeSave && sceneName != SceneNames.MainMenu && SaveManager.Instance != null)
             SaveManager.Instance.WriteSave(sceneName);
 
         SceneManager.LoadScene(sceneName);

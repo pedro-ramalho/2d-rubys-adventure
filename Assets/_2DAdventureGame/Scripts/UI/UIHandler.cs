@@ -79,6 +79,8 @@ public class UIHandler : MonoBehaviour
         loseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
         winScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
 
+        if (stingerSource != null) stingerSource.ignoreListenerPause = true;
+
         dialoguePanel.style.display = DisplayStyle.None;
 
         player = Player.Instance;
