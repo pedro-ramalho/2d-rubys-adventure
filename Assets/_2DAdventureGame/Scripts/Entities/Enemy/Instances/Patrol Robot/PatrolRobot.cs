@@ -24,6 +24,8 @@ public class PatrolRobot : Enemy
 
     public int Direction { get; set; }
 
+    public SpriteRenderer SpriteRenderer { get; private set; }
+
     public PatrolRobotState CurrentState { get; private set; }
     public PatrolRobotPatrollingState PatrollingState { get; private set; }
     public PatrolRobotFixedState FixedState { get; private set; }
@@ -31,6 +33,8 @@ public class PatrolRobot : Enemy
     protected override void Awake()
     {
         base.Awake();
+
+        SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         PatrollingState = new PatrolRobotPatrollingState();
         FixedState = new PatrolRobotFixedState();

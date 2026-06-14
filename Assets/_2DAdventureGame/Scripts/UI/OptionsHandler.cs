@@ -27,6 +27,7 @@ public class OptionsHandler : MonoBehaviour
     private VisualElement optionsRoot;
     private (string Button, InputAction Action, int Index)[] rebindEntries;
     private MainMenuHandler clickPlayer;
+    private bool isRebinding;
 
     void Start()
     {
@@ -126,6 +127,9 @@ public class OptionsHandler : MonoBehaviour
 
     void StartRebind(InputAction action, int bindingIndex, Button button)
     {
+        if (isRebinding) return;
+        isRebinding = true;
+
         action.Disable();
         button.SetEnabled(false);
         button.text = "Press a key...";
@@ -140,6 +144,7 @@ public class OptionsHandler : MonoBehaviour
                 button.SetEnabled(true);
                 button.text = GetBindingDisplayName(action, bindingIndex);
                 InputManager.Instance.SaveBindings();
+                isRebinding = false;
             })
             .OnCancel(op =>
             {
@@ -147,6 +152,7 @@ public class OptionsHandler : MonoBehaviour
                 action.Enable();
                 button.SetEnabled(true);
                 button.text = GetBindingDisplayName(action, bindingIndex);
+                isRebinding = false;
             })
             .Start();
     }
