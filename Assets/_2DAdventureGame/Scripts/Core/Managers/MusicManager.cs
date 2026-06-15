@@ -11,15 +11,6 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
     private Coroutine transition;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Instance != this) return;
-
-        if (source != null) source.ignoreListenerPause = true;
-        if (stingerSource != null) stingerSource.ignoreListenerPause = true;
-    }
-
     public void Play(AudioClip clip)
     {
         if (clip == null) return;

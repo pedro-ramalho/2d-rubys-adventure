@@ -2440,11 +2440,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
-        type: 3}
-      propertyPath: worldId
-      value: l1q1.box.2
-      objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: interactables.Array.size
@@ -14223,7 +14218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
   type: 1
   reportTag: Patrol Robot
-  worldId: l1q2.robot.2
 --- !u!1001 &1182738465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14914,7 +14908,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
   type: 1
   reportTag: Patrol Robot
-  worldId: l1q2.robot.1
 --- !u!1001 &1235617655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15338,7 +15331,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
   type: 1
   reportTag: Patrol Robot
-  worldId: l1q2.robot.4
 --- !u!1001 &1318164685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15351,11 +15343,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Box
-      objectReference: {fileID: 0}
-    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
-        type: 3}
-      propertyPath: worldId
-      value: l1q1.box.1
       objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
@@ -19707,7 +19694,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
   type: 1
   reportTag: Patrol Robot
-  worldId: l1q2.robot.3
 --- !u!1 &1343173741
 GameObject:
   m_ObjectHideFlags: 0
@@ -25729,11 +25715,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
-        type: 3}
-      propertyPath: worldId
-      value: l1q1.box.3
-      objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: interactables.Array.size
@@ -29262,11 +29243,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
-        type: 3}
-      propertyPath: worldId
-      value: l1q1.box.6
-      objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: interactables.Array.size
@@ -29481,11 +29457,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Box (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
-        type: 3}
-      propertyPath: worldId
-      value: l1q1.box.4
       objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
@@ -30338,11 +30309,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Box (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
-        type: 3}
-      propertyPath: worldId
-      value: l1q1.box.5
       objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}

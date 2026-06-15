@@ -7,17 +7,8 @@ public class QuestConclusionActivator : MonoBehaviour
 
     void Start()
     {
-        if (QuestManager.Instance == null) return;
-
-        QuestManager.Instance.OnQuestConcluded += HandleConcluded;
-
-        if (QuestManager.Instance.IsCompleted(boundQuest) && target != null)
-        {
-            foreach (AudioSource source in target.GetComponentsInChildren<AudioSource>(true))
-                source.playOnAwake = false;
-
-            target.SetActive(true);
-        }
+        if (QuestManager.Instance != null)
+            QuestManager.Instance.OnQuestConcluded += HandleConcluded;    
     }
 
     void OnDestroy()

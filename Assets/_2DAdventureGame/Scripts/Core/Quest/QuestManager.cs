@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-100)]
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
@@ -12,7 +11,6 @@ public class QuestManager : MonoBehaviour
 
     public Quest ActiveQuest { get; private set; }
     private readonly HashSet<QuestData> completed = new();
-    private readonly HashSet<string> consumedWorldIds = new();
     private readonly Dictionary<string, QuestData> questsById = new();
 
     public event Action<Quest> OnQuestAccepted;
@@ -24,14 +22,11 @@ public class QuestManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         BuildQuestLookup();
-        Debug.Log($"[QM] Awake in scene='{gameObject.scene.name}'. Known quests=[{string.Join(",", questsById.Keys)}]");
     }
 
     void Start()
     {
-        bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasSave;
-        Debug.Log($"[QM] Start. HasSave={hasSave}");
-        if (hasSave)
+        if (SaveManager.Instance != null && SaveManager.Instance.HasSave)
             RestoreFromSave(SaveManager.Instance.Current);
     }
 
@@ -49,37 +44,16 @@ public class QuestManager : MonoBehaviour
         {
             foreach (string id in save.completedQuestIds)
                 if (questsById.TryGetValue(id, out QuestData data))
-                {
                     completed.Add(data);
-                    if (AbilityManager.Instance != null)
-                        AbilityManager.Instance.Unlock(data.unlockOnAccept);
-                }
         }
-
-        if (save.consumedWorldIds != null)
-        {
-            foreach (string worldId in save.consumedWorldIds)
-                if (!string.IsNullOrEmpty(worldId))
-                    consumedWorldIds.Add(worldId);
-        }
-
-        Debug.Log($"[QM] Restored: completed=[{string.Join(",", GetCompletedQuestIds())}], consumed=[{string.Join(",", consumedWorldIds)}], save.activeId='{save.activeQuestId}' save.count={save.activeQuestCount}");
 
         if (!string.IsNullOrEmpty(save.activeQuestId) && questsById.TryGetValue(save.activeQuestId, out QuestData activeData))
             RestoreActiveQuest(activeData, save.activeQuestCount);
     }
 
-    public void AcceptQuest(QuestData data)
-    {
-        Debug.Log($"[QM] AcceptQuest('{data?.id}')");
-        StartQuest(data, initialCount: 0, raiseAccepted: true);
-    }
+    public void AcceptQuest(QuestData data) => StartQuest(data, initialCount: 0, raiseAccepted: true);
 
-    private void RestoreActiveQuest(QuestData data, int count)
-    {
-        Debug.Log($"[QM] RestoreActiveQuest('{data.id}', count={count})");
-        StartQuest(data, count, raiseAccepted: false);
-    }
+    private void RestoreActiveQuest(QuestData data, int count) => StartQuest(data, count, raiseAccepted: false);
 
     private void StartQuest(QuestData data, int initialCount, bool raiseAccepted)
     {
@@ -99,31 +73,14 @@ public class QuestManager : MonoBehaviour
             yield return data.id;
     }
 
-    public IEnumerable<string> GetConsumedWorldIds() => consumedWorldIds;
-
-    public bool IsConsumed(string worldId) =>
-        !string.IsNullOrEmpty(worldId) && consumedWorldIds.Contains(worldId);
-
     public void SubmitReport(QuestReport report)
     {
-        Debug.Log($"[QM] SubmitReport type={report.Type} tag='{report.Tag}' worldId='{report.WorldId}' (active='{ActiveQuest?.Data.id}' count={ActiveQuest?.Count})");
-
-        if (ActiveQuest == null || ActiveQuest.IsComplete)
-        {
-            Debug.Log("[QM] SubmitReport: ignored (no active quest or already complete)");
+        if (ActiveQuest == null || ActiveQuest.IsComplete) 
             return;
-        }
-
-        if (!string.IsNullOrEmpty(report.WorldId) && !consumedWorldIds.Add(report.WorldId))
-        {
-            Debug.Log($"[QM] SubmitReport: worldId '{report.WorldId}' already consumed, ignored.");
-            return;
-        }
 
         ActiveQuest.ApplyProgress(report);
-        Debug.Log($"[QM] After ApplyProgress: count={ActiveQuest.Count}/{ActiveQuest.Data.objective.count}");
 
-        if (ActiveQuest.IsComplete)
+        if (ActiveQuest.IsComplete) 
             CompleteActiveQuest();
     }
 
@@ -134,27 +91,22 @@ public class QuestManager : MonoBehaviour
 
         ActiveQuest = null;
 
-        Debug.Log($"[QM] CompleteActiveQuest('{finished.Data.id}')");
-
         OnQuestCompleted?.Invoke(finished);
 
         AudioClip defaultTrack = SceneMusicConfigManager.Instance?.DefaultTrack;
         if (MusicManager.Instance == null)
             return;
-
+        
         if (defaultTrack != null)
             MusicManager.Instance.PlayWithStinger(questCompletionSfx, defaultTrack);
         else
             MusicManager.Instance.FadeOutAndStop(5f);
+        
     }
 
     public bool IsCompleted(QuestData data) => completed.Contains(data);
 
-    public void ConcludeQuest(QuestData data)
-    {
-        Debug.Log($"[QM] ConcludeQuest('{data?.id}')");
-        OnQuestConcluded?.Invoke(data);
-    }
+    public void ConcludeQuest(QuestData data) => OnQuestConcluded?.Invoke(data);
 
     public void NotifyEpilogueFinished(QuestData data) => OnQuestEpilogueFinished?.Invoke(data);
 }

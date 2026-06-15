@@ -10,5 +10,4 @@ public class Save
     public string activeQuestId;
     public int activeQuestCount;
     public List<string> completedQuestIds;
-    public List<string> consumedWorldIds;
 }
