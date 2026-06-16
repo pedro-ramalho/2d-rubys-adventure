@@ -2440,6 +2440,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: worldId
+      value: l1q1.box.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: interactables.Array.size
@@ -12765,6 +12776,98 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 998943083}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1010579478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1010579479}
+  - component: {fileID: 1010579480}
+  m_Layer: 0
+  m_Name: L1Q2 Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1010579479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010579478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 108008129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1010579480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010579478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d22addf5ba33344586adddc58896a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CountedQuestController
+  data: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  completionSfx: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
+--- !u!1 &1039706586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039706587}
+  - component: {fileID: 1039706588}
+  m_Layer: 0
+  m_Name: L1Q1 Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1039706587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039706586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 108008129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1039706588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039706586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d22addf5ba33344586adddc58896a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CountedQuestController
+  data: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
+  completionSfx: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
 --- !u!1001 &1048376030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14216,8 +14319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 1
-  reportTag: Patrol Robot
+  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  worldId: l1q2.robot.2
 --- !u!1001 &1182738465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14906,8 +15009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 1
-  reportTag: Patrol Robot
+  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  worldId: l1q2.robot.1
 --- !u!1001 &1235617655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15329,8 +15432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 1
-  reportTag: Patrol Robot
+  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  worldId: l1q2.robot.4
 --- !u!1001 &1318164685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15343,6 +15446,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: worldId
+      value: l1q1.box.1
       objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
@@ -19692,8 +19806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 1
-  reportTag: Patrol Robot
+  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  worldId: l1q2.robot.3
 --- !u!1 &1343173741
 GameObject:
   m_ObjectHideFlags: 0
@@ -25715,6 +25829,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: worldId
+      value: l1q1.box.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: interactables.Array.size
@@ -28611,6 +28736,53 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1950635833}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1950761559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1950761560}
+  - component: {fileID: 1950761561}
+  m_Layer: 0
+  m_Name: L1Q1 Cargo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1950761560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950761559}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 108008129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1950761561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950761559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af886e9653b455049afd6a4d2febd6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhaseGatedActivator
+  quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
+  target: {fileID: 59159636}
+  activateOnConclude: 1
 --- !u!114 &1954623967 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3469440624432549009, guid: 51e1c83b411afaf4fb8c15695f2ce000,
@@ -29243,6 +29415,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: worldId
+      value: l1q1.box.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: interactables.Array.size
@@ -29457,6 +29640,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Box (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: worldId
+      value: l1q1.box.4
       objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
@@ -30310,6 +30504,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
+    - target: {fileID: 1461250853656128103, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: worldId
+      value: l1q1.box.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2189125344610601575, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: interactables.Array.size
@@ -30828,7 +31033,19 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2324887274116712341, guid: 0f5547b27424469469effdb43a11811a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1039706587}
+    - targetCorrespondingSourceObject: {fileID: 2324887274116712341, guid: 0f5547b27424469469effdb43a11811a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1010579479}
+    - targetCorrespondingSourceObject: {fileID: 2324887274116712341, guid: 0f5547b27424469469effdb43a11811a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1950761560}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f5547b27424469469effdb43a11811a, type: 3}
 --- !u!1660057539 &9223372036854775807

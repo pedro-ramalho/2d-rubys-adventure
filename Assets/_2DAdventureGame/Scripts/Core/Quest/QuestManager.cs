@@ -1,27 +1,16 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
 
-    [SerializeField] private AudioClip questCompletionSfx;
-    [SerializeField] private QuestData[] knownQuests;
-
-    public Quest ActiveQuest { get; private set; }
-    private readonly HashSet<QuestData> completed = new();
-    private readonly Dictionary<string, QuestData> questsById = new();
-
-    public event Action<Quest> OnQuestAccepted;
-    public event Action<Quest> OnQuestCompleted;
-    public event Action<QuestData> OnQuestConcluded;
-    public event Action<QuestData> OnQuestEpilogueFinished;
+    private readonly Dictionary<string, QuestController> controllers = new();
 
     void Awake()
     {
         if (Instance == null) Instance = this;
-        BuildQuestLookup();
     }
 
     void Start()
@@ -30,83 +19,41 @@ public class QuestManager : MonoBehaviour
             RestoreFromSave(SaveManager.Instance.Current);
     }
 
-    void BuildQuestLookup()
+    public void Register(QuestController controller)
     {
-        if (knownQuests == null) return;
-        foreach (QuestData quest in knownQuests)
-            if (quest != null && !string.IsNullOrEmpty(quest.id))
-                questsById[quest.id] = quest;
+        if (controller == null || controller.Data == null || string.IsNullOrEmpty(controller.Data.id))
+            return;
+        controllers[controller.Data.id] = controller;
+    }
+
+    public void Unregister(QuestController controller)
+    {
+        if (controller == null || controller.Data == null) return;
+        if (controllers.TryGetValue(controller.Data.id, out QuestController current) && current == controller)
+            controllers.Remove(controller.Data.id);
+    }
+
+    public QuestController Get(string questId) =>
+        !string.IsNullOrEmpty(questId) && controllers.TryGetValue(questId, out QuestController c) ? c : null;
+
+    public QuestController Get(QuestData questData) =>
+        questData != null ? Get(questData.id) : null;
+
+    public IEnumerable<QuestController> All => controllers.Values;
+
+    public List<QuestSaveData> CaptureAll()
+    {
+        List<QuestSaveData> list = new();
+        foreach (QuestController controller in controllers.Values)
+            list.Add(controller.Capture());
+        return list;
     }
 
     void RestoreFromSave(Save save)
     {
-        if (save.completedQuestIds != null)
-        {
-            foreach (string id in save.completedQuestIds)
-                if (questsById.TryGetValue(id, out QuestData data))
-                    completed.Add(data);
-        }
-
-        if (!string.IsNullOrEmpty(save.activeQuestId) && questsById.TryGetValue(save.activeQuestId, out QuestData activeData))
-            RestoreActiveQuest(activeData, save.activeQuestCount);
+        if (save?.quests == null) return;
+        foreach (QuestSaveData saved in save.quests)
+            if (saved != null && controllers.TryGetValue(saved.questId, out QuestController controller))
+                controller.Restore(saved);
     }
-
-    public void AcceptQuest(QuestData data) => StartQuest(data, initialCount: 0, raiseAccepted: true);
-
-    private void RestoreActiveQuest(QuestData data, int count) => StartQuest(data, count, raiseAccepted: false);
-
-    private void StartQuest(QuestData data, int initialCount, bool raiseAccepted)
-    {
-        ActiveQuest = new Quest(data, initialCount);
-        if (raiseAccepted) OnQuestAccepted?.Invoke(ActiveQuest);
-
-        if (AbilityManager.Instance != null)
-            AbilityManager.Instance.Unlock(data.unlockOnAccept);
-
-        if (MusicManager.Instance != null && data.backgroundTrack != null)
-            MusicManager.Instance.Play(data.backgroundTrack);
-    }
-
-    public IEnumerable<string> GetCompletedQuestIds()
-    {
-        foreach (QuestData data in completed)
-            yield return data.id;
-    }
-
-    public void SubmitReport(QuestReport report)
-    {
-        if (ActiveQuest == null || ActiveQuest.IsComplete) 
-            return;
-
-        ActiveQuest.ApplyProgress(report);
-
-        if (ActiveQuest.IsComplete) 
-            CompleteActiveQuest();
-    }
-
-    private void CompleteActiveQuest()
-    {
-        Quest finished = ActiveQuest;
-        completed.Add(finished.Data);
-
-        ActiveQuest = null;
-
-        OnQuestCompleted?.Invoke(finished);
-
-        AudioClip defaultTrack = SceneMusicConfigManager.Instance?.DefaultTrack;
-        if (MusicManager.Instance == null)
-            return;
-        
-        if (defaultTrack != null)
-            MusicManager.Instance.PlayWithStinger(questCompletionSfx, defaultTrack);
-        else
-            MusicManager.Instance.FadeOutAndStop(5f);
-        
-    }
-
-    public bool IsCompleted(QuestData data) => completed.Contains(data);
-
-    public void ConcludeQuest(QuestData data) => OnQuestConcluded?.Invoke(data);
-
-    public void NotifyEpilogueFinished(QuestData data) => OnQuestEpilogueFinished?.Invoke(data);
 }

@@ -43,6 +43,13 @@ public class PatrolRobot : Enemy
         CurrentState.Enter(this);
     }
 
+    void Start()
+    {
+        QuestReporter reporter = GetComponent<QuestReporter>();
+        if (reporter != null && reporter.IsConsumed())
+            EnterFixedSilent();
+    }
+
     void Update() => CurrentState.Update(this);
 
     void FixedUpdate() => CurrentState.FixedUpdate(this);
@@ -52,6 +59,15 @@ public class PatrolRobot : Enemy
         CurrentState.Exit(this);
         CurrentState = newState;
         CurrentState.Enter(this);
+    }
+
+    public void EnterFixedSilent()
+    {
+        Rigidbody.simulated = false;
+        Animator.SetTrigger(AnimatorHashes.Fixed);
+        AudioSource.Stop();
+        if (smokeEffect != null) smokeEffect.Stop();
+        CurrentState = FixedState;
     }
 
     protected override void OnProjectileHit() => CurrentState.OnProjectileHit(this);

@@ -22,12 +22,9 @@ public class PlayerDeadState : PlayerState
         yield return new WaitForSecondsRealtime(ReloadDelay);
         Time.timeScale = 1f;
 
-        if (Player.Instance != null)
-            Player.Instance.CurrentHealth = Player.Instance.Data.maxHealth;
-
         string currentScene = SceneManager.GetActiveScene().name;
         if (SceneTransitioner.Instance != null)
-            SceneTransitioner.Instance.LoadSceneWithCrossfade(currentScene, 0f);
+            SceneTransitioner.Instance.LoadSceneWithCrossfade(currentScene, 0f, writeSave: false);
         else
             SceneManager.LoadScene(currentScene);
     }

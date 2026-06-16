@@ -36,12 +36,15 @@ public class SceneTransitioner : MonoBehaviour
     }
 
     public void LoadSceneWithCrossfade(string sceneName) =>
-        LoadSceneWithCrossfade(sceneName, preTransitionDelay);
+        LoadSceneWithCrossfade(sceneName, preTransitionDelay, writeSave: true);
 
     public void LoadSceneWithCrossfade(string sceneName, float preDelay) =>
-        StartCoroutine(LoadScene(sceneName, preDelay));
+        LoadSceneWithCrossfade(sceneName, preDelay, writeSave: true);
 
-    IEnumerator LoadScene(string scene, float preDelay)
+    public void LoadSceneWithCrossfade(string sceneName, float preDelay, bool writeSave) =>
+        StartCoroutine(LoadScene(sceneName, preDelay, writeSave));
+
+    IEnumerator LoadScene(string scene, float preDelay, bool writeSave)
     {
         IsTransitioning = true;
 
@@ -59,7 +62,7 @@ public class SceneTransitioner : MonoBehaviour
 
         yield return new WaitForSeconds(fadeOutDuration);
 
-        if (scene != SceneNames.MainMenu && SaveManager.Instance != null)
+        if (writeSave && scene != SceneNames.MainMenu && SaveManager.Instance != null)
             SaveManager.Instance.WriteSave(scene);
 
         SceneManager.LoadScene(scene);

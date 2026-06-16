@@ -6,7 +6,7 @@ using UnityEngine;
 public class SaveManager : PersistentSingleton<SaveManager>
 {
     private const string SaveFileName = "save.json";
-    private const int CurrentSaveVersion = 3;
+    private const int CurrentSaveVersion = 4;
     private const int NoStoredHealth = -1;
 
     public bool HasSave { get; private set; }
@@ -44,30 +44,16 @@ public class SaveManager : PersistentSingleton<SaveManager>
 
     public void WriteSave(string sceneName)
     {
-        string activeQuestId = string.Empty;
-        int activeQuestCount = 0;
-        if (QuestManager.Instance != null && QuestManager.Instance.ActiveQuest != null)
-        {
-            activeQuestId = QuestManager.Instance.ActiveQuest.Data.id;
-            activeQuestCount = QuestManager.Instance.ActiveQuest.Count;
-        }
-
-        HashSet<string> mergedCompleted = new();
-        if (Current != null && Current.completedQuestIds != null)
-            foreach (string id in Current.completedQuestIds)
-                mergedCompleted.Add(id);
-        if (QuestManager.Instance != null)
-            foreach (string id in QuestManager.Instance.GetCompletedQuestIds())
-                mergedCompleted.Add(id);
+        List<QuestSaveData> quests = QuestManager.Instance != null
+            ? QuestManager.Instance.CaptureAll()
+            : PreserveQuestsFromCurrent();
 
         Save save = new Save
         {
             version = CurrentSaveVersion,
             sceneName = sceneName,
             playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth,
-            activeQuestId = activeQuestId,
-            activeQuestCount = activeQuestCount,
-            completedQuestIds = new List<string>(mergedCompleted)
+            quests = quests
         };
 
         try
@@ -81,6 +67,21 @@ public class SaveManager : PersistentSingleton<SaveManager>
         {
             Debug.LogError("Failed to write save file.");
         }
+    }
+
+    List<QuestSaveData> PreserveQuestsFromCurrent()
+    {
+        if (Current?.quests == null) return new List<QuestSaveData>();
+
+        List<QuestSaveData> copy = new();
+        foreach (QuestSaveData q in Current.quests)
+            copy.Add(new QuestSaveData
+            {
+                questId = q.questId,
+                phase = q.phase,
+                consumedIds = q.consumedIds != null ? new List<string>(q.consumedIds) : null
+            });
+        return copy;
     }
 
     public void DeleteSave()

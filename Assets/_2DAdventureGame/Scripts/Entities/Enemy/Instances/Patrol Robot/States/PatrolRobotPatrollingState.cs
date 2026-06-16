@@ -42,5 +42,11 @@ public class PatrolRobotPatrollingState : PatrolRobotState
         owner.Rigidbody.MovePosition(position);
     }
 
-    public override void OnProjectileHit(PatrolRobot owner) => owner.ChangeState(owner.FixedState);
+    public override void OnProjectileHit(PatrolRobot owner)
+    {
+        QuestReporter reporter = owner.GetComponent<QuestReporter>();
+        if (reporter != null && reporter.Quest != null && !reporter.CanReport()) return;
+
+        owner.ChangeState(owner.FixedState);
+    }
 }

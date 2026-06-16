@@ -6,17 +6,26 @@ public class Collectible : MonoBehaviour
     protected virtual void ApplyEffect(Player player) { }
     protected virtual void OnEffectApplied() => Destroy(gameObject);
 
+    void Start()
+    {
+        QuestReporter reporter = GetComponent<QuestReporter>();
+        if (reporter != null && reporter.IsConsumed())
+            gameObject.SetActive(false);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Player player))
-        {
-            ApplyEffect(player);
+        if (!other.TryGetComponent(out Player player)) return;
 
-            if (collectibleClip != null)
-                player.OneShotSource.PlayOneShot(collectibleClip);
+        QuestReporter reporter = GetComponent<QuestReporter>();
+        if (reporter != null && reporter.Quest != null && !reporter.CanReport()) return;
 
-            OnEffectApplied();
-            GetComponent<QuestReporter>()?.Report();
-        }
-    }         
+        ApplyEffect(player);
+
+        if (collectibleClip != null)
+            player.OneShotSource.PlayOneShot(collectibleClip);
+
+        OnEffectApplied();
+        if (reporter != null) reporter.Report();
+    }
 }

@@ -10,6 +10,14 @@ public class MusicManager : PersistentSingleton<MusicManager>
     [SerializeField] private float transitionDelay = 1.0f;
 
     private Coroutine transition;
+    private float baseVolume = 1f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (Instance != this) return;
+        if (source != null) baseVolume = source.volume;
+    }
 
     public void Play(AudioClip clip)
     {
@@ -22,6 +30,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
         {
             source.clip = clip;
             source.loop = true;
+            source.volume = baseVolume;
             source.Play();
             return;
         }
@@ -32,10 +41,13 @@ public class MusicManager : PersistentSingleton<MusicManager>
     public void PlayWithStinger(AudioClip stinger, AudioClip nextTrack)
     {
         if (stinger == null) { Play(nextTrack); return; }
-        if (nextTrack == null) return;
 
         if (transition != null) StopCoroutine(transition);
-        transition = StartCoroutine(StingerThenTrack(stinger, nextTrack));
+
+        if (nextTrack == null)
+            transition = StartCoroutine(StingerThenSilence(stinger));
+        else
+            transition = StartCoroutine(StingerThenTrack(stinger, nextTrack));
     }
 
     public void FadeOutAndStop(float duration)
@@ -46,17 +58,15 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
     IEnumerator FadeOutAndStopRoutine(float duration)
     {
-        float restoreVolume = source.volume;
         yield return FadeVolumeTo(0f, duration);
         source.Stop();
         source.clip = null;
-        source.volume = restoreVolume;
+        source.volume = baseVolume;
         transition = null;
     }
 
     IEnumerator SwitchTo(AudioClip clip)
     {
-        float originalVolume = source.volume;
         yield return FadeVolumeTo(0f, fadeOutDuration);
         source.Stop();
 
@@ -65,15 +75,29 @@ public class MusicManager : PersistentSingleton<MusicManager>
         source.clip = clip;
         source.loop = true;
         source.Play();
-        yield return FadeVolumeTo(originalVolume, fadeInDuration);
+        yield return FadeVolumeTo(baseVolume, fadeInDuration);
+
+        transition = null;
+    }
+
+    IEnumerator StingerThenSilence(AudioClip stinger)
+    {
+        if (source.isPlaying)
+        {
+            yield return FadeVolumeTo(0f, fadeOutDuration);
+            source.Stop();
+            source.clip = null;
+            source.volume = baseVolume;
+        }
+
+        if (stingerSource != null) stingerSource.PlayOneShot(stinger);
+        yield return new WaitForSecondsRealtime(stinger.length);
 
         transition = null;
     }
 
     IEnumerator StingerThenTrack(AudioClip stinger, AudioClip nextTrack)
     {
-        float originalVolume = source.volume;
-
         source.Stop();
         if (stingerSource != null) stingerSource.PlayOneShot(stinger);
 
@@ -84,7 +108,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
         source.loop = true;
         source.volume = 0f;
         source.Play();
-        yield return FadeVolumeTo(originalVolume, fadeInDuration);
+        yield return FadeVolumeTo(baseVolume, fadeInDuration);
 
         transition = null;
     }

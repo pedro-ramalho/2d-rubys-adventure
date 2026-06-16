@@ -12,25 +12,18 @@ public class QuestTrackerManager : MonoBehaviour
     private Label progressLabel;
 
     private bool isOpen;
-    private QuestData completionPendingQuest;
+    private QuestController completionPending;
 
     private int lastCount = -1;
-    private QuestData lastQuest;
+    private QuestController lastTracked;
 
     private const string CompletionMessage = "Quest complete! Return and speak with the NPC.";
 
     void Awake() => inputActions = InputManager.Instance.Actions;
 
-    void OnEnable()
-    {
-        inputActions.Player.Tracker.performed += OnTrackerPressed;
-    }
+    void OnEnable() => inputActions.Player.Tracker.performed += OnTrackerPressed;
 
-    void OnDisable()
-    {
-        inputActions.Player.Tracker.performed -= OnTrackerPressed;
-    }
-
+    void OnDisable() => inputActions.Player.Tracker.performed -= OnTrackerPressed;
 
     void Start()
     {
@@ -40,10 +33,11 @@ public class QuestTrackerManager : MonoBehaviour
         progressLabel = root.Q<Label>("Progress");
 
         if (QuestManager.Instance != null)
-        {
-            QuestManager.Instance.OnQuestCompleted += HandleQuestCompleted;
-            QuestManager.Instance.OnQuestConcluded += HandleQuestConcluded;
-        }
+            foreach (QuestController c in QuestManager.Instance.All)
+            {
+                c.OnPhaseChanged += HandlePhaseChanged;
+                c.OnConcluded += HandleConcluded;
+            }
 
         SetVisible(false);
     }
@@ -51,22 +45,26 @@ public class QuestTrackerManager : MonoBehaviour
     void OnDestroy()
     {
         if (QuestManager.Instance != null)
+            foreach (QuestController c in QuestManager.Instance.All)
+            {
+                c.OnPhaseChanged -= HandlePhaseChanged;
+                c.OnConcluded -= HandleConcluded;
+            }
+    }
+
+    void HandlePhaseChanged(QuestController c)
+    {
+        if (c.Phase == QuestPhase.After)
         {
-            QuestManager.Instance.OnQuestCompleted -= HandleQuestCompleted;
-            QuestManager.Instance.OnQuestConcluded -= HandleQuestConcluded;
+            completionPending = c;
+            Refresh();
         }
     }
 
-    void HandleQuestCompleted(Quest quest)
+    void HandleConcluded(QuestController c)
     {
-        completionPendingQuest = quest.Data;
-        Refresh();
-    }
-
-    void HandleQuestConcluded(QuestData data)
-    {
-        if (data != completionPendingQuest) return;
-        completionPendingQuest = null;
+        if (c != completionPending) return;
+        completionPending = null;
         isOpen = false;
         Refresh();
     }
@@ -76,18 +74,17 @@ public class QuestTrackerManager : MonoBehaviour
         if (PauseManager.IsPaused)
         {
             SetVisible(false);
-            
             return;
         }
 
-        if (isOpen || completionPendingQuest != null) 
+        if (isOpen || completionPending != null)
             Refresh();
     }
 
     void OnTrackerPressed(InputAction.CallbackContext ctx)
     {
         if (PauseManager.IsPaused) return;
-        if (completionPendingQuest != null) return;
+        if (completionPending != null) return;
 
         isOpen = !isOpen;
         Refresh();
@@ -95,7 +92,7 @@ public class QuestTrackerManager : MonoBehaviour
 
     void Refresh()
     {
-        if (completionPendingQuest != null)
+        if (completionPending != null)
         {
             if (descriptionLabel != null) descriptionLabel.text = CompletionMessage;
             if (progressLabel != null) progressLabel.text = string.Empty;
@@ -103,26 +100,35 @@ public class QuestTrackerManager : MonoBehaviour
             return;
         }
 
-        Quest quest = QuestManager.Instance?.ActiveQuest;
-        if (!isOpen || quest == null)
+        CountedQuestController tracked = FindActiveCounted();
+        if (!isOpen || tracked == null)
         {
             SetVisible(false);
             return;
         }
 
-        if (descriptionLabel != null && quest.Data != lastQuest)
+        if (descriptionLabel != null && tracked != lastTracked)
         {
-            descriptionLabel.text = quest.Data.description;
-            lastQuest = quest.Data;
+            descriptionLabel.text = tracked.Data.description;
+            lastTracked = tracked;
         }
 
-        if (progressLabel != null && quest.Count != lastCount)
+        if (progressLabel != null && tracked.Count != lastCount)
         {
-            progressLabel.text = $"{quest.Count} / {quest.Data.objective.count}";
-            lastCount = quest.Count;
+            progressLabel.text = $"{tracked.Count} / {tracked.Target}";
+            lastCount = tracked.Count;
         }
 
         SetVisible(true);
+    }
+
+    CountedQuestController FindActiveCounted()
+    {
+        if (QuestManager.Instance == null) return null;
+        foreach (QuestController c in QuestManager.Instance.All)
+            if (c.Phase == QuestPhase.During && c is CountedQuestController counted)
+                return counted;
+        return null;
     }
 
     void SetVisible(bool visible)

@@ -2,10 +2,10 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "QuestDialogue", menuName = "Game/Quest Dialogue")]
 public class QuestDialogue : ScriptableObject
-{  
+{
     [Tooltip("The quest associated with this dialogue.")]
     public QuestData quest;
-    
+
     [Tooltip("Dialogue lines that will be displayed before the associated quest is accepted by the Player.")]
     public DialoguePhase before;
 
@@ -15,14 +15,18 @@ public class QuestDialogue : ScriptableObject
     [Tooltip("Dialogue lines that will be displayed once the associated quest is completed.")]
     public DialoguePhase after;
 
-    public DialoguePhase Pick(QuestManager manager)
+    public DialoguePhase Pick(QuestController controller)
     {
-        DialoguePhase phase =
-            manager.IsCompleted(quest)         ? after  :
-            manager.ActiveQuest?.Data == quest ? during :
-                                                 before;
+        QuestPhase phase = controller != null ? controller.Phase : QuestPhase.Before;
 
-        return phase != null && !phase.IsEmpty ? phase : null;
+        DialoguePhase chosen = phase switch
+        {
+            QuestPhase.After  => after,
+            QuestPhase.During => during,
+            _                 => before
+        };
+
+        return chosen != null && !chosen.IsEmpty ? chosen : null;
     }
 
     public bool IsAfterPhase(DialoguePhase phase) => phase == after && quest != null;

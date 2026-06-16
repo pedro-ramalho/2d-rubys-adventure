@@ -14,6 +14,7 @@ public class Marshmallow : NPC
     private Rigidbody2D rb;
     private Collider2D[] colliders;
     private Vector2 startPosition;
+    private QuestController controller;
 
     void Awake()
     {
@@ -26,31 +27,30 @@ public class Marshmallow : NPC
 
     void Start()
     {
-        if (QuestManager.Instance != null)
-        {
-            QuestManager.Instance.OnQuestAccepted += HandleQuestAccepted;
-            QuestManager.Instance.OnQuestEpilogueFinished += HandleQuestEpilogueFinished;
-        }
+        if (QuestManager.Instance == null) return;
+        controller = QuestManager.Instance.Get(boundQuest);
+        if (controller == null) return;
+
+        controller.OnPhaseChanged += HandlePhaseChanged;
+        controller.OnEpilogueFinished += HandleEpilogueFinished;
     }
 
     void OnDestroy()
     {
-        if (QuestManager.Instance != null)
+        if (controller != null)
         {
-            QuestManager.Instance.OnQuestAccepted -= HandleQuestAccepted;
-            QuestManager.Instance.OnQuestEpilogueFinished -= HandleQuestEpilogueFinished;
+            controller.OnPhaseChanged -= HandlePhaseChanged;
+            controller.OnEpilogueFinished -= HandleEpilogueFinished;
         }
     }
 
-    void HandleQuestAccepted(Quest quest)
+    void HandlePhaseChanged(QuestController c)
     {
-        if (quest.Data == boundQuest) WalkToExit();
+        if (c.Phase == QuestPhase.During) WalkToExit();
+        else if (c.Phase == QuestPhase.After) WalkBack();
     }
 
-    void HandleQuestEpilogueFinished(QuestData data)
-    {
-        if (data == boundQuest) SetCollidersEnabled(false);
-    }
+    void HandleEpilogueFinished(QuestController c) => SetCollidersEnabled(false);
 
     public void WalkToExit()
     {

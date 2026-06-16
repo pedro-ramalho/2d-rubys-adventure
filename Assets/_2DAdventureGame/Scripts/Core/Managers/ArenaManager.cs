@@ -1,12 +1,10 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ArenaManager : MonoBehaviour
 {
     [SerializeField] private WaveSpawner spawner;
     [SerializeField] private UIHandler ui;
-    [SerializeField] private Marshmallow marshmallow;
     [SerializeField] private QuestData winQuest;
     [SerializeField] private float endGameDelay = 3f;
     [SerializeField] private float epilogueReadDelay = 3f;
@@ -14,32 +12,31 @@ public class ArenaManager : MonoBehaviour
     [SerializeField] private AudioClip victoryStinger;
 
     private bool gameEnded;
+    private QuestController controller;
 
     void Start()
     {
         spawner.OnAllWavesCleared += HandleAllWavesCleared;
+
         if (QuestManager.Instance != null)
-            QuestManager.Instance.OnQuestEpilogueFinished += HandleQuestEpilogueFinished;
+        {
+            controller = QuestManager.Instance.Get(winQuest);
+            if (controller != null) controller.OnEpilogueFinished += HandleEpilogueFinished;
+        }
     }
 
     void OnDestroy()
     {
-        if (spawner != null)
-            spawner.OnAllWavesCleared -= HandleAllWavesCleared;
-
-        if (QuestManager.Instance != null)
-            QuestManager.Instance.OnQuestEpilogueFinished -= HandleQuestEpilogueFinished;
+        if (spawner != null) spawner.OnAllWavesCleared -= HandleAllWavesCleared;
+        if (controller != null) controller.OnEpilogueFinished -= HandleEpilogueFinished;
     }
 
     void HandleAllWavesCleared()
     {
-        if (marshmallow != null) marshmallow.WalkBack();
+        if (controller != null) controller.MarkComplete();
     }
 
-    void HandleQuestEpilogueFinished(QuestData data)
-    {
-        if (data == winQuest) StartCoroutine(DelayedWin());
-    }
+    void HandleEpilogueFinished(QuestController c) => StartCoroutine(DelayedWin());
 
     IEnumerator DelayedWin()
     {
@@ -51,9 +48,9 @@ public class ArenaManager : MonoBehaviour
 
     void Win()
     {
-        if (gameEnded) 
+        if (gameEnded)
             return;
-        
+
         gameEnded = true;
 
         MusicManager.Instance?.FadeOutAndStop(2f);

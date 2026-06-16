@@ -10,7 +10,9 @@ public class PatrolRobotFixedState : PatrolRobotState
         if (owner.FixedClip != null) owner.AudioSource.PlayOneShot(owner.FixedClip);
         if (owner.FixedEffectPrefab != null)
             Object.Instantiate(owner.FixedEffectPrefab, owner.SpriteRenderer.bounds.center, Quaternion.identity);
-        owner.SmokeEffect.Stop();
-        owner.GetComponent<QuestReporter>()?.Report();
+        if (owner.SmokeEffect != null) owner.SmokeEffect.Stop();
+
+        QuestReporter reporter = owner.GetComponent<QuestReporter>();
+        if (reporter != null) reporter.Report();
     }
 }

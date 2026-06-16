@@ -15,7 +15,8 @@ public class NPC : MonoBehaviour
         {
             foreach (QuestDialogue dialogue in dialogues)
             {
-                DialoguePhase phase = dialogue.Pick(QuestManager.Instance);
+                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.quest) : null;
+                DialoguePhase phase = dialogue.Pick(controller);
                 if (phase != null)
                 {
                     currentDialogue = dialogue;
@@ -28,7 +29,10 @@ public class NPC : MonoBehaviour
             lineIndex = 0;
 
             if (currentDialogue.IsAfterPhase(currentPhase))
-                QuestManager.Instance.ConcludeQuest(currentDialogue.quest);
+            {
+                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
+                if (controller != null) controller.Conclude();
+            }
         }
 
         UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++], transform);
@@ -36,10 +40,16 @@ public class NPC : MonoBehaviour
         if (lineIndex >= currentPhase.lines.Count)
         {
             if (currentPhase.questToGrantAfter != null)
-                QuestManager.Instance.AcceptQuest(currentPhase.questToGrantAfter);
+            {
+                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentPhase.questToGrantAfter) : null;
+                if (controller != null) controller.Accept();
+            }
 
             if (currentDialogue.IsAfterPhase(currentPhase))
-                QuestManager.Instance.NotifyEpilogueFinished(currentDialogue.quest);
+            {
+                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
+                if (controller != null) controller.EpilogueFinished();
+            }
 
             currentPhase.onExhausted?.Invoke();
             currentPhase = null;

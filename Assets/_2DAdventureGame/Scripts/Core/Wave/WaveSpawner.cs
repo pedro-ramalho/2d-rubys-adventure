@@ -28,24 +28,25 @@ public class WaveSpawner : MonoBehaviour
 
     private readonly List<GameObject> aliveEnemies = new();
     private bool started;
+    private QuestController controller;
 
     public event Action OnAllWavesCleared;
 
     void Start()
     {
-        if (QuestManager.Instance != null)
-            QuestManager.Instance.OnQuestAccepted += HandleQuestAccepted;
+        if (QuestManager.Instance == null) return;
+        controller = QuestManager.Instance.Get(triggerQuest);
+        if (controller != null) controller.OnPhaseChanged += HandlePhaseChanged;
     }
 
     void OnDestroy()
     {
-        if (QuestManager.Instance != null)
-            QuestManager.Instance.OnQuestAccepted -= HandleQuestAccepted;
+        if (controller != null) controller.OnPhaseChanged -= HandlePhaseChanged;
     }
 
-    void HandleQuestAccepted(Quest quest)
+    void HandlePhaseChanged(QuestController c)
     {
-        if (started || quest.Data != triggerQuest) return;
+        if (started || c.Phase != QuestPhase.During) return;
         started = true;
         StartCoroutine(RunWaves());
     }
