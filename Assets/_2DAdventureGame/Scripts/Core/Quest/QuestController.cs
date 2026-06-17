@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class QuestController : MonoBehaviour
@@ -42,7 +43,7 @@ public abstract class QuestController : MonoBehaviour
     {
         if (Phase != QuestPhase.During) return;
         SetPhase(QuestPhase.After);
-        PlayCompletionAudio();
+        QuestMusic.PlayCompletionStinger(completionSfx);
     }
 
     public void Conclude()
@@ -57,6 +58,24 @@ public abstract class QuestController : MonoBehaviour
         OnEpilogueFinished?.Invoke(this);
     }
 
+    public QuestSaveData Capture() => new QuestSaveData
+    {
+        questId = data.id,
+        phase = CapturePhase(),
+        consumedIds = CaptureConsumed()
+    };
+
+    public void Restore(QuestSaveData saved)
+    {
+        RestoreData(saved);
+        SetPhase(saved.phase);
+        if (saved.phase != QuestPhase.Before) ApplyUnlock();
+    }
+
+    protected virtual QuestPhase CapturePhase() => Phase;
+    protected virtual List<string> CaptureConsumed() => null;
+    protected virtual void RestoreData(QuestSaveData saved) { }
+
     protected void SetPhase(QuestPhase next)
     {
         if (Phase == next) return;
@@ -69,21 +88,4 @@ public abstract class QuestController : MonoBehaviour
         if (AbilityManager.Instance != null)
             AbilityManager.Instance.Unlock(data.unlockOnAccept);
     }
-
-    void PlayCompletionAudio()
-    {
-        if (MusicManager.Instance == null) return;
-
-        AudioClip next = QuestMusic.ResolveTrack();
-
-        if (completionSfx != null)
-            MusicManager.Instance.PlayWithStinger(completionSfx, next);
-        else if (next != null)
-            MusicManager.Instance.Play(next);
-        else
-            MusicManager.Instance.FadeOutAndStop(5f);
-    }
-
-    public abstract QuestSaveData Capture();
-    public abstract void Restore(QuestSaveData saved);
 }

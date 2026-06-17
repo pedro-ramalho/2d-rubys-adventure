@@ -5,7 +5,9 @@ public class QuestData : ScriptableObject
 {
     public string id;
     public string description;
-    public QuestObjective objective;
+
+    [Tooltip("Number of contributors required to complete (e.g. 6 boxes, 4 robots). Ignored by wave-style quests.")]
+    public int targetCount;
 
     [Header("Progression")]
     [Tooltip("Abilities unlocked when this quest is accepted.")]

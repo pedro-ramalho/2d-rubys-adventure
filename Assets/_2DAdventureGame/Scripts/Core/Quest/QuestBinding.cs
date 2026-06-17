@@ -16,8 +16,6 @@ public class QuestBinding : MonoBehaviour
     [Tooltip("Components disabled while the bound quest is not in During (e.g. the Collectible script).")]
     [SerializeField] private Behaviour[] interactables;
 
-    public QuestData BoundQuest => boundQuest;
-
     private readonly List<SpriteRenderer> renderers = new();
     private readonly List<Collider2D> colliders = new();
     private QuestController controller;

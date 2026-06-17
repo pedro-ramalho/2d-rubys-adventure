@@ -5,7 +5,7 @@ public class CountedQuestController : QuestController
     private readonly HashSet<string> consumedIds = new();
 
     public int Count => consumedIds.Count;
-    public int Target => data != null ? data.objective.count : 0;
+    public int Target => data != null ? data.targetCount : 0;
 
     public bool IsConsumed(string worldId) =>
         !string.IsNullOrEmpty(worldId) && consumedIds.Contains(worldId);
@@ -26,24 +26,15 @@ public class CountedQuestController : QuestController
         return true;
     }
 
-    public override QuestSaveData Capture() => new QuestSaveData
-    {
-        questId = data.id,
-        phase = Phase,
-        consumedIds = new List<string>(consumedIds)
-    };
+    protected override List<string> CaptureConsumed() => new(consumedIds);
 
-    public override void Restore(QuestSaveData saved)
+    protected override void RestoreData(QuestSaveData saved)
     {
         consumedIds.Clear();
-        if (saved.consumedIds != null)
-            foreach (string id in saved.consumedIds)
-                if (!string.IsNullOrEmpty(id))
-                    consumedIds.Add(id);
+        if (saved.consumedIds == null) return;
 
-        SetPhase(saved.phase);
-
-        if (saved.phase != QuestPhase.Before)
-            ApplyUnlock();
+        foreach (string id in saved.consumedIds)
+            if (!string.IsNullOrEmpty(id))
+                consumedIds.Add(id);
     }
 }
