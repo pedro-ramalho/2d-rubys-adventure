@@ -10,7 +10,8 @@ public class QuestManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null) 
+            Instance = this;
     }
 
     void Start()
@@ -23,12 +24,15 @@ public class QuestManager : MonoBehaviour
     {
         if (controller == null || controller.Data == null || string.IsNullOrEmpty(controller.Data.id))
             return;
+        
         controllers[controller.Data.id] = controller;
     }
 
     public void Unregister(QuestController controller)
     {
-        if (controller == null || controller.Data == null) return;
+        if (controller == null || controller.Data == null) 
+            return;
+        
         if (controllers.TryGetValue(controller.Data.id, out QuestController current) && current == controller)
             controllers.Remove(controller.Data.id);
     }
@@ -44,14 +48,18 @@ public class QuestManager : MonoBehaviour
     public List<QuestSaveData> CaptureAll()
     {
         List<QuestSaveData> list = new();
+
         foreach (QuestController controller in controllers.Values)
             list.Add(controller.Capture());
+        
         return list;
     }
 
     void RestoreFromSave(Save save)
     {
-        if (save?.quests == null) return;
+        if (save?.quests == null) 
+            return;
+        
         foreach (QuestSaveData saved in save.quests)
             if (saved != null && controllers.TryGetValue(saved.questId, out QuestController controller))
                 controller.Restore(saved);

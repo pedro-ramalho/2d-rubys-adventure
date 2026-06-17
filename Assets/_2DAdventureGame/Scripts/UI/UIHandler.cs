@@ -101,7 +101,9 @@ public class UIHandler : MonoBehaviour
     void RestoreTypingAudio()
     {
         AudioSource audio = OneShot();
-        if (audio == null) return;
+        if (audio == null) 
+            return;
+        
         audio.pitch = 1f;
         audio.volume = originalOneShotVolume;
     }
@@ -127,7 +129,10 @@ public class UIHandler : MonoBehaviour
             audio.PlayOneShot(clickClip);
 
         CancelInvoke(nameof(HideDialogue));
-        if (typeRoutine != null) StopCoroutine(typeRoutine);
+        
+        if (typeRoutine != null) 
+            StopCoroutine(typeRoutine);
+
         StopPromptFade();
 
         isShowingPrompt = false;
@@ -141,27 +146,36 @@ public class UIHandler : MonoBehaviour
 
     public void ShowInteractPrompt(string text)
     {
-        if (dialogueActive) return;
-        if (isShowingPrompt && dialogueText.text == text && promptFadeRoutine == null) return;
+        if (dialogueActive) 
+            return;
+        
+        if (isShowingPrompt && dialogueText.text == text && promptFadeRoutine == null) 
+            return;
 
         dialogueText.text = text;
         if (dialoguePanel.style.display == DisplayStyle.None)
             dialoguePanel.style.opacity = 0f;
+            
         dialoguePanel.style.display = DisplayStyle.Flex;
         isShowingPrompt = true;
+
         StartPromptFade(1f, hideAfter: false);
     }
 
     public void HideInteractPrompt()
     {
-        if (!isShowingPrompt) return;
+        if (!isShowingPrompt) 
+            return;
+        
         isShowingPrompt = false;
+        
         StartPromptFade(0f, hideAfter: true);
     }
 
     private void StartPromptFade(float targetOpacity, bool hideAfter)
     {
         StopPromptFade();
+        
         promptFadeRoutine = StartCoroutine(FadePrompt(targetOpacity, hideAfter));
     }
 
@@ -177,6 +191,7 @@ public class UIHandler : MonoBehaviour
     private IEnumerator FadePrompt(float targetOpacity, bool hideAfter)
     {
         float startOpacity = dialoguePanel.resolvedStyle.opacity;
+        
         float elapsed = 0f;
         while (elapsed < promptFadeDuration)
         {
@@ -185,18 +200,28 @@ public class UIHandler : MonoBehaviour
             dialoguePanel.style.opacity = Mathf.Lerp(startOpacity, targetOpacity, t);
             yield return null;
         }
+
         dialoguePanel.style.opacity = targetOpacity;
-        if (hideAfter) dialoguePanel.style.display = DisplayStyle.None;
+        
+        if (hideAfter) 
+            dialoguePanel.style.display = DisplayStyle.None;
+        
         promptFadeRoutine = null;
     }
 
     public void Skip()
     {
-        if (typeRoutine == null) return;
+        if (typeRoutine == null) 
+            return;
+        
         StopCoroutine(typeRoutine);
+        
         typeRoutine = null;
+        
         RestoreTypingAudio();
+        
         dialogueText.text = currentLine;
+        
         Invoke(nameof(HideDialogue), displayTime);
     }
 
@@ -228,8 +253,11 @@ public class UIHandler : MonoBehaviour
 
             yield return new WaitForSeconds(typeInterval);
         }
+
         RestoreTypingAudio();
+        
         typeRoutine = null;
+        
         Invoke(nameof(HideDialogue), displayTime);
     }
 
@@ -239,10 +267,14 @@ public class UIHandler : MonoBehaviour
         if (typeRoutine != null)
         {
             StopCoroutine(typeRoutine);
+            
             typeRoutine = null;
+            
             RestoreTypingAudio();
         }
+
         StopPromptFade();
+        
         dialoguePanel.style.display = DisplayStyle.None;
         dialoguePanel.style.opacity = 1f;
         isShowingPrompt = false;
@@ -254,7 +286,8 @@ public class UIHandler : MonoBehaviour
     
     public void DisplayLoseScreen()
     {
-        if (loseScreen != null) loseScreen.style.opacity = 1.0f;
+        if (loseScreen != null) 
+            loseScreen.style.opacity = 1.0f;
 
         MusicManager.Instance?.FadeOutAndStop(musicFadeOnEndScreen);
 

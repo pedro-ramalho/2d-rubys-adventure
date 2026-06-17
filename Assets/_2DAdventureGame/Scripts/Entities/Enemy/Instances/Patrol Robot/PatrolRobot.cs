@@ -66,7 +66,10 @@ public class PatrolRobot : Enemy
         Rigidbody.simulated = false;
         Animator.SetTrigger(AnimatorHashes.Fixed);
         AudioSource.Stop();
-        if (smokeEffect != null) smokeEffect.Stop();
+        
+        if (smokeEffect != null) 
+            smokeEffect.Stop();
+        
         CurrentState = FixedState;
     }
 
@@ -74,11 +77,17 @@ public class PatrolRobot : Enemy
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (CurrentState == FixedState) return;
-        if (!other.TryGetComponent(out Player player)) return;
-        if (player.IsInvincible) return;
+        if (CurrentState == FixedState) 
+            return;
+        
+        if (!other.TryGetComponent(out Player player)) 
+            return;
+        
+        if (player.IsInvincible) 
+            return;
 
         player.ApplyDamage(Data.contactDamage);
-        if (hitClip != null) AudioSource.PlayOneShot(hitClip);
+        if (hitClip != null) 
+            AudioSource.PlayOneShot(hitClip);
     }
 }

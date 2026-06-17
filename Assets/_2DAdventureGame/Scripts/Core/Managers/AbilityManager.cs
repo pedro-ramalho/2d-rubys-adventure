@@ -21,13 +21,11 @@ public class AbilityManager : PersistentSingleton<AbilityManager>
     protected override void Awake()
     {
         base.Awake();
+
         if (Instance != this) return;
 
         unlocked = startingAbilities;
     }
 
-    public void Unlock(AbilityFlag abilities)
-    {
-        unlocked |= abilities;
-    }
+    public void Unlock(AbilityFlag abilities) => unlocked |= abilities;
 }

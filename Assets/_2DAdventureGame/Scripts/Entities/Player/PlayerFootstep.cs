@@ -33,10 +33,12 @@ public class PlayerFootstep : MonoBehaviour
 
     public void PlayFootstep()
     {
-        if (source == null) return;
+        if (source == null) 
+            return;
 
         AudioClip[] clips = SelectClips();
-        if (clips == null || clips.Length == 0) return;
+        if (clips == null || clips.Length == 0) 
+            return;
 
         source.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
         source.pitch = 1f + UnityEngine.Random.Range(-pitchVariation, pitchVariation);
@@ -49,10 +51,12 @@ public class PlayerFootstep : MonoBehaviour
         
         foreach((Tilemap tilemap, AudioClip[] clips) in resolved)
         {
-            if (tilemap == null) continue;
+            if (tilemap == null) 
+                continue;
 
             Vector3Int cell = tilemap.WorldToCell(feet);
-            if (tilemap.GetTile(cell) != null) return clips;
+            if (tilemap.GetTile(cell) != null) 
+                return clips;
         }
 
         return null;
@@ -61,11 +65,13 @@ public class PlayerFootstep : MonoBehaviour
     private void ResolveSurfaces()
     {
         resolved.Clear();
-        if (surfaces == null) return;
+        if (surfaces == null) 
+            return;
 
         foreach (SurfaceProfile p in surfaces)
         {
-            if (string.IsNullOrEmpty(p.tag)) continue;
+            if (string.IsNullOrEmpty(p.tag)) 
+                continue;
 
             GameObject[] tagged = GameObject.FindGameObjectsWithTag(p.tag);
             foreach (GameObject g in tagged)

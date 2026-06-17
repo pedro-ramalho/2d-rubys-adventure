@@ -9,6 +9,7 @@ public abstract class PersistentSingleton<T> : MonoBehaviour where T : Persisten
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            
             return;
         }
 
@@ -19,7 +20,8 @@ public abstract class PersistentSingleton<T> : MonoBehaviour where T : Persisten
 
     protected static void BootstrapIfMissing()
     {
-        if (Instance != null) return;
+        if (Instance != null) 
+            return;
         
         new GameObject(typeof(T).Name).AddComponent<T>();
     }

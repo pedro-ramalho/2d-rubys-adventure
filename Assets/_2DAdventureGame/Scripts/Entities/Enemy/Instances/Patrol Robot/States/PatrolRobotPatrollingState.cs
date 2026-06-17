@@ -32,6 +32,7 @@ public class PatrolRobotPatrollingState : PatrolRobotState
                 owner.Animator.SetFloat(AnimatorHashes.MoveX, owner.Direction);
                 owner.Animator.SetFloat(AnimatorHashes.MoveY, 0f);
                 break;
+            
             case PatrolDirection.Vertical:
                 position.y += offset;
                 owner.Animator.SetFloat(AnimatorHashes.MoveX, 0f);
@@ -45,7 +46,8 @@ public class PatrolRobotPatrollingState : PatrolRobotState
     public override void OnProjectileHit(PatrolRobot owner)
     {
         QuestReporter reporter = owner.GetComponent<QuestReporter>();
-        if (reporter != null && reporter.Quest != null && !reporter.CanReport()) return;
+        if (reporter != null && reporter.Quest != null && !reporter.CanReport()) 
+            return;
 
         owner.ChangeState(owner.FixedState);
     }

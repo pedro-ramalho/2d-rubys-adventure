@@ -87,7 +87,9 @@ public class MainMenuHandler : MonoBehaviour
 
     void OnSaveDeleted()
     {
-        if (continueButton == null) return;
+        if (continueButton == null) 
+            return;
+        
         continueButton.SetEnabled(false);
         continueButton.clicked -= ContinueGame;
     }
@@ -100,8 +102,11 @@ public class MainMenuHandler : MonoBehaviour
 
     void ContinueGame()
     {
-        if (isStartingGame) return;
-        if (SaveManager.Instance == null || !SaveManager.Instance.HasSave) return;
+        if (isStartingGame) 
+            return;
+        
+        if (SaveManager.Instance == null || !SaveManager.Instance.HasSave) 
+            return;
 
         BeginSceneFadeAndLoad(SaveManager.Instance.Current.sceneName, writeSave: false);
     }
@@ -112,20 +117,26 @@ public class MainMenuHandler : MonoBehaviour
         {
             float bx = Mathf.Sin(Time.time * backgroundPanSpeed) * backgroundPanAmplitudeX;
             float by = Mathf.Cos(Time.time * backgroundPanSpeed * 0.7f) * backgroundPanAmplitudeY;
+            
             background.style.translate = new Translate(bx, by);
         }
 
         if (title != null)
         {
             float ty = Mathf.Sin(Time.time * titleBobSpeed) * titleBobAmplitude;
+            
             title.style.translate = new Translate(0, ty);
         }
     }
 
     void StartGame()
     {
-        if (isStartingGame) return;
-        if (SaveManager.Instance != null) SaveManager.Instance.DeleteSave();
+        if (isStartingGame) 
+            return;
+        
+        if (SaveManager.Instance != null) 
+            SaveManager.Instance.DeleteSave();
+        
         BeginSceneFadeAndLoad(firstLevelSceneName, writeSave: true);
     }
 
@@ -155,9 +166,12 @@ public class MainMenuHandler : MonoBehaviour
             elapsed += Time.deltaTime;
             if (overlay != null)
                 overlay.style.opacity = Mathf.Lerp(0f, 1f, elapsed / startGameFadeDuration);
+            
             yield return null;
         }
-        if (overlay != null) overlay.style.opacity = 1f;
+
+        if (overlay != null) 
+            overlay.style.opacity = 1f;
 
         if (writeSave && sceneName != SceneNames.MainMenu && SaveManager.Instance != null)
             SaveManager.Instance.WriteSave(sceneName);

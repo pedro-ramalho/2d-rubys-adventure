@@ -9,10 +9,7 @@ public class VendingMachineMovingState : VendingMachineState
         owner.AudioSource.Play();
     }
 
-    public override void Exit(VendingMachine owner)
-    {
-        owner.AudioSource.Stop();
-    }
+    public override void Exit(VendingMachine owner) => owner.AudioSource.Stop();
 
     public override void Update(VendingMachine owner)
     {

@@ -34,20 +34,27 @@ public class WaveSpawner : MonoBehaviour
 
     void Start()
     {
-        if (QuestManager.Instance == null) return;
+        if (QuestManager.Instance == null) 
+            return;
+        
         controller = QuestManager.Instance.Get(triggerQuest);
-        if (controller != null) controller.OnPhaseChanged += HandlePhaseChanged;
+        if (controller != null) 
+            controller.OnPhaseChanged += HandlePhaseChanged;
     }
 
     void OnDestroy()
     {
-        if (controller != null) controller.OnPhaseChanged -= HandlePhaseChanged;
+        if (controller != null) 
+            controller.OnPhaseChanged -= HandlePhaseChanged;
     }
 
     void HandlePhaseChanged(QuestController c)
     {
-        if (started || c.Phase != QuestPhase.During) return;
+        if (started || c.Phase != QuestPhase.During) 
+            return;
+
         started = true;
+        
         StartCoroutine(RunWaves());
     }
 
@@ -79,7 +86,8 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnBonusWave()
     {
-        if (waves.Count == 0) yield break;
+        if (waves.Count == 0) 
+            yield break;
 
         GameObject prefab = waves[^1].enemyPrefab;
 
@@ -93,7 +101,9 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnOne(GameObject enemyPrefab)
     {
         Transform point = PickSpawnPoint();
-        if (point == null) yield break;
+        if (point == null) 
+            yield break;
+        
         yield return StartCoroutine(SpawnAt(point, enemyPrefab));
     }
 
@@ -105,7 +115,8 @@ public class WaveSpawner : MonoBehaviour
 
         yield return new WaitForSeconds(telegraphDuration);
 
-        if (telegraph != null) Destroy(telegraph);
+        if (telegraph != null) 
+            Destroy(telegraph);
 
         GameObject enemy = Instantiate(enemyPrefab, point.position, Quaternion.identity);
         aliveEnemies.Add(enemy);
@@ -137,7 +148,8 @@ public class WaveSpawner : MonoBehaviour
     {
         foreach (GameObject e in aliveEnemies)
         {
-            if (e == null) continue;
+            if (e == null) 
+                continue;
 
             if (Vector2.Distance(pos, e.transform.position) < minSpawnSpacing)
                 return true;
@@ -150,6 +162,7 @@ public class WaveSpawner : MonoBehaviour
     {
         for (int i = aliveEnemies.Count - 1; i >= 0; i--)
             if (aliveEnemies[i] == null) aliveEnemies.RemoveAt(i);
+        
         return aliveEnemies.Count == 0;
     }
 }

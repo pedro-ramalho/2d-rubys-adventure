@@ -15,7 +15,8 @@ public abstract class PlayerState : State<Player>
 
     public virtual void HandleDamage(Player owner, int amount)
     {
-        if (owner.IsInvincible) return;
+        if (owner.IsInvincible) 
+            return;
 
         owner.IsInvincible = true;
         owner.DamageCooldown = owner.Data.invincibilityDuration;

@@ -57,15 +57,19 @@ public class QuestTrackerManager : MonoBehaviour
         if (c.Phase == QuestPhase.After)
         {
             completionPending = c;
+
             Refresh();
         }
     }
 
     void HandleConcluded(QuestController c)
     {
-        if (c != completionPending) return;
+        if (c != completionPending) 
+            return;
+        
         completionPending = null;
         isOpen = false;
+        
         Refresh();
     }
 
@@ -74,6 +78,7 @@ public class QuestTrackerManager : MonoBehaviour
         if (PauseManager.IsPaused)
         {
             SetVisible(false);
+
             return;
         }
 
@@ -83,10 +88,14 @@ public class QuestTrackerManager : MonoBehaviour
 
     void OnTrackerPressed(InputAction.CallbackContext ctx)
     {
-        if (PauseManager.IsPaused) return;
-        if (completionPending != null) return;
+        if (PauseManager.IsPaused) 
+            return;
+        
+        if (completionPending != null) 
+            return;
 
         isOpen = !isOpen;
+
         Refresh();
     }
 
@@ -94,9 +103,14 @@ public class QuestTrackerManager : MonoBehaviour
     {
         if (completionPending != null)
         {
-            if (descriptionLabel != null) descriptionLabel.text = CompletionMessage;
-            if (progressLabel != null) progressLabel.text = string.Empty;
+            if (descriptionLabel != null) 
+                descriptionLabel.text = CompletionMessage;
+            
+            if (progressLabel != null) 
+                progressLabel.text = string.Empty;
+            
             SetVisible(true);
+            
             return;
         }
 
@@ -104,6 +118,7 @@ public class QuestTrackerManager : MonoBehaviour
         if (!isOpen || tracked == null)
         {
             SetVisible(false);
+            
             return;
         }
 
@@ -124,10 +139,13 @@ public class QuestTrackerManager : MonoBehaviour
 
     CountedQuestController FindActiveCounted()
     {
-        if (QuestManager.Instance == null) return null;
+        if (QuestManager.Instance == null) 
+            return null;
+        
         foreach (QuestController c in QuestManager.Instance.All)
             if (c.Phase == QuestPhase.During && c is CountedQuestController counted)
                 return counted;
+        
         return null;
     }
 

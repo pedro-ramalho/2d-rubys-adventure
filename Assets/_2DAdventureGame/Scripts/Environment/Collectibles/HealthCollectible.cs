@@ -6,6 +6,7 @@ public class HealthCollectible : Collectible
 
     protected override void ApplyEffect(Player player)
     {
-        if (player.CurrentHealth < player.Data.maxHealth) player.Heal(healAmount);
+        if (player.CurrentHealth < player.Data.maxHealth) 
+            player.Heal(healAmount);
     }
 }

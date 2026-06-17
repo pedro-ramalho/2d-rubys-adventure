@@ -24,6 +24,7 @@ public class PlayerDashingState : PlayerState
         if (dashTimer <= 0)
         {
             owner.ChangeState(owner.GroundedState);
+            
             return;
         }
 

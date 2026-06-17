@@ -52,7 +52,8 @@ public class OptionsHandler : MonoBehaviour
 
         PlayerInputActions a = InputManager.Instance.Actions;
         InputAction move = a.Player.Movement;
-        // Movement composite indices: 1-4 = primary WASD, 6-9 = secondary arrows (0 and 5 are composite roots).
+        
+        // Movement composite indices: 1-4 = primary WASD, 6-9 = secondary arrows (0 and 5 are composite roots)
         rebindEntries = new (string, InputAction, int)[]
         {
             ("DashRebindButton",           a.Player.Dash,  0),
@@ -66,6 +67,7 @@ public class OptionsHandler : MonoBehaviour
             ("LeftSecondaryRebindButton",  move, 8),
             ("RightSecondaryRebindButton", move, 9),
         };
+
         foreach ((string button, InputAction action, int index) in rebindEntries)
             WireRebindButton(root, button, action, index);
     }
@@ -85,6 +87,7 @@ public class OptionsHandler : MonoBehaviour
     {
         Slider slider = optionsRoot.Q<Slider>(sliderName);
         slider.SetValueWithoutNotify(DefaultVolume);
+        
         ApplyVolume(mixerParam, DefaultVolume);
         PlayerPrefs.DeleteKey(mixerParam);
     }
@@ -160,15 +163,20 @@ public class OptionsHandler : MonoBehaviour
     static string GetBindingDisplayName(InputAction action, int bindingIndex)
     {
         string path = action.bindings[bindingIndex].effectivePath;
-        if (string.IsNullOrEmpty(path)) return string.Empty;
+        if (string.IsNullOrEmpty(path)) 
+            return string.Empty;
+        
         int slashIdx = path.LastIndexOf('/');
         string keyName = slashIdx >= 0 ? path.Substring(slashIdx + 1) : path;
+        
         return FormatKeyName(keyName);
     }
 
     static string FormatKeyName(string raw)
     {
-        if (string.IsNullOrEmpty(raw)) return raw;
+        if (string.IsNullOrEmpty(raw)) 
+            return raw;
+        
         StringBuilder sb = new StringBuilder();
         sb.Append(char.ToUpperInvariant(raw[0]));
         for (int i = 1; i < raw.Length; i++)
@@ -176,13 +184,16 @@ public class OptionsHandler : MonoBehaviour
             if (char.IsUpper(raw[i])) sb.Append(' ');
             sb.Append(raw[i]);
         }
+
         return sb.ToString();
     }
 
     public void Open()
     {
         optionsRoot.style.display = DisplayStyle.Flex;
+        
         RefreshDeleteSaveButton();
+        
         Opened?.Invoke();
     }
 
@@ -190,19 +201,23 @@ public class OptionsHandler : MonoBehaviour
     {
         if (SaveManager.Instance != null)
             SaveManager.Instance.DeleteSave();
+
         RefreshDeleteSaveButton();
     }
 
     void RefreshDeleteSaveButton()
     {
         Button button = optionsRoot.Q<Button>("DeleteSaveButton");
+        
         bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasSave;
+        
         button.SetEnabled(hasSave);
     }
 
     public void Close()
     {
         optionsRoot.style.display = DisplayStyle.None;
+        
         Closed?.Invoke();
     }
 }

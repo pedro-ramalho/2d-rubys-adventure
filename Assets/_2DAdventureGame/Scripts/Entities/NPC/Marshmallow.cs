@@ -22,14 +22,18 @@ public class Marshmallow : NPC
         rb = GetComponent<Rigidbody2D>();
         colliders = GetComponents<Collider2D>();
         startPosition = transform.position;
+
         SetFacing(idleFacing);
     }
 
     void Start()
     {
-        if (QuestManager.Instance == null) return;
+        if (QuestManager.Instance == null) 
+            return;
+        
         controller = QuestManager.Instance.Get(boundQuest);
-        if (controller == null) return;
+        if (controller == null) 
+            return;
 
         controller.OnPhaseChanged += HandlePhaseChanged;
         controller.OnEpilogueFinished += HandleEpilogueFinished;
@@ -46,15 +50,18 @@ public class Marshmallow : NPC
 
     void HandlePhaseChanged(QuestController c)
     {
-        if (c.Phase == QuestPhase.During) WalkToExit();
-        else if (c.Phase == QuestPhase.After) WalkBack();
+        if (c.Phase == QuestPhase.During) 
+            WalkToExit();
+        else if (c.Phase == QuestPhase.After) 
+            WalkBack();
     }
 
     void HandleEpilogueFinished(QuestController c) => SetCollidersEnabled(false);
 
     public void WalkToExit()
     {
-        if (exitPoint != null) StartCoroutine(WalkTo(exitPoint.position));
+        if (exitPoint != null) 
+            StartCoroutine(WalkTo(exitPoint.position));
     }
 
     public void WalkBack() => StartCoroutine(WalkTo(startPosition));

@@ -17,17 +17,13 @@ public class VendingMachineChargingState : VendingMachineState
         owner.AudioSource.PlayOneShot(owner.ChargeClip);
     }
 
-    public override void Exit(VendingMachine owner)
-    {
-        owner.Animator.SetBool(AnimatorHashes.ChargingHorizontal, false);
-    }
-
+    public override void Exit(VendingMachine owner) => owner.Animator.SetBool(AnimatorHashes.ChargingHorizontal, false);
+    
     public override void Update(VendingMachine owner)
     {
         timer += Time.deltaTime;
         if (timer >= owner.ChargeDuration)
             owner.ChangeState(owner.StunnedState);
-        
     }
 
     public override void FixedUpdate(VendingMachine owner)

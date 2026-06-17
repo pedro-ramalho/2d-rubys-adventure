@@ -29,6 +29,7 @@ public class PlayerShootingState : PlayerState
         if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f)
         {
             owner.ChangeState(owner.DashingState);
+            
             return;
         }
 

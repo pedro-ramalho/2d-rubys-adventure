@@ -13,18 +13,18 @@ public class InputManager : PersistentSingleton<InputManager>
     protected override void Awake()
     {
         base.Awake();
+        
         if (Instance != this) return;
 
         Actions = new PlayerInputActions();
+        
         LoadBindings();
+        
         Actions.Player.Enable();
     }
 
-    public void SaveBindings()
-    {
-        PlayerPrefs.SetString(BindingsKey, Actions.SaveBindingOverridesAsJson());
-    }
-
+    public void SaveBindings() => PlayerPrefs.SetString(BindingsKey, Actions.SaveBindingOverridesAsJson());
+    
     public void LoadBindings()
     {
         string json = PlayerPrefs.GetString(BindingsKey, string.Empty);
@@ -35,6 +35,7 @@ public class InputManager : PersistentSingleton<InputManager>
     public void ResetBindings()
     {
         Actions.RemoveAllBindingOverrides();
+        
         PlayerPrefs.DeleteKey(BindingsKey);
     }
 }

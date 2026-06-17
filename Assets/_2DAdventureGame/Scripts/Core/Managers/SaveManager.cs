@@ -22,19 +22,25 @@ public class SaveManager : PersistentSingleton<SaveManager>
     protected override void Awake()
     {
         base.Awake();
-        if (Instance != this) return;
+
+        if (Instance != this) 
+            return;
+        
         ReadFromDisk();
     }
 
     void ReadFromDisk()
     {
         HasSave = false;
-        if (!File.Exists(SavePath)) return;
+
+        if (!File.Exists(SavePath)) 
+            return;
 
         try
         {
             Save loaded = JsonUtility.FromJson<Save>(File.ReadAllText(SavePath));
-            if (loaded?.version != CurrentSaveVersion) return;
+            if (loaded?.version != CurrentSaveVersion) 
+                return;
 
             Current = loaded;
             HasSave = true;
@@ -59,7 +65,9 @@ public class SaveManager : PersistentSingleton<SaveManager>
         try
         {
             string json = JsonUtility.ToJson(save, true);
+            
             File.WriteAllText(SavePath, json);
+            
             Current = save;
             HasSave = true;
         }
@@ -74,6 +82,7 @@ public class SaveManager : PersistentSingleton<SaveManager>
         if (Current?.quests == null) return new List<QuestSaveData>();
 
         List<QuestSaveData> copy = new();
+        
         foreach (QuestSaveData q in Current.quests)
             copy.Add(new QuestSaveData
             {
@@ -81,6 +90,7 @@ public class SaveManager : PersistentSingleton<SaveManager>
                 phase = q.phase,
                 consumedIds = q.consumedIds != null ? new List<string>(q.consumedIds) : null
             });
+
         return copy;
     }
 
@@ -88,8 +98,10 @@ public class SaveManager : PersistentSingleton<SaveManager>
     {
         if (File.Exists(SavePath))
             File.Delete(SavePath);
+
         Current = null;
         HasSave = false;
+        
         SaveDeleted?.Invoke();
     }
 }

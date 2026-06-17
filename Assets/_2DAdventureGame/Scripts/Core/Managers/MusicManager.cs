@@ -15,16 +15,24 @@ public class MusicManager : PersistentSingleton<MusicManager>
     protected override void Awake()
     {
         base.Awake();
-        if (Instance != this) return;
-        if (source != null) baseVolume = source.volume;
+
+        if (Instance != this)
+            return;
+
+        if (source != null)
+            baseVolume = source.volume;
     }
 
     public void Play(AudioClip clip)
     {
-        if (clip == null) return;
-        if (source.clip == clip && source.isPlaying) return;
+        if (clip == null)
+            return;
 
-        if (transition != null) StopCoroutine(transition);
+        if (source.clip == clip && source.isPlaying)
+            return;
+
+        if (transition != null)
+            StopCoroutine(transition);
 
         if (source.clip == null)
         {
@@ -32,6 +40,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
             source.loop = true;
             source.volume = baseVolume;
             source.Play();
+
             return;
         }
 
@@ -40,9 +49,15 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
     public void PlayWithStinger(AudioClip stinger, AudioClip nextTrack)
     {
-        if (stinger == null) { Play(nextTrack); return; }
+        if (stinger == null)
+        {
+            Play(nextTrack); 
+            
+            return;
+        }
 
-        if (transition != null) StopCoroutine(transition);
+        if (transition != null) 
+            StopCoroutine(transition);
 
         if (nextTrack == null)
             transition = StartCoroutine(StingerThenSilence(stinger));
@@ -52,13 +67,16 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
     public void FadeOutAndStop(float duration)
     {
-        if (transition != null) StopCoroutine(transition);
+        if (transition != null) 
+            StopCoroutine(transition);
+        
         transition = StartCoroutine(FadeOutAndStopRoutine(duration));
     }
 
     IEnumerator FadeOutAndStopRoutine(float duration)
     {
         yield return FadeVolumeTo(0f, duration);
+        
         source.Stop();
         source.clip = null;
         source.volume = baseVolume;
@@ -68,6 +86,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
     IEnumerator SwitchTo(AudioClip clip)
     {
         yield return FadeVolumeTo(0f, fadeOutDuration);
+        
         source.Stop();
 
         yield return new WaitForSecondsRealtime(transitionDelay);
@@ -75,6 +94,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
         source.clip = clip;
         source.loop = true;
         source.Play();
+        
         yield return FadeVolumeTo(baseVolume, fadeInDuration);
 
         transition = null;
@@ -85,12 +105,14 @@ public class MusicManager : PersistentSingleton<MusicManager>
         if (source.isPlaying)
         {
             yield return FadeVolumeTo(0f, fadeOutDuration);
+            
             source.Stop();
             source.clip = null;
             source.volume = baseVolume;
         }
 
         if (stingerSource != null) stingerSource.PlayOneShot(stinger);
+        
         yield return new WaitForSecondsRealtime(stinger.length);
 
         transition = null;
@@ -99,7 +121,9 @@ public class MusicManager : PersistentSingleton<MusicManager>
     IEnumerator StingerThenTrack(AudioClip stinger, AudioClip nextTrack)
     {
         source.Stop();
-        if (stingerSource != null) stingerSource.PlayOneShot(stinger);
+        
+        if (stingerSource != null) 
+            stingerSource.PlayOneShot(stinger);
 
         yield return new WaitForSecondsRealtime(stinger.length);
         yield return new WaitForSecondsRealtime(transitionDelay);
@@ -108,6 +132,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
         source.loop = true;
         source.volume = 0f;
         source.Play();
+        
         yield return FadeVolumeTo(baseVolume, fadeInDuration);
 
         transition = null;
@@ -118,17 +143,21 @@ public class MusicManager : PersistentSingleton<MusicManager>
         if (duration <= 0f)
         {
             source.volume = target;
+            
             yield break;
         }
 
         float start = source.volume;
         float elapsed = 0f;
+        
         while (elapsed < duration)
         {
             elapsed += Time.unscaledDeltaTime;
             source.volume = Mathf.Lerp(start, target, elapsed / duration);
+            
             yield return null;
         }
+
         source.volume = target;
     }
 }

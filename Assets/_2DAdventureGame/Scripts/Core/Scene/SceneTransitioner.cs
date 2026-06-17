@@ -17,8 +17,8 @@ public class SceneTransitioner : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
         fadeOutDuration = ResolveClipLength(fadeOutClipName);
-        Debug.Log($"SceneTransitioner: fadeOutDuration = {fadeOutDuration}s");
     }
 
     float ResolveClipLength(string clipName)
@@ -29,8 +29,6 @@ public class SceneTransitioner : MonoBehaviour
         foreach (var clip in transition.runtimeAnimatorController.animationClips)
             if (clip.name == clipName)
                 return clip.length;
-
-        Debug.LogWarning($"SceneTransitioner: clip '{clipName}' not found on the animator.");
 
         return 1f;
     }
@@ -58,6 +56,7 @@ public class SceneTransitioner : MonoBehaviour
             UIHandler.Instance.HideDialogue();
             UIHandler.Instance.HideHUD();
         }
+        
         transition.SetTrigger(startTrigger);
 
         yield return new WaitForSeconds(fadeOutDuration);

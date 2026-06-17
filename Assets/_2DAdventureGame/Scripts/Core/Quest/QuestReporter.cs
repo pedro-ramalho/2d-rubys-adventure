@@ -4,7 +4,6 @@ public class QuestReporter : MonoBehaviour
 {
     [SerializeField] private QuestData quest;
 
-    [Tooltip("Unique identifier for this specific scene object (e.g. 'l1q1.box.a'). Required for counted-quest contributors whose collection state must persist through save/reload.")]
     [SerializeField] private string worldId;
 
     public QuestData Quest => quest;
@@ -13,7 +12,8 @@ public class QuestReporter : MonoBehaviour
     public void Report()
     {
         CountedQuestController controller = GetCountedController();
-        if (controller != null) controller.TryReport(worldId);
+        if (controller != null) 
+            controller.TryReport(worldId);
     }
 
     public bool CanReport()

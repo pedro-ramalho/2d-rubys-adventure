@@ -17,7 +17,9 @@ public class CountedQuestController : QuestController
 
     public bool TryReport(string worldId)
     {
-        if (!CanReport(worldId)) return false;
+        if (!CanReport(worldId)) 
+            return false;
+        
         consumedIds.Add(worldId);
 
         if (consumedIds.Count >= Target)
@@ -31,7 +33,9 @@ public class CountedQuestController : QuestController
     protected override void RestoreData(QuestSaveData saved)
     {
         consumedIds.Clear();
-        if (saved.consumedIds == null) return;
+
+        if (saved.consumedIds == null) 
+            return;
 
         foreach (string id in saved.consumedIds)
             if (!string.IsNullOrEmpty(id))

@@ -12,7 +12,8 @@ public class SceneMusicConfigManager : MonoBehaviour
 
     void OnDestroy()
     {
-        if (Instance == this) Instance = null;    
+        if (Instance == this) 
+            Instance = null;    
     }
 
     void Start() => QuestMusic.Refresh();

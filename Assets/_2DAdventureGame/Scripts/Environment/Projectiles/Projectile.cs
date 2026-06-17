@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour
     {
         if (hitEffectPrefab != null)
             Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        
         Destroy(gameObject);
     }
 }

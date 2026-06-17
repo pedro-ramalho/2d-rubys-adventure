@@ -14,21 +14,29 @@ public static class QuestMusic
 
     public static void Refresh()
     {
-        if (MusicManager.Instance == null) return;
+        if (MusicManager.Instance == null) 
+            return;
 
         AudioClip target = ResolveTrack();
-        if (target != null) MusicManager.Instance.Play(target);
-        else MusicManager.Instance.FadeOutAndStop(5f);
+
+        if (target != null) 
+            MusicManager.Instance.Play(target);
+        else 
+            MusicManager.Instance.FadeOutAndStop(5f);
     }
 
     public static void PlayCompletionStinger(AudioClip stinger)
     {
-        if (MusicManager.Instance == null) return;
+        if (MusicManager.Instance == null) 
+            return;
 
         AudioClip next = ResolveTrack();
 
-        if (stinger != null)   MusicManager.Instance.PlayWithStinger(stinger, next);
-        else if (next != null) MusicManager.Instance.Play(next);
-        else                   MusicManager.Instance.FadeOutAndStop(5f);
+        if (stinger != null)   
+            MusicManager.Instance.PlayWithStinger(stinger, next);
+        else if (next != null) 
+            MusicManager.Instance.Play(next);
+        else                   
+            MusicManager.Instance.FadeOutAndStop(5f);
     }
 }

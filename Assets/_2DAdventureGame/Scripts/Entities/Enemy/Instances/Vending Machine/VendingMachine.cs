@@ -74,6 +74,7 @@ public class VendingMachine : Enemy
             SpawnExplosion(SpriteRenderer.bounds.center);
             GetComponent<QuestReporter>()?.Report();
             Destroy(gameObject);
+            
             return;
         }
 
@@ -86,6 +87,7 @@ public class VendingMachine : Enemy
                 SpawnExplosion(collision.GetContact(0).point);
                 ChangeState(StunnedState);
             }
+            
             return;
         }
 

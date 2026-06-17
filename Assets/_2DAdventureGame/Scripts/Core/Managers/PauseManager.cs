@@ -20,26 +20,33 @@ public class PauseManager : PersistentSingleton<PauseManager>
     protected override void Awake()
     {
         base.Awake();
-        if (Instance != this) return;
+
+        if (Instance != this)
+            return;
 
         inputActions = InputManager.Instance.Actions;
     }
 
     void OnEnable()
     {
-        if (Instance != this) return;
+        if (Instance != this)
+            return;
+
         inputActions.Player.Pause.performed += OnPausePressed;
     }
 
     void OnDisable()
     {
-        if (Instance != this) return;
+        if (Instance != this)
+            return;
+
         inputActions.Player.Pause.performed -= OnPausePressed;
     }
 
     void Start()
     {
-        if (Instance != this) return;
+        if (Instance != this)
+            return;
 
         pauseRoot = pauseDocument.rootVisualElement.Q<VisualElement>("PauseRoot");
         saveConfirmationLabel = pauseRoot.Q<Label>("SaveConfirmationLabel");
@@ -84,9 +91,13 @@ public class PauseManager : PersistentSingleton<PauseManager>
 
     void OnPausePressed(InputAction.CallbackContext ctx)
     {
-        if (SceneManager.GetActiveScene().name == SceneNames.MainMenu) return;
-        
-        if (IsPaused) Resume(); else Pause();
+        if (SceneManager.GetActiveScene().name == SceneNames.MainMenu)
+            return;
+
+        if (IsPaused)
+            Resume();
+        else
+            Pause();
     }
 
     public void Pause() => SetPaused(true);

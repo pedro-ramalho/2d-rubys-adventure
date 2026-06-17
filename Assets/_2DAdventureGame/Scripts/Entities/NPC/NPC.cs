@@ -21,17 +21,21 @@ public class NPC : MonoBehaviour
                 {
                     currentDialogue = dialogue;
                     currentPhase = phase;
+
                     break;
                 }
             }
 
-            if (currentPhase == null) return;
+            if (currentPhase == null) 
+                return;
+            
             lineIndex = 0;
 
             if (currentDialogue.IsAfterPhase(currentPhase))
             {
                 QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
-                if (controller != null) controller.Conclude();
+                if (controller != null) 
+                    controller.Conclude();
             }
         }
 
@@ -42,13 +46,15 @@ public class NPC : MonoBehaviour
             if (currentPhase.questToGrantAfter != null)
             {
                 QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentPhase.questToGrantAfter) : null;
-                if (controller != null) controller.Accept();
+                if (controller != null) 
+                    controller.Accept();
             }
 
             if (currentDialogue.IsAfterPhase(currentPhase))
             {
                 QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
-                if (controller != null) controller.EpilogueFinished();
+                if (controller != null) 
+                    controller.EpilogueFinished();
             }
 
             currentPhase.onExhausted?.Invoke();

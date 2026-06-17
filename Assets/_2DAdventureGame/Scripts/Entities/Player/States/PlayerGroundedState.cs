@@ -17,6 +17,7 @@ public class PlayerGroundedState : PlayerState
         if (owner.ShootAction.WasPressedThisFrame() && AbilityManager.Instance != null && AbilityManager.Instance.CanShoot)
         {
             owner.ChangeState(owner.ShootingState);
+            
             return;
         }
 
@@ -28,6 +29,7 @@ public class PlayerGroundedState : PlayerState
     {
         Vector2 targetVelocity = move * owner.Data.speed;
         float rate = move.magnitude > 0f ? owner.Data.acceleration : owner.Data.deceleration;
+        
         owner.CurrentVelocity = Vector2.MoveTowards(owner.CurrentVelocity, targetVelocity, rate * Time.fixedDeltaTime);
         owner.Rigidbody.MovePosition(owner.Rigidbody.position + owner.CurrentVelocity * Time.fixedDeltaTime);
     }
@@ -66,11 +68,14 @@ public class PlayerGroundedState : PlayerState
 
         if (UIHandler.Instance != null)
         {
-            if (npc != null) UIHandler.Instance.ShowInteractPrompt("Press X to talk");
-            else UIHandler.Instance.HideInteractPrompt();
+            if (npc != null) 
+                UIHandler.Instance.ShowInteractPrompt("Press X to talk");
+            else 
+                UIHandler.Instance.HideInteractPrompt();
         }
 
-        if (!owner.TalkAction.WasPressedThisFrame() || npc == null) return;
+        if (!owner.TalkAction.WasPressedThisFrame() || npc == null) 
+            return;
 
         if (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
             UIHandler.Instance.Skip();

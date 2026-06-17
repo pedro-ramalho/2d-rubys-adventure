@@ -36,13 +36,15 @@ public class ArenaManager : MonoBehaviour
         if (controller != null) controller.MarkComplete();
     }
 
-    void HandleEpilogueFinished(QuestController c) => StartCoroutine(DelayedWin());
+    void HandleEpilogueFinished(QuestController _) => StartCoroutine(DelayedWin());
 
     IEnumerator DelayedWin()
     {
         while (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
             yield return null;
+        
         yield return new WaitForSeconds(epilogueReadDelay);
+        
         Win();
     }
 
@@ -58,6 +60,7 @@ public class ArenaManager : MonoBehaviour
             stingerSource.PlayOneShot(victoryStinger);
 
         ui.DisplayWinScreen();
+        
         Invoke(nameof(ReloadScene), endGameDelay);
     }
 

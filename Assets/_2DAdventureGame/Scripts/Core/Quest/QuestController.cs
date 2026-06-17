@@ -6,7 +6,6 @@ public abstract class QuestController : MonoBehaviour
 {
     [SerializeField] protected QuestData data;
 
-    [Tooltip("Optional stinger played when this quest transitions from During to After.")]
     [SerializeField] private AudioClip completionSfx;
 
     public QuestData Data => data;
@@ -21,40 +20,54 @@ public abstract class QuestController : MonoBehaviour
         if (data == null || string.IsNullOrEmpty(data.id))
         {
             Debug.LogError($"[QuestController:{name}] QuestData missing or has no id.");
+            
             return;
         }
-        if (QuestManager.Instance != null) QuestManager.Instance.Register(this);
+
+        if (QuestManager.Instance != null) 
+            QuestManager.Instance.Register(this);
     }
 
     protected virtual void OnDestroy()
     {
-        if (QuestManager.Instance != null) QuestManager.Instance.Unregister(this);
+        if (QuestManager.Instance != null) 
+            QuestManager.Instance.Unregister(this);
     }
 
     public virtual void Accept()
     {
-        if (Phase != QuestPhase.Before) return;
+        if (Phase != QuestPhase.Before) 
+            return;
+
         SetPhase(QuestPhase.During);
         ApplyUnlock();
+        
         QuestMusic.Refresh();
     }
 
     public virtual void MarkComplete()
     {
-        if (Phase != QuestPhase.During) return;
+        if (Phase != QuestPhase.During) 
+            return;
+        
         SetPhase(QuestPhase.After);
+        
         QuestMusic.PlayCompletionStinger(completionSfx);
     }
 
     public void Conclude()
     {
-        if (Phase != QuestPhase.After) return;
+        if (Phase != QuestPhase.After) 
+            return;
+        
         OnConcluded?.Invoke(this);
     }
 
     public void EpilogueFinished()
     {
-        if (Phase != QuestPhase.After) return;
+        if (Phase != QuestPhase.After) 
+            return;
+        
         OnEpilogueFinished?.Invoke(this);
     }
 
@@ -69,7 +82,9 @@ public abstract class QuestController : MonoBehaviour
     {
         RestoreData(saved);
         SetPhase(saved.phase);
-        if (saved.phase != QuestPhase.Before) ApplyUnlock();
+
+        if (saved.phase != QuestPhase.Before) 
+            ApplyUnlock();
     }
 
     protected virtual QuestPhase CapturePhase() => Phase;
@@ -78,7 +93,9 @@ public abstract class QuestController : MonoBehaviour
 
     protected void SetPhase(QuestPhase next)
     {
-        if (Phase == next) return;
+        if (Phase == next) 
+            return;
+        
         Phase = next;
         OnPhaseChanged?.Invoke(this);
     }

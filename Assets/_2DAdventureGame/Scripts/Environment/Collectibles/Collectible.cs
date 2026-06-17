@@ -15,10 +15,12 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.TryGetComponent(out Player player)) return;
+        if (!other.TryGetComponent(out Player player)) 
+            return;
 
         QuestReporter reporter = GetComponent<QuestReporter>();
-        if (reporter != null && reporter.Quest != null && !reporter.CanReport()) return;
+        if (reporter != null && reporter.Quest != null && !reporter.CanReport()) 
+            return;
 
         ApplyEffect(player);
 
@@ -26,6 +28,7 @@ public class Collectible : MonoBehaviour
             player.OneShotSource.PlayOneShot(collectibleClip);
 
         OnEffectApplied();
-        if (reporter != null) reporter.Report();
+        if (reporter != null) 
+            reporter.Report();
     }
 }

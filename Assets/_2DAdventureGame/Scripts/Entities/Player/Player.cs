@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -92,13 +91,17 @@ public class Player : MonoBehaviour, IDamageable
 
     void OnDestroy()
     {
-        if (Instance == this) Instance = null;
+        if (Instance == this) 
+            Instance = null;
     }
 
     void Update()
     {
-        if (PauseManager.IsPaused) return;
+        if (PauseManager.IsPaused) 
+            return;
+        
         UpdateTimers();
+        
         CurrentState.Update(this);
     }
 
