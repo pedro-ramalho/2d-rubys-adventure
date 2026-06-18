@@ -75,7 +75,7 @@ public class QuestTrackerManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.IsPaused)
+        if (PauseManager.IsPaused || (SceneTransitioner.Instance != null && SceneTransitioner.Instance.IsTransitioning))
         {
             SetVisible(false);
 
@@ -130,7 +130,11 @@ public class QuestTrackerManager : MonoBehaviour
 
         if (progressLabel != null && tracked.Count != lastCount)
         {
-            progressLabel.text = $"{tracked.Count} / {tracked.Target}";
+            progressLabel.text = string.Concat(
+                tracked.Count.ToString(),
+                " / ",
+                tracked.Target.ToString()
+            );
             lastCount = tracked.Count;
         }
 

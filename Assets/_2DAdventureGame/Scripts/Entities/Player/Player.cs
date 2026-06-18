@@ -50,7 +50,7 @@ public class Player : MonoBehaviour, IDamageable
     public float DamageCooldown { get; set; }
 
     // Movement
-    public Vector2 MoveDirection { get; set; } = Vector2.right;
+    public Vector2 MoveDirection { get; set; } = Vector2.up;
     public Vector2 CurrentVelocity { get; set; }
     public float DashCooldownTimer { get; set; }
 

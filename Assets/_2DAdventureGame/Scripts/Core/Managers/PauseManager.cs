@@ -94,6 +94,9 @@ public class PauseManager : PersistentSingleton<PauseManager>
         if (SceneManager.GetActiveScene().name == SceneNames.MainMenu)
             return;
 
+        if (SceneTransitioner.Instance != null && SceneTransitioner.Instance.IsTransitioning)
+            return;
+
         if (IsPaused)
             Resume();
         else

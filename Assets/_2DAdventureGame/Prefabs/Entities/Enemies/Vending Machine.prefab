@@ -111,7 +111,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 500
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -351,15 +351,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VendingMachine
   data: {fileID: 11400000, guid: a1e0dc0aa758f9647972954f4ad36eb6, type: 2}
-  smokeEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
-    type: 3}
   chargeTint: {r: 0.990566, g: 0.4532307, b: 0.4532307, a: 1}
   stunnedTint: {r: 0.6084906, g: 1, b: 0.9317475, a: 1}
   walkingClip: {fileID: 8300000, guid: f2bd042fedd3e02449fe7ce851241323, type: 3}
   windupClip: {fileID: 8300000, guid: 46455a1048fa7474ba99a4e875f62055, type: 3}
   chargeClip: {fileID: 8300000, guid: f42b991edb4392d41bc46af3c2144e71, type: 3}
   stunnedClip: {fileID: 8300000, guid: 53e15805f3efe69499a4997b6bc50ba5, type: 3}
-  wallTag: Wall
   explosionPrefab: {fileID: 3768179546986632569, guid: 7b74849dd50677e40b8f73b1d57de7de,
     type: 3}
   detectionRadius: 5
@@ -403,8 +400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 1
-  reportTag: VM
+  quest: {fileID: 0}
+  worldId: 
 --- !u!1001 &5581598578453275785
 PrefabInstance:
   m_ObjectHideFlags: 0

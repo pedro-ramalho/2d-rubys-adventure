@@ -22,12 +22,9 @@
 
 .menu-button:hover {
     scale: 1.05 1.05;
-    background-color: rgba(241, 138, 3, 0.73);
-    border-left-color: rgba(255, 178, 34, 0.95);
-    border-right-color: rgba(255, 178, 34, 0.95);
-    border-top-color: rgba(255, 178, 34, 0.95);
-    border-bottom-color: rgba(255, 178, 34, 0.95);
+    background-color: rgba(80, 80, 80, 0.95);
 }
+
 
 .menu-button:active {
     scale: 0.98 0.98;
