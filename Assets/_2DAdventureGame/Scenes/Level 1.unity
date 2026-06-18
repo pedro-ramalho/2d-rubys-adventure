@@ -14181,12 +14181,12 @@ PrefabInstance:
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MaxDistance
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MinDistance
-      value: 2.08
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
@@ -14866,12 +14866,12 @@ PrefabInstance:
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MaxDistance
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MinDistance
-      value: 2.08
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
@@ -15289,12 +15289,12 @@ PrefabInstance:
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MaxDistance
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MinDistance
-      value: 2.08
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
@@ -19668,12 +19668,12 @@ PrefabInstance:
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MaxDistance
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: MinDistance
-      value: 2.08
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3948843125931185040, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
@@ -20202,10 +20202,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1393758997}
-    - targetCorrespondingSourceObject: {fileID: 844690113617188872, guid: 454258e503a7c0843bcdf11fdf1cc1a3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1393758998}
   m_SourcePrefab: {fileID: 100100000, guid: 454258e503a7c0843bcdf11fdf1cc1a3, type: 3}
 --- !u!4 &1393758995 stripped
 Transform:
@@ -20233,20 +20229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogues:
   - {fileID: 11400000, guid: 4f10cc39e4116ed469b7b07b56056577, type: 2}
---- !u!114 &1393758998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393758996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c10af8636bc901b479112ddeab5e5a5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuestConclusionActivator
-  boundQuest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
-  target: {fileID: 59159636}
 --- !u!1001 &1396050039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29818,7 +29800,7 @@ MonoBehaviour:
   displayTime: 4
   clickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
   typeInterval: 0.08
-  typeClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
+  typeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.06
   promptFadeDuration: 0.05

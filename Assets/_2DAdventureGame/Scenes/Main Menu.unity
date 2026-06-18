@@ -676,6 +676,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
         type: 3}
+      propertyPath: fadeOutClipName
+      value: CrossfadeStart_Animation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586496677087907642, guid: 43bbe1555b122fc4d9c9628f07d74643,
+        type: 3}
       propertyPath: preTransitionDelay
       value: 0
       objectReference: {fileID: 0}
