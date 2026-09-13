@@ -7,10 +7,8 @@ using UnityEngine.SceneManagement;
 
 namespace AdventureGame.Core.Scene
 {
-    public class SceneTransitioner : MonoBehaviour
+    public class SceneTransitioner : SceneSingleton<SceneTransitioner>
     {
-        public static SceneTransitioner Instance { get; private set; }
-
         [SerializeField] private Animator transition;
         [SerializeField] private string startTrigger = "Start";
         [SerializeField] private string fadeOutClipName = "CrossfadeStart_Animation";
@@ -19,9 +17,10 @@ namespace AdventureGame.Core.Scene
 
         public bool IsTransitioning { get; private set; }
 
-        void Awake()
+        protected override void Awake()
         {
-            Instance = this;
+            base.Awake();
+            if (Instance != this) return;
 
             fadeOutDuration = ResolveClipLength(fadeOutClipName);
         }

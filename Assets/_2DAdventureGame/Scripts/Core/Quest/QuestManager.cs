@@ -5,17 +5,9 @@ using UnityEngine;
 namespace AdventureGame.Core.Quest
 {
     [DefaultExecutionOrder(-100)]
-    public class QuestManager : MonoBehaviour
+    public class QuestManager : SceneSingleton<QuestManager>
     {
-        public static QuestManager Instance { get; private set; }
-
         private readonly Dictionary<string, QuestController> controllers = new();
-
-        void Awake()
-        {
-            if (Instance == null) 
-                Instance = this;
-        }
 
         void Start()
         {

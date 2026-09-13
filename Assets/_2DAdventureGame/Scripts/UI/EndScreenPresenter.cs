@@ -5,10 +5,8 @@ using UnityEngine.UIElements;
 namespace AdventureGame.UI
 {
     [RequireComponent(typeof(UIDocument))]
-    public class EndScreenPresenter : MonoBehaviour
+    public class EndScreenPresenter : SceneSingleton<EndScreenPresenter>
     {
-        public static EndScreenPresenter Instance { get; private set; }
-
         [SerializeField]
         private AudioSource m_StingerSource;
 
@@ -20,12 +18,6 @@ namespace AdventureGame.UI
 
         private VisualElement m_WinScreen;
         private VisualElement m_LoseScreen;
-
-        void Awake()
-        {
-            if (Instance == null)
-                Instance = this;
-        }
 
         void Start()
         {

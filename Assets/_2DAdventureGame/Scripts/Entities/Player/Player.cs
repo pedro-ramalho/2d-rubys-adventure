@@ -9,10 +9,8 @@ namespace AdventureGame.Entities.Player
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(SpriteRenderer))]
-    public class Player : MonoBehaviour, IDamageable
+    public class Player : SceneSingleton<Player>, IDamageable
     {
-        public static Player Instance { get; private set; }
-
         // Components
         public Rigidbody2D Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
@@ -69,9 +67,10 @@ namespace AdventureGame.Entities.Player
         public PlayerShootingState ShootingState { get; private set; }
         public PlayerDeadState DeadState { get; private set; }
 
-        void Awake()
+        protected override void Awake()
         {
-            if (Instance == null) Instance = this;
+            base.Awake();
+            if (Instance != this) return;
 
             Rigidbody = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
@@ -91,12 +90,6 @@ namespace AdventureGame.Entities.Player
 
             CurrentState = GroundedState;
             CurrentState.Enter(this);
-        }
-
-        void OnDestroy()
-        {
-            if (Instance == this) 
-                Instance = null;
         }
 
         void Update()
