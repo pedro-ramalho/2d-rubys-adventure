@@ -24,8 +24,6 @@ namespace AdventureGame.UI
         [Header("Prompt Fade")]
         [SerializeField] private float promptFadeDuration = 0.15f;
 
-        private VisualElement hud;
-        private VisualElement healthBar;
         private VisualElement dialoguePanel;
         private Label dialogueText;
         private VisualElement winScreen;
@@ -74,8 +72,6 @@ namespace AdventureGame.UI
         void Start()
         {
             UIDocument uiDocument = GetComponent<UIDocument>();
-            hud = uiDocument.rootVisualElement.Q<VisualElement>("HealthBarBackground");
-            healthBar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
         
             dialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
             dialogueText = dialoguePanel.Q<Label>("DialogueText");
@@ -86,43 +82,18 @@ namespace AdventureGame.UI
             dialoguePanel.style.display = DisplayStyle.None;
 
             player = Player.Instance;
-            player.OnHealthChanged += SetHealthValue;
-            SetHealthValue(player.CurrentHealth / (float)player.Data.maxHealth);
-        }
-
-        void OnDestroy()
-        {
-            if (player != null)
-                player.OnHealthChanged -= SetHealthValue;
-        }
-
-        void SetHealthValue(float percentage)
-        {
-            if (healthBar != null)
-                healthBar.style.width = Length.Percent(100 * percentage);
         }
 
         void RestoreTypingAudio()
         {
             AudioSource audio = OneShot();
-            if (audio == null) 
+            if (audio == null)
                 return;
-        
+
             audio.pitch = 1f;
             audio.volume = originalOneShotVolume;
         }
 
-        public void SetHUDVisible(bool visible)
-        {
-            if (hud == null)
-                return;
-        
-            hud.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
-        }
-
-        public void HideHUD() => SetHUDVisible(false);
-        public void ShowHUD() => SetHUDVisible(true);
-    
         public void DisplayDialogueWithLine(string line) => DisplayDialogueWithLine(line, null);
         public void DisplayDialogueWithLine(string line, Transform speaker) 
         {
