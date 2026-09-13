@@ -11,7 +11,6 @@ namespace AdventureGame.Core.Managers
     public class ArenaManager : MonoBehaviour
     {
         [SerializeField] private WaveSpawner spawner;
-        [SerializeField] private UIHandler ui;
         [SerializeField] private QuestData winQuest;
         [SerializeField] private float endGameDelay = 3f;
         [SerializeField] private float epilogueReadDelay = 3f;
@@ -66,7 +65,7 @@ namespace AdventureGame.Core.Managers
             if (stingerSource != null && victoryStinger != null)
                 stingerSource.PlayOneShot(victoryStinger);
 
-            ui.DisplayWinScreen();
+            EndScreenPresenter.Instance?.DisplayWinScreen();
         
             Invoke(nameof(ReloadScene), endGameDelay);
         }
