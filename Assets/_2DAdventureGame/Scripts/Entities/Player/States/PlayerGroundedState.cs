@@ -57,7 +57,8 @@ namespace AdventureGame.Entities.Player.States
         {
             if (SceneTransitioner.Instance != null && SceneTransitioner.Instance.IsTransitioning)
             {
-                UIHandler.Instance?.HideInteractPrompt();
+                if (InteractPromptPresenter.Instance != null)
+                    InteractPromptPresenter.Instance.HideInteractPrompt();
                 return;
             }
 
@@ -72,12 +73,12 @@ namespace AdventureGame.Entities.Player.States
             NPC.NPC npc = null;
             if (hit.collider != null) hit.collider.TryGetComponent(out npc);
 
-            if (UIHandler.Instance != null)
+            if (InteractPromptPresenter.Instance != null)
             {
-                if (npc != null) 
-                    UIHandler.Instance.ShowInteractPrompt("Press X to talk");
-                else 
-                    UIHandler.Instance.HideInteractPrompt();
+                if (npc != null)
+                    InteractPromptPresenter.Instance.ShowInteractPrompt("Press X to talk");
+                else
+                    InteractPromptPresenter.Instance.HideInteractPrompt();
             }
 
             if (!owner.TalkAction.WasPressedThisFrame() || npc == null) 

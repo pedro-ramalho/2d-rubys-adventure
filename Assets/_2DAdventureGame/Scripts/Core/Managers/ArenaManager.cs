@@ -65,7 +65,8 @@ namespace AdventureGame.Core.Managers
             if (stingerSource != null && victoryStinger != null)
                 stingerSource.PlayOneShot(victoryStinger);
 
-            EndScreenPresenter.Instance?.DisplayWinScreen();
+            if (EndScreenPresenter.Instance != null)
+                EndScreenPresenter.Instance.DisplayWinScreen();
         
             Invoke(nameof(ReloadScene), endGameDelay);
         }
