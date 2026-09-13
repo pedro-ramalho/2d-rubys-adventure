@@ -1,10 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a9bd9b37-5e71-44cd-81b4-63f13c27b450" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="1" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/_2DAdventureGame/Scripts/AdventureGame.asmdef" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_2DAdventureGame/Scripts/Core/Constants/AnimatorHashes.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0500732668131678E-21" />
+      <entry key="MS500" value="6.371532760142327E-5" />
+      <entry key="S2" value="0.08934309232506717" />
+      <entry key="S5" value="0.38056109852366854" />
+      <entry key="S10" value="0.6168963434441126" />
+      <entry key="S30" value="0.8518247243529737" />
+      <entry key="S60" value="0.964109708737502" />
+      <entry key="M2" value="1.3640846073966628" />
+      <entry key="M5" value="2.7365511458570824" />
+      <entry key="M10" value="3.9287767830018274" />
+      <entry key="M15" value="4.495026263388257" />
+      <entry key="M30" value="5.176987558605444" />
+      <entry key="H1" value="5.56906474681183" />
+      <entry key="H2" value="5.7794293913323465" />
+      <entry key="H4" value="5.888406812240604" />
+      <entry key="D1" value="5.981216688193866" />
+      <entry key="W1" value="5.997312115725572" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.000000000000352" />
+      <entry key="MS500" value="1.003230741725204" />
+      <entry key="S2" value="1.2590531602499397" />
+      <entry key="S5" value="1.7753476813213562" />
+      <entry key="S10" value="2.2109170434006824" />
+      <entry key="S30" value="2.681206299307876" />
+      <entry key="S60" value="2.8566483760585495" />
+      <entry key="M2" value="3.160626465108398" />
+      <entry key="M5" value="4.033036406549199" />
+      <entry key="M10" value="4.760711045846311" />
+      <entry key="M15" value="5.10198369544992" />
+      <entry key="M30" value="5.510335326433848" />
+      <entry key="H1" value="5.743997179105184" />
+      <entry key="H2" value="5.869068737623403" />
+      <entry key="H4" value="5.933783979469964" />
+      <entry key="D1" value="5.9888582169004625" />
+      <entry key="W1" value="5.998405705591993" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="5.290839560317177E-7" />
+      <entry key="MS500" value="0.056721344970747184" />
+      <entry key="S2" value="0.7312785184010551" />
+      <entry key="S5" value="1.738995557147533" />
+      <entry key="S10" value="2.554736607863588" />
+      <entry key="S30" value="3.4200734638241936" />
+      <entry key="S60" value="3.7602507405510672" />
+      <entry key="M2" value="4.490825844000668" />
+      <entry key="M5" value="6.7519003706185305" />
+      <entry key="M10" value="8.678943351224278" />
+      <entry key="M15" value="9.589451536554357" />
+      <entry key="M30" value="10.683228303291099" />
+      <entry key="H1" value="11.31092461444892" />
+      <entry key="H2" value="11.647405408756242" />
+      <entry key="H4" value="11.821638209468409" />
+      <entry key="D1" value="11.969981925838434" />
+      <entry key="W1" value="11.995704516722606" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 7,
   "fromUser": false
 }]]></component>
   <component name="ProjectId" id="3JGfrsklWCwqscZg0mRjt7kXJD0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -17,6 +110,10 @@
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>
@@ -58,6 +155,26 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a9bd9b37-5e71-44cd-81b4-63f13c27b450" name="Changes" comment="" />
+      <created>1789292550004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1789292550004</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
