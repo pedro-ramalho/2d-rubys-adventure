@@ -46,7 +46,7 @@ namespace AdventureGame.Core.Managers
 
         IEnumerator DelayedWin()
         {
-            while (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
+            while (DialoguePresenter.Instance != null && DialoguePresenter.Instance.IsTyping)
                 yield return null;
         
             yield return new WaitForSeconds(epilogueReadDelay);
