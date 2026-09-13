@@ -1,13 +1,13 @@
-using System;
-
-
-public abstract class State<T> 
+namespace AdventureGame.Core
 {
-    public virtual void Enter(T owner) {}
+    public abstract class State<T> 
+    {
+        public virtual void Enter(T owner) {}
 
-    public virtual void Update(T owner) {}
+        public virtual void Update(T owner) {}
     
-    public virtual void FixedUpdate(T owner) {}
+        public virtual void FixedUpdate(T owner) {}
 
-    public virtual void Exit(T owner) {} 
+        public virtual void Exit(T owner) {} 
+    }
 }

@@ -1,29 +1,33 @@
+using AdventureGame.Core.Dialogue;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "QuestDialogue", menuName = "Game/Quest Dialogue")]
-public class QuestDialogue : ScriptableObject
+namespace AdventureGame.Core.Quest
 {
-    public QuestData quest;
-
-    public DialoguePhase before;
-
-    public DialoguePhase during;
-
-    public DialoguePhase after;
-
-    public DialoguePhase Pick(QuestController controller)
+    [CreateAssetMenu(fileName = "QuestDialogue", menuName = "Game/Quest Dialogue")]
+    public class QuestDialogue : ScriptableObject
     {
-        QuestPhase phase = controller != null ? controller.Phase : QuestPhase.Before;
+        public QuestData quest;
 
-        DialoguePhase chosen = phase switch
+        public DialoguePhase before;
+
+        public DialoguePhase during;
+
+        public DialoguePhase after;
+
+        public DialoguePhase Pick(QuestController controller)
         {
-            QuestPhase.After  => after,
-            QuestPhase.During => during,
-            _                 => before
-        };
+            QuestPhase phase = controller != null ? controller.Phase : QuestPhase.Before;
 
-        return chosen != null && !chosen.IsEmpty ? chosen : null;
+            DialoguePhase chosen = phase switch
+            {
+                QuestPhase.After  => after,
+                QuestPhase.During => during,
+                _                 => before
+            };
+
+            return chosen != null && !chosen.IsEmpty ? chosen : null;
+        }
+
+        public bool IsAfterPhase(DialoguePhase phase) => phase == after && quest != null;
     }
-
-    public bool IsAfterPhase(DialoguePhase phase) => phase == after && quest != null;
 }

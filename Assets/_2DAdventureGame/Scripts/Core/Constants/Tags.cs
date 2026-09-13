@@ -1,4 +1,7 @@
-public static class Tags
+namespace AdventureGame.Core.Constants
 {
-    public const string Wall = "Wall";
+    public static class Tags
+    {
+        public const string Wall = "Wall";
+    }
 }

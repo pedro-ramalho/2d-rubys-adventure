@@ -1,25 +1,28 @@
 using UnityEngine;
 
-public class VendingMachineStunnedState : VendingMachineState
+namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
 {
-    private float timer;
-
-    public override void Enter(VendingMachine owner)
+    public class VendingMachineStunnedState : VendingMachineState
     {
-        timer = 0f;
-        owner.SpriteRenderer.color = owner.StunnedTint;
+        private float timer;
 
-        owner.AudioSource.PlayOneShot(owner.StunnedClip);
-    }
+        public override void Enter(VendingMachine owner)
+        {
+            timer = 0f;
+            owner.SpriteRenderer.color = owner.StunnedTint;
 
-    public override void Update(VendingMachine owner)
-    {
-        timer += Time.deltaTime;
+            owner.AudioSource.PlayOneShot(owner.StunnedClip);
+        }
 
-        float t = Mathf.Clamp01(timer / owner.StunnedDuration);
-        owner.SpriteRenderer.color = Color.Lerp(owner.StunnedTint, owner.BaseColor, t);
+        public override void Update(VendingMachine owner)
+        {
+            timer += Time.deltaTime;
 
-        if (timer >= owner.StunnedDuration)
-            owner.ChangeState(owner.MovingState);
+            float t = Mathf.Clamp01(timer / owner.StunnedDuration);
+            owner.SpriteRenderer.color = Color.Lerp(owner.StunnedTint, owner.BaseColor, t);
+
+            if (timer >= owner.StunnedDuration)
+                owner.ChangeState(owner.MovingState);
+        }
     }
 }

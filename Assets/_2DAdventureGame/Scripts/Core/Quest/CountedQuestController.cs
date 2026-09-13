@@ -1,44 +1,47 @@
 using System.Collections.Generic;
 
-public class CountedQuestController : QuestController
+namespace AdventureGame.Core.Quest
 {
-    private readonly HashSet<string> consumedIds = new();
-
-    public int Count => consumedIds.Count;
-    public int Target => data != null ? data.targetCount : 0;
-
-    public bool IsConsumed(string worldId) =>
-        !string.IsNullOrEmpty(worldId) && consumedIds.Contains(worldId);
-
-    public bool CanReport(string worldId) =>
-        Phase == QuestPhase.During &&
-        !string.IsNullOrEmpty(worldId) &&
-        !consumedIds.Contains(worldId);
-
-    public bool TryReport(string worldId)
+    public class CountedQuestController : QuestController
     {
-        if (!CanReport(worldId)) 
-            return false;
+        private readonly HashSet<string> consumedIds = new();
+
+        public int Count => consumedIds.Count;
+        public int Target => data != null ? data.targetCount : 0;
+
+        public bool IsConsumed(string worldId) =>
+            !string.IsNullOrEmpty(worldId) && consumedIds.Contains(worldId);
+
+        public bool CanReport(string worldId) =>
+            Phase == QuestPhase.During &&
+            !string.IsNullOrEmpty(worldId) &&
+            !consumedIds.Contains(worldId);
+
+        public bool TryReport(string worldId)
+        {
+            if (!CanReport(worldId)) 
+                return false;
         
-        consumedIds.Add(worldId);
+            consumedIds.Add(worldId);
 
-        if (consumedIds.Count >= Target)
-            MarkComplete();
+            if (consumedIds.Count >= Target)
+                MarkComplete();
 
-        return true;
-    }
+            return true;
+        }
 
-    protected override List<string> CaptureConsumed() => new(consumedIds);
+        protected override List<string> CaptureConsumed() => new(consumedIds);
 
-    protected override void RestoreData(QuestSaveData saved)
-    {
-        consumedIds.Clear();
+        protected override void RestoreData(QuestSaveData saved)
+        {
+            consumedIds.Clear();
 
-        if (saved.consumedIds == null) 
-            return;
+            if (saved.consumedIds == null) 
+                return;
 
-        foreach (string id in saved.consumedIds)
-            if (!string.IsNullOrEmpty(id))
-                consumedIds.Add(id);
+            foreach (string id in saved.consumedIds)
+                if (!string.IsNullOrEmpty(id))
+                    consumedIds.Add(id);
+        }
     }
 }

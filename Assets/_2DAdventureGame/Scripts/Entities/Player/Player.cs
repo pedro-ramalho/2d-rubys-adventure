@@ -1,136 +1,141 @@
 using System;
+using AdventureGame.Core.Managers;
+using AdventureGame.Entities.Player.States;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(SpriteRenderer))]
-public class Player : MonoBehaviour, IDamageable
+namespace AdventureGame.Entities.Player
 {
-    public static Player Instance { get; private set; }
-
-    // Components
-    public Rigidbody2D Rigidbody { get; private set; }
-    public Animator Animator { get; private set; }
-    public SpriteRenderer SpriteRenderer { get; private set; }
-
-    [Header("Player Data")]
-    [SerializeField] private PlayerData data;
-    public PlayerData Data => data;
-
-    [Header("Player Input")]
-    private PlayerInputActions inputActions;
-    public InputAction MoveAction => inputActions.Player.Movement;
-    public InputAction DashAction => inputActions.Player.Dash;
-    public InputAction ShootAction => inputActions.Player.Shoot;
-    public InputAction TalkAction => inputActions.Player.Talk;
-
-    [Header("Player Assets")]
-    [field: SerializeField]
-    public AudioSource OneShotSource { get; private set; }
-
-    [field: SerializeField]
-    public AudioClip DashClip { get; private set; }
-    
-    [field: SerializeField]
-    public AudioClip HitClip { get; private set; }
-    
-    [field: SerializeField]
-    public AudioClip LaunchClip { get; private set; }
-    
-    [field: SerializeField]
-    public GameObject AfterimagePrefab { get; private set; }
-    
-    [field: SerializeField]
-    public GameObject ProjectilePrefab { get; private set; }
-
-    // Health
-    public int CurrentHealth { get; set; }
-    public bool IsInvincible { get; set; }
-    public float DamageCooldown { get; set; }
-
-    // Movement
-    public Vector2 MoveDirection { get; set; } = Vector2.up;
-    public Vector2 CurrentVelocity { get; set; }
-    public float DashCooldownTimer { get; set; }
-
-    // State
-    public PlayerState CurrentState { get; private set; }
-    public event Action<float> OnHealthChanged;
-    public event Action OnDied;
-
-    // State instances
-    public PlayerGroundedState GroundedState { get; private set; }
-    public PlayerDashingState DashingState { get; private set; }
-    public PlayerShootingState ShootingState { get; private set; }
-    public PlayerDeadState DeadState { get; private set; }
-
-    void Awake()
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class Player : MonoBehaviour, IDamageable
     {
-        if (Instance == null) Instance = this;
+        public static Player Instance { get; private set; }
 
-        Rigidbody = GetComponent<Rigidbody2D>();
-        Animator = GetComponent<Animator>();
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        // Components
+        public Rigidbody2D Rigidbody { get; private set; }
+        public Animator Animator { get; private set; }
+        public SpriteRenderer SpriteRenderer { get; private set; }
 
-        int health = SaveManager.Instance != null && SaveManager.Instance.HasSave && SaveManager.Instance.Current.playerHealth >= 0
-            ? SaveManager.Instance.Current.playerHealth
-            : data.startingHealth;
-        CurrentHealth = Mathf.Clamp(health, 0, data.maxHealth);
+        [Header("Player Data")]
+        [SerializeField] private PlayerData data;
+        public PlayerData Data => data;
 
-        inputActions = InputManager.Instance.Actions;
+        [Header("Player Input")]
+        private PlayerInputActions inputActions;
+        public InputAction MoveAction => inputActions.Player.Movement;
+        public InputAction DashAction => inputActions.Player.Dash;
+        public InputAction ShootAction => inputActions.Player.Shoot;
+        public InputAction TalkAction => inputActions.Player.Talk;
 
-        GroundedState = new PlayerGroundedState();
-        DashingState = new PlayerDashingState();
-        ShootingState = new PlayerShootingState();
-        DeadState = new PlayerDeadState();
+        [Header("Player Assets")]
+        [field: SerializeField]
+        public AudioSource OneShotSource { get; private set; }
 
-        CurrentState = GroundedState;
-        CurrentState.Enter(this);
-    }
+        [field: SerializeField]
+        public AudioClip DashClip { get; private set; }
+    
+        [field: SerializeField]
+        public AudioClip HitClip { get; private set; }
+    
+        [field: SerializeField]
+        public AudioClip LaunchClip { get; private set; }
+    
+        [field: SerializeField]
+        public GameObject AfterimagePrefab { get; private set; }
+    
+        [field: SerializeField]
+        public GameObject ProjectilePrefab { get; private set; }
 
-    void OnDestroy()
-    {
-        if (Instance == this) 
-            Instance = null;
-    }
+        // Health
+        public int CurrentHealth { get; set; }
+        public bool IsInvincible { get; set; }
+        public float DamageCooldown { get; set; }
 
-    void Update()
-    {
-        if (PauseManager.IsPaused) 
-            return;
-        
-        UpdateTimers();
-        
-        CurrentState.Update(this);
-    }
+        // Movement
+        public Vector2 MoveDirection { get; set; } = Vector2.up;
+        public Vector2 CurrentVelocity { get; set; }
+        public float DashCooldownTimer { get; set; }
 
-    void FixedUpdate() => CurrentState.FixedUpdate(this);
+        // State
+        public PlayerState CurrentState { get; private set; }
+        public event Action<float> OnHealthChanged;
+        public event Action OnDied;
 
-    void UpdateTimers()
-    {
-        if (IsInvincible)
+        // State instances
+        public PlayerGroundedState GroundedState { get; private set; }
+        public PlayerDashingState DashingState { get; private set; }
+        public PlayerShootingState ShootingState { get; private set; }
+        public PlayerDeadState DeadState { get; private set; }
+
+        void Awake()
         {
-            DamageCooldown -= Time.deltaTime;
-            if (DamageCooldown <= 0f)
-                IsInvincible = false;
+            if (Instance == null) Instance = this;
+
+            Rigidbody = GetComponent<Rigidbody2D>();
+            Animator = GetComponent<Animator>();
+            SpriteRenderer = GetComponent<SpriteRenderer>();
+
+            int health = SaveManager.Instance != null && SaveManager.Instance.HasSave && SaveManager.Instance.Current.playerHealth >= 0
+                ? SaveManager.Instance.Current.playerHealth
+                : data.startingHealth;
+            CurrentHealth = Mathf.Clamp(health, 0, data.maxHealth);
+
+            inputActions = InputManager.Instance.Actions;
+
+            GroundedState = new PlayerGroundedState();
+            DashingState = new PlayerDashingState();
+            ShootingState = new PlayerShootingState();
+            DeadState = new PlayerDeadState();
+
+            CurrentState = GroundedState;
+            CurrentState.Enter(this);
         }
 
-        if (DashCooldownTimer > 0f)
-            DashCooldownTimer -= Time.deltaTime;    
+        void OnDestroy()
+        {
+            if (Instance == this) 
+                Instance = null;
+        }
+
+        void Update()
+        {
+            if (PauseManager.IsPaused) 
+                return;
+        
+            UpdateTimers();
+        
+            CurrentState.Update(this);
+        }
+
+        void FixedUpdate() => CurrentState.FixedUpdate(this);
+
+        void UpdateTimers()
+        {
+            if (IsInvincible)
+            {
+                DamageCooldown -= Time.deltaTime;
+                if (DamageCooldown <= 0f)
+                    IsInvincible = false;
+            }
+
+            if (DashCooldownTimer > 0f)
+                DashCooldownTimer -= Time.deltaTime;    
+        }
+
+        public void ChangeState(PlayerState newState)
+        {
+            CurrentState.Exit(this);
+            CurrentState = newState;
+            CurrentState.Enter(this);
+        }
+
+        public void Heal(int amount) => CurrentState.HandleHeal(this, amount);
+
+        public void ApplyDamage(int amount) => CurrentState.HandleDamage(this, amount);
+
+        public void RaiseOnHealthChanged(float percentage) => OnHealthChanged?.Invoke(percentage);
+        public void RaiseOnDied() => OnDied?.Invoke();
     }
-
-    public void ChangeState(PlayerState newState)
-    {
-        CurrentState.Exit(this);
-        CurrentState = newState;
-        CurrentState.Enter(this);
-    }
-
-    public void Heal(int amount) => CurrentState.HandleHeal(this, amount);
-
-    public void ApplyDamage(int amount) => CurrentState.HandleDamage(this, amount);
-
-    public void RaiseOnHealthChanged(float percentage) => OnHealthChanged?.Invoke(percentage);
-    public void RaiseOnDied() => OnDied?.Invoke();
 }

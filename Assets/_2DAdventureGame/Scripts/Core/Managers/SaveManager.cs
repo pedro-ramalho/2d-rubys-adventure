@@ -1,107 +1,112 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using AdventureGame.Core.Quest;
+using AdventureGame.Entities.Player;
 using UnityEngine;
 
-public class SaveManager : PersistentSingleton<SaveManager>
+namespace AdventureGame.Core.Managers
 {
-    private const string SaveFileName = "save.json";
-    private const int CurrentSaveVersion = 4;
-    private const int NoStoredHealth = -1;
-
-    public bool HasSave { get; private set; }
-    public Save Current { get; private set; }
-
-    public event Action SaveDeleted;
-
-    private string SavePath => Path.Combine(Application.persistentDataPath, SaveFileName);
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Bootstrap() => BootstrapIfMissing();
-
-    protected override void Awake()
+    public class SaveManager : PersistentSingleton<SaveManager>
     {
-        base.Awake();
+        private const string SaveFileName = "save.json";
+        private const int CurrentSaveVersion = 4;
+        private const int NoStoredHealth = -1;
 
-        if (Instance != this) 
-            return;
-        
-        ReadFromDisk();
-    }
+        public bool HasSave { get; private set; }
+        public Save Current { get; private set; }
 
-    void ReadFromDisk()
-    {
-        HasSave = false;
+        public event Action SaveDeleted;
 
-        if (!File.Exists(SavePath)) 
-            return;
+        private string SavePath => Path.Combine(Application.persistentDataPath, SaveFileName);
 
-        try
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void Bootstrap() => BootstrapIfMissing();
+
+        protected override void Awake()
         {
-            Save loaded = JsonUtility.FromJson<Save>(File.ReadAllText(SavePath));
-            if (loaded?.version != CurrentSaveVersion) 
+            base.Awake();
+
+            if (Instance != this) 
+                return;
+        
+            ReadFromDisk();
+        }
+
+        void ReadFromDisk()
+        {
+            HasSave = false;
+
+            if (!File.Exists(SavePath)) 
                 return;
 
-            Current = loaded;
-            HasSave = true;
-        }
-        catch { }
-    }
-
-    public void WriteSave(string sceneName)
-    {
-        List<QuestSaveData> quests = QuestManager.Instance != null
-            ? QuestManager.Instance.CaptureAll()
-            : PreserveQuestsFromCurrent();
-
-        Save save = new Save
-        {
-            version = CurrentSaveVersion,
-            sceneName = sceneName,
-            playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth,
-            quests = quests
-        };
-
-        try
-        {
-            string json = JsonUtility.ToJson(save, true);
-            
-            File.WriteAllText(SavePath, json);
-            
-            Current = save;
-            HasSave = true;
-        }
-        catch
-        {
-            Debug.LogError("Failed to write save file.");
-        }
-    }
-
-    List<QuestSaveData> PreserveQuestsFromCurrent()
-    {
-        if (Current?.quests == null) return new List<QuestSaveData>();
-
-        List<QuestSaveData> copy = new();
-        
-        foreach (QuestSaveData q in Current.quests)
-            copy.Add(new QuestSaveData
+            try
             {
-                questId = q.questId,
-                phase = q.phase,
-                consumedIds = q.consumedIds != null ? new List<string>(q.consumedIds) : null
-            });
+                Save loaded = JsonUtility.FromJson<Save>(File.ReadAllText(SavePath));
+                if (loaded?.version != CurrentSaveVersion) 
+                    return;
 
-        return copy;
-    }
+                Current = loaded;
+                HasSave = true;
+            }
+            catch { }
+        }
 
-    public void DeleteSave()
-    {
-        if (File.Exists(SavePath))
-            File.Delete(SavePath);
+        public void WriteSave(string sceneName)
+        {
+            List<QuestSaveData> quests = QuestManager.Instance != null
+                ? QuestManager.Instance.CaptureAll()
+                : PreserveQuestsFromCurrent();
 
-        Current = null;
-        HasSave = false;
+            Save save = new Save
+            {
+                version = CurrentSaveVersion,
+                sceneName = sceneName,
+                playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth,
+                quests = quests
+            };
+
+            try
+            {
+                string json = JsonUtility.ToJson(save, true);
+            
+                File.WriteAllText(SavePath, json);
+            
+                Current = save;
+                HasSave = true;
+            }
+            catch
+            {
+                Debug.LogError("Failed to write save file.");
+            }
+        }
+
+        List<QuestSaveData> PreserveQuestsFromCurrent()
+        {
+            if (Current?.quests == null) return new List<QuestSaveData>();
+
+            List<QuestSaveData> copy = new();
         
-        SaveDeleted?.Invoke();
+            foreach (QuestSaveData q in Current.quests)
+                copy.Add(new QuestSaveData
+                {
+                    questId = q.questId,
+                    phase = q.phase,
+                    consumedIds = q.consumedIds != null ? new List<string>(q.consumedIds) : null
+                });
+
+            return copy;
+        }
+
+        public void DeleteSave()
+        {
+            if (File.Exists(SavePath))
+                File.Delete(SavePath);
+
+            Current = null;
+            HasSave = false;
+        
+            SaveDeleted?.Invoke();
+        }
     }
 }
