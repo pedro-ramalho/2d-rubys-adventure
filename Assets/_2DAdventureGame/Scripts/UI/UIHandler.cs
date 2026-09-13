@@ -20,9 +20,6 @@ namespace AdventureGame.UI
         [SerializeField] private int typeClipEveryNChars = 2;
         [SerializeField] private float typeClipPitchJitter = 0.08f;
 
-        [Header("Prompt Fade")]
-        [SerializeField] private float promptFadeDuration = 0.15f;
-
         private VisualElement dialoguePanel;
         private Label dialogueText;
 
@@ -32,13 +29,12 @@ namespace AdventureGame.UI
         private Player player;
         private Coroutine typeRoutine;
         private string currentLine;
-        private bool isShowingPrompt;
         private bool dialogueActive;
-        private Coroutine promptFadeRoutine;
         private float originalOneShotVolume = 1f;
         private Transform currentSpeaker;
 
         public bool IsTyping => typeRoutine != null;
+        public bool IsDialogueActive => dialogueActive;
 
         AudioSource OneShot() => player != null ? player.OneShotSource : null;
 
@@ -84,9 +80,12 @@ namespace AdventureGame.UI
         }
 
         public void DisplayDialogueWithLine(string line) => DisplayDialogueWithLine(line, null);
-        public void DisplayDialogueWithLine(string line, Transform speaker) 
+        public void DisplayDialogueWithLine(string line, Transform speaker)
         {
             currentSpeaker = speaker;
+
+            if (InteractPromptPresenter.Instance != null)
+                InteractPromptPresenter.Instance.HideInteractPrompt();
 
             AudioSource audio = OneShot();
             if (clickClip != null && audio != null)
@@ -94,83 +93,15 @@ namespace AdventureGame.UI
 
             CancelInvoke(nameof(HideDialogue));
         
-            if (typeRoutine != null) 
+            if (typeRoutine != null)
                 StopCoroutine(typeRoutine);
 
-            StopPromptFade();
-
-            isShowingPrompt = false;
             dialogueActive = true;
             currentLine = line;
             dialogueText.text = string.Empty;
             dialoguePanel.style.opacity = 1f;
             dialoguePanel.style.display = DisplayStyle.Flex;
             typeRoutine = StartCoroutine(TypeLine(line));
-        }
-
-        public void ShowInteractPrompt(string text)
-        {
-            if (dialogueActive) 
-                return;
-        
-            if (isShowingPrompt && dialogueText.text == text && promptFadeRoutine == null) 
-                return;
-
-            dialogueText.text = text;
-            if (dialoguePanel.style.display == DisplayStyle.None)
-                dialoguePanel.style.opacity = 0f;
-            
-            dialoguePanel.style.display = DisplayStyle.Flex;
-            isShowingPrompt = true;
-
-            StartPromptFade(1f, hideAfter: false);
-        }
-
-        public void HideInteractPrompt()
-        {
-            if (!isShowingPrompt) 
-                return;
-        
-            isShowingPrompt = false;
-        
-            StartPromptFade(0f, hideAfter: true);
-        }
-
-        private void StartPromptFade(float targetOpacity, bool hideAfter)
-        {
-            StopPromptFade();
-        
-            promptFadeRoutine = StartCoroutine(FadePrompt(targetOpacity, hideAfter));
-        }
-
-        private void StopPromptFade()
-        {
-            if (promptFadeRoutine != null)
-            {
-                StopCoroutine(promptFadeRoutine);
-                promptFadeRoutine = null;
-            }
-        }
-
-        private IEnumerator FadePrompt(float targetOpacity, bool hideAfter)
-        {
-            float startOpacity = dialoguePanel.resolvedStyle.opacity;
-        
-            float elapsed = 0f;
-            while (elapsed < promptFadeDuration)
-            {
-                elapsed += Time.unscaledDeltaTime;
-                float t = Mathf.SmoothStep(0f, 1f, elapsed / promptFadeDuration);
-                dialoguePanel.style.opacity = Mathf.Lerp(startOpacity, targetOpacity, t);
-                yield return null;
-            }
-
-            dialoguePanel.style.opacity = targetOpacity;
-        
-            if (hideAfter) 
-                dialoguePanel.style.display = DisplayStyle.None;
-        
-            promptFadeRoutine = null;
         }
 
         public void Skip()
@@ -237,11 +168,8 @@ namespace AdventureGame.UI
                 RestoreTypingAudio();
             }
 
-            StopPromptFade();
-        
             dialoguePanel.style.display = DisplayStyle.None;
             dialoguePanel.style.opacity = 1f;
-            isShowingPrompt = false;
             dialogueActive = false;
             currentSpeaker = null;
         }
