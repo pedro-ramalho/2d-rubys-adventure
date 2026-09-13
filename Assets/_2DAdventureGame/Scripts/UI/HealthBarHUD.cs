@@ -5,19 +5,11 @@ using UnityEngine.UIElements;
 namespace AdventureGame.UI
 {
     [RequireComponent(typeof(UIDocument))]
-    public class HealthBarHUD : MonoBehaviour
+    public class HealthBarHUD : SceneSingleton<HealthBarHUD>
     {
-        public static HealthBarHUD Instance { get; private set; }
-
         private VisualElement m_Hud;
         private VisualElement m_HealthBar;
         private Player m_Player;
-
-        void Awake()
-        {
-            if (Instance == null)
-                Instance = this;
-        }
 
         void Start()
         {
@@ -32,8 +24,10 @@ namespace AdventureGame.UI
             OnPlayerHealthChanged(m_Player.CurrentHealth / (float)m_Player.Data.maxHealth);
         }
 
-        void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             if (m_Player != null)
                 m_Player.OnHealthChanged -= OnPlayerHealthChanged;
         }
