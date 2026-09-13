@@ -1,18 +1,20 @@
-using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class CameraShake : MonoBehaviour
+namespace AdventureGame.Core.Effects
 {
-    public static CameraShake Instance { get; private set; }
-    private CinemachineImpulseSource impulseSource;
-
-    void Awake()
+    public class CameraShake : MonoBehaviour
     {
-        if (Instance == null) Instance = this;
-        
-        impulseSource = GetComponent<CinemachineImpulseSource>();
-    }
+        public static CameraShake Instance { get; private set; }
+        private CinemachineImpulseSource impulseSource;
 
-    public void Shake(float amplitude = 1f) => impulseSource.GenerateImpulse(amplitude);
+        void Awake()
+        {
+            if (Instance == null) Instance = this;
+        
+            impulseSource = GetComponent<CinemachineImpulseSource>();
+        }
+
+        public void Shake(float amplitude = 1f) => impulseSource.GenerateImpulse(amplitude);
+    }
 }

@@ -1,30 +1,34 @@
+using AdventureGame.Environment.Projectiles;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
-public abstract class Enemy : MonoBehaviour
+namespace AdventureGame.Entities.Enemy
 {
-    [Header("Enemy Data")]
-    [SerializeField] private EnemyData data;
-    public EnemyData Data => data;
-
-    // Components
-    public Rigidbody2D Rigidbody { get; private set; }
-    public Animator Animator { get; private set; }
-    public AudioSource AudioSource { get; private set; }
-
-    protected virtual void Awake()
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
+    public abstract class Enemy : MonoBehaviour
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
-        Animator = GetComponent<Animator>();
-        AudioSource = GetComponent<AudioSource>();
-    }
+        [Header("Enemy Data")]
+        [SerializeField] private EnemyData data;
+        public EnemyData Data => data;
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out Projectile _)) OnProjectileHit();
-    }
+        // Components
+        public Rigidbody2D Rigidbody { get; private set; }
+        public Animator Animator { get; private set; }
+        public AudioSource AudioSource { get; private set; }
 
-    protected abstract void OnProjectileHit();
+        protected virtual void Awake()
+        {
+            Rigidbody = GetComponent<Rigidbody2D>();
+            Animator = GetComponent<Animator>();
+            AudioSource = GetComponent<AudioSource>();
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Projectile _)) OnProjectileHit();
+        }
+
+        protected abstract void OnProjectileHit();
+    }
 }

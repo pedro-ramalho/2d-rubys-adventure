@@ -1,31 +1,35 @@
+using AdventureGame.Core.Constants;
 using UnityEngine;
 
-public class VendingMachineWindupState : VendingMachineState
+namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
 {
-    private float timer;
-
-    public override void Enter(VendingMachine owner)
+    public class VendingMachineWindupState : VendingMachineState
     {
-        timer = 0f;
+        private float timer;
 
-        owner.ChargeDirection = (Player.Instance.Rigidbody.position - owner.Rigidbody.position).normalized;
+        public override void Enter(VendingMachine owner)
+        {
+            timer = 0f;
 
-        owner.Animator.SetFloat(AnimatorHashes.MoveX, owner.ChargeDirection.x);
-        owner.Animator.SetFloat(AnimatorHashes.MoveY, owner.ChargeDirection.y);
+            owner.ChargeDirection = (Player.Player.Instance.Rigidbody.position - owner.Rigidbody.position).normalized;
 
-        owner.Rigidbody.linearVelocity = Vector2.zero;
+            owner.Animator.SetFloat(AnimatorHashes.MoveX, owner.ChargeDirection.x);
+            owner.Animator.SetFloat(AnimatorHashes.MoveY, owner.ChargeDirection.y);
 
-        owner.AudioSource.PlayOneShot(owner.WindupClip);
-    }
+            owner.Rigidbody.linearVelocity = Vector2.zero;
 
-    public override void Update(VendingMachine owner)
-    {
-        timer += Time.deltaTime;
+            owner.AudioSource.PlayOneShot(owner.WindupClip);
+        }
 
-        float t = Mathf.Clamp01(timer / owner.WindupDuration);
-        owner.SpriteRenderer.color = Color.Lerp(owner.BaseColor, owner.ChargeTint, t);
+        public override void Update(VendingMachine owner)
+        {
+            timer += Time.deltaTime;
 
-        if (timer >= owner.WindupDuration)
-            owner.ChangeState(owner.ChargingState);
+            float t = Mathf.Clamp01(timer / owner.WindupDuration);
+            owner.SpriteRenderer.color = Color.Lerp(owner.BaseColor, owner.ChargeTint, t);
+
+            if (timer >= owner.WindupDuration)
+                owner.ChangeState(owner.ChargingState);
+        }
     }
 }
