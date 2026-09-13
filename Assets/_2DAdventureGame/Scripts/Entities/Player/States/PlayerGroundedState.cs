@@ -84,8 +84,8 @@ namespace AdventureGame.Entities.Player.States
             if (!owner.TalkAction.WasPressedThisFrame() || npc == null) 
                 return;
 
-            if (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
-                UIHandler.Instance.Skip();
+            if (DialoguePresenter.Instance != null && DialoguePresenter.Instance.IsTyping)
+                DialoguePresenter.Instance.Skip();
             else
                 npc.Talk();
         }

@@ -56,8 +56,8 @@ namespace AdventureGame.Core.Scene
 
             yield return new WaitForSeconds(preDelay);
 
-            if (UIHandler.Instance != null)
-                UIHandler.Instance.HideDialogue();
+            if (DialoguePresenter.Instance != null)
+                DialoguePresenter.Instance.HideDialogue();
 
             if (HealthBarHUD.Instance != null)
                 HealthBarHUD.Instance.Hide();

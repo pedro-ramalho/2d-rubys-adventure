@@ -1,14 +1,16 @@
 using System.Collections;
 using AdventureGame.Entities.Player;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.UI
 {
+    [MovedFrom(autoUpdateAPI: true, sourceClassName: "UIHandler")]
     [RequireComponent(typeof(UIDocument))]
-    public class UIHandler : MonoBehaviour
+    public class DialoguePresenter : MonoBehaviour
     {
-        public static UIHandler Instance { get; private set; }
+        public static DialoguePresenter Instance { get; private set; }
 
         [SerializeField] private float displayTime = 4.0f;
         [SerializeField] private AudioClip clickClip;

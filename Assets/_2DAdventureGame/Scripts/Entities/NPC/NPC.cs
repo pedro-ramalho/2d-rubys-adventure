@@ -44,7 +44,7 @@ namespace AdventureGame.Entities.NPC
                 }
             }
 
-            UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++], transform);
+            DialoguePresenter.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++], transform);
 
             if (lineIndex >= currentPhase.lines.Count)
             {

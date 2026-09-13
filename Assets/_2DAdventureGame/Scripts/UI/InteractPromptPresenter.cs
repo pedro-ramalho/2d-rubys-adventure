@@ -32,7 +32,7 @@ namespace AdventureGame.UI
 
         public void ShowInteractPrompt(string text)
         {
-            if (UIHandler.Instance != null && UIHandler.Instance.IsDialogueActive)
+            if (DialoguePresenter.Instance != null && DialoguePresenter.Instance.IsDialogueActive)
                 return;
 
             if (m_IsShowingPrompt && m_Label.text == text && m_FadeRoutine == null)
