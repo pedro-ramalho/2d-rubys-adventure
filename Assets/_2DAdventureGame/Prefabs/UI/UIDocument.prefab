@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8673883087785145659}
   - component: {fileID: 9104989948962717351}
   - component: {fileID: 4692784475991011820}
+  - component: {fileID: 5109673865737715701}
   - component: {fileID: 4032925307199344108}
   m_Layer: 5
   m_Name: UIDocument
@@ -78,7 +79,6 @@ MonoBehaviour:
   typeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.06
-  promptFadeDuration: 0.05
   dialogueMaxDistance: 5
 --- !u!114 &9104989948962717351
 MonoBehaviour:
@@ -107,6 +107,19 @@ MonoBehaviour:
   m_StingerSource: {fileID: 4032925307199344108}
   m_DefeatSting: {fileID: 8300000, guid: 9ab3581e025d20144b834b1dcff9c816, type: 3}
   m_MusicFadeOnEndScreen: 2
+--- !u!114 &5109673865737715701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434735629243172838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd1dc75e8ee98d4a9f3560f5e74c785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.UI.InteractPromptPresenter
+  m_PromptFadeDuration: 0.15
 --- !u!82 &4032925307199344108
 AudioSource:
   m_ObjectHideFlags: 0
