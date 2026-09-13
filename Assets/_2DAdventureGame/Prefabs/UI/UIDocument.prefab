@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7224748602815091252}
   - component: {fileID: 7699836477262777137}
-  - component: {fileID: 8673883087785145659}
   - component: {fileID: 9104989948962717351}
+  - component: {fileID: 8673883087785145659}
   - component: {fileID: 4692784475991011820}
   - component: {fileID: 5109673865737715701}
   - component: {fileID: 4032925307199344108}
@@ -61,6 +61,18 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &9104989948962717351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434735629243172838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05de81ea9ff315048803ea765e0d858f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.UI.HealthBarHUD
 --- !u!114 &8673883087785145659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,18 +92,6 @@ MonoBehaviour:
   typeClipEveryNChars: 2
   typeClipPitchJitter: 0.06
   dialogueMaxDistance: 5
---- !u!114 &9104989948962717351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8434735629243172838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05de81ea9ff315048803ea765e0d858f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AdventureGame::AdventureGame.UI.HealthBarHUD
 --- !u!114 &4692784475991011820
 MonoBehaviour:
   m_ObjectHideFlags: 0
