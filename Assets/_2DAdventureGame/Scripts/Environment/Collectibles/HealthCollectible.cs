@@ -1,12 +1,16 @@
+using AdventureGame.Entities.Player;
 using UnityEngine;
 
-public class HealthCollectible : Collectible
+namespace AdventureGame.Environment.Collectibles
 {
-    [SerializeField] private int healAmount;
-
-    protected override void ApplyEffect(Player player)
+    public class HealthCollectible : Collectible
     {
-        if (player.CurrentHealth < player.Data.maxHealth) 
-            player.Heal(healAmount);
+        [SerializeField] private int healAmount;
+
+        protected override void ApplyEffect(Player player)
+        {
+            if (player.CurrentHealth < player.Data.maxHealth) 
+                player.Heal(healAmount);
+        }
     }
 }

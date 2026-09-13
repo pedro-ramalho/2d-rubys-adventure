@@ -1,6 +1,9 @@
-public enum QuestPhase
+namespace AdventureGame.Core.Quest
 {
-    Before,
-    During,
-    After
+    public enum QuestPhase
+    {
+        Before,
+        During,
+        After
+    }
 }

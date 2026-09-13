@@ -1,66 +1,70 @@
+using AdventureGame.Core.Constants;
 using UnityEngine;
 
-public class PlayerDashingState : PlayerState
+namespace AdventureGame.Entities.Player.States
 {
-    private float dashTimer;
-    private float afterimageTimer;
-    private Vector2 dashDirection;
-
-    public override void Enter(Player owner)
+    public class PlayerDashingState : PlayerState
     {
-        dashTimer = owner.Data.dashDuration;
-        dashDirection = owner.MoveDirection;
+        private float dashTimer;
+        private float afterimageTimer;
+        private Vector2 dashDirection;
 
-        owner.DashCooldownTimer = owner.Data.dashCooldown;
-        owner.IsInvincible = true;
-        owner.DamageCooldown = owner.Data.dashDuration;
-        owner.Animator.SetFloat(AnimatorHashes.Speed, 1f);
-        owner.OneShotSource.PlayOneShot(owner.DashClip);
-        owner.CurrentVelocity = Vector2.zero;
-    }
-
-    public override void Update(Player owner)
-    {
-        if (dashTimer <= 0)
+        public override void Enter(Player owner)
         {
-            owner.ChangeState(owner.GroundedState);
+            dashTimer = owner.Data.dashDuration;
+            dashDirection = owner.MoveDirection;
+
+            owner.DashCooldownTimer = owner.Data.dashCooldown;
+            owner.IsInvincible = true;
+            owner.DamageCooldown = owner.Data.dashDuration;
+            owner.Animator.SetFloat(AnimatorHashes.Speed, 1f);
+            owner.OneShotSource.PlayOneShot(owner.DashClip);
+            owner.CurrentVelocity = Vector2.zero;
+        }
+
+        public override void Update(Player owner)
+        {
+            if (dashTimer <= 0)
+            {
+                owner.ChangeState(owner.GroundedState);
             
-            return;
+                return;
+            }
+
+            if (afterimageTimer <= 0)
+                SpawnAfterimages(owner);
+
+            dashTimer -= Time.deltaTime;
+            afterimageTimer -= Time.deltaTime;
         }
 
-        if (afterimageTimer <= 0)
-            SpawnAfterimages(owner);
-
-        dashTimer -= Time.deltaTime;
-        afterimageTimer -= Time.deltaTime;
-    }
-
-    public override void FixedUpdate(Player owner)
-    {
-        Vector2 offset = dashDirection * owner.Data.dashSpeed * Time.fixedDeltaTime;
-
-        owner.Rigidbody.MovePosition(owner.Rigidbody.position + offset);
-    }
-
-    private void SpawnAfterimages(Player owner)
-    {
-        GameObject ghost = Object.Instantiate(
-            owner.AfterimagePrefab,
-            owner.transform.position,
-            owner.transform.rotation
-        );
-
-        if (ghost.TryGetComponent(out DashAfterimage afterimage))
+        public override void FixedUpdate(Player owner)
         {
-            afterimage.Initialize(
-                owner.SpriteRenderer.sprite,
-                owner.transform.localScale,
-                owner.SpriteRenderer.flipX,
-                owner.Data.afterimageColor,
-                owner.Data.afterimageLingerDuration
-            );
+            Vector2 offset = dashDirection * owner.Data.dashSpeed * Time.fixedDeltaTime;
+
+            owner.Rigidbody.MovePosition(owner.Rigidbody.position + offset);
         }
 
-        afterimageTimer = owner.Data.afterimageInterval;
+        private void SpawnAfterimages(Player owner)
+        {
+            GameObject ghost = Object.Instantiate(
+                owner.AfterimagePrefab,
+                owner.transform.position,
+                owner.transform.rotation
+            );
+
+            if (ghost.TryGetComponent(out DashAfterimage afterimage))
+            {
+                afterimage.Initialize(
+                    owner.SpriteRenderer.sprite,
+                    owner.transform.localScale,
+                    owner.SpriteRenderer.flipX,
+                    owner.Data.afterimageColor,
+                    owner.Data.afterimageLingerDuration
+                );
+            }
+
+            afterimageTimer = owner.Data.afterimageInterval;
+        }
     }
 }

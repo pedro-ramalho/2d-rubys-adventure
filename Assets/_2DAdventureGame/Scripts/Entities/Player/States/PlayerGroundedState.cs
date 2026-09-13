@@ -1,86 +1,93 @@
+using AdventureGame.Core.Constants;
+using AdventureGame.Core.Managers;
+using AdventureGame.Core.Scene;
+using AdventureGame.UI;
 using UnityEngine;
 
-public class PlayerGroundedState : PlayerState
+namespace AdventureGame.Entities.Player.States
 {
-    private Vector2 move;
-
-    private static readonly int NPCMaskHash = LayerMask.GetMask("NPC");
-
-    public override void Update(Player owner)
+    public class PlayerGroundedState : PlayerState
     {
-        move = owner.MoveAction.ReadValue<Vector2>();
+        private Vector2 move;
 
-        UpdateMoveDirection(owner);
-        UpdateAnimator(owner);
-        HandleNPCInteraction(owner);
+        private static readonly int NPCMaskHash = LayerMask.GetMask("NPC");
 
-        if (owner.ShootAction.WasPressedThisFrame() && AbilityManager.Instance != null && AbilityManager.Instance.CanShoot)
+        public override void Update(Player owner)
         {
-            owner.ChangeState(owner.ShootingState);
+            move = owner.MoveAction.ReadValue<Vector2>();
+
+            UpdateMoveDirection(owner);
+            UpdateAnimator(owner);
+            HandleNPCInteraction(owner);
+
+            if (owner.ShootAction.WasPressedThisFrame() && AbilityManager.Instance != null && AbilityManager.Instance.CanShoot)
+            {
+                owner.ChangeState(owner.ShootingState);
             
-            return;
+                return;
+            }
+
+            if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f && AbilityManager.Instance != null && AbilityManager.Instance.CanDash)
+                owner.ChangeState(owner.DashingState);
         }
 
-        if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f && AbilityManager.Instance != null && AbilityManager.Instance.CanDash)
-            owner.ChangeState(owner.DashingState);
-    }
-
-    public override void FixedUpdate(Player owner)
-    {
-        Vector2 targetVelocity = move * owner.Data.speed;
-        float rate = move.magnitude > 0f ? owner.Data.acceleration : owner.Data.deceleration;
+        public override void FixedUpdate(Player owner)
+        {
+            Vector2 targetVelocity = move * owner.Data.speed;
+            float rate = move.magnitude > 0f ? owner.Data.acceleration : owner.Data.deceleration;
         
-        owner.CurrentVelocity = Vector2.MoveTowards(owner.CurrentVelocity, targetVelocity, rate * Time.fixedDeltaTime);
-        owner.Rigidbody.MovePosition(owner.Rigidbody.position + owner.CurrentVelocity * Time.fixedDeltaTime);
-    }
-
-    private void UpdateMoveDirection(Player owner)
-    {
-        if (!Mathf.Approximately(move.x, 0f) || !Mathf.Approximately(move.y, 0f))
-            owner.MoveDirection = move.normalized;
-    }
-
-    private void UpdateAnimator(Player owner)
-    {
-        owner.Animator.SetFloat(AnimatorHashes.LookX, owner.MoveDirection.x);
-        owner.Animator.SetFloat(AnimatorHashes.LookY, owner.MoveDirection.y);
-        owner.Animator.SetFloat(AnimatorHashes.Speed, move.magnitude);
-    }
-
-    private void HandleNPCInteraction(Player owner)
-    {
-        if (SceneTransitioner.Instance != null && SceneTransitioner.Instance.IsTransitioning)
-        {
-            UIHandler.Instance?.HideInteractPrompt();
-            return;
+            owner.CurrentVelocity = Vector2.MoveTowards(owner.CurrentVelocity, targetVelocity, rate * Time.fixedDeltaTime);
+            owner.Rigidbody.MovePosition(owner.Rigidbody.position + owner.CurrentVelocity * Time.fixedDeltaTime);
         }
 
-        RaycastHit2D hit = Physics2D.CircleCast(
-            (Vector2)owner.transform.position + Vector2.up * 0.2f,
-            0.4f,
-            owner.MoveDirection,
-            1.5f,
-            NPCMaskHash
-        );
-
-        NPC npc = null;
-        if (hit.collider != null) hit.collider.TryGetComponent(out npc);
-
-        if (UIHandler.Instance != null)
+        private void UpdateMoveDirection(Player owner)
         {
-            if (npc != null) 
-                UIHandler.Instance.ShowInteractPrompt("Press X to talk");
-            else 
-                UIHandler.Instance.HideInteractPrompt();
+            if (!Mathf.Approximately(move.x, 0f) || !Mathf.Approximately(move.y, 0f))
+                owner.MoveDirection = move.normalized;
         }
 
-        if (!owner.TalkAction.WasPressedThisFrame() || npc == null) 
-            return;
+        private void UpdateAnimator(Player owner)
+        {
+            owner.Animator.SetFloat(AnimatorHashes.LookX, owner.MoveDirection.x);
+            owner.Animator.SetFloat(AnimatorHashes.LookY, owner.MoveDirection.y);
+            owner.Animator.SetFloat(AnimatorHashes.Speed, move.magnitude);
+        }
 
-        if (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
-            UIHandler.Instance.Skip();
-        else
-            npc.Talk();
+        private void HandleNPCInteraction(Player owner)
+        {
+            if (SceneTransitioner.Instance != null && SceneTransitioner.Instance.IsTransitioning)
+            {
+                UIHandler.Instance?.HideInteractPrompt();
+                return;
+            }
+
+            RaycastHit2D hit = Physics2D.CircleCast(
+                (Vector2)owner.transform.position + Vector2.up * 0.2f,
+                0.4f,
+                owner.MoveDirection,
+                1.5f,
+                NPCMaskHash
+            );
+
+            NPC.NPC npc = null;
+            if (hit.collider != null) hit.collider.TryGetComponent(out npc);
+
+            if (UIHandler.Instance != null)
+            {
+                if (npc != null) 
+                    UIHandler.Instance.ShowInteractPrompt("Press X to talk");
+                else 
+                    UIHandler.Instance.HideInteractPrompt();
+            }
+
+            if (!owner.TalkAction.WasPressedThisFrame() || npc == null) 
+                return;
+
+            if (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
+                UIHandler.Instance.Skip();
+            else
+                npc.Talk();
+        }
+
     }
-
 }

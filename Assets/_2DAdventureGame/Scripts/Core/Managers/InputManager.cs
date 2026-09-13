@@ -1,41 +1,44 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : PersistentSingleton<InputManager>
+namespace AdventureGame.Core.Managers
 {
-    private const string BindingsKey = "InputBindings";
-
-    public PlayerInputActions Actions { get; private set; }
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Bootstrap() => BootstrapIfMissing();
-
-    protected override void Awake()
+    public class InputManager : PersistentSingleton<InputManager>
     {
-        base.Awake();
-        
-        if (Instance != this) return;
+        private const string BindingsKey = "InputBindings";
 
-        Actions = new PlayerInputActions();
-        
-        LoadBindings();
-        
-        Actions.Player.Enable();
-    }
+        public PlayerInputActions Actions { get; private set; }
 
-    public void SaveBindings() => PlayerPrefs.SetString(BindingsKey, Actions.SaveBindingOverridesAsJson());
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void Bootstrap() => BootstrapIfMissing();
+
+        protected override void Awake()
+        {
+            base.Awake();
+        
+            if (Instance != this) return;
+
+            Actions = new PlayerInputActions();
+        
+            LoadBindings();
+        
+            Actions.Player.Enable();
+        }
+
+        public void SaveBindings() => PlayerPrefs.SetString(BindingsKey, Actions.SaveBindingOverridesAsJson());
     
-    public void LoadBindings()
-    {
-        string json = PlayerPrefs.GetString(BindingsKey, string.Empty);
-        if (!string.IsNullOrEmpty(json))
-            Actions.LoadBindingOverridesFromJson(json);
-    }
+        public void LoadBindings()
+        {
+            string json = PlayerPrefs.GetString(BindingsKey, string.Empty);
+            if (!string.IsNullOrEmpty(json))
+                Actions.LoadBindingOverridesFromJson(json);
+        }
 
-    public void ResetBindings()
-    {
-        Actions.RemoveAllBindingOverrides();
+        public void ResetBindings()
+        {
+            Actions.RemoveAllBindingOverrides();
         
-        PlayerPrefs.DeleteKey(BindingsKey);
+            PlayerPrefs.DeleteKey(BindingsKey);
+        }
     }
 }

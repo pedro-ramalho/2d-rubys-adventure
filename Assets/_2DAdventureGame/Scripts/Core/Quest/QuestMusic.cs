@@ -1,42 +1,46 @@
+using AdventureGame.Core.Managers;
 using UnityEngine;
 
-public static class QuestMusic
+namespace AdventureGame.Core.Quest
 {
-    public static AudioClip ResolveTrack()
+    public static class QuestMusic
     {
-        if (QuestManager.Instance != null)
-            foreach (QuestController c in QuestManager.Instance.All)
-                if (c.Phase == QuestPhase.During && c.Data != null && c.Data.backgroundTrack != null)
-                    return c.Data.backgroundTrack;
+        public static AudioClip ResolveTrack()
+        {
+            if (QuestManager.Instance != null)
+                foreach (QuestController c in QuestManager.Instance.All)
+                    if (c.Phase == QuestPhase.During && c.Data != null && c.Data.backgroundTrack != null)
+                        return c.Data.backgroundTrack;
 
-        return SceneMusicConfigManager.Instance != null ? SceneMusicConfigManager.Instance.DefaultTrack : null;
-    }
+            return SceneMusicConfigManager.Instance != null ? SceneMusicConfigManager.Instance.DefaultTrack : null;
+        }
 
-    public static void Refresh()
-    {
-        if (MusicManager.Instance == null) 
-            return;
+        public static void Refresh()
+        {
+            if (MusicManager.Instance == null) 
+                return;
 
-        AudioClip target = ResolveTrack();
+            AudioClip target = ResolveTrack();
 
-        if (target != null) 
-            MusicManager.Instance.Play(target);
-        else 
-            MusicManager.Instance.FadeOutAndStop(5f);
-    }
+            if (target != null) 
+                MusicManager.Instance.Play(target);
+            else 
+                MusicManager.Instance.FadeOutAndStop(5f);
+        }
 
-    public static void PlayCompletionStinger(AudioClip stinger)
-    {
-        if (MusicManager.Instance == null) 
-            return;
+        public static void PlayCompletionStinger(AudioClip stinger)
+        {
+            if (MusicManager.Instance == null) 
+                return;
 
-        AudioClip next = ResolveTrack();
+            AudioClip next = ResolveTrack();
 
-        if (stinger != null)   
-            MusicManager.Instance.PlayWithStinger(stinger, next);
-        else if (next != null) 
-            MusicManager.Instance.Play(next);
-        else                   
-            MusicManager.Instance.FadeOutAndStop(5f);
+            if (stinger != null)   
+                MusicManager.Instance.PlayWithStinger(stinger, next);
+            else if (next != null) 
+                MusicManager.Instance.Play(next);
+            else                   
+                MusicManager.Instance.FadeOutAndStop(5f);
+        }
     }
 }
