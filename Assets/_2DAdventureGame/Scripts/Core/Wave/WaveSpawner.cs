@@ -38,19 +38,27 @@ namespace AdventureGame.Core.Wave
 
         void Start()
         {
-            if (QuestManager.Instance == null) 
+            if (Player.Instance != null)
+                Player.Instance.OnDied += HandlePlayerDied;
+
+            if (QuestManager.Instance == null)
                 return;
-        
+
             controller = QuestManager.Instance.Get(triggerQuest);
-            if (controller != null) 
+            if (controller != null)
                 controller.OnPhaseChanged += HandlePhaseChanged;
         }
 
         void OnDestroy()
         {
-            if (controller != null) 
+            if (Player.Instance != null)
+                Player.Instance.OnDied -= HandlePlayerDied;
+
+            if (controller != null)
                 controller.OnPhaseChanged -= HandlePhaseChanged;
         }
+
+        void HandlePlayerDied() => StopAllCoroutines();
 
         void HandlePhaseChanged(QuestController c)
         {
