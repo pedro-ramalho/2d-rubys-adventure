@@ -1,7 +1,6 @@
 using System.Collections;
 using AdventureGame.Core.Constants;
 using AdventureGame.Core.Scene;
-using AdventureGame.Core.Wave;
 using AdventureGame.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,26 +16,10 @@ namespace AdventureGame.Entities.Player.States
             owner.CurrentVelocity = Vector2.zero;
             owner.Animator.SetFloat(AnimatorHashes.Speed, 0f);
 
-            HaltCombat();
-
             Time.timeScale = 0f;
 
             if (EndScreenPresenter.Instance != null) EndScreenPresenter.Instance.DisplayLoseScreen();
             owner.StartCoroutine(ReloadAfterDelay());
-        }
-
-        static void HaltCombat()
-        {
-            foreach (Enemy.Enemy enemy in Object.FindObjectsByType<Enemy.Enemy>(FindObjectsSortMode.None))
-            {
-                enemy.enabled = false;
-                if (enemy.AudioSource != null) enemy.AudioSource.Stop();
-                if (enemy.Animator != null) enemy.Animator.enabled = false;
-                if (enemy.Rigidbody != null) enemy.Rigidbody.simulated = false;
-            }
-
-            foreach (WaveSpawner spawner in Object.FindObjectsByType<WaveSpawner>(FindObjectsSortMode.None))
-                spawner.StopAllCoroutines();
         }
 
         private IEnumerator ReloadAfterDelay()
