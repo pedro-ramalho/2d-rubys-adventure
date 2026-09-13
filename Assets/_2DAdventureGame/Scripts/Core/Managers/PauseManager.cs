@@ -116,7 +116,7 @@ namespace AdventureGame.Core.Managers
             IsPaused = paused;
             Time.timeScale = paused ? 0f : 1f;
             SetVisible(paused);
-            UIHandler.Instance?.SetHUDVisible(!paused);
+            HealthBarHUD.Instance?.SetVisible(!paused);
             PlayToggleSfx();
         }
 

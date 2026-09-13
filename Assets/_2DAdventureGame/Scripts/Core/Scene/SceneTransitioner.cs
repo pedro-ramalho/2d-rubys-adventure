@@ -56,11 +56,8 @@ namespace AdventureGame.Core.Scene
 
             yield return new WaitForSeconds(preDelay);
 
-            if (UIHandler.Instance != null)
-            {
-                UIHandler.Instance.HideDialogue();
-                UIHandler.Instance.HideHUD();
-            }
+            UIHandler.Instance?.HideDialogue();
+            HealthBarHUD.Instance?.Hide();
         
             transition.SetTrigger(startTrigger);
 
