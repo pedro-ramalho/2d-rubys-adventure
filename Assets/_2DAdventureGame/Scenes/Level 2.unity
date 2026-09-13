@@ -1740,7 +1740,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaManager
   spawner: {fileID: 1665620913}
-  ui: {fileID: 2056929449}
   winQuest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
   endGameDelay: 8
   epilogueReadDelay: 3
@@ -9440,6 +9439,7 @@ GameObject:
   - component: {fileID: 2056929447}
   - component: {fileID: 2056929449}
   - component: {fileID: 2056929451}
+  - component: {fileID: 2056929452}
   - component: {fileID: 2056929450}
   m_Layer: 5
   m_Name: UIDocument
@@ -9507,9 +9507,6 @@ MonoBehaviour:
   typeClipPitchJitter: 0.06
   promptFadeDuration: 0.05
   dialogueMaxDistance: 10
-  stingerSource: {fileID: 2056929450}
-  defeatSting: {fileID: 8300000, guid: 9ab3581e025d20144b834b1dcff9c816, type: 3}
-  musicFadeOnEndScreen: 2
 --- !u!82 &2056929450
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9619,6 +9616,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05de81ea9ff315048803ea765e0d858f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AdventureGame::AdventureGame.UI.HealthBarHUD
+--- !u!114 &2056929452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056929446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4368c0c9b5b4a2f42a559e28ef122144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.UI.EndScreenPresenter
+  m_StingerSource: {fileID: 2056929450}
+  m_DefeatSting: {fileID: 8300000, guid: 9ab3581e025d20144b834b1dcff9c816, type: 3}
+  m_MusicFadeOnEndScreen: 2
 --- !u!1 &2058835688
 GameObject:
   m_ObjectHideFlags: 0

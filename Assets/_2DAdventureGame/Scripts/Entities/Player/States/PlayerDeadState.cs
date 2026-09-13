@@ -21,7 +21,7 @@ namespace AdventureGame.Entities.Player.States
 
             Time.timeScale = 0f;
 
-            if (UIHandler.Instance != null) UIHandler.Instance.DisplayLoseScreen();
+            if (EndScreenPresenter.Instance != null) EndScreenPresenter.Instance.DisplayLoseScreen();
             owner.StartCoroutine(ReloadAfterDelay());
         }
 

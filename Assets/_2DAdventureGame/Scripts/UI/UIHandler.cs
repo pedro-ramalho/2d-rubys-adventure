@@ -1,5 +1,4 @@
 using System.Collections;
-using AdventureGame.Core.Managers;
 using AdventureGame.Entities.Player;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -26,16 +25,9 @@ namespace AdventureGame.UI
 
         private VisualElement dialoguePanel;
         private Label dialogueText;
-        private VisualElement winScreen;
-        private VisualElement loseScreen;
 
         [Header("Dialogue Range")]
         [SerializeField] private float dialogueMaxDistance = 5f;
-
-        [Header("End Screens")]
-        [SerializeField] private AudioSource stingerSource;
-        [SerializeField] private AudioClip defeatSting;
-        [SerializeField] private float musicFadeOnEndScreen = 2f;
 
         private Player player;
         private Coroutine typeRoutine;
@@ -75,9 +67,6 @@ namespace AdventureGame.UI
         
             dialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
             dialogueText = dialoguePanel.Q<Label>("DialogueText");
-
-            loseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
-            winScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
 
             dialoguePanel.style.display = DisplayStyle.None;
 
@@ -255,19 +244,6 @@ namespace AdventureGame.UI
             isShowingPrompt = false;
             dialogueActive = false;
             currentSpeaker = null;
-        }
-    
-        public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;
-    
-        public void DisplayLoseScreen()
-        {
-            if (loseScreen != null) 
-                loseScreen.style.opacity = 1.0f;
-
-            MusicManager.Instance?.FadeOutAndStop(musicFadeOnEndScreen);
-
-            if (stingerSource != null && defeatSting != null)
-                stingerSource.PlayOneShot(defeatSting);
         }
     }
 }
