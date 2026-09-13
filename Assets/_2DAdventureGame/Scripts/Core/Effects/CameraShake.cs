@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace AdventureGame.Core.Effects
 {
-    public class CameraShake : MonoBehaviour
+    public class CameraShake : SceneSingleton<CameraShake>
     {
-        public static CameraShake Instance { get; private set; }
         private CinemachineImpulseSource impulseSource;
 
-        void Awake()
+        protected override void Awake()
         {
-            if (Instance == null) Instance = this;
-        
+            base.Awake();
+            if (Instance != this) return;
+
             impulseSource = GetComponent<CinemachineImpulseSource>();
         }
 

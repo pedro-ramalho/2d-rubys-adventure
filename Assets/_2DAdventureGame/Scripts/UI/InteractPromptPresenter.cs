@@ -5,21 +5,14 @@ using UnityEngine.UIElements;
 namespace AdventureGame.UI
 {
     [RequireComponent(typeof(UIDocument))]
-    public class InteractPromptPresenter : MonoBehaviour
+    public class InteractPromptPresenter : SceneSingleton<InteractPromptPresenter>
     {
-        public static InteractPromptPresenter Instance { get; private set; }
-
         [SerializeField] private float m_PromptFadeDuration = 0.15f;
 
         private VisualElement m_Panel;
         private Label m_Label;
         private bool m_IsShowingPrompt;
         private Coroutine m_FadeRoutine;
-
-        void Awake()
-        {
-            if (Instance == null) Instance = this;
-        }
 
         void Start()
         {

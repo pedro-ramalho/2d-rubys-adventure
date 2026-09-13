@@ -8,10 +8,8 @@ namespace AdventureGame.UI
 {
     [MovedFrom(autoUpdateAPI: true, sourceClassName: "UIHandler")]
     [RequireComponent(typeof(UIDocument))]
-    public class DialoguePresenter : MonoBehaviour
+    public class DialoguePresenter : SceneSingleton<DialoguePresenter>
     {
-        public static DialoguePresenter Instance { get; private set; }
-
         [SerializeField] private float displayTime = 4.0f;
         [SerializeField] private AudioClip clickClip;
 
@@ -39,11 +37,6 @@ namespace AdventureGame.UI
         public bool IsDialogueActive => dialogueActive;
 
         AudioSource OneShot() => player != null ? player.OneShotSource : null;
-
-        void Awake()
-        {
-            if (Instance == null) Instance = this;
-        }
 
         void Update()
         {
