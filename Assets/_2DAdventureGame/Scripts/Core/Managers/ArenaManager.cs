@@ -1,6 +1,6 @@
 using System.Collections;
 using AdventureGame.Core.Constants;
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using AdventureGame.Core.Scene;
 using AdventureGame.Core.Wave;
 using AdventureGame.UI;
@@ -30,7 +30,7 @@ namespace AdventureGame.Core.Managers
         [SerializeField] private AudioClip m_VictoryStingerSfx;
 
         private bool m_IsGameOver;
-        private QuestController m_QuestController;
+        private Quest m_Quest;
 
         void Start()
         {
@@ -38,23 +38,23 @@ namespace AdventureGame.Core.Managers
 
             if (QuestManager.Instance != null)
             {
-                m_QuestController = QuestManager.Instance.Get(m_QuestData);
-                if (m_QuestController != null) m_QuestController.OnEpilogueFinished += HandleEpilogueFinished;
+                m_Quest = QuestManager.Instance.Get(m_QuestData);
+                if (m_Quest != null) m_Quest.OnEpilogueFinished += HandleEpilogueFinished;
             }
         }
 
         void OnDestroy()
         {
             if (m_WaveSpawner != null) m_WaveSpawner.OnAllWavesCleared -= HandleAllWavesCleared;
-            if (m_QuestController != null) m_QuestController.OnEpilogueFinished -= HandleEpilogueFinished;
+            if (m_Quest != null) m_Quest.OnEpilogueFinished -= HandleEpilogueFinished;
         }
 
         void HandleAllWavesCleared()
         {
-            if (m_QuestController != null) m_QuestController.MarkComplete();
+            if (m_Quest != null) m_Quest.MarkComplete();
         }
 
-        void HandleEpilogueFinished(QuestController _) => StartCoroutine(DelayedWin());
+        void HandleEpilogueFinished(Quest _) => StartCoroutine(DelayedWin());
 
         IEnumerator DelayedWin()
         {

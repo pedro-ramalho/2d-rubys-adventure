@@ -1,4 +1,4 @@
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.Serialization;
@@ -19,19 +19,19 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            QuestController.OnAnyPhaseChanged += OnQuestPhaseChanged;
+            Quest.OnAnyPhaseChanged += OnQuestPhaseChanged;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            QuestController.OnAnyPhaseChanged -= OnQuestPhaseChanged;
+            Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
         }
 
         void Start() => PlayResolvedTrack();
 
-        void OnQuestPhaseChanged(QuestController quest)
+        void OnQuestPhaseChanged(Quest quest)
         {
             if (MusicManager.Instance == null)
                 return;
@@ -77,7 +77,7 @@ namespace AdventureGame.Core.Managers
             if (QuestManager.Instance == null)
                 return m_DefaultTrack;
 
-            foreach (QuestController quest in QuestManager.Instance.All)
+            foreach (Quest quest in QuestManager.Instance.All)
                 if (quest.Phase == QuestPhase.During && quest.Data != null && quest.Data.BackgroundTrack != null)
                     return quest.Data.BackgroundTrack;
 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AdventureGame.Core.Quest
+namespace AdventureGame.Core.Quests
 {
     [Serializable]
     public class QuestSaveData

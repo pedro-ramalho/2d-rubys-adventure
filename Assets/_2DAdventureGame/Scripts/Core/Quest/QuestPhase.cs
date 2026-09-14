@@ -1,4 +1,4 @@
-namespace AdventureGame.Core.Quest
+namespace AdventureGame.Core.Quests
 {
     public enum QuestPhase
     {

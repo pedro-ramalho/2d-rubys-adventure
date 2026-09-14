@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace AdventureGame.Core.Quest
+namespace AdventureGame.Core.Quests
 {
     public class QuestReporter : MonoBehaviour
     {
@@ -16,24 +16,26 @@ namespace AdventureGame.Core.Quest
 
         public void Report()
         {
-            CountedQuestController controller = GetCountedController();
-            if (controller != null) 
-                controller.TryReport(m_WorldId);
+            Quest quest = GetQuest();
+            if (quest != null) 
+                quest.TryReport(m_WorldId);
         }
 
         public bool CanReport()
         {
-            CountedQuestController controller = GetCountedController();
-            return controller != null && controller.CanReport(m_WorldId);
+            Quest quest = GetQuest();
+
+            return quest != null && quest.CanReport(m_WorldId);
         }
 
         public bool IsConsumed()
         {
-            CountedQuestController controller = GetCountedController();
-            return controller != null && controller.IsConsumed(m_WorldId);
+            Quest quest = GetQuest();
+
+            return quest != null && quest.IsConsumed(m_WorldId);
         }
 
-        CountedQuestController GetCountedController() =>
-            QuestManager.Instance != null ? QuestManager.Instance.Get(m_QuestData) as CountedQuestController : null;
+        Quest GetQuest() =>
+            QuestManager.Instance != null ? QuestManager.Instance.Get(m_QuestData) : null;
     }
 }
