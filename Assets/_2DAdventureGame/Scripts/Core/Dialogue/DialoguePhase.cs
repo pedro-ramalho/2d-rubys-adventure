@@ -8,10 +8,10 @@ namespace AdventureGame.Core.Dialogue
     [Serializable]
     public class DialoguePhase
     {
-        public List<string> lines;
-        public QuestData questToGrantAfter;
-        public UnityEvent onExhausted;
+        public List<string> Lines;
+        public QuestData QuestToGrantAfter;
+        public UnityEvent OnExhausted;
 
-        public bool IsEmpty => lines == null || lines.Count == 0;
+        public bool IsEmpty => Lines == null || Lines.Count == 0;
     }
 }

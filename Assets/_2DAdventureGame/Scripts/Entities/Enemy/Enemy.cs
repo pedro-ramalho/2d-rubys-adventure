@@ -1,5 +1,6 @@
 using AdventureGame.Environment.Projectiles;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Enemy
 {
@@ -9,8 +10,9 @@ namespace AdventureGame.Entities.Enemy
     public abstract class Enemy : MonoBehaviour
     {
         [Header("Enemy Data")]
-        [SerializeField] private EnemyData data;
-        public EnemyData Data => data;
+        [FormerlySerializedAs("data")]
+        [SerializeField] private EnemyData m_EnemyData;
+        public EnemyData Data => m_EnemyData;
 
         // Components
         public Rigidbody2D Rigidbody { get; private set; }
@@ -24,9 +26,29 @@ namespace AdventureGame.Entities.Enemy
             AudioSource = GetComponent<AudioSource>();
         }
 
+        protected virtual void OnEnable()
+        {
+            if (Player.Player.Instance != null)
+                Player.Player.Instance.OnDied += HandlePlayerDied;
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (Player.Player.Instance != null)
+                Player.Player.Instance.OnDied -= HandlePlayerDied;
+        }
+
         void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out Projectile _)) OnProjectileHit();
+        }
+
+        void HandlePlayerDied()
+        {
+            if (AudioSource != null) AudioSource.Stop();
+            if (Animator != null) Animator.enabled = false;
+            if (Rigidbody != null) Rigidbody.simulated = false;
+            enabled = false;
         }
 
         protected abstract void OnProjectileHit();

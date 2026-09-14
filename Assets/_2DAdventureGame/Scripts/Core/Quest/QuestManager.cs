@@ -5,17 +5,9 @@ using UnityEngine;
 namespace AdventureGame.Core.Quest
 {
     [DefaultExecutionOrder(-100)]
-    public class QuestManager : MonoBehaviour
+    public class QuestManager : SceneSingleton<QuestManager>
     {
-        public static QuestManager Instance { get; private set; }
-
-        private readonly Dictionary<string, QuestController> controllers = new();
-
-        void Awake()
-        {
-            if (Instance == null) 
-                Instance = this;
-        }
+        private readonly Dictionary<string, QuestController> m_QuestControllers = new();
 
         void Start()
         {
@@ -25,10 +17,10 @@ namespace AdventureGame.Core.Quest
 
         public void Register(QuestController controller)
         {
-            if (controller == null || controller.Data == null || string.IsNullOrEmpty(controller.Data.id))
+            if (controller == null || controller.Data == null || string.IsNullOrEmpty(controller.Data.Id))
                 return;
         
-            controllers[controller.Data.id] = controller;
+            m_QuestControllers[controller.Data.Id] = controller;
         }
 
         public void Unregister(QuestController controller)
@@ -36,23 +28,23 @@ namespace AdventureGame.Core.Quest
             if (controller == null || controller.Data == null) 
                 return;
         
-            if (controllers.TryGetValue(controller.Data.id, out QuestController current) && current == controller)
-                controllers.Remove(controller.Data.id);
+            if (m_QuestControllers.TryGetValue(controller.Data.Id, out QuestController current) && current == controller)
+                m_QuestControllers.Remove(controller.Data.Id);
         }
 
         public QuestController Get(string questId) =>
-            !string.IsNullOrEmpty(questId) && controllers.TryGetValue(questId, out QuestController c) ? c : null;
+            !string.IsNullOrEmpty(questId) && m_QuestControllers.TryGetValue(questId, out QuestController c) ? c : null;
 
         public QuestController Get(QuestData questData) =>
-            questData != null ? Get(questData.id) : null;
+            questData != null ? Get(questData.Id) : null;
 
-        public IEnumerable<QuestController> All => controllers.Values;
+        public IEnumerable<QuestController> All => m_QuestControllers.Values;
 
         public List<QuestSaveData> CaptureAll()
         {
             List<QuestSaveData> list = new();
 
-            foreach (QuestController controller in controllers.Values)
+            foreach (QuestController controller in m_QuestControllers.Values)
                 list.Add(controller.Capture());
         
             return list;
@@ -60,11 +52,11 @@ namespace AdventureGame.Core.Quest
 
         void RestoreFromSave(Save save)
         {
-            if (save?.quests == null) 
+            if (save?.Quests == null) 
                 return;
         
-            foreach (QuestSaveData saved in save.quests)
-                if (saved != null && controllers.TryGetValue(saved.questId, out QuestController controller))
+            foreach (QuestSaveData saved in save.Quests)
+                if (saved != null && m_QuestControllers.TryGetValue(saved.QuestId, out QuestController controller))
                     controller.Restore(saved);
         }
     }

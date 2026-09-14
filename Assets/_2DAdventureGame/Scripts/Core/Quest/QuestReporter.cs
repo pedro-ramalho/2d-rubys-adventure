@@ -1,36 +1,39 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Quest
 {
     public class QuestReporter : MonoBehaviour
     {
-        [SerializeField] private QuestData quest;
+        [FormerlySerializedAs("quest")]
+        [SerializeField] private QuestData m_QuestData;
 
-        [SerializeField] private string worldId;
+        [FormerlySerializedAs("worldId")]
+        [SerializeField] private string m_WorldId;
 
-        public QuestData Quest => quest;
-        public string WorldId => worldId;
+        public QuestData Quest => m_QuestData;
+        public string WorldId => m_WorldId;
 
         public void Report()
         {
             CountedQuestController controller = GetCountedController();
             if (controller != null) 
-                controller.TryReport(worldId);
+                controller.TryReport(m_WorldId);
         }
 
         public bool CanReport()
         {
             CountedQuestController controller = GetCountedController();
-            return controller != null && controller.CanReport(worldId);
+            return controller != null && controller.CanReport(m_WorldId);
         }
 
         public bool IsConsumed()
         {
             CountedQuestController controller = GetCountedController();
-            return controller != null && controller.IsConsumed(worldId);
+            return controller != null && controller.IsConsumed(m_WorldId);
         }
 
         CountedQuestController GetCountedController() =>
-            QuestManager.Instance != null ? QuestManager.Instance.Get(quest) as CountedQuestController : null;
+            QuestManager.Instance != null ? QuestManager.Instance.Get(m_QuestData) as CountedQuestController : null;
     }
 }

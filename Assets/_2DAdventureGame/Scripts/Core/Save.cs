@@ -7,9 +7,9 @@ namespace AdventureGame.Core
     [Serializable]
     public class Save
     {
-        public int version;
-        public string sceneName;
-        public int playerHealth;
-        public List<QuestSaveData> quests;
+        public int Version;
+        public string SceneName;
+        public int PlayerHealth;
+        public List<QuestSaveData> Quests;
     }
 }

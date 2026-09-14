@@ -2,6 +2,7 @@ using AdventureGame.Core.Constants;
 using AdventureGame.Core.Quest;
 using AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
 {
@@ -10,22 +11,35 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
     public class PatrolRobot : Enemy
     {
         [Header("Patrol Robot Assets")]
-        [SerializeField] private ParticleSystem smokeEffect;
-        [SerializeField] private GameObject fixedEffectPrefab;
-        [SerializeField] private AudioClip fixedClip;
-        [SerializeField] private AudioClip hitClip;
-        public ParticleSystem SmokeEffect => smokeEffect;
-        public GameObject FixedEffectPrefab => fixedEffectPrefab;
-        public AudioClip FixedClip => fixedClip;
-        public AudioClip HitClip => hitClip;
+        
+        [FormerlySerializedAs("smokeEffect")]
+        [SerializeField] private ParticleSystem m_SmokeEffect;
+
+        [FormerlySerializedAs("fixedEffectPrefab")]
+        [SerializeField] private GameObject m_FixedEffectPrefab;
+
+        [FormerlySerializedAs("fixedClip")]
+        [SerializeField] private AudioClip m_FixedClip;
+
+        [FormerlySerializedAs("hitClip")]
+        [SerializeField] private AudioClip m_HitClip;
+        public ParticleSystem SmokeEffect => m_SmokeEffect;
+        public GameObject FixedEffectPrefab => m_FixedEffectPrefab;
+        public AudioClip FixedClip => m_FixedClip;
+        public AudioClip HitClip => m_HitClip;
 
         [Header("Patrolling Properties")]
-        [SerializeField] private PatrolDirection patrolDirection;
-        [SerializeField] private float patrolDuration;
-        [SerializeField] private float speed;
-        public PatrolDirection PatrolDirection => patrolDirection;
-        public float PatrolDuration => patrolDuration;
-        public float Speed => speed;
+        [FormerlySerializedAs("patrolDirection")]
+        [SerializeField] private PatrolDirection m_PatrolDirection;
+
+        [FormerlySerializedAs("patrolDuration")]
+        [SerializeField] private float m_PatrolDuration;
+
+        [FormerlySerializedAs("speed")]
+        [SerializeField] private float m_Speed;
+        public PatrolDirection PatrolDirection => m_PatrolDirection;
+        public float PatrolDuration => m_PatrolDuration;
+        public float Speed => m_Speed;
 
         public int Direction { get; set; }
 
@@ -72,8 +86,8 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
             Animator.SetTrigger(AnimatorHashes.Fixed);
             AudioSource.Stop();
         
-            if (smokeEffect != null) 
-                smokeEffect.Stop();
+            if (m_SmokeEffect != null) 
+                m_SmokeEffect.Stop();
         
             CurrentState = FixedState;
         }
@@ -91,9 +105,9 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
             if (player.IsInvincible) 
                 return;
 
-            player.ApplyDamage(Data.contactDamage);
-            if (hitClip != null) 
-                AudioSource.PlayOneShot(hitClip);
+            player.ApplyDamage(Data.ContactDamage);
+            if (m_HitClip != null) 
+                AudioSource.PlayOneShot(m_HitClip);
         }
     }
 }

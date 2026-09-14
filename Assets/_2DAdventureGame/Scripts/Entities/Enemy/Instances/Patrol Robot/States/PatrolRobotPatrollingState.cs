@@ -6,21 +6,21 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States
 {
     public class PatrolRobotPatrollingState : PatrolRobotState
     {
-        private float directionTimer;
+        private float m_DirectionTimer;
 
         public override void Enter(PatrolRobot owner)
         {
-            directionTimer = owner.PatrolDuration;
+            m_DirectionTimer = owner.PatrolDuration;
             owner.Direction = 1;
         }
 
         public override void Update(PatrolRobot owner)
         {
-            directionTimer -= Time.deltaTime;
-            if (directionTimer <= 0f)
+            m_DirectionTimer -= Time.deltaTime;
+            if (m_DirectionTimer <= 0f)
             {
                 owner.Direction = -owner.Direction;
-                directionTimer = owner.PatrolDuration;
+                m_DirectionTimer = owner.PatrolDuration;
             }
         }
 

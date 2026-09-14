@@ -5,6 +5,7 @@ using AdventureGame.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.Core.Managers
@@ -13,14 +14,19 @@ namespace AdventureGame.Core.Managers
     {
         public static bool IsPaused { get; private set; }
 
-        [SerializeField] private UIDocument pauseDocument;
-        [SerializeField] private AudioSource sfxSource;
-        [SerializeField] private AudioClip toggleClip;
+        [FormerlySerializedAs("pauseDocument")]
+        [SerializeField] private UIDocument m_PauseUiDocument;
+        
+        [FormerlySerializedAs("sfxSource")]
+        [SerializeField] private AudioSource m_SfxAudioSource;
+        
+        [FormerlySerializedAs("toggleClip")]
+        [SerializeField] private AudioClip m_ToggleSfx;
 
-        private PlayerInputActions inputActions;
-        private VisualElement pauseRoot;
-        private Label saveConfirmationLabel;
-        private Coroutine saveConfirmationRoutine;
+        private PlayerInputActions m_InputActions;
+        private VisualElement m_PauseRoot;
+        private Label m_SaveConfirmationLabel;
+        private Coroutine m_SaveConfirmationCoroutine;
 
         protected override void Awake()
         {
@@ -29,7 +35,7 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            inputActions = InputManager.Instance.Actions;
+            m_InputActions = InputManager.Instance.Actions;
         }
 
         void OnEnable()
@@ -37,7 +43,7 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            inputActions.Player.Pause.performed += OnPausePressed;
+            m_InputActions.Player.Pause.performed += OnPausePressed;
         }
 
         void OnDisable()
@@ -45,7 +51,7 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            inputActions.Player.Pause.performed -= OnPausePressed;
+            m_InputActions.Player.Pause.performed -= OnPausePressed;
         }
 
         void Start()
@@ -53,10 +59,10 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            pauseRoot = pauseDocument.rootVisualElement.Q<VisualElement>("PauseRoot");
-            saveConfirmationLabel = pauseRoot.Q<Label>("SaveConfirmationLabel");
-            Button saveButton = pauseRoot.Q<Button>("SaveButton");
-            Button returnButton = pauseRoot.Q<Button>("ReturnButton");
+            m_PauseRoot = m_PauseUiDocument.rootVisualElement.Q<VisualElement>("PauseRoot");
+            m_SaveConfirmationLabel = m_PauseRoot.Q<Label>("SaveConfirmationLabel");
+            Button saveButton = m_PauseRoot.Q<Button>("SaveButton");
+            Button returnButton = m_PauseRoot.Q<Button>("ReturnButton");
 
             saveButton.clicked += () =>
             {
@@ -75,23 +81,23 @@ namespace AdventureGame.Core.Managers
 
         void ShowSaveFeedback()
         {
-            if (saveConfirmationLabel == null)
+            if (m_SaveConfirmationLabel == null)
                 return;
 
-            if (saveConfirmationRoutine != null)
-                StopCoroutine(saveConfirmationRoutine);
+            if (m_SaveConfirmationCoroutine != null)
+                StopCoroutine(m_SaveConfirmationCoroutine);
 
-            saveConfirmationRoutine = StartCoroutine(SaveFeedbackRoutine());
+            m_SaveConfirmationCoroutine = StartCoroutine(SaveFeedbackRoutine());
         }
 
         IEnumerator SaveFeedbackRoutine()
         {
-            saveConfirmationLabel.style.opacity = 1f;
+            m_SaveConfirmationLabel.style.opacity = 1f;
 
             yield return new WaitForSecondsRealtime(2f);
 
-            saveConfirmationLabel.style.opacity = 0f;
-            saveConfirmationRoutine = null;
+            m_SaveConfirmationLabel.style.opacity = 0f;
+            m_SaveConfirmationCoroutine = null;
         }
 
         void OnPausePressed(InputAction.CallbackContext ctx)
@@ -116,20 +122,21 @@ namespace AdventureGame.Core.Managers
             IsPaused = paused;
             Time.timeScale = paused ? 0f : 1f;
             SetVisible(paused);
-            UIHandler.Instance?.SetHUDVisible(!paused);
+            if (HealthBarHUD.Instance != null)
+                HealthBarHUD.Instance.SetVisible(!paused);
             PlayToggleSfx();
         }
 
         void PlayToggleSfx()
         {
-            if (sfxSource != null && toggleClip != null)
-                sfxSource.PlayOneShot(toggleClip);
+            if (m_SfxAudioSource != null && m_ToggleSfx != null)
+                m_SfxAudioSource.PlayOneShot(m_ToggleSfx);
         }
 
         void SetVisible(bool visible)
         {
-            if (pauseRoot != null)
-                pauseRoot.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+            if (m_PauseRoot != null)
+                m_PauseRoot.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
 }
