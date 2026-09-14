@@ -25,7 +25,7 @@ namespace AdventureGame.Environment.Collectibles
                 return;
 
             QuestReporter reporter = GetComponent<QuestReporter>();
-            if (reporter != null && reporter.Quest != null && !reporter.CanReport()) 
+            if (reporter != null && reporter.Data != null && !reporter.CanReport())
                 return;
 
             ApplyEffect(player);
