@@ -1,5 +1,6 @@
 using AdventureGame.Environment.Projectiles;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Enemy
 {
@@ -9,8 +10,9 @@ namespace AdventureGame.Entities.Enemy
     public abstract class Enemy : MonoBehaviour
     {
         [Header("Enemy Data")]
-        [SerializeField] private EnemyData data;
-        public EnemyData Data => data;
+        [FormerlySerializedAs("data")]
+        [SerializeField] private EnemyData m_EnemyData;
+        public EnemyData Data => m_EnemyData;
 
         // Components
         public Rigidbody2D Rigidbody { get; private set; }

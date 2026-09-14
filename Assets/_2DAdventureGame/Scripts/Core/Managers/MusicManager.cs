@@ -1,18 +1,28 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Managers
 {
     public class MusicManager : PersistentSingleton<MusicManager>
     {
-        [SerializeField] private AudioSource source;
-        [SerializeField] private AudioSource stingerSource;
-        [SerializeField] private float fadeOutDuration = 0.6f;
-        [SerializeField] private float fadeInDuration = 0.6f;
-        [SerializeField] private float transitionDelay = 1.0f;
+        [FormerlySerializedAs("source")]
+        [SerializeField] private AudioSource m_AudioSource;
+        
+        [FormerlySerializedAs("stingerSource")]
+        [SerializeField] private AudioSource m_StingerAudioSource;
+        
+        [FormerlySerializedAs("fadeOutDuration")]
+        [SerializeField] private float m_FadeOutDurationS = 0.6f;
+        
+        [FormerlySerializedAs("fadeInDuration")]
+        [SerializeField] private float m_FadeInDurationS = 0.6f;
+        
+        [FormerlySerializedAs("transitionDelay")]
+        [SerializeField] private float m_TransitionDelayS = 1.0f;
 
-        private Coroutine transition;
-        private float baseVolume = 1f;
+        private Coroutine m_TransitionCoroutine;
+        private float m_BaseVolume = 1f;
 
         protected override void Awake()
         {
@@ -21,8 +31,8 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            if (source != null)
-                baseVolume = source.volume;
+            if (m_AudioSource != null)
+                m_BaseVolume = m_AudioSource.volume;
         }
 
         public void Play(AudioClip clip)
@@ -30,23 +40,23 @@ namespace AdventureGame.Core.Managers
             if (clip == null)
                 return;
 
-            if (source.clip == clip && source.isPlaying)
+            if (m_AudioSource.clip == clip && m_AudioSource.isPlaying)
                 return;
 
-            if (transition != null)
-                StopCoroutine(transition);
+            if (m_TransitionCoroutine != null)
+                StopCoroutine(m_TransitionCoroutine);
 
-            if (source.clip == null)
+            if (m_AudioSource.clip == null)
             {
-                source.clip = clip;
-                source.loop = true;
-                source.volume = baseVolume;
-                source.Play();
+                m_AudioSource.clip = clip;
+                m_AudioSource.loop = true;
+                m_AudioSource.volume = m_BaseVolume;
+                m_AudioSource.Play();
 
                 return;
             }
 
-            transition = StartCoroutine(SwitchTo(clip));
+            m_TransitionCoroutine = StartCoroutine(SwitchTo(clip));
         }
 
         public void PlayWithStinger(AudioClip stinger, AudioClip nextTrack)
@@ -58,109 +68,109 @@ namespace AdventureGame.Core.Managers
                 return;
             }
 
-            if (transition != null) 
-                StopCoroutine(transition);
+            if (m_TransitionCoroutine != null) 
+                StopCoroutine(m_TransitionCoroutine);
 
             if (nextTrack == null)
-                transition = StartCoroutine(StingerThenSilence(stinger));
+                m_TransitionCoroutine = StartCoroutine(StingerThenSilence(stinger));
             else
-                transition = StartCoroutine(StingerThenTrack(stinger, nextTrack));
+                m_TransitionCoroutine = StartCoroutine(StingerThenTrack(stinger, nextTrack));
         }
 
         public void FadeOutAndStop(float duration)
         {
-            if (transition != null) 
-                StopCoroutine(transition);
+            if (m_TransitionCoroutine != null) 
+                StopCoroutine(m_TransitionCoroutine);
         
-            transition = StartCoroutine(FadeOutAndStopRoutine(duration));
+            m_TransitionCoroutine = StartCoroutine(FadeOutAndStopRoutine(duration));
         }
 
         IEnumerator FadeOutAndStopRoutine(float duration)
         {
             yield return FadeVolumeTo(0f, duration);
         
-            source.Stop();
-            source.clip = null;
-            source.volume = baseVolume;
-            transition = null;
+            m_AudioSource.Stop();
+            m_AudioSource.clip = null;
+            m_AudioSource.volume = m_BaseVolume;
+            m_TransitionCoroutine = null;
         }
 
         IEnumerator SwitchTo(AudioClip clip)
         {
-            yield return FadeVolumeTo(0f, fadeOutDuration);
+            yield return FadeVolumeTo(0f, m_FadeOutDurationS);
         
-            source.Stop();
+            m_AudioSource.Stop();
 
-            yield return new WaitForSecondsRealtime(transitionDelay);
+            yield return new WaitForSecondsRealtime(m_TransitionDelayS);
 
-            source.clip = clip;
-            source.loop = true;
-            source.Play();
+            m_AudioSource.clip = clip;
+            m_AudioSource.loop = true;
+            m_AudioSource.Play();
         
-            yield return FadeVolumeTo(baseVolume, fadeInDuration);
+            yield return FadeVolumeTo(m_BaseVolume, m_FadeInDurationS);
 
-            transition = null;
+            m_TransitionCoroutine = null;
         }
 
         IEnumerator StingerThenSilence(AudioClip stinger)
         {
-            if (source.isPlaying)
+            if (m_AudioSource.isPlaying)
             {
-                yield return FadeVolumeTo(0f, fadeOutDuration);
+                yield return FadeVolumeTo(0f, m_FadeOutDurationS);
             
-                source.Stop();
-                source.clip = null;
-                source.volume = baseVolume;
+                m_AudioSource.Stop();
+                m_AudioSource.clip = null;
+                m_AudioSource.volume = m_BaseVolume;
             }
 
-            if (stingerSource != null) stingerSource.PlayOneShot(stinger);
+            if (m_StingerAudioSource != null) m_StingerAudioSource.PlayOneShot(stinger);
         
             yield return new WaitForSecondsRealtime(stinger.length);
 
-            transition = null;
+            m_TransitionCoroutine = null;
         }
 
         IEnumerator StingerThenTrack(AudioClip stinger, AudioClip nextTrack)
         {
-            source.Stop();
+            m_AudioSource.Stop();
         
-            if (stingerSource != null) 
-                stingerSource.PlayOneShot(stinger);
+            if (m_StingerAudioSource != null) 
+                m_StingerAudioSource.PlayOneShot(stinger);
 
             yield return new WaitForSecondsRealtime(stinger.length);
-            yield return new WaitForSecondsRealtime(transitionDelay);
+            yield return new WaitForSecondsRealtime(m_TransitionDelayS);
 
-            source.clip = nextTrack;
-            source.loop = true;
-            source.volume = 0f;
-            source.Play();
+            m_AudioSource.clip = nextTrack;
+            m_AudioSource.loop = true;
+            m_AudioSource.volume = 0f;
+            m_AudioSource.Play();
         
-            yield return FadeVolumeTo(baseVolume, fadeInDuration);
+            yield return FadeVolumeTo(m_BaseVolume, m_FadeInDurationS);
 
-            transition = null;
+            m_TransitionCoroutine = null;
         }
 
         IEnumerator FadeVolumeTo(float target, float duration)
         {
             if (duration <= 0f)
             {
-                source.volume = target;
+                m_AudioSource.volume = target;
             
                 yield break;
             }
 
-            float start = source.volume;
+            float start = m_AudioSource.volume;
             float elapsed = 0f;
         
             while (elapsed < duration)
             {
                 elapsed += Time.unscaledDeltaTime;
-                source.volume = Mathf.Lerp(start, target, elapsed / duration);
+                m_AudioSource.volume = Mathf.Lerp(start, target, elapsed / duration);
             
                 yield return null;
             }
 
-            source.volume = target;
+            m_AudioSource.volume = target;
         }
     }
 }

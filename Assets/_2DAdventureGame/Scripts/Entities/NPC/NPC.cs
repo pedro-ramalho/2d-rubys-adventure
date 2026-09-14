@@ -3,68 +3,70 @@ using AdventureGame.Core.Dialogue;
 using AdventureGame.Core.Quest;
 using AdventureGame.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.NPC
 {
     public class NPC : MonoBehaviour
     {
-        [SerializeField] private List<QuestDialogue> dialogues;
+        [FormerlySerializedAs("dialogues")]
+        [SerializeField] private List<QuestDialogue> m_DialogueLines;
 
-        private DialoguePhase currentPhase;
-        private QuestDialogue currentDialogue;
+        private DialoguePhase m_CurrentDialoguePhase;
+        private QuestDialogue m_CurrentDialogue;
         private int lineIndex;
 
         public void Talk()
         {
-            if (currentPhase == null)
+            if (m_CurrentDialoguePhase == null)
             {
-                foreach (QuestDialogue dialogue in dialogues)
+                foreach (QuestDialogue dialogue in m_DialogueLines)
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.quest) : null;
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.Quest) : null;
                     DialoguePhase phase = dialogue.Pick(controller);
                     if (phase != null)
                     {
-                        currentDialogue = dialogue;
-                        currentPhase = phase;
+                        m_CurrentDialogue = dialogue;
+                        m_CurrentDialoguePhase = phase;
 
                         break;
                     }
                 }
 
-                if (currentPhase == null) 
+                if (m_CurrentDialoguePhase == null) 
                     return;
             
                 lineIndex = 0;
 
-                if (currentDialogue.IsAfterPhase(currentPhase))
+                if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
                     if (controller != null) 
                         controller.Conclude();
                 }
             }
 
-            DialoguePresenter.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++], transform);
+            DialoguePresenter.Instance.DisplayDialogueWithLine(m_CurrentDialoguePhase.Lines[lineIndex++], transform);
 
-            if (lineIndex >= currentPhase.lines.Count)
+            if (lineIndex >= m_CurrentDialoguePhase.Lines.Count)
             {
-                if (currentPhase.questToGrantAfter != null)
+                if (m_CurrentDialoguePhase.QuestToGrantAfter != null)
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentPhase.questToGrantAfter) : null;
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialoguePhase.QuestToGrantAfter) : null;
                     if (controller != null) 
                         controller.Accept();
                 }
 
-                if (currentDialogue.IsAfterPhase(currentPhase))
+                if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
                     if (controller != null) 
                         controller.EpilogueFinished();
                 }
 
-                currentPhase.onExhausted?.Invoke();
-                currentPhase = null;
-                currentDialogue = null;
+                m_CurrentDialoguePhase.OnExhausted?.Invoke();
+                m_CurrentDialoguePhase = null;
+                m_CurrentDialogue = null;
             }
         }
     }

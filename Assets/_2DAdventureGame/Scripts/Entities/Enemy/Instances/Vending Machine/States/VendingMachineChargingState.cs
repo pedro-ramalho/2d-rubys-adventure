@@ -5,16 +5,16 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
 {
     public class VendingMachineChargingState : VendingMachineState
     {
-        private float timer;
-        private Vector2 direction;
+        private float m_Timer;
+        private Vector2 m_Direction;
 
         public override void Enter(VendingMachine owner)
         {
-            timer = 0f;
-            direction = owner.ChargeDirection;
+            m_Timer = 0f;
+            m_Direction = owner.ChargeDirection;
 
-            owner.Animator.SetFloat(AnimatorHashes.MoveX, direction.x);
-            owner.Animator.SetFloat(AnimatorHashes.MoveY, direction.y);
+            owner.Animator.SetFloat(AnimatorHashes.MoveX, m_Direction.x);
+            owner.Animator.SetFloat(AnimatorHashes.MoveY, m_Direction.y);
             owner.Animator.SetBool(AnimatorHashes.ChargingHorizontal, owner.IsChargeHorizontal);
 
             owner.AudioSource.PlayOneShot(owner.ChargeClip);
@@ -24,18 +24,18 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
     
         public override void Update(VendingMachine owner)
         {
-            timer += Time.deltaTime;
-            if (timer >= owner.ChargeDuration)
+            m_Timer += Time.deltaTime;
+            if (m_Timer >= owner.ChargeDuration)
                 owner.ChangeState(owner.StunnedState);
         }
 
         public override void FixedUpdate(VendingMachine owner)
         {
-            float progress = timer / owner.ChargeDuration;
+            float progress = m_Timer / owner.ChargeDuration;
             float speed = owner.SpeedCurve.Evaluate(progress) * owner.MaxSpeed;
 
             owner.Rigidbody.MovePosition(
-                owner.Rigidbody.position + direction * (speed * Time.fixedDeltaTime)
+                owner.Rigidbody.position + m_Direction * (speed * Time.fixedDeltaTime)
             );
         }
     }

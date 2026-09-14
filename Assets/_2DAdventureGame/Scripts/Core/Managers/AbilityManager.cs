@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Managers
 {
@@ -13,12 +14,13 @@ namespace AdventureGame.Core.Managers
 
     public class AbilityManager : PersistentSingleton<AbilityManager>
     {
-        [SerializeField] private AbilityFlag startingAbilities = AbilityFlag.None;
+        [FormerlySerializedAs("startingAbilities")]
+        [SerializeField] private AbilityFlag m_StartingAbilities = AbilityFlag.None;
 
-        private AbilityFlag unlocked;
+        private AbilityFlag m_UnlockedAbilities;
 
-        public bool CanDash  => (unlocked & AbilityFlag.Dash)  != 0;
-        public bool CanShoot => (unlocked & AbilityFlag.Shoot) != 0;
+        public bool CanDash  => (m_UnlockedAbilities & AbilityFlag.Dash)  != 0;
+        public bool CanShoot => (m_UnlockedAbilities & AbilityFlag.Shoot) != 0;
 
         protected override void Awake()
         {
@@ -26,9 +28,9 @@ namespace AdventureGame.Core.Managers
 
             if (Instance != this) return;
 
-            unlocked = startingAbilities;
+            m_UnlockedAbilities = m_StartingAbilities;
         }
 
-        public void Unlock(AbilityFlag abilities) => unlocked |= abilities;
+        public void Unlock(AbilityFlag abilities) => m_UnlockedAbilities |= abilities;
     }
 }

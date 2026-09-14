@@ -6,11 +6,11 @@ namespace AdventureGame.Entities.Player.States
 {
     public class PlayerShootingState : PlayerState
     {
-        private float timer;
+        private float m_Timer;
 
         public override void Enter(Player owner)
         {
-            timer = owner.Data.shootDuration;
+            m_Timer = owner.Data.ShootDuration;
             owner.CurrentVelocity = Vector2.zero;
 
             owner.Animator.SetTrigger(AnimatorHashes.Launch);
@@ -23,12 +23,12 @@ namespace AdventureGame.Entities.Player.States
             );
 
             if (projectileObj.TryGetComponent(out Projectile projectile))
-                projectile.Launch(owner.MoveDirection, owner.Data.projectileLaunchForce);
+                projectile.Launch(owner.MoveDirection, owner.Data.ProjectileLaunchForce);
         }
 
         public override void Update(Player owner)
         {
-            timer -= Time.deltaTime;
+            m_Timer -= Time.deltaTime;
 
             if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f)
             {
@@ -37,7 +37,7 @@ namespace AdventureGame.Entities.Player.States
                 return;
             }
 
-            if (timer <= 0f)
+            if (m_Timer <= 0f)
                 owner.ChangeState(owner.GroundedState);
         }
     }

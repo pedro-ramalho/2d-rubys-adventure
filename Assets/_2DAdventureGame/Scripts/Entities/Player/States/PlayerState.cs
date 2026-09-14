@@ -14,8 +14,8 @@ namespace AdventureGame.Entities.Player.States
 
         public virtual void HandleHeal(Player owner, int amount)
         {
-            owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth + amount, 0, owner.Data.maxHealth);
-            owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.maxHealth);
+            owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth + amount, 0, owner.Data.MaxHealth);
+            owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.MaxHealth);
         }
 
         public virtual void HandleDamage(Player owner, int amount)
@@ -24,15 +24,15 @@ namespace AdventureGame.Entities.Player.States
                 return;
 
             owner.IsInvincible = true;
-            owner.DamageCooldown = owner.Data.invincibilityDuration;
+            owner.DamageCooldown = owner.Data.InvincibilityDuration;
 
             owner.Animator.SetTrigger(AnimatorHashes.Hit);
             owner.OneShotSource.PlayOneShot(owner.HitClip);
         
             CameraShake.Instance?.Shake();
 
-            owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth - amount, 0, owner.Data.maxHealth);
-            owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.maxHealth);
+            owner.CurrentHealth = Mathf.Clamp(owner.CurrentHealth - amount, 0, owner.Data.MaxHealth);
+            owner.RaiseOnHealthChanged(owner.CurrentHealth / (float)owner.Data.MaxHealth);
 
             if (owner.CurrentHealth == 0)
             {

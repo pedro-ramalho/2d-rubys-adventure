@@ -9,8 +9,8 @@ namespace AdventureGame.Core.Quest
         {
             if (QuestManager.Instance != null)
                 foreach (QuestController c in QuestManager.Instance.All)
-                    if (c.Phase == QuestPhase.During && c.Data != null && c.Data.backgroundTrack != null)
-                        return c.Data.backgroundTrack;
+                    if (c.Phase == QuestPhase.During && c.Data != null && c.Data.BackgroundTrack != null)
+                        return c.Data.BackgroundTrack;
 
             return SceneMusicConfigManager.Instance != null ? SceneMusicConfigManager.Instance.DefaultTrack : null;
         }
