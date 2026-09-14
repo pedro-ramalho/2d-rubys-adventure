@@ -21,5 +21,7 @@ namespace AdventureGame.Core.Quest
 
         [FormerlySerializedAs("backgroundTrack")]
         public AudioClip BackgroundTrack;
+
+        public AudioClip CompletionStinger;
     }
 }

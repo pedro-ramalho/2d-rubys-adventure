@@ -17,3 +17,4 @@ MonoBehaviour:
   TargetCount: 1
   UnlockOnAccept: 0
   BackgroundTrack: {fileID: 0}
+  CompletionStinger: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}

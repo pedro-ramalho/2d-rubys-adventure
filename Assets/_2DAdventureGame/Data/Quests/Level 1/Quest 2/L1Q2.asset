@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f3e1dc421590b469119e7345035d6b, type: 3}
   m_Name: L1Q2
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  id: L1Q2
-  description: Fix the Patrol Robots that have been causing a ruckus.
-  targetCount: 4
-  unlockOnAccept: 2
-  backgroundTrack: {fileID: 8300000, guid: ad6d68efc3e6bcc44b95d48ddba95ed1, type: 3}
+  Id: L1Q2
+  Description: Fix the Patrol Robots that have been causing a ruckus.
+  TargetCount: 4
+  UnlockOnAccept: 2
+  BackgroundTrack: {fileID: 8300000, guid: ad6d68efc3e6bcc44b95d48ddba95ed1, type: 3}
+  CompletionStinger: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
