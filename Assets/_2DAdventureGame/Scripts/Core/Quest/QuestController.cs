@@ -10,9 +10,6 @@ namespace AdventureGame.Core.Quest
         [FormerlySerializedAs("data")]
         [SerializeField] protected QuestData m_QuestData;
 
-        [FormerlySerializedAs("completionSfx")]
-        [SerializeField] private AudioClip m_CompletionSfx;
-
         public QuestData Data => m_QuestData;
         public QuestPhase Phase { get; protected set; } = QuestPhase.Before;
 
@@ -47,8 +44,6 @@ namespace AdventureGame.Core.Quest
                 return;
 
             SetPhase(QuestPhase.During);
-        
-            QuestMusic.Refresh();
         }
 
         public virtual void MarkComplete()
@@ -57,8 +52,6 @@ namespace AdventureGame.Core.Quest
                 return;
         
             SetPhase(QuestPhase.After);
-        
-            QuestMusic.PlayCompletionStinger(m_CompletionSfx);
         }
 
         public void Conclude()
