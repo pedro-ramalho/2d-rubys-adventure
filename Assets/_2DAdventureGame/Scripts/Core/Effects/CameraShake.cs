@@ -5,16 +5,16 @@ namespace AdventureGame.Core.Effects
 {
     public class CameraShake : SceneSingleton<CameraShake>
     {
-        private CinemachineImpulseSource impulseSource;
+        private CinemachineImpulseSource m_ImpulseSource;
 
         protected override void Awake()
         {
             base.Awake();
             if (Instance != this) return;
 
-            impulseSource = GetComponent<CinemachineImpulseSource>();
+            m_ImpulseSource = GetComponent<CinemachineImpulseSource>();
         }
 
-        public void Shake(float amplitude = 1f) => impulseSource.GenerateImpulse(amplitude);
+        public void Shake(float amplitude = 1f) => m_ImpulseSource.GenerateImpulse(amplitude);
     }
 }

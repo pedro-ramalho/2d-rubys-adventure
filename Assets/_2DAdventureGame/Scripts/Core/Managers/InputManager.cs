@@ -5,7 +5,7 @@ namespace AdventureGame.Core.Managers
 {
     public class InputManager : PersistentSingleton<InputManager>
     {
-        private const string BindingsKey = "InputBindings";
+        private const string k_BindingsKey = "InputBindings";
 
         public PlayerInputActions Actions { get; private set; }
 
@@ -25,11 +25,11 @@ namespace AdventureGame.Core.Managers
             Actions.Player.Enable();
         }
 
-        public void SaveBindings() => PlayerPrefs.SetString(BindingsKey, Actions.SaveBindingOverridesAsJson());
+        public void SaveBindings() => PlayerPrefs.SetString(k_BindingsKey, Actions.SaveBindingOverridesAsJson());
     
         public void LoadBindings()
         {
-            string json = PlayerPrefs.GetString(BindingsKey, string.Empty);
+            string json = PlayerPrefs.GetString(k_BindingsKey, string.Empty);
             if (!string.IsNullOrEmpty(json))
                 Actions.LoadBindingOverridesFromJson(json);
         }
@@ -38,7 +38,7 @@ namespace AdventureGame.Core.Managers
         {
             Actions.RemoveAllBindingOverrides();
         
-            PlayerPrefs.DeleteKey(BindingsKey);
+            PlayerPrefs.DeleteKey(k_BindingsKey);
         }
     }
 }

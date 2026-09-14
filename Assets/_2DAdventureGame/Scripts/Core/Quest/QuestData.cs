@@ -6,13 +6,13 @@ namespace AdventureGame.Core.Quest
     [CreateAssetMenu(fileName = "QuestData", menuName = "Game/Quest")]
     public class QuestData : ScriptableObject
     {
-        public string id;
-        public string description;
+        public string Id;
+        public string Description;
 
-        public int targetCount;
+        public int TargetCount;
 
-        public AbilityFlag unlockOnAccept = AbilityFlag.None;
+        public AbilityFlag UnlockOnAccept = AbilityFlag.None;
 
-        public AudioClip backgroundTrack;
+        public AudioClip BackgroundTrack;
     }
 }

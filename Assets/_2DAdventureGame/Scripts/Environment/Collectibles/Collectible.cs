@@ -1,12 +1,14 @@
 using AdventureGame.Core.Quest;
 using AdventureGame.Entities.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Environment.Collectibles
 {
     public class Collectible : MonoBehaviour
     {
-        [SerializeField] protected AudioClip collectibleClip;
+        [FormerlySerializedAs("collectibleClip")]
+        [SerializeField] protected AudioClip m_CollectibleClip;
         protected virtual void ApplyEffect(Player player) { }
         protected virtual void OnEffectApplied() => Destroy(gameObject);
 
@@ -28,8 +30,8 @@ namespace AdventureGame.Environment.Collectibles
 
             ApplyEffect(player);
 
-            if (collectibleClip != null)
-                player.OneShotSource.PlayOneShot(collectibleClip);
+            if (m_CollectibleClip != null)
+                player.OneShotSource.PlayOneShot(m_CollectibleClip);
 
             OnEffectApplied();
             if (reporter != null) 

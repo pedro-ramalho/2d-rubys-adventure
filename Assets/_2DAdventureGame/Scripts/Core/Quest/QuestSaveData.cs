@@ -6,8 +6,8 @@ namespace AdventureGame.Core.Quest
     [Serializable]
     public class QuestSaveData
     {
-        public string questId;
-        public QuestPhase phase;
-        public List<string> consumedIds;
+        public string QuestId;
+        public QuestPhase Phase;
+        public List<string> ConsumedIds;
     }
 }

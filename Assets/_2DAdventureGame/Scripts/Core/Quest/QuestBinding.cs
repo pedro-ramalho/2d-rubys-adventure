@@ -1,31 +1,37 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Quest
 {
     public class QuestBinding : MonoBehaviour
     {
-        [SerializeField] private QuestData boundQuest;
+        [FormerlySerializedAs("boundQuest")]
+        [SerializeField] private QuestData m_BoundQuestData;
 
-        [SerializeField] private bool activateOnQuestAccept;
+        [FormerlySerializedAs("activateOnQuestAccept")]
+        [SerializeField] private bool m_ActivateOnQuestAccept;
 
-        [SerializeField] private bool enableTriggerOnQuestAccept;
+        [FormerlySerializedAs("enableTriggerOnQuestAccept")]
+        [SerializeField] private bool m_EnableTriggerOnQuestAccept;
 
-        [SerializeField] private bool deactivateOnComplete = true;
+        [FormerlySerializedAs("deactivateOnComplete")]
+        [SerializeField] private bool m_DeactivateOnComplete = true;
 
-        [SerializeField] private Behaviour[] interactables;
+        [FormerlySerializedAs("interactables")]
+        [SerializeField] private Behaviour[] m_Interactables;
 
-        private readonly List<SpriteRenderer> renderers = new();
-        private readonly List<Collider2D> colliders = new();
-        private QuestController controller;
+        private readonly List<SpriteRenderer> m_SpriteRenderers = new();
+        private readonly List<Collider2D> m_Colliders = new();
+        private QuestController m_QuestController;
 
         void Awake()
         {
-            if (activateOnQuestAccept || enableTriggerOnQuestAccept)
-                GetComponentsInChildren(true, colliders);
+            if (m_ActivateOnQuestAccept || m_EnableTriggerOnQuestAccept)
+                GetComponentsInChildren(true, m_Colliders);
 
-            if (activateOnQuestAccept)
-                GetComponentsInChildren(true, renderers);
+            if (m_ActivateOnQuestAccept)
+                GetComponentsInChildren(true, m_SpriteRenderers);
 
             SetInteractable(false);
         }
@@ -35,8 +41,8 @@ namespace AdventureGame.Core.Quest
             if (QuestManager.Instance == null) 
                 return;
 
-            controller = QuestManager.Instance.Get(boundQuest);
-            if (controller == null) 
+            m_QuestController = QuestManager.Instance.Get(m_BoundQuestData);
+            if (m_QuestController == null) 
                 return;
 
             QuestReporter reporter = GetComponent<QuestReporter>();
@@ -47,15 +53,15 @@ namespace AdventureGame.Core.Quest
                 return;
             }
 
-            controller.OnPhaseChanged += HandlePhaseChanged;
+            m_QuestController.OnPhaseChanged += HandlePhaseChanged;
         
-            SetInteractable(controller.Phase == QuestPhase.During);
+            SetInteractable(m_QuestController.Phase == QuestPhase.During);
         }
 
         void OnDestroy()
         {
-            if (controller != null)
-                controller.OnPhaseChanged -= HandlePhaseChanged;
+            if (m_QuestController != null)
+                m_QuestController.OnPhaseChanged -= HandlePhaseChanged;
         }
 
         void HandlePhaseChanged(QuestController c)
@@ -64,7 +70,7 @@ namespace AdventureGame.Core.Quest
             {
                 SetInteractable(true);
             }
-            else if (c.Phase == QuestPhase.After && deactivateOnComplete)
+            else if (c.Phase == QuestPhase.After && m_DeactivateOnComplete)
             {
                 SetInteractable(false);
             }
@@ -72,23 +78,23 @@ namespace AdventureGame.Core.Quest
 
         void SetInteractable(bool value)
         {
-            foreach (Behaviour b in interactables)
+            foreach (Behaviour b in m_Interactables)
                 if (b != null) b.enabled = value;
 
-            if (activateOnQuestAccept)
+            if (m_ActivateOnQuestAccept)
             {
-                foreach (SpriteRenderer r in renderers)
+                foreach (SpriteRenderer r in m_SpriteRenderers)
                     if (r != null) 
                         r.enabled = value;
 
-                foreach (Collider2D c in colliders)
+                foreach (Collider2D c in m_Colliders)
                     if (c != null) 
                         c.enabled = value;
             }
 
-            if (enableTriggerOnQuestAccept)
+            if (m_EnableTriggerOnQuestAccept)
             {
-                foreach (Collider2D c in colliders)
+                foreach (Collider2D c in m_Colliders)
                     if (c != null) 
                         c.isTrigger = value;
             }

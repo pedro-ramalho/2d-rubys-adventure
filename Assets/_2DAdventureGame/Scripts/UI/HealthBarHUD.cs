@@ -21,7 +21,7 @@ namespace AdventureGame.UI
             m_Player = Player.Instance;
             m_Player.OnHealthChanged += OnPlayerHealthChanged;
             
-            OnPlayerHealthChanged(m_Player.CurrentHealth / (float)m_Player.Data.maxHealth);
+            OnPlayerHealthChanged(m_Player.CurrentHealth / (float)m_Player.Data.MaxHealth);
         }
 
         protected override void OnDestroy()

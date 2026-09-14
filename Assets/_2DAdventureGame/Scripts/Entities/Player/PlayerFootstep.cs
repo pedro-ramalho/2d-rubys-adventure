@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace AdventureGame.Entities.Player
@@ -11,19 +12,24 @@ namespace AdventureGame.Entities.Player
         [Serializable]
         private class SurfaceProfile
         {
-            public string tag;
-            public AudioClip[] clips;
+            public string Tag;
+            public AudioClip[] Clips;
         }
 
-        [SerializeField] private AudioSource source;
-        [SerializeField] private SurfaceProfile[] surfaces;
+        [FormerlySerializedAs("source")]
+        [SerializeField] private AudioSource m_AudioSource;
 
-        [SerializeField] private Vector2 feetOffset = new Vector2(0f, -0.3f);
+        [FormerlySerializedAs("surfaces")]
+        [SerializeField] private SurfaceProfile[] m_Surfaces;
+
+        [FormerlySerializedAs("feetOffset")]
+        [SerializeField] private Vector2 m_FeetOffset = new Vector2(0f, -0.3f);
 
         [Tooltip("Random pitch variation in either direction")]
-        [SerializeField, Range(0f, 0.3f)] private float pitchVariation = 0.05f;
+        [FormerlySerializedAs("pitchVariation")]
+        [SerializeField, Range(0f, 0.3f)] private float m_PitchVariation = 0.05f;
 
-        private readonly List<(Tilemap tilemap, AudioClip[] clips)> resolved = new();
+        private readonly List<(Tilemap tilemap, AudioClip[] clips)> m_Resolved = new();
 
         void Awake() => SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -35,23 +41,23 @@ namespace AdventureGame.Entities.Player
 
         public void PlayFootstep()
         {
-            if (source == null) 
+            if (m_AudioSource == null) 
                 return;
 
             AudioClip[] clips = SelectClips();
             if (clips == null || clips.Length == 0) 
                 return;
 
-            source.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
-            source.pitch = 1f + UnityEngine.Random.Range(-pitchVariation, pitchVariation);
-            source.Play();
+            m_AudioSource.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+            m_AudioSource.pitch = 1f + UnityEngine.Random.Range(-m_PitchVariation, m_PitchVariation);
+            m_AudioSource.Play();
         }
 
         private AudioClip[] SelectClips()
         {
-            Vector3 feet = transform.position + (Vector3)feetOffset;
+            Vector3 feet = transform.position + (Vector3)m_FeetOffset;
         
-            foreach((Tilemap tilemap, AudioClip[] clips) in resolved)
+            foreach((Tilemap tilemap, AudioClip[] clips) in m_Resolved)
             {
                 if (tilemap == null) 
                     continue;
@@ -66,19 +72,19 @@ namespace AdventureGame.Entities.Player
 
         private void ResolveSurfaces()
         {
-            resolved.Clear();
-            if (surfaces == null) 
+            m_Resolved.Clear();
+            if (m_Surfaces == null) 
                 return;
 
-            foreach (SurfaceProfile p in surfaces)
+            foreach (SurfaceProfile p in m_Surfaces)
             {
-                if (string.IsNullOrEmpty(p.tag)) 
+                if (string.IsNullOrEmpty(p.Tag)) 
                     continue;
 
-                GameObject[] tagged = GameObject.FindGameObjectsWithTag(p.tag);
+                GameObject[] tagged = GameObject.FindGameObjectsWithTag(p.Tag);
                 foreach (GameObject g in tagged)
                     if (g.TryGetComponent(out Tilemap tm))
-                        resolved.Add((tm, p.clips));
+                        m_Resolved.Add((tm, p.Clips));
             }
         }
     }

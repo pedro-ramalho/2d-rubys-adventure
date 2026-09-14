@@ -4,16 +4,25 @@ using AdventureGame.Core.Managers;
 using AdventureGame.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Scene
 {
     public class SceneTransitioner : SceneSingleton<SceneTransitioner>
     {
-        [SerializeField] private Animator transition;
-        [SerializeField] private string startTrigger = "Start";
-        [SerializeField] private string fadeOutClipName = "CrossfadeStart_Animation";
-        [SerializeField] private float preTransitionDelay = 1.5f;
-        private float fadeOutDuration = 1f;
+        [FormerlySerializedAs("transition")]
+        [SerializeField] private Animator m_TransitionAnimator;
+
+        [FormerlySerializedAs("startTrigger")]
+        [SerializeField] private string m_StartTrigger = "Start";
+
+        [FormerlySerializedAs("fadeOutClipName")]
+        [SerializeField] private string m_FadeOutClipName = "CrossfadeStart_Animation";
+        
+        [FormerlySerializedAs("preTransitionDelay")]
+        [SerializeField] private float m_PreTransitionDelay = 1.5f;
+        
+        private float m_FadeOutDuration = 1f;
 
         public bool IsTransitioning { get; private set; }
 
@@ -22,15 +31,15 @@ namespace AdventureGame.Core.Scene
             base.Awake();
             if (Instance != this) return;
 
-            fadeOutDuration = ResolveClipLength(fadeOutClipName);
+            m_FadeOutDuration = ResolveClipLength(m_FadeOutClipName);
         }
 
         float ResolveClipLength(string clipName)
         {
-            if (transition == null || transition.runtimeAnimatorController == null)
+            if (m_TransitionAnimator == null || m_TransitionAnimator.runtimeAnimatorController == null)
                 return 1f;
 
-            foreach (var clip in transition.runtimeAnimatorController.animationClips)
+            foreach (var clip in m_TransitionAnimator.runtimeAnimatorController.animationClips)
                 if (clip.name == clipName)
                     return clip.length;
 
@@ -38,7 +47,7 @@ namespace AdventureGame.Core.Scene
         }
 
         public void LoadSceneWithCrossfade(string sceneName) =>
-            LoadSceneWithCrossfade(sceneName, preTransitionDelay, writeSave: true);
+            LoadSceneWithCrossfade(sceneName, m_PreTransitionDelay, writeSave: true);
 
         public void LoadSceneWithCrossfade(string sceneName, float preDelay) =>
             LoadSceneWithCrossfade(sceneName, preDelay, writeSave: true);
@@ -51,7 +60,7 @@ namespace AdventureGame.Core.Scene
             IsTransitioning = true;
 
             if (MusicManager.Instance != null)
-                MusicManager.Instance.FadeOutAndStop(preDelay + fadeOutDuration);
+                MusicManager.Instance.FadeOutAndStop(preDelay + m_FadeOutDuration);
 
             yield return new WaitForSeconds(preDelay);
 
@@ -61,9 +70,9 @@ namespace AdventureGame.Core.Scene
             if (HealthBarHUD.Instance != null)
                 HealthBarHUD.Instance.Hide();
         
-            transition.SetTrigger(startTrigger);
+            m_TransitionAnimator.SetTrigger(m_StartTrigger);
 
-            yield return new WaitForSeconds(fadeOutDuration);
+            yield return new WaitForSeconds(m_FadeOutDuration);
 
             if (writeSave && scene != SceneNames.MainMenu && SaveManager.Instance != null)
                 SaveManager.Instance.WriteSave(scene);

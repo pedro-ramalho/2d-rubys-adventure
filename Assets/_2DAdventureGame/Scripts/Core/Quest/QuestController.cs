@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using AdventureGame.Core.Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Quest
 {
     public abstract class QuestController : MonoBehaviour
     {
-        [SerializeField] protected QuestData data;
+        [FormerlySerializedAs("data")]
+        [SerializeField] protected QuestData m_QuestData;
 
-        [SerializeField] private AudioClip completionSfx;
+        [FormerlySerializedAs("completionSfx")]
+        [SerializeField] private AudioClip m_CompletionSfx;
 
-        public QuestData Data => data;
+        public QuestData Data => m_QuestData;
         public QuestPhase Phase { get; protected set; } = QuestPhase.Before;
 
         public event Action<QuestController> OnPhaseChanged;
@@ -20,7 +23,7 @@ namespace AdventureGame.Core.Quest
 
         protected virtual void Awake()
         {
-            if (data == null || string.IsNullOrEmpty(data.id))
+            if (m_QuestData == null || string.IsNullOrEmpty(m_QuestData.Id))
             {
                 Debug.LogError($"[QuestController:{name}] QuestData missing or has no id.");
             
@@ -55,7 +58,7 @@ namespace AdventureGame.Core.Quest
         
             SetPhase(QuestPhase.After);
         
-            QuestMusic.PlayCompletionStinger(completionSfx);
+            QuestMusic.PlayCompletionStinger(m_CompletionSfx);
         }
 
         public void Conclude()
@@ -76,17 +79,17 @@ namespace AdventureGame.Core.Quest
 
         public QuestSaveData Capture() => new QuestSaveData
         {
-            questId = data.id,
-            phase = CapturePhase(),
-            consumedIds = CaptureConsumed()
+            QuestId = m_QuestData.Id,
+            Phase = CapturePhase(),
+            ConsumedIds = CaptureConsumed()
         };
 
         public void Restore(QuestSaveData saved)
         {
             RestoreData(saved);
-            SetPhase(saved.phase);
+            SetPhase(saved.Phase);
 
-            if (saved.phase != QuestPhase.Before) 
+            if (saved.Phase != QuestPhase.Before) 
                 ApplyUnlock();
         }
 
@@ -106,7 +109,7 @@ namespace AdventureGame.Core.Quest
         protected void ApplyUnlock()
         {
             if (AbilityManager.Instance != null)
-                AbilityManager.Instance.Unlock(data.unlockOnAccept);
+                AbilityManager.Instance.Unlock(m_QuestData.UnlockOnAccept);
         }
     }
 }

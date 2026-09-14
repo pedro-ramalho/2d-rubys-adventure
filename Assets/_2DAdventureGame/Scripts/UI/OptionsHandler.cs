@@ -4,6 +4,7 @@ using AdventureGame.Core.Managers;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.UI
@@ -11,10 +12,11 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(UIDocument))]
     public class OptionsHandler : MonoBehaviour
     {
-        [SerializeField] private AudioMixer audioMixer;
+        [FormerlySerializedAs("audioMixer")]
+        [SerializeField] private AudioMixer m_AudioMixer;
 
-        private const float DefaultVolume = 1f;
-        private const float MinDb = -80f;
+        private const float k_DefaultVolume = 1f;
+        private const float k_MinDb = -80f;
 
         private static readonly (string Slider, string Param)[] VolumeEntries =
         {
@@ -27,16 +29,16 @@ namespace AdventureGame.UI
         public event Action Opened;
         public event Action Closed;
 
-        private VisualElement optionsRoot;
+        private VisualElement m_OptionsRoot;
         private (string Button, InputAction Action, int Index)[] rebindEntries;
-        private MainMenuHandler clickPlayer;
-        private bool isRebinding;
+        private MainMenuHandler m_MainMenuHandler;
+        private bool m_IsRebinding;
 
         void Start()
         {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-            optionsRoot = root.Q<VisualElement>("OptionsRoot");
-            clickPlayer = GetComponent<MainMenuHandler>();
+            m_OptionsRoot = root.Q<VisualElement>("OptionsRoot");
+            m_MainMenuHandler = GetComponent<MainMenuHandler>();
 
             Button backButton = root.Q<Button>("OptionsBackButton");
             backButton.clicked += PlayClick;
@@ -88,23 +90,23 @@ namespace AdventureGame.UI
 
         void ResetVolumeSlider(string sliderName, string mixerParam)
         {
-            Slider slider = optionsRoot.Q<Slider>(sliderName);
-            slider.SetValueWithoutNotify(DefaultVolume);
+            Slider slider = m_OptionsRoot.Q<Slider>(sliderName);
+            slider.SetValueWithoutNotify(k_DefaultVolume);
         
-            ApplyVolume(mixerParam, DefaultVolume);
+            ApplyVolume(mixerParam, k_DefaultVolume);
             PlayerPrefs.DeleteKey(mixerParam);
         }
 
         void RefreshRebindLabel(string buttonName, InputAction action, int bindingIndex)
         {
-            Button button = optionsRoot.Q<Button>(buttonName);
+            Button button = m_OptionsRoot.Q<Button>(buttonName);
             button.text = GetBindingDisplayName(action, bindingIndex);
         }
 
         void WireVolumeSlider(VisualElement root, string sliderName, string mixerParam)
         {
             Slider slider = root.Q<Slider>(sliderName);
-            float saved = PlayerPrefs.GetFloat(mixerParam, DefaultVolume);
+            float saved = PlayerPrefs.GetFloat(mixerParam, k_DefaultVolume);
             slider.SetValueWithoutNotify(saved);
             ApplyVolume(mixerParam, saved);
 
@@ -117,8 +119,8 @@ namespace AdventureGame.UI
 
         void ApplyVolume(string mixerParam, float linear)
         {
-            float dB = linear > 0.0001f ? Mathf.Log10(linear) * 20f : MinDb;
-            audioMixer.SetFloat(mixerParam, dB);
+            float dB = linear > 0.0001f ? Mathf.Log10(linear) * 20f : k_MinDb;
+            m_AudioMixer.SetFloat(mixerParam, dB);
         }
 
         void WireRebindButton(VisualElement root, string buttonName, InputAction action, int bindingIndex)
@@ -129,12 +131,12 @@ namespace AdventureGame.UI
             button.clicked += () => StartRebind(action, bindingIndex, button);
         }
 
-        void PlayClick() => clickPlayer?.PlayClick();
+        void PlayClick() => m_MainMenuHandler?.PlayClick();
 
         void StartRebind(InputAction action, int bindingIndex, Button button)
         {
-            if (isRebinding) return;
-            isRebinding = true;
+            if (m_IsRebinding) return;
+            m_IsRebinding = true;
 
             action.Disable();
             button.SetEnabled(false);
@@ -150,7 +152,7 @@ namespace AdventureGame.UI
                     button.SetEnabled(true);
                     button.text = GetBindingDisplayName(action, bindingIndex);
                     InputManager.Instance.SaveBindings();
-                    isRebinding = false;
+                    m_IsRebinding = false;
                 })
                 .OnCancel(op =>
                 {
@@ -158,7 +160,7 @@ namespace AdventureGame.UI
                     action.Enable();
                     button.SetEnabled(true);
                     button.text = GetBindingDisplayName(action, bindingIndex);
-                    isRebinding = false;
+                    m_IsRebinding = false;
                 })
                 .Start();
         }
@@ -193,7 +195,7 @@ namespace AdventureGame.UI
 
         public void Open()
         {
-            optionsRoot.style.display = DisplayStyle.Flex;
+            m_OptionsRoot.style.display = DisplayStyle.Flex;
         
             RefreshDeleteSaveButton();
         
@@ -210,7 +212,7 @@ namespace AdventureGame.UI
 
         void RefreshDeleteSaveButton()
         {
-            Button button = optionsRoot.Q<Button>("DeleteSaveButton");
+            Button button = m_OptionsRoot.Q<Button>("DeleteSaveButton");
         
             bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasSave;
         
@@ -219,7 +221,7 @@ namespace AdventureGame.UI
 
         public void Close()
         {
-            optionsRoot.style.display = DisplayStyle.None;
+            m_OptionsRoot.style.display = DisplayStyle.None;
         
             Closed?.Invoke();
         }

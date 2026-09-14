@@ -9,7 +9,7 @@ namespace AdventureGame.Entities.Player.States
 {
     public class PlayerDeadState : PlayerState
     {
-        private const float ReloadDelay = 1.5f;
+        private const float k_ReloadDelay = 1.5f;
 
         public override void Enter(Player owner)
         {
@@ -24,7 +24,7 @@ namespace AdventureGame.Entities.Player.States
 
         private IEnumerator ReloadAfterDelay()
         {
-            yield return new WaitForSecondsRealtime(ReloadDelay);
+            yield return new WaitForSecondsRealtime(k_ReloadDelay);
             Time.timeScale = 1f;
 
             string currentScene = SceneManager.GetActiveScene().name;
