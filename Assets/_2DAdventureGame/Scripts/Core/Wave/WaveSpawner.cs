@@ -1,168 +1,173 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AdventureGame.Core.Quest;
+using AdventureGame.Entities.Player;
 using UnityEngine;
 
-public class WaveSpawner : MonoBehaviour
+namespace AdventureGame.Core.Wave
 {
-    [Header("Waves")]
-    [SerializeField] private List<Wave> waves;
-
-    [Header("Spawn Points")]
-    [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private float minSpawnSpacing = 3f;
-    [SerializeField] private float minDistanceFromPlayer = 4f;
-    [SerializeField] private int maxSpawnAttempts = 30;
-
-    [Header("Telegraph")]
-    [SerializeField] private GameObject telegraphPrefab;
-    [SerializeField] private float telegraphDuration = 0.6f;
-    [SerializeField] private float spawnInterval = 0.3f;
-
-    [Header("Timing")]
-    [SerializeField] private float initialDelay = 2f;
-    [SerializeField] private float breatherDuration = 2f;
-
-    [Header("Trigger")]
-    [SerializeField] private QuestData triggerQuest;
-
-    private readonly List<GameObject> aliveEnemies = new();
-    private bool started;
-    private QuestController controller;
-
-    public event Action OnAllWavesCleared;
-
-    void Start()
+    public class WaveSpawner : MonoBehaviour
     {
-        if (QuestManager.Instance == null) 
-            return;
-        
-        controller = QuestManager.Instance.Get(triggerQuest);
-        if (controller != null) 
-            controller.OnPhaseChanged += HandlePhaseChanged;
-    }
+        [Header("Waves")]
+        [SerializeField] private List<Wave> waves;
 
-    void OnDestroy()
-    {
-        if (controller != null) 
-            controller.OnPhaseChanged -= HandlePhaseChanged;
-    }
+        [Header("Spawn Points")]
+        [SerializeField] private Transform[] spawnPoints;
+        [SerializeField] private float minSpawnSpacing = 3f;
+        [SerializeField] private float minDistanceFromPlayer = 4f;
+        [SerializeField] private int maxSpawnAttempts = 30;
 
-    void HandlePhaseChanged(QuestController c)
-    {
-        if (started || c.Phase != QuestPhase.During) 
-            return;
+        [Header("Telegraph")]
+        [SerializeField] private GameObject telegraphPrefab;
+        [SerializeField] private float telegraphDuration = 0.6f;
+        [SerializeField] private float spawnInterval = 0.3f;
 
-        started = true;
-        
-        StartCoroutine(RunWaves());
-    }
+        [Header("Timing")]
+        [SerializeField] private float initialDelay = 2f;
+        [SerializeField] private float breatherDuration = 2f;
 
-    IEnumerator RunWaves()
-    {
-        yield return new WaitForSeconds(initialDelay);
+        [Header("Trigger")]
+        [SerializeField] private QuestData triggerQuest;
 
-        foreach (Wave wave in waves)
+        private readonly List<GameObject> aliveEnemies = new();
+        private bool started;
+        private QuestController controller;
+
+        public event Action OnAllWavesCleared;
+
+        void Start()
         {
-            yield return StartCoroutine(SpawnWave(wave));
+            if (QuestManager.Instance == null) 
+                return;
+        
+            controller = QuestManager.Instance.Get(triggerQuest);
+            if (controller != null) 
+                controller.OnPhaseChanged += HandlePhaseChanged;
+        }
+
+        void OnDestroy()
+        {
+            if (controller != null) 
+                controller.OnPhaseChanged -= HandlePhaseChanged;
+        }
+
+        void HandlePhaseChanged(QuestController c)
+        {
+            if (started || c.Phase != QuestPhase.During) 
+                return;
+
+            started = true;
+        
+            StartCoroutine(RunWaves());
+        }
+
+        IEnumerator RunWaves()
+        {
+            yield return new WaitForSeconds(initialDelay);
+
+            foreach (Wave wave in waves)
+            {
+                yield return StartCoroutine(SpawnWave(wave));
+                yield return new WaitUntil(IsWaveCleared);
+                yield return new WaitForSeconds(breatherDuration);
+            }
+
+            yield return StartCoroutine(SpawnBonusWave());
             yield return new WaitUntil(IsWaveCleared);
-            yield return new WaitForSeconds(breatherDuration);
+
+            OnAllWavesCleared?.Invoke();
         }
 
-        yield return StartCoroutine(SpawnBonusWave());
-        yield return new WaitUntil(IsWaveCleared);
-
-        OnAllWavesCleared?.Invoke();
-    }
-
-    IEnumerator SpawnWave(Wave wave)
-    {
-        for (int i = 0; i < wave.enemyCount; i++)
+        IEnumerator SpawnWave(Wave wave)
         {
-            yield return StartCoroutine(SpawnOne(wave.enemyPrefab));
-            yield return new WaitForSeconds(spawnInterval);
+            for (int i = 0; i < wave.enemyCount; i++)
+            {
+                yield return StartCoroutine(SpawnOne(wave.enemyPrefab));
+                yield return new WaitForSeconds(spawnInterval);
+            }
         }
-    }
 
-    IEnumerator SpawnBonusWave()
-    {
-        if (waves.Count == 0) 
-            yield break;
-
-        GameObject prefab = waves[^1].enemyPrefab;
-
-        foreach (Transform point in spawnPoints)
+        IEnumerator SpawnBonusWave()
         {
-            yield return StartCoroutine(SpawnAt(point, prefab));
-            yield return new WaitForSeconds(spawnInterval);
-        }
-    }
+            if (waves.Count == 0) 
+                yield break;
 
-    IEnumerator SpawnOne(GameObject enemyPrefab)
-    {
-        Transform point = PickSpawnPoint();
-        if (point == null) 
-            yield break;
+            GameObject prefab = waves[^1].enemyPrefab;
+
+            foreach (Transform point in spawnPoints)
+            {
+                yield return StartCoroutine(SpawnAt(point, prefab));
+                yield return new WaitForSeconds(spawnInterval);
+            }
+        }
+
+        IEnumerator SpawnOne(GameObject enemyPrefab)
+        {
+            Transform point = PickSpawnPoint();
+            if (point == null) 
+                yield break;
         
-        yield return StartCoroutine(SpawnAt(point, enemyPrefab));
-    }
-
-    IEnumerator SpawnAt(Transform point, GameObject enemyPrefab)
-    {
-        GameObject telegraph = telegraphPrefab != null
-            ? Instantiate(telegraphPrefab, point.position, Quaternion.identity)
-            : null;
-
-        yield return new WaitForSeconds(telegraphDuration);
-
-        if (telegraph != null) 
-            Destroy(telegraph);
-
-        GameObject enemy = Instantiate(enemyPrefab, point.position, Quaternion.identity);
-        aliveEnemies.Add(enemy);
-    }
-
-    Transform PickSpawnPoint()
-    {
-        for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
-        {
-            Transform candidate = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-
-            if (IsTooCloseToPlayer(candidate.position)) continue;
-            if (IsTooCloseToAlive(candidate.position)) continue;
-
-            return candidate;
+            yield return StartCoroutine(SpawnAt(point, enemyPrefab));
         }
 
-        return null;
-    }
-
-    bool IsTooCloseToPlayer(Vector3 pos)
-    {
-        Player p = Player.Instance;
-        if (p == null) return false;
-        return Vector2.Distance(pos, p.transform.position) < minDistanceFromPlayer;
-    }
-
-    bool IsTooCloseToAlive(Vector3 pos)
-    {
-        foreach (GameObject e in aliveEnemies)
+        IEnumerator SpawnAt(Transform point, GameObject enemyPrefab)
         {
-            if (e == null) 
-                continue;
+            GameObject telegraph = telegraphPrefab != null
+                ? Instantiate(telegraphPrefab, point.position, Quaternion.identity)
+                : null;
 
-            if (Vector2.Distance(pos, e.transform.position) < minSpawnSpacing)
-                return true;
+            yield return new WaitForSeconds(telegraphDuration);
+
+            if (telegraph != null) 
+                Destroy(telegraph);
+
+            GameObject enemy = Instantiate(enemyPrefab, point.position, Quaternion.identity);
+            aliveEnemies.Add(enemy);
         }
 
-        return false;
-    }
+        Transform PickSpawnPoint()
+        {
+            for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
+            {
+                Transform candidate = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
 
-    bool IsWaveCleared()
-    {
-        for (int i = aliveEnemies.Count - 1; i >= 0; i--)
-            if (aliveEnemies[i] == null) aliveEnemies.RemoveAt(i);
+                if (IsTooCloseToPlayer(candidate.position)) continue;
+                if (IsTooCloseToAlive(candidate.position)) continue;
+
+                return candidate;
+            }
+
+            return null;
+        }
+
+        bool IsTooCloseToPlayer(Vector3 pos)
+        {
+            Player p = Player.Instance;
+            if (p == null) return false;
+            return Vector2.Distance(pos, p.transform.position) < minDistanceFromPlayer;
+        }
+
+        bool IsTooCloseToAlive(Vector3 pos)
+        {
+            foreach (GameObject e in aliveEnemies)
+            {
+                if (e == null) 
+                    continue;
+
+                if (Vector2.Distance(pos, e.transform.position) < minSpawnSpacing)
+                    return true;
+            }
+
+            return false;
+        }
+
+        bool IsWaveCleared()
+        {
+            for (int i = aliveEnemies.Count - 1; i >= 0; i--)
+                if (aliveEnemies[i] == null) aliveEnemies.RemoveAt(i);
         
-        return aliveEnemies.Count == 0;
+            return aliveEnemies.Count == 0;
+        }
     }
 }

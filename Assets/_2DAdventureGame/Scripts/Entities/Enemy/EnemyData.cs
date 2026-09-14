@@ -1,14 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "Game/Enemy Data")]
-public class EnemyData : ScriptableObject
+namespace AdventureGame.Entities.Enemy
 {
-    [Header("Health")]
-    public int maxHealth;
+    [CreateAssetMenu(fileName = "EnemyData", menuName = "Game/Enemy Data")]
+    public class EnemyData : ScriptableObject
+    {
+        [Header("Health")]
+        public int maxHealth;
 
-    [Header("Movement")]
-    public float speed;
+        [Header("Movement")]
+        public float speed;
 
-    [Header("Combat")]
-    public int contactDamage = 1;
+        [Header("Combat")]
+        public int contactDamage = 1;
+    }
 }

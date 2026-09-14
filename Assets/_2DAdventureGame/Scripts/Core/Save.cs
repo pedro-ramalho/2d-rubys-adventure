@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using AdventureGame.Core.Quest;
 
-[Serializable]
-public class Save
+namespace AdventureGame.Core
 {
-    public int version;
-    public string sceneName;
-    public int playerHealth;
-    public List<QuestSaveData> quests;
+    [Serializable]
+    public class Save
+    {
+        public int version;
+        public string sceneName;
+        public int playerHealth;
+        public List<QuestSaveData> quests;
+    }
 }

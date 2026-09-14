@@ -1,14 +1,18 @@
+using AdventureGame.Core.Managers;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "QuestData", menuName = "Game/Quest")]
-public class QuestData : ScriptableObject
+namespace AdventureGame.Core.Quest
 {
-    public string id;
-    public string description;
+    [CreateAssetMenu(fileName = "QuestData", menuName = "Game/Quest")]
+    public class QuestData : ScriptableObject
+    {
+        public string id;
+        public string description;
 
-    public int targetCount;
+        public int targetCount;
 
-    public AbilityFlag unlockOnAccept = AbilityFlag.None;
+        public AbilityFlag unlockOnAccept = AbilityFlag.None;
 
-    public AudioClip backgroundTrack;
+        public AudioClip backgroundTrack;
+    }
 }

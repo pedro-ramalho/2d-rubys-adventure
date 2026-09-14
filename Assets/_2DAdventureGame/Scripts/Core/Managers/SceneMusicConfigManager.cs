@@ -1,20 +1,24 @@
+using AdventureGame.Core.Quest;
 using UnityEngine;
 
-public class SceneMusicConfigManager : MonoBehaviour
+namespace AdventureGame.Core.Managers
 {
-    public static SceneMusicConfigManager Instance { get; private set; }
-
-    [SerializeField] private AudioClip defaultTrack;
-
-    public AudioClip DefaultTrack => defaultTrack;
-
-    void Awake() => Instance = this;
-
-    void OnDestroy()
+    public class SceneMusicConfigManager : MonoBehaviour
     {
-        if (Instance == this) 
-            Instance = null;    
-    }
+        public static SceneMusicConfigManager Instance { get; private set; }
 
-    void Start() => QuestMusic.Refresh();
+        [SerializeField] private AudioClip defaultTrack;
+
+        public AudioClip DefaultTrack => defaultTrack;
+
+        void Awake() => Instance = this;
+
+        void OnDestroy()
+        {
+            if (Instance == this) 
+                Instance = null;    
+        }
+
+        void Start() => QuestMusic.Refresh();
+    }
 }
