@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Projects\\\\2D Roguelike\\\\Assets\\\\Scripts\" -Recurse -Directory | ForEach-Object { $_.FullName -replace [regex]::Escape\\(\"C:\\\\Projects\\\\2D Roguelike\\\\Assets\\\\Scripts\"\\), \"\" } | Sort-Object)",
+      "Bash(Select-String -Pattern \"public string|public AudioClip\" -CaseSensitive -SimpleMatch)"
+    ]
+  }
+}
