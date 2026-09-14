@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5520857734429561620}
   - component: {fileID: 7430181832025918656}
-  - component: {fileID: 6224880180635722400}
   - component: {fileID: 811901220543717376}
   - component: {fileID: 5816172660457709865}
+  - component: {fileID: 6224880180635722400}
   - component: {fileID: 8754377893997399698}
-  - component: {fileID: 1618699171719920485}
+  - component: {fileID: 4646730723322058593}
   m_Layer: 0
   m_Name: Kiwi
   m_TagString: Untagged
@@ -97,20 +97,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &6224880180635722400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6947501844073881673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a292d1066a6a5144aa5a19a01d99d958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthCollectible
-  collectibleClip: {fileID: 8300000, guid: 173a14cf06354c643b46b235f2a4f974, type: 3}
-  healAmount: 1
 --- !u!61 &811901220543717376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -179,6 +165,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6224880180635722400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947501844073881673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a292d1066a6a5144aa5a19a01d99d958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthCollectible
+  m_CollectibleClip: {fileID: 8300000, guid: 173a14cf06354c643b46b235f2a4f974, type: 3}
+  m_HealAmount: 1
 --- !u!114 &8754377893997399698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,9 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  type: 0
-  reportTag: Kiwi
---- !u!114 &1618699171719920485
+  m_QuestData: {fileID: 0}
+  m_WorldId: 
+--- !u!114 &4646730723322058593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,13 +202,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6947501844073881673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c396b2add69ab42a3e2ba9c24c18f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6eceb279a7972d940838abfbffea9b12, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QuestBinding
-  boundQuest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
-  activateOnQuestAccept: 1
-  deactivateOnComplete: 0
-  interactables: []
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.Core.Quest.QuestPhaseVisibilityGate
+  m_Quest: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
+  m_ShowFrom: 1
 --- !u!1001 &5343465772426597669
 PrefabInstance:
   m_ObjectHideFlags: 0

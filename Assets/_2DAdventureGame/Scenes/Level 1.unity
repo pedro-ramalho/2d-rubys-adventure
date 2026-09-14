@@ -948,6 +948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 48257775}
+  - component: {fileID: 48257776}
   m_Layer: 0
   m_Name: Decorations
   m_TagString: Untagged
@@ -982,6 +983,20 @@ Transform:
   - {fileID: 59159637}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &48257776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48257774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af886e9653b455049afd6a4d2febd6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.Core.Quest.PhaseGatedActivator
+  m_Quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
+  m_Target: {fileID: 59159636}
 --- !u!1 &59159636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,7 +1500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7defd65e1bb7b3e4abb3342171f59bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMusicConfigManager
-  defaultTrack: {fileID: 8300000, guid: 00ed200faa45d024dba3c47cb1db49ab, type: 3}
+  m_DefaultTrack: {fileID: 8300000, guid: 00ed200faa45d024dba3c47cb1db49ab, type: 3}
 --- !u!4 &108008129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2324887274116712341, guid: 0f5547b27424469469effdb43a11811a,
@@ -4008,7 +4023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68dc5fe6796b57c4a95ea7329cd8453a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  dialogues:
+  m_DialogueLines:
   - {fileID: 11400000, guid: 715986190625f844386144d329f7ab11, type: 2}
 --- !u!1001 &343054088
 PrefabInstance:
@@ -12894,8 +12909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d22addf5ba33344586adddc58896a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountedQuestController
-  data: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
-  completionSfx: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
+  m_QuestData: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
 --- !u!1 &1039706586
 GameObject:
   m_ObjectHideFlags: 0
@@ -12940,8 +12954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d22addf5ba33344586adddc58896a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountedQuestController
-  data: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
-  completionSfx: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
+  m_QuestData: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
 --- !u!1001 &1048376030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14393,8 +14406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
-  worldId: l1q2.robot.2
+  m_QuestData: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  m_WorldId: l1q2.robot.2
 --- !u!1001 &1182738465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15083,8 +15096,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
-  worldId: l1q2.robot.1
+  m_QuestData: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  m_WorldId: l1q2.robot.1
 --- !u!1001 &1235617655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15506,8 +15519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
-  worldId: l1q2.robot.4
+  m_QuestData: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  m_WorldId: l1q2.robot.4
 --- !u!1001 &1318164685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19880,8 +19893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
-  worldId: l1q2.robot.3
+  m_QuestData: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  m_WorldId: l1q2.robot.3
 --- !u!1 &1343173741
 GameObject:
   m_ObjectHideFlags: 0
@@ -20301,7 +20314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68dc5fe6796b57c4a95ea7329cd8453a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  dialogues:
+  m_DialogueLines:
   - {fileID: 11400000, guid: 4f10cc39e4116ed469b7b07b56056577, type: 2}
 --- !u!1001 &1396050039
 PrefabInstance:
@@ -28836,9 +28849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af886e9653b455049afd6a4d2febd6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhaseGatedActivator
-  quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
-  target: {fileID: 59159636}
-  activateOnConclude: 1
+  m_Quest: {fileID: 0}
+  m_Target: {fileID: 0}
 --- !u!114 &1954623967 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3469440624432549009, guid: 51e1c83b411afaf4fb8c15695f2ce000,
@@ -30588,7 +30600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096d6f6087495f24ea7459d2eb23f376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestTrackerManager
-  trackerDocument: {fileID: 2132114640}
+  m_TrackerUiDocument: {fileID: 2132114640}
 --- !u!1001 &2145908368
 PrefabInstance:
   m_ObjectHideFlags: 0
