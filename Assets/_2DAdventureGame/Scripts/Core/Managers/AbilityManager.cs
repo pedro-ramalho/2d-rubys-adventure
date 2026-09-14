@@ -1,4 +1,5 @@
 using System;
+using AdventureGame.Core.Quest;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -26,9 +27,23 @@ namespace AdventureGame.Core.Managers
         {
             base.Awake();
 
-            if (Instance != this) return;
+            if (Instance != this) 
+                return;
+
+            QuestController.OnAnyPhaseChanged += OnQuestPhaseChanged;
 
             m_UnlockedAbilities = m_StartingAbilities;
+        }
+
+        void OnQuestPhaseChanged(QuestController quest)
+        {
+            if (quest.Phase != QuestPhase.During)
+                return;
+
+            if (quest.Data == null)
+                return;
+
+            Unlock(quest.Data.UnlockOnAccept);
         }
 
         public void Unlock(AbilityFlag abilities) => m_UnlockedAbilities |= abilities;
