@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using AdventureGame.Core.Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -20,6 +19,8 @@ namespace AdventureGame.Core.Quest
         public event Action<QuestController> OnPhaseChanged;
         public event Action<QuestController> OnConcluded;
         public event Action<QuestController> OnEpilogueFinished;
+
+        public static event Action<QuestController> OnAnyPhaseChanged;
 
         protected virtual void Awake()
         {
@@ -46,7 +47,6 @@ namespace AdventureGame.Core.Quest
                 return;
 
             SetPhase(QuestPhase.During);
-            ApplyUnlock();
         
             QuestMusic.Refresh();
         }
@@ -88,9 +88,6 @@ namespace AdventureGame.Core.Quest
         {
             RestoreData(saved);
             SetPhase(saved.Phase);
-
-            if (saved.Phase != QuestPhase.Before) 
-                ApplyUnlock();
         }
 
         protected virtual QuestPhase CapturePhase() => Phase;
@@ -103,13 +100,9 @@ namespace AdventureGame.Core.Quest
                 return;
         
             Phase = next;
-            OnPhaseChanged?.Invoke(this);
-        }
 
-        protected void ApplyUnlock()
-        {
-            if (AbilityManager.Instance != null)
-                AbilityManager.Instance.Unlock(m_QuestData.UnlockOnAccept);
+            OnPhaseChanged?.Invoke(this);
+            OnAnyPhaseChanged?.Invoke(this);
         }
     }
 }
