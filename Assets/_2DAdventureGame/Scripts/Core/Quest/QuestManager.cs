@@ -20,6 +20,9 @@ namespace AdventureGame.Core.Quests
             if (quest == null || quest.Data == null || string.IsNullOrEmpty(quest.Data.Id))
                 return;
 
+            if (m_Quests.TryGetValue(quest.Data.Id, out Quest existing) && existing != quest)
+                Debug.LogWarning($"[QuestManager] Duplicate quest id '{quest.Data.Id}' on '{quest.name}' overwrites '{existing.name}'.");
+
             m_Quests[quest.Data.Id] = quest;
         }
 
@@ -32,11 +35,8 @@ namespace AdventureGame.Core.Quests
                 m_Quests.Remove(quest.Data.Id);
         }
 
-        public Quest Get(string questId) =>
-            !string.IsNullOrEmpty(questId) && m_Quests.TryGetValue(questId, out Quest q) ? q : null;
-
         public Quest Get(QuestData questData) =>
-            questData != null ? Get(questData.Id) : null;
+            questData != null && m_Quests.TryGetValue(questData.Id, out Quest q) ? q : null;
 
         public IEnumerable<Quest> All => m_Quests.Values;
 

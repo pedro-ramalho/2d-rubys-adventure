@@ -50,7 +50,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States
         public override void OnProjectileHit(PatrolRobot owner)
         {
             QuestReporter reporter = owner.GetComponent<QuestReporter>();
-            if (reporter != null && reporter.Quest != null && !reporter.CanReport()) 
+            if (reporter != null && reporter.Data != null && !reporter.CanReport())
                 return;
 
             owner.ChangeState(owner.FixedState);

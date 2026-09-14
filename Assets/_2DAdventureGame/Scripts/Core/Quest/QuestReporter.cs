@@ -11,8 +11,7 @@ namespace AdventureGame.Core.Quests
         [FormerlySerializedAs("worldId")]
         [SerializeField] private string m_WorldId;
 
-        public QuestData Quest => m_QuestData;
-        public string WorldId => m_WorldId;
+        public QuestData Data => m_QuestData;
 
         public void Report()
         {
