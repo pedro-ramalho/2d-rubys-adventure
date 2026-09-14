@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AdventureGame.Core.Dialogue;
 using AdventureGame.Core.Quests;
@@ -16,6 +17,9 @@ namespace AdventureGame.Entities.NPC
         private QuestDialogue m_CurrentDialogue;
         private int lineIndex;
 
+        public static event Action<QuestData> OnEpilogueStarted;
+        public static event Action<QuestData> OnEpilogueEnded;
+
         public void Talk()
         {
             if (m_CurrentDialoguePhase == null)
@@ -33,17 +37,13 @@ namespace AdventureGame.Entities.NPC
                     }
                 }
 
-                if (m_CurrentDialoguePhase == null) 
+                if (m_CurrentDialoguePhase == null)
                     return;
-            
+
                 lineIndex = 0;
 
                 if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
-                {
-                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
-                    if (quest != null)
-                        quest.Conclude();
-                }
+                    OnEpilogueStarted?.Invoke(m_CurrentDialogue.Quest);
             }
 
             DialoguePresenter.Instance.DisplayDialogueWithLine(m_CurrentDialoguePhase.Lines[lineIndex++], transform);
@@ -58,11 +58,7 @@ namespace AdventureGame.Entities.NPC
                 }
 
                 if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
-                {
-                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
-                    if (quest != null)
-                        quest.EpilogueFinished();
-                }
+                    OnEpilogueEnded?.Invoke(m_CurrentDialogue.Quest);
 
                 m_CurrentDialoguePhase.OnExhausted?.Invoke();
                 m_CurrentDialoguePhase = null;
