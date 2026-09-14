@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   Id: L1Q1
   Description: Find the missing merchandise.
+  CompletionMode: 1
   TargetCount: 6
   UnlockOnAccept: 1
   BackgroundTrack: {fileID: 8300000, guid: 5a6826292d457644abaaee2ebfd1ff43, type: 3}

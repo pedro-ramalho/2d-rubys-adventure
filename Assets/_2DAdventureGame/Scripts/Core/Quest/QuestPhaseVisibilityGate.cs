@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AdventureGame.Core.Quest
+namespace AdventureGame.Core.Quests
 {
     public class QuestPhaseVisibilityGate : MonoBehaviour
     {
@@ -18,7 +18,7 @@ namespace AdventureGame.Core.Quest
 
             SetVisible(false);
 
-            QuestController.OnAnyPhaseChanged += OnQuestPhaseChanged;
+            Quest.OnAnyPhaseChanged += OnQuestPhaseChanged;
         }
 
         void Start()
@@ -26,20 +26,20 @@ namespace AdventureGame.Core.Quest
             if (QuestManager.Instance == null)
                 return;
 
-            QuestController controller = QuestManager.Instance.Get(m_Quest);
-            if (controller != null && HasReached(controller.Phase))
+            Quest quest = QuestManager.Instance.Get(m_Quest);
+            if (quest != null && HasReached(quest.Phase))
                 SetVisible(true);
         }
 
         void OnDestroy()
-            => QuestController.OnAnyPhaseChanged -= OnQuestPhaseChanged;
+            => Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
 
-        void OnQuestPhaseChanged(QuestController controller)
+        void OnQuestPhaseChanged(Quest quest)
         {
-            if (controller.Data != m_Quest)
+            if (quest.Data != m_Quest)
                 return;
 
-            if (HasReached(controller.Phase))
+            if (HasReached(quest.Phase))
                 SetVisible(true);
         }
 

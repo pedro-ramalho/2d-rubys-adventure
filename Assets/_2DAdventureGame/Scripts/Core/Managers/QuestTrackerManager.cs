@@ -1,4 +1,4 @@
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using AdventureGame.Core.Scene;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,10 +18,10 @@ namespace AdventureGame.Core.Managers
         private Label m_ProgressLabel;
 
         private bool m_IsOpen;
-        private QuestController m_CompletionPending;
+        private Quest m_CompletionPending;
 
         private int m_LastCount = -1;
-        private QuestController m_LastTrackedController;
+        private Quest m_LastTracked;
 
         private const string k_CompletionMessage = "Quest complete! Return and speak with the NPC.";
 
@@ -39,10 +39,10 @@ namespace AdventureGame.Core.Managers
             m_ProgressLabel = root.Q<Label>("Progress");
 
             if (QuestManager.Instance != null)
-                foreach (QuestController c in QuestManager.Instance.All)
+                foreach (Quest q in QuestManager.Instance.All)
                 {
-                    c.OnPhaseChanged += HandlePhaseChanged;
-                    c.OnConcluded += HandleConcluded;
+                    q.OnPhaseChanged += HandlePhaseChanged;
+                    q.OnConcluded += HandleConcluded;
                 }
 
             SetVisible(false);
@@ -51,31 +51,31 @@ namespace AdventureGame.Core.Managers
         void OnDestroy()
         {
             if (QuestManager.Instance != null)
-                foreach (QuestController c in QuestManager.Instance.All)
+                foreach (Quest q in QuestManager.Instance.All)
                 {
-                    c.OnPhaseChanged -= HandlePhaseChanged;
-                    c.OnConcluded -= HandleConcluded;
+                    q.OnPhaseChanged -= HandlePhaseChanged;
+                    q.OnConcluded -= HandleConcluded;
                 }
         }
 
-        void HandlePhaseChanged(QuestController c)
+        void HandlePhaseChanged(Quest q)
         {
-            if (c.Phase == QuestPhase.After)
+            if (q.Phase == QuestPhase.After)
             {
-                m_CompletionPending = c;
+                m_CompletionPending = q;
 
                 Refresh();
             }
         }
 
-        void HandleConcluded(QuestController c)
+        void HandleConcluded(Quest q)
         {
-            if (c != m_CompletionPending) 
+            if (q != m_CompletionPending)
                 return;
-        
+
             m_CompletionPending = null;
             m_IsOpen = false;
-        
+
             Refresh();
         }
 
@@ -120,18 +120,18 @@ namespace AdventureGame.Core.Managers
                 return;
             }
 
-            CountedQuestController tracked = FindActiveCounted();
+            Quest tracked = FindActiveCounted();
             if (!m_IsOpen || tracked == null)
             {
                 SetVisible(false);
-            
+
                 return;
             }
 
-            if (m_DescriptionLabel != null && tracked != m_LastTrackedController)
+            if (m_DescriptionLabel != null && tracked != m_LastTracked)
             {
                 m_DescriptionLabel.text = tracked.Data.Description;
-                m_LastTrackedController = tracked;
+                m_LastTracked = tracked;
             }
 
             if (m_ProgressLabel != null && tracked.Count != m_LastCount)
@@ -147,15 +147,15 @@ namespace AdventureGame.Core.Managers
             SetVisible(true);
         }
 
-        CountedQuestController FindActiveCounted()
+        Quest FindActiveCounted()
         {
-            if (QuestManager.Instance == null) 
+            if (QuestManager.Instance == null)
                 return null;
-        
-            foreach (QuestController c in QuestManager.Instance.All)
-                if (c.Phase == QuestPhase.During && c is CountedQuestController counted)
-                    return counted;
-        
+
+            foreach (Quest q in QuestManager.Instance.All)
+                if (q.Phase == QuestPhase.During && q.Data != null && q.Data.CompletionMode == QuestCompletionMode.Counted)
+                    return q;
+
             return null;
         }
 

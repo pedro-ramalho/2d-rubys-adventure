@@ -1,4 +1,4 @@
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using AdventureGame.Entities.Player;
 using UnityEngine;
 using UnityEngine.Serialization;

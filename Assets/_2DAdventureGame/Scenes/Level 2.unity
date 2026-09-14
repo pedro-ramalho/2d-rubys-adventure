@@ -7605,7 +7605,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986215918}
-  - component: {fileID: 1986215919}
+  - component: {fileID: 1986215920}
   m_Layer: 0
   m_Name: L2Q1 Controller
   m_TagString: Untagged
@@ -7628,7 +7628,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1375190241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1986215919
+--- !u!114 &1986215920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7637,9 +7637,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1986215917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c3aca5dcb714c43b1dd7a9ba6bc378, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d22addf5ba33344586adddc58896a16, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WaveQuestController
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.Core.Quest.CountedQuestController
   m_QuestData: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
 --- !u!1 &2012837021
 GameObject:
