@@ -21,8 +21,6 @@ namespace AdventureGame.Core.Quests
         public int Target => m_QuestData != null ? m_QuestData.TargetCount : 0;
 
         public event Action<Quest> OnPhaseChanged;
-        public event Action<Quest> OnConcluded;
-        public event Action<Quest> OnEpilogueFinished;
 
         public static event Action<Quest> OnAnyPhaseChanged;
 
@@ -58,22 +56,6 @@ namespace AdventureGame.Core.Quests
                 return;
 
             SetPhase(QuestPhase.After);
-        }
-
-        public void Conclude()
-        {
-            if (Phase != QuestPhase.After)
-                return;
-
-            OnConcluded?.Invoke(this);
-        }
-
-        public void EpilogueFinished()
-        {
-            if (Phase != QuestPhase.After)
-                return;
-
-            OnEpilogueFinished?.Invoke(this);
         }
 
         public bool IsConsumed(string worldId) =>

@@ -1,5 +1,6 @@
 using AdventureGame.Core.Quests;
 using AdventureGame.Core.Scene;
+using AdventureGame.Entities.NPC;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -18,7 +19,7 @@ namespace AdventureGame.Core.Managers
         private Label m_ProgressLabel;
 
         private bool m_IsOpen;
-        private Quest m_CompletionPending;
+        private QuestData m_CompletionPending;
 
         private int m_LastCount = -1;
         private Quest m_LastTracked;
@@ -40,10 +41,9 @@ namespace AdventureGame.Core.Managers
 
             if (QuestManager.Instance != null)
                 foreach (Quest q in QuestManager.Instance.All)
-                {
                     q.OnPhaseChanged += HandlePhaseChanged;
-                    q.OnConcluded += HandleConcluded;
-                }
+
+            NPC.OnEpilogueStarted += HandleEpilogueStarted;
 
             SetVisible(false);
         }
@@ -52,25 +52,24 @@ namespace AdventureGame.Core.Managers
         {
             if (QuestManager.Instance != null)
                 foreach (Quest q in QuestManager.Instance.All)
-                {
                     q.OnPhaseChanged -= HandlePhaseChanged;
-                    q.OnConcluded -= HandleConcluded;
-                }
+
+            NPC.OnEpilogueStarted -= HandleEpilogueStarted;
         }
 
         void HandlePhaseChanged(Quest q)
         {
             if (q.Phase == QuestPhase.After)
             {
-                m_CompletionPending = q;
+                m_CompletionPending = q.Data;
 
                 Refresh();
             }
         }
 
-        void HandleConcluded(Quest q)
+        void HandleEpilogueStarted(QuestData data)
         {
-            if (q != m_CompletionPending)
+            if (data != m_CompletionPending)
                 return;
 
             m_CompletionPending = null;
