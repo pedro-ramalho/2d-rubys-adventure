@@ -1,10 +1,12 @@
 using AdventureGame.Core.Quests;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace AdventureGame.Entities.NPC
 {
     [RequireComponent(typeof(Marshmallow))]
-    public class MarshmallowCoreagrapher : MonoBehaviour
+    [MovedFrom(autoUpdateAPI:true, sourceClassName:"MarshmallowChoreagrapher")]
+    public class MarshmallowChoreographer : MonoBehaviour
     {
         [SerializeField] private QuestData m_QuestData;
 
@@ -15,6 +17,8 @@ namespace AdventureGame.Entities.NPC
 
         void Start()
         {
+            NPC.OnEpilogueEnded += HandleEpilogueEnded;
+
             if (QuestManager.Instance == null)
                 return;
 
@@ -23,26 +27,28 @@ namespace AdventureGame.Entities.NPC
                 return;
 
             m_Quest.OnPhaseChanged += OnQuestPhaseChanged;
-            m_Quest.OnEpilogueFinished += OnQuestEpilogueFinished;
         }
 
         void OnDestroy()
         {
+            NPC.OnEpilogueEnded -= HandleEpilogueEnded;
+
             if (m_Quest != null)
-            {
                 m_Quest.OnPhaseChanged -= OnQuestPhaseChanged;
-                m_Quest.OnEpilogueFinished -= OnQuestEpilogueFinished;
-            }
         }
 
-        void OnQuestPhaseChanged(Quest controller)
+        void OnQuestPhaseChanged(Quest quest)
         {
-            if (controller.Phase == QuestPhase.During)
+            if (quest.Phase == QuestPhase.During)
                 m_Marshmallow.WalkToExit();
-            else if (controller.Phase == QuestPhase.After)
+            else if (quest.Phase == QuestPhase.After)
                 m_Marshmallow.WalkBack();
         }
 
-        void OnQuestEpilogueFinished(Quest _) => m_Marshmallow.DisableCollisions();
+        void HandleEpilogueEnded(QuestData data)
+        {
+            if (data == m_QuestData)
+                m_Marshmallow.DisableCollisions();
+        }
     }
 }
