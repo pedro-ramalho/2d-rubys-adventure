@@ -1,34 +1,39 @@
+using AdventureGame.Core.Quest;
+using AdventureGame.Entities.Player;
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+namespace AdventureGame.Environment.Collectibles
 {
-    [SerializeField] protected AudioClip collectibleClip;
-    protected virtual void ApplyEffect(Player player) { }
-    protected virtual void OnEffectApplied() => Destroy(gameObject);
-
-    void Start()
+    public class Collectible : MonoBehaviour
     {
-        QuestReporter reporter = GetComponent<QuestReporter>();
-        if (reporter != null && reporter.IsConsumed())
-            gameObject.SetActive(false);
-    }
+        [SerializeField] protected AudioClip collectibleClip;
+        protected virtual void ApplyEffect(Player player) { }
+        protected virtual void OnEffectApplied() => Destroy(gameObject);
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.TryGetComponent(out Player player)) 
-            return;
+        void Start()
+        {
+            QuestReporter reporter = GetComponent<QuestReporter>();
+            if (reporter != null && reporter.IsConsumed())
+                gameObject.SetActive(false);
+        }
 
-        QuestReporter reporter = GetComponent<QuestReporter>();
-        if (reporter != null && reporter.Quest != null && !reporter.CanReport()) 
-            return;
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.TryGetComponent(out Player player)) 
+                return;
 
-        ApplyEffect(player);
+            QuestReporter reporter = GetComponent<QuestReporter>();
+            if (reporter != null && reporter.Quest != null && !reporter.CanReport()) 
+                return;
 
-        if (collectibleClip != null)
-            player.OneShotSource.PlayOneShot(collectibleClip);
+            ApplyEffect(player);
 
-        OnEffectApplied();
-        if (reporter != null) 
-            reporter.Report();
+            if (collectibleClip != null)
+                player.OneShotSource.PlayOneShot(collectibleClip);
+
+            OnEffectApplied();
+            if (reporter != null) 
+                reporter.Report();
+        }
     }
 }

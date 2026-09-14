@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class Wave
+namespace AdventureGame.Core.Wave
 {
-    public GameObject enemyPrefab;
-    public int enemyCount;
+    [Serializable]
+    public class Wave
+    {
+        public GameObject enemyPrefab;
+        public int enemyCount;
+    }
 }

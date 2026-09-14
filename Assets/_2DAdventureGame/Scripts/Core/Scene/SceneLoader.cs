@@ -1,14 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SceneLoader", menuName = "Game/Scene Loader")]
-public class SceneLoader : ScriptableObject
+namespace AdventureGame.Core.Scene
 {
-    [SerializeField] private string sceneName;
-    [SerializeField] private float preTransitionDelay = 4f;
-
-    public void Load()
+    [CreateAssetMenu(fileName = "SceneLoader", menuName = "Game/Scene Loader")]
+    public class SceneLoader : ScriptableObject
     {
-        if (SceneTransitioner.Instance != null)
-            SceneTransitioner.Instance.LoadSceneWithCrossfade(sceneName, preTransitionDelay);
+        [SerializeField] private string sceneName;
+        [SerializeField] private float preTransitionDelay = 4f;
+
+        public void Load()
+        {
+            if (SceneTransitioner.Instance != null)
+                SceneTransitioner.Instance.LoadSceneWithCrossfade(sceneName, preTransitionDelay);
+        }
     }
 }

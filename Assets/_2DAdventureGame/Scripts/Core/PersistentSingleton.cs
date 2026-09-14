@@ -1,28 +1,31 @@
 using UnityEngine;
 
-public abstract class PersistentSingleton<T> : MonoBehaviour where T : PersistentSingleton<T>
+namespace AdventureGame.Core
 {
-    public static T Instance { get; private set; }
-
-    protected virtual void Awake()
+    public abstract class PersistentSingleton<T> : MonoBehaviour where T : PersistentSingleton<T>
     {
-        if (Instance != null && Instance != this)
+        public static T Instance { get; private set; }
+
+        protected virtual void Awake()
         {
-            Destroy(gameObject);
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
             
-            return;
+                return;
+            }
+
+            Instance = (T)this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
         }
 
-        Instance = (T)this;
-        transform.SetParent(null);
-        DontDestroyOnLoad(gameObject);
-    }
-
-    protected static void BootstrapIfMissing()
-    {
-        if (Instance != null) 
-            return;
+        protected static void BootstrapIfMissing()
+        {
+            if (Instance != null) 
+                return;
         
-        new GameObject(typeof(T).Name).AddComponent<T>();
+            new GameObject(typeof(T).Name).AddComponent<T>();
+        }
     }
 }

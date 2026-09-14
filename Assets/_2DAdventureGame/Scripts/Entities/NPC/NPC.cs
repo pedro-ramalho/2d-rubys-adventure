@@ -1,65 +1,71 @@
 using System.Collections.Generic;
+using AdventureGame.Core.Dialogue;
+using AdventureGame.Core.Quest;
+using AdventureGame.UI;
 using UnityEngine;
 
-public class NPC : MonoBehaviour
+namespace AdventureGame.Entities.NPC
 {
-    [SerializeField] private List<QuestDialogue> dialogues;
-
-    private DialoguePhase currentPhase;
-    private QuestDialogue currentDialogue;
-    private int lineIndex;
-
-    public void Talk()
+    public class NPC : MonoBehaviour
     {
-        if (currentPhase == null)
-        {
-            foreach (QuestDialogue dialogue in dialogues)
-            {
-                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.quest) : null;
-                DialoguePhase phase = dialogue.Pick(controller);
-                if (phase != null)
-                {
-                    currentDialogue = dialogue;
-                    currentPhase = phase;
+        [SerializeField] private List<QuestDialogue> dialogues;
 
-                    break;
+        private DialoguePhase currentPhase;
+        private QuestDialogue currentDialogue;
+        private int lineIndex;
+
+        public void Talk()
+        {
+            if (currentPhase == null)
+            {
+                foreach (QuestDialogue dialogue in dialogues)
+                {
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.quest) : null;
+                    DialoguePhase phase = dialogue.Pick(controller);
+                    if (phase != null)
+                    {
+                        currentDialogue = dialogue;
+                        currentPhase = phase;
+
+                        break;
+                    }
+                }
+
+                if (currentPhase == null) 
+                    return;
+            
+                lineIndex = 0;
+
+                if (currentDialogue.IsAfterPhase(currentPhase))
+                {
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
+                    if (controller != null) 
+                        controller.Conclude();
                 }
             }
 
-            if (currentPhase == null) 
-                return;
-            
-            lineIndex = 0;
+            UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++], transform);
 
-            if (currentDialogue.IsAfterPhase(currentPhase))
+            if (lineIndex >= currentPhase.lines.Count)
             {
-                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
-                if (controller != null) 
-                    controller.Conclude();
+                if (currentPhase.questToGrantAfter != null)
+                {
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentPhase.questToGrantAfter) : null;
+                    if (controller != null) 
+                        controller.Accept();
+                }
+
+                if (currentDialogue.IsAfterPhase(currentPhase))
+                {
+                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
+                    if (controller != null) 
+                        controller.EpilogueFinished();
+                }
+
+                currentPhase.onExhausted?.Invoke();
+                currentPhase = null;
+                currentDialogue = null;
             }
-        }
-
-        UIHandler.Instance.DisplayDialogueWithLine(currentPhase.lines[lineIndex++], transform);
-
-        if (lineIndex >= currentPhase.lines.Count)
-        {
-            if (currentPhase.questToGrantAfter != null)
-            {
-                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentPhase.questToGrantAfter) : null;
-                if (controller != null) 
-                    controller.Accept();
-            }
-
-            if (currentDialogue.IsAfterPhase(currentPhase))
-            {
-                QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(currentDialogue.quest) : null;
-                if (controller != null) 
-                    controller.EpilogueFinished();
-            }
-
-            currentPhase.onExhausted?.Invoke();
-            currentPhase = null;
-            currentDialogue = null;
         }
     }
 }

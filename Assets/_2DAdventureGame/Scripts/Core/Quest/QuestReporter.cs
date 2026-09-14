@@ -1,33 +1,36 @@
 using UnityEngine;
 
-public class QuestReporter : MonoBehaviour
+namespace AdventureGame.Core.Quest
 {
-    [SerializeField] private QuestData quest;
-
-    [SerializeField] private string worldId;
-
-    public QuestData Quest => quest;
-    public string WorldId => worldId;
-
-    public void Report()
+    public class QuestReporter : MonoBehaviour
     {
-        CountedQuestController controller = GetCountedController();
-        if (controller != null) 
-            controller.TryReport(worldId);
-    }
+        [SerializeField] private QuestData quest;
 
-    public bool CanReport()
-    {
-        CountedQuestController controller = GetCountedController();
-        return controller != null && controller.CanReport(worldId);
-    }
+        [SerializeField] private string worldId;
 
-    public bool IsConsumed()
-    {
-        CountedQuestController controller = GetCountedController();
-        return controller != null && controller.IsConsumed(worldId);
-    }
+        public QuestData Quest => quest;
+        public string WorldId => worldId;
 
-    CountedQuestController GetCountedController() =>
-        QuestManager.Instance != null ? QuestManager.Instance.Get(quest) as CountedQuestController : null;
+        public void Report()
+        {
+            CountedQuestController controller = GetCountedController();
+            if (controller != null) 
+                controller.TryReport(worldId);
+        }
+
+        public bool CanReport()
+        {
+            CountedQuestController controller = GetCountedController();
+            return controller != null && controller.CanReport(worldId);
+        }
+
+        public bool IsConsumed()
+        {
+            CountedQuestController controller = GetCountedController();
+            return controller != null && controller.IsConsumed(worldId);
+        }
+
+        CountedQuestController GetCountedController() =>
+            QuestManager.Instance != null ? QuestManager.Instance.Get(quest) as CountedQuestController : null;
+    }
 }

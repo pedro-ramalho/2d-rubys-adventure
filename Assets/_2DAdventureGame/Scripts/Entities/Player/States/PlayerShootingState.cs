@@ -1,39 +1,44 @@
+using AdventureGame.Core.Constants;
+using AdventureGame.Environment.Projectiles;
 using UnityEngine;
 
-public class PlayerShootingState : PlayerState
+namespace AdventureGame.Entities.Player.States
 {
-    private float timer;
-
-    public override void Enter(Player owner)
+    public class PlayerShootingState : PlayerState
     {
-        timer = owner.Data.shootDuration;
-        owner.CurrentVelocity = Vector2.zero;
+        private float timer;
 
-        owner.Animator.SetTrigger(AnimatorHashes.Launch);
-        owner.OneShotSource.PlayOneShot(owner.LaunchClip);
-
-        GameObject projectileObj = Object.Instantiate(
-            owner.ProjectilePrefab,
-            owner.Rigidbody.position + Vector2.up * 0.5f,
-            Quaternion.identity
-        );
-
-        if (projectileObj.TryGetComponent(out Projectile projectile))
-            projectile.Launch(owner.MoveDirection, owner.Data.projectileLaunchForce);
-    }
-
-    public override void Update(Player owner)
-    {
-        timer -= Time.deltaTime;
-
-        if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f)
+        public override void Enter(Player owner)
         {
-            owner.ChangeState(owner.DashingState);
-            
-            return;
+            timer = owner.Data.shootDuration;
+            owner.CurrentVelocity = Vector2.zero;
+
+            owner.Animator.SetTrigger(AnimatorHashes.Launch);
+            owner.OneShotSource.PlayOneShot(owner.LaunchClip);
+
+            GameObject projectileObj = Object.Instantiate(
+                owner.ProjectilePrefab,
+                owner.Rigidbody.position + Vector2.up * 0.5f,
+                Quaternion.identity
+            );
+
+            if (projectileObj.TryGetComponent(out Projectile projectile))
+                projectile.Launch(owner.MoveDirection, owner.Data.projectileLaunchForce);
         }
 
-        if (timer <= 0f)
-            owner.ChangeState(owner.GroundedState);
+        public override void Update(Player owner)
+        {
+            timer -= Time.deltaTime;
+
+            if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f)
+            {
+                owner.ChangeState(owner.DashingState);
+            
+                return;
+            }
+
+            if (timer <= 0f)
+                owner.ChangeState(owner.GroundedState);
+        }
     }
 }

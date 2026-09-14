@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-[Serializable]
-public class QuestSaveData
+namespace AdventureGame.Core.Quest
 {
-    public string questId;
-    public QuestPhase phase;
-    public List<string> consumedIds;
+    [Serializable]
+    public class QuestSaveData
+    {
+        public string questId;
+        public QuestPhase phase;
+        public List<string> consumedIds;
+    }
 }

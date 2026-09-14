@@ -1,31 +1,34 @@
 using System;
 using UnityEngine;
 
-[Flags]
-public enum AbilityFlag
+namespace AdventureGame.Core.Managers
 {
-    None  = 0,
-    Dash  = 1 << 0,
-    Shoot = 1 << 1    
-}
-
-public class AbilityManager : PersistentSingleton<AbilityManager>
-{
-    [SerializeField] private AbilityFlag startingAbilities = AbilityFlag.None;
-
-    private AbilityFlag unlocked;
-
-    public bool CanDash  => (unlocked & AbilityFlag.Dash)  != 0;
-    public bool CanShoot => (unlocked & AbilityFlag.Shoot) != 0;
-
-    protected override void Awake()
+    [Flags]
+    public enum AbilityFlag
     {
-        base.Awake();
-
-        if (Instance != this) return;
-
-        unlocked = startingAbilities;
+        None  = 0,
+        Dash  = 1 << 0,
+        Shoot = 1 << 1    
     }
 
-    public void Unlock(AbilityFlag abilities) => unlocked |= abilities;
+    public class AbilityManager : PersistentSingleton<AbilityManager>
+    {
+        [SerializeField] private AbilityFlag startingAbilities = AbilityFlag.None;
+
+        private AbilityFlag unlocked;
+
+        public bool CanDash  => (unlocked & AbilityFlag.Dash)  != 0;
+        public bool CanShoot => (unlocked & AbilityFlag.Shoot) != 0;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (Instance != this) return;
+
+            unlocked = startingAbilities;
+        }
+
+        public void Unlock(AbilityFlag abilities) => unlocked |= abilities;
+    }
 }

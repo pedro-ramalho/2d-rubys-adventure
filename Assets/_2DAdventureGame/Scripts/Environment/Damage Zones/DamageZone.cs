@@ -1,10 +1,14 @@
+using AdventureGame.Entities;
 using UnityEngine;
 
-public class DamageZone : MonoBehaviour
+namespace AdventureGame.Environment.Damage_Zones
 {
-    void OnTriggerStay2D(Collider2D other)
+    public class DamageZone : MonoBehaviour
     {
-        if (other.TryGetComponent(out IDamageable damageable))
-            damageable.ApplyDamage(amount: 1);
+        void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out IDamageable damageable))
+                damageable.ApplyDamage(amount: 1);
+        }
     }
 }

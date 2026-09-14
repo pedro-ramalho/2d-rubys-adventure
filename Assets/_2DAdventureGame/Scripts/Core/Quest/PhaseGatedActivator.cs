@@ -1,52 +1,55 @@
 using UnityEngine;
 
-public class PhaseGatedActivator : MonoBehaviour
+namespace AdventureGame.Core.Quest
 {
-    [SerializeField] private QuestData quest;
-
-    [SerializeField] private GameObject target;
-
-    [SerializeField] private bool activateOnConclude = true;
-
-    private QuestController controller;
-
-    void Start()
+    public class PhaseGatedActivator : MonoBehaviour
     {
-        controller = QuestManager.Instance != null ? QuestManager.Instance.Get(quest) : null;
-        if (controller == null) 
-            return;
+        [SerializeField] private QuestData quest;
 
-        if (controller.Phase == QuestPhase.After)
+        [SerializeField] private GameObject target;
+
+        [SerializeField] private bool activateOnConclude = true;
+
+        private QuestController controller;
+
+        void Start()
         {
-            ActivateSilent();
+            controller = QuestManager.Instance != null ? QuestManager.Instance.Get(quest) : null;
+            if (controller == null) 
+                return;
 
-            return;
+            if (controller.Phase == QuestPhase.After)
+            {
+                ActivateSilent();
+
+                return;
+            }
+
+            if (activateOnConclude)
+                controller.OnConcluded += HandleConcluded;
         }
 
-        if (activateOnConclude)
-            controller.OnConcluded += HandleConcluded;
-    }
+        void OnDestroy()
+        {
+            if (controller != null)
+                controller.OnConcluded -= HandleConcluded;
+        }
 
-    void OnDestroy()
-    {
-        if (controller != null)
-            controller.OnConcluded -= HandleConcluded;
-    }
+        void HandleConcluded(QuestController _)
+        {
+            if (target != null) 
+                target.SetActive(true);
+        }
 
-    void HandleConcluded(QuestController _)
-    {
-        if (target != null) 
+        void ActivateSilent()
+        {
+            if (target == null) 
+                return;
+        
+            foreach (AudioSource source in target.GetComponentsInChildren<AudioSource>(true))
+                source.playOnAwake = false;
+        
             target.SetActive(true);
-    }
-
-    void ActivateSilent()
-    {
-        if (target == null) 
-            return;
-        
-        foreach (AudioSource source in target.GetComponentsInChildren<AudioSource>(true))
-            source.playOnAwake = false;
-        
-        target.SetActive(true);
+        }
     }
 }
