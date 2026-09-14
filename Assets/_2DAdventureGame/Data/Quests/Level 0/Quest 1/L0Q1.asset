@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f3e1dc421590b469119e7345035d6b, type: 3}
   m_Name: L0Q1
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  id: 1
-  description: Accept the kiwi given by the NPC.
-  targetCount: 1
-  unlockOnAccept: 0
-  backgroundTrack: {fileID: 0}
+  Id: L0Q1
+  Description: Accept the Kiwi.
+  TargetCount: 1
+  UnlockOnAccept: 0
+  BackgroundTrack: {fileID: 0}
