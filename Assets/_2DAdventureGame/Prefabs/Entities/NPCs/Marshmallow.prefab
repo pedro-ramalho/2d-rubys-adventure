@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8425838221108022396}
   - component: {fileID: 9051159507432964429}
   - component: {fileID: 1187377033261619839}
+  - component: {fileID: 4887686369985562816}
   m_Layer: 8
   m_Name: Marshmallow
   m_TagString: Untagged
@@ -202,9 +203,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca1db974e85c23a4992f1777f2ccc0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Marshmallow
-  dialogues:
+  m_DialogueLines:
   - {fileID: 11400000, guid: 69e659aed88e5c24aafa49ea0d6fe5a2, type: 2}
-  boundQuest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
-  exitPoint: {fileID: 0}
-  walkSpeed: 2
-  idleFacing: {x: 0, y: -1}
+  m_ExitPointPosition: {fileID: 0}
+  m_WalkSpeed: 2
+  m_IdleFacing: {x: 0, y: -1}
+--- !u!114 &4887686369985562816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607571905773036296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92cb6fb077fcead4e8b94205fe45e038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.Entities.NPC.MarshmallowCoreagrapher
+  m_QuestData: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
