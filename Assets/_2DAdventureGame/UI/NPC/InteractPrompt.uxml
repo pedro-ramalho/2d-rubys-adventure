@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ui="UnityEngine.UIElements"
+    xmlns:uie="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
+>
+    <ui:VisualElement name="Background" picking-mode="Ignore" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="Vignette" picking-mode="Ignore" style="position: absolute; bottom: 0; left: 0; right: 0; height: 30%; background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: stretch-to-fill; background-image: url(&quot;project://database/Assets/_2DAdventureGame/UI/DialogueVignette.png?fileID=2800000&amp;guid=6f9c5205311117045a3c6b0a54226d14&amp;type=3#DialogueVignette&quot;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.75);"/>
+        <ui:Label text="" name="InteractPromptText" picking-mode="Ignore" style="position: absolute; bottom: 120px; left: 48px; right: 48px; -unity-font-definition: url(&quot;project://database/Assets/_2DAdventureGame/Fonts/TTF/PatrickHand-Regular.ttf?fileID=12800000&amp;guid=b2bf5b4298c8a314a9bc3eee05797056&amp;type=3#PatrickHand-Regular&quot;); font-size: 36px; color: rgb(245, 241, 232); white-space: normal; -unity-font-style: bold; -unity-text-outline-width: 1px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.95); -unity-text-align: middle-center;"/>
+    </ui:VisualElement>
+</ui:UXML>

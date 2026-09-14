@@ -6,12 +6,12 @@ namespace AdventureGame.Entities.Enemy
     public class EnemyData : ScriptableObject
     {
         [Header("Health")]
-        public int maxHealth;
+        public int MaxHealth;
 
         [Header("Movement")]
-        public float speed;
+        public float Speed;
 
         [Header("Combat")]
-        public int contactDamage = 1;
+        public int ContactDamage = 1;
     }
 }

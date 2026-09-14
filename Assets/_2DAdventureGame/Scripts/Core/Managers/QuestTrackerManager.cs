@@ -2,39 +2,41 @@ using AdventureGame.Core.Quest;
 using AdventureGame.Core.Scene;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.Core.Managers
 {
     public class QuestTrackerManager : MonoBehaviour
     {
-        [SerializeField] private UIDocument trackerDocument;
+        [FormerlySerializedAs("trackerDocument")]
+        [SerializeField] private UIDocument m_TrackerUiDocument;
 
-        private PlayerInputActions inputActions;
-        private VisualElement trackerRoot;
-        private Label descriptionLabel;
-        private Label progressLabel;
+        private PlayerInputActions m_InputActions;
+        private VisualElement m_TrackerRoot;
+        private Label m_DescriptionLabel;
+        private Label m_ProgressLabel;
 
-        private bool isOpen;
-        private QuestController completionPending;
+        private bool m_IsOpen;
+        private QuestController m_CompletionPending;
 
-        private int lastCount = -1;
-        private QuestController lastTracked;
+        private int m_LastCount = -1;
+        private QuestController m_LastTrackedController;
 
-        private const string CompletionMessage = "Quest complete! Return and speak with the NPC.";
+        private const string k_CompletionMessage = "Quest complete! Return and speak with the NPC.";
 
-        void Awake() => inputActions = InputManager.Instance.Actions;
+        void Awake() => m_InputActions = InputManager.Instance.Actions;
 
-        void OnEnable() => inputActions.Player.Tracker.performed += OnTrackerPressed;
+        void OnEnable() => m_InputActions.Player.Tracker.performed += OnTrackerPressed;
 
-        void OnDisable() => inputActions.Player.Tracker.performed -= OnTrackerPressed;
+        void OnDisable() => m_InputActions.Player.Tracker.performed -= OnTrackerPressed;
 
         void Start()
         {
-            VisualElement root = trackerDocument.rootVisualElement;
-            trackerRoot = root.Q<VisualElement>("TrackerRoot");
-            descriptionLabel = root.Q<Label>("Description");
-            progressLabel = root.Q<Label>("Progress");
+            VisualElement root = m_TrackerUiDocument.rootVisualElement;
+            m_TrackerRoot = root.Q<VisualElement>("TrackerRoot");
+            m_DescriptionLabel = root.Q<Label>("Description");
+            m_ProgressLabel = root.Q<Label>("Progress");
 
             if (QuestManager.Instance != null)
                 foreach (QuestController c in QuestManager.Instance.All)
@@ -60,7 +62,7 @@ namespace AdventureGame.Core.Managers
         {
             if (c.Phase == QuestPhase.After)
             {
-                completionPending = c;
+                m_CompletionPending = c;
 
                 Refresh();
             }
@@ -68,11 +70,11 @@ namespace AdventureGame.Core.Managers
 
         void HandleConcluded(QuestController c)
         {
-            if (c != completionPending) 
+            if (c != m_CompletionPending) 
                 return;
         
-            completionPending = null;
-            isOpen = false;
+            m_CompletionPending = null;
+            m_IsOpen = false;
         
             Refresh();
         }
@@ -86,7 +88,7 @@ namespace AdventureGame.Core.Managers
                 return;
             }
 
-            if (isOpen || completionPending != null)
+            if (m_IsOpen || m_CompletionPending != null)
                 Refresh();
         }
 
@@ -95,23 +97,23 @@ namespace AdventureGame.Core.Managers
             if (PauseManager.IsPaused) 
                 return;
         
-            if (completionPending != null) 
+            if (m_CompletionPending != null) 
                 return;
 
-            isOpen = !isOpen;
+            m_IsOpen = !m_IsOpen;
 
             Refresh();
         }
 
         void Refresh()
         {
-            if (completionPending != null)
+            if (m_CompletionPending != null)
             {
-                if (descriptionLabel != null) 
-                    descriptionLabel.text = CompletionMessage;
+                if (m_DescriptionLabel != null) 
+                    m_DescriptionLabel.text = k_CompletionMessage;
             
-                if (progressLabel != null) 
-                    progressLabel.text = string.Empty;
+                if (m_ProgressLabel != null) 
+                    m_ProgressLabel.text = string.Empty;
             
                 SetVisible(true);
             
@@ -119,27 +121,27 @@ namespace AdventureGame.Core.Managers
             }
 
             CountedQuestController tracked = FindActiveCounted();
-            if (!isOpen || tracked == null)
+            if (!m_IsOpen || tracked == null)
             {
                 SetVisible(false);
             
                 return;
             }
 
-            if (descriptionLabel != null && tracked != lastTracked)
+            if (m_DescriptionLabel != null && tracked != m_LastTrackedController)
             {
-                descriptionLabel.text = tracked.Data.description;
-                lastTracked = tracked;
+                m_DescriptionLabel.text = tracked.Data.Description;
+                m_LastTrackedController = tracked;
             }
 
-            if (progressLabel != null && tracked.Count != lastCount)
+            if (m_ProgressLabel != null && tracked.Count != m_LastCount)
             {
-                progressLabel.text = string.Concat(
+                m_ProgressLabel.text = string.Concat(
                     tracked.Count.ToString(),
                     " / ",
                     tracked.Target.ToString()
                 );
-                lastCount = tracked.Count;
+                m_LastCount = tracked.Count;
             }
 
             SetVisible(true);
@@ -159,8 +161,8 @@ namespace AdventureGame.Core.Managers
 
         void SetVisible(bool visible)
         {
-            if (trackerRoot != null)
-                trackerRoot.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+            if (m_TrackerRoot != null)
+                m_TrackerRoot.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
 }

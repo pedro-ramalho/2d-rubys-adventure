@@ -5,18 +5,18 @@ namespace AdventureGame.Entities.Player.States
 {
     public class PlayerDashingState : PlayerState
     {
-        private float dashTimer;
-        private float afterimageTimer;
-        private Vector2 dashDirection;
+        private float m_DashTimer;
+        private float m_AfterimageTimer;
+        private Vector2 m_DashDirection;
 
         public override void Enter(Player owner)
         {
-            dashTimer = owner.Data.dashDuration;
-            dashDirection = owner.MoveDirection;
+            m_DashTimer = owner.Data.DashDuration;
+            m_DashDirection = owner.MoveDirection;
 
-            owner.DashCooldownTimer = owner.Data.dashCooldown;
+            owner.DashCooldownTimer = owner.Data.DashCooldown;
             owner.IsInvincible = true;
-            owner.DamageCooldown = owner.Data.dashDuration;
+            owner.DamageCooldown = owner.Data.DashDuration;
             owner.Animator.SetFloat(AnimatorHashes.Speed, 1f);
             owner.OneShotSource.PlayOneShot(owner.DashClip);
             owner.CurrentVelocity = Vector2.zero;
@@ -24,23 +24,23 @@ namespace AdventureGame.Entities.Player.States
 
         public override void Update(Player owner)
         {
-            if (dashTimer <= 0)
+            if (m_DashTimer <= 0)
             {
                 owner.ChangeState(owner.GroundedState);
             
                 return;
             }
 
-            if (afterimageTimer <= 0)
+            if (m_AfterimageTimer <= 0)
                 SpawnAfterimages(owner);
 
-            dashTimer -= Time.deltaTime;
-            afterimageTimer -= Time.deltaTime;
+            m_DashTimer -= Time.deltaTime;
+            m_AfterimageTimer -= Time.deltaTime;
         }
 
         public override void FixedUpdate(Player owner)
         {
-            Vector2 offset = dashDirection * owner.Data.dashSpeed * Time.fixedDeltaTime;
+            Vector2 offset = m_DashDirection * owner.Data.DashSpeed * Time.fixedDeltaTime;
 
             owner.Rigidbody.MovePosition(owner.Rigidbody.position + offset);
         }
@@ -59,12 +59,12 @@ namespace AdventureGame.Entities.Player.States
                     owner.SpriteRenderer.sprite,
                     owner.transform.localScale,
                     owner.SpriteRenderer.flipX,
-                    owner.Data.afterimageColor,
-                    owner.Data.afterimageLingerDuration
+                    owner.Data.AfterimageColor,
+                    owner.Data.AfterimageLingerDuration
                 );
             }
 
-            afterimageTimer = owner.Data.afterimageInterval;
+            m_AfterimageTimer = owner.Data.AfterimageInterval;
         }
     }
 }

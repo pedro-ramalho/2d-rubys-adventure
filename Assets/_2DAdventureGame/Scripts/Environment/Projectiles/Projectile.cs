@@ -1,21 +1,25 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Environment.Projectiles
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] private float maxLifetime = 3f;
-        [SerializeField] private GameObject hitEffectPrefab;
+        [FormerlySerializedAs("maxLifetime")]
+        [SerializeField] private float m_MaxLifetime = 3f;
 
-        private Rigidbody2D rb;
+        [FormerlySerializedAs("hitEffectPrefab")]
+        [SerializeField] private GameObject m_HitEffectPrefab;
 
-        void Awake() => rb = GetComponent<Rigidbody2D>();
+        private Rigidbody2D m_Rigidbody;
+
+        void Awake() => m_Rigidbody = GetComponent<Rigidbody2D>();
 
         public void Launch(Vector2 direction, float force)
         {
-            rb.AddForce(direction * force);
-            Destroy(gameObject, maxLifetime);
+            m_Rigidbody.AddForce(direction * force);
+            Destroy(gameObject, m_MaxLifetime);
         }
 
         void OnTriggerEnter2D(Collider2D other) => HandleImpact();
@@ -24,8 +28,8 @@ namespace AdventureGame.Environment.Projectiles
 
         void HandleImpact()
         {
-            if (hitEffectPrefab != null)
-                Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            if (m_HitEffectPrefab != null)
+                Instantiate(m_HitEffectPrefab, transform.position, Quaternion.identity);
         
             Destroy(gameObject);
         }

@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace AdventureGame.Core.Effects
 {
-    public class CameraShake : MonoBehaviour
+    public class CameraShake : SceneSingleton<CameraShake>
     {
-        public static CameraShake Instance { get; private set; }
-        private CinemachineImpulseSource impulseSource;
+        private CinemachineImpulseSource m_ImpulseSource;
 
-        void Awake()
+        protected override void Awake()
         {
-            if (Instance == null) Instance = this;
-        
-            impulseSource = GetComponent<CinemachineImpulseSource>();
+            base.Awake();
+            if (Instance != this) return;
+
+            m_ImpulseSource = GetComponent<CinemachineImpulseSource>();
         }
 
-        public void Shake(float amplitude = 1f) => impulseSource.GenerateImpulse(amplitude);
+        public void Shake(float amplitude = 1f) => m_ImpulseSource.GenerateImpulse(amplitude);
     }
 }

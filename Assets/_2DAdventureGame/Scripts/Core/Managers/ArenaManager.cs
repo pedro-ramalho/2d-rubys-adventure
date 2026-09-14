@@ -5,70 +5,82 @@ using AdventureGame.Core.Scene;
 using AdventureGame.Core.Wave;
 using AdventureGame.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Managers
 {
     public class ArenaManager : MonoBehaviour
     {
-        [SerializeField] private WaveSpawner spawner;
-        [SerializeField] private UIHandler ui;
-        [SerializeField] private QuestData winQuest;
-        [SerializeField] private float endGameDelay = 3f;
-        [SerializeField] private float epilogueReadDelay = 3f;
-        [SerializeField] private AudioSource stingerSource;
-        [SerializeField] private AudioClip victoryStinger;
+        [FormerlySerializedAs("spawner")]
+        [SerializeField] private WaveSpawner m_WaveSpawner;
 
-        private bool gameEnded;
-        private QuestController controller;
+        [FormerlySerializedAs("winQuest")]
+        [SerializeField] private QuestData m_QuestData;
+
+        [FormerlySerializedAs("endGameDelay")]
+        [SerializeField] private float m_EndGameDelayS = 3f;
+
+        [FormerlySerializedAs("epilogueReadDelay")]
+        [SerializeField] private float m_EpilogueReadDelayS = 3f;
+        
+        [FormerlySerializedAs("stingerSource")]
+        [SerializeField] private AudioSource m_StingerAudioSource;
+
+        [FormerlySerializedAs("victoryStinger")]
+        [SerializeField] private AudioClip m_VictoryStingerSfx;
+
+        private bool m_IsGameOver;
+        private QuestController m_QuestController;
 
         void Start()
         {
-            spawner.OnAllWavesCleared += HandleAllWavesCleared;
+            m_WaveSpawner.OnAllWavesCleared += HandleAllWavesCleared;
 
             if (QuestManager.Instance != null)
             {
-                controller = QuestManager.Instance.Get(winQuest);
-                if (controller != null) controller.OnEpilogueFinished += HandleEpilogueFinished;
+                m_QuestController = QuestManager.Instance.Get(m_QuestData);
+                if (m_QuestController != null) m_QuestController.OnEpilogueFinished += HandleEpilogueFinished;
             }
         }
 
         void OnDestroy()
         {
-            if (spawner != null) spawner.OnAllWavesCleared -= HandleAllWavesCleared;
-            if (controller != null) controller.OnEpilogueFinished -= HandleEpilogueFinished;
+            if (m_WaveSpawner != null) m_WaveSpawner.OnAllWavesCleared -= HandleAllWavesCleared;
+            if (m_QuestController != null) m_QuestController.OnEpilogueFinished -= HandleEpilogueFinished;
         }
 
         void HandleAllWavesCleared()
         {
-            if (controller != null) controller.MarkComplete();
+            if (m_QuestController != null) m_QuestController.MarkComplete();
         }
 
         void HandleEpilogueFinished(QuestController _) => StartCoroutine(DelayedWin());
 
         IEnumerator DelayedWin()
         {
-            while (UIHandler.Instance != null && UIHandler.Instance.IsTyping)
+            while (DialoguePresenter.Instance != null && DialoguePresenter.Instance.IsTyping)
                 yield return null;
         
-            yield return new WaitForSeconds(epilogueReadDelay);
+            yield return new WaitForSeconds(m_EpilogueReadDelayS);
         
             Win();
         }
 
         void Win()
         {
-            if (gameEnded)
+            if (m_IsGameOver)
                 return;
 
-            gameEnded = true;
+            m_IsGameOver = true;
 
             MusicManager.Instance?.FadeOutAndStop(2f);
-            if (stingerSource != null && victoryStinger != null)
-                stingerSource.PlayOneShot(victoryStinger);
+            if (m_StingerAudioSource != null && m_VictoryStingerSfx != null)
+                m_StingerAudioSource.PlayOneShot(m_VictoryStingerSfx);
 
-            ui.DisplayWinScreen();
+            if (EndScreenPresenter.Instance != null)
+                EndScreenPresenter.Instance.DisplayWinScreen();
         
-            Invoke(nameof(ReloadScene), endGameDelay);
+            Invoke(nameof(ReloadScene), m_EndGameDelayS);
         }
 
         void ReloadScene() => SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu, 0f);
