@@ -1,13 +1,15 @@
 using AdventureGame.Core.Quest;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Managers
 {
     public class SceneMusicConfigManager : SceneSingleton<SceneMusicConfigManager>
     {
-        [SerializeField] private AudioClip defaultTrack;
+        [FormerlySerializedAs("defaultTrack")]
+        [SerializeField] private AudioClip m_DefaultTrack;
 
-        public AudioClip DefaultTrack => defaultTrack;
+        public AudioClip DefaultTrack => m_DefaultTrack;
 
         void Start() => QuestMusic.Refresh();
     }

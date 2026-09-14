@@ -6,13 +6,13 @@ namespace AdventureGame.Core.Quest
     [CreateAssetMenu(fileName = "QuestDialogue", menuName = "Game/Quest Dialogue")]
     public class QuestDialogue : ScriptableObject
     {
-        public QuestData quest;
+        public QuestData Quest;
 
-        public DialoguePhase before;
+        public DialoguePhase Before;
 
-        public DialoguePhase during;
+        public DialoguePhase During;
 
-        public DialoguePhase after;
+        public DialoguePhase After;
 
         public DialoguePhase Pick(QuestController controller)
         {
@@ -20,14 +20,14 @@ namespace AdventureGame.Core.Quest
 
             DialoguePhase chosen = phase switch
             {
-                QuestPhase.After  => after,
-                QuestPhase.During => during,
-                _                 => before
+                QuestPhase.After  => After,
+                QuestPhase.During => During,
+                _                 => Before
             };
 
             return chosen != null && !chosen.IsEmpty ? chosen : null;
         }
 
-        public bool IsAfterPhase(DialoguePhase phase) => phase == after && quest != null;
+        public bool IsAfterPhase(DialoguePhase phase) => phase == After && Quest != null;
     }
 }

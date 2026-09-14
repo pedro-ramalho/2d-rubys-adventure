@@ -8,13 +8,13 @@ namespace AdventureGame.Entities.Player.States
 {
     public class PlayerGroundedState : PlayerState
     {
-        private Vector2 move;
+        private Vector2 m_Move;
 
         private static readonly int NPCMaskHash = LayerMask.GetMask("NPC");
 
         public override void Update(Player owner)
         {
-            move = owner.MoveAction.ReadValue<Vector2>();
+            m_Move = owner.MoveAction.ReadValue<Vector2>();
 
             UpdateMoveDirection(owner);
             UpdateAnimator(owner);
@@ -33,8 +33,8 @@ namespace AdventureGame.Entities.Player.States
 
         public override void FixedUpdate(Player owner)
         {
-            Vector2 targetVelocity = move * owner.Data.speed;
-            float rate = move.magnitude > 0f ? owner.Data.acceleration : owner.Data.deceleration;
+            Vector2 targetVelocity = m_Move * owner.Data.Speed;
+            float rate = m_Move.magnitude > 0f ? owner.Data.Acceleration : owner.Data.Deceleration;
         
             owner.CurrentVelocity = Vector2.MoveTowards(owner.CurrentVelocity, targetVelocity, rate * Time.fixedDeltaTime);
             owner.Rigidbody.MovePosition(owner.Rigidbody.position + owner.CurrentVelocity * Time.fixedDeltaTime);
@@ -42,15 +42,15 @@ namespace AdventureGame.Entities.Player.States
 
         private void UpdateMoveDirection(Player owner)
         {
-            if (!Mathf.Approximately(move.x, 0f) || !Mathf.Approximately(move.y, 0f))
-                owner.MoveDirection = move.normalized;
+            if (!Mathf.Approximately(m_Move.x, 0f) || !Mathf.Approximately(m_Move.y, 0f))
+                owner.MoveDirection = m_Move.normalized;
         }
 
         private void UpdateAnimator(Player owner)
         {
             owner.Animator.SetFloat(AnimatorHashes.LookX, owner.MoveDirection.x);
             owner.Animator.SetFloat(AnimatorHashes.LookY, owner.MoveDirection.y);
-            owner.Animator.SetFloat(AnimatorHashes.Speed, move.magnitude);
+            owner.Animator.SetFloat(AnimatorHashes.Speed, m_Move.magnitude);
         }
 
         private void HandleNPCInteraction(Player owner)

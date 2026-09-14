@@ -28,7 +28,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
         public override void FixedUpdate(VendingMachine owner)
         {
             Vector2 toPlayer = (Player.Player.Instance.Rigidbody.position - owner.Rigidbody.position).normalized;
-            Vector2 step = toPlayer * (owner.Data.speed * Time.fixedDeltaTime);
+            Vector2 step = toPlayer * (owner.Data.Speed * Time.fixedDeltaTime);
 
             owner.Rigidbody.MovePosition(owner.Rigidbody.position + step);
 

@@ -3,6 +3,7 @@ using AdventureGame.Core.Managers;
 using AdventureGame.Entities.Player.States;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Player
 {
@@ -17,15 +18,16 @@ namespace AdventureGame.Entities.Player
         public SpriteRenderer SpriteRenderer { get; private set; }
 
         [Header("Player Data")]
-        [SerializeField] private PlayerData data;
-        public PlayerData Data => data;
+        [FormerlySerializedAs("data")]
+        [SerializeField] private PlayerData m_PlayerData;
+        public PlayerData Data => m_PlayerData;
 
         [Header("Player Input")]
-        private PlayerInputActions inputActions;
-        public InputAction MoveAction => inputActions.Player.Movement;
-        public InputAction DashAction => inputActions.Player.Dash;
-        public InputAction ShootAction => inputActions.Player.Shoot;
-        public InputAction TalkAction => inputActions.Player.Talk;
+        private PlayerInputActions m_InputActions;
+        public InputAction MoveAction => m_InputActions.Player.Movement;
+        public InputAction DashAction => m_InputActions.Player.Dash;
+        public InputAction ShootAction => m_InputActions.Player.Shoot;
+        public InputAction TalkAction => m_InputActions.Player.Talk;
 
         [Header("Player Assets")]
         [field: SerializeField]
@@ -46,22 +48,18 @@ namespace AdventureGame.Entities.Player
         [field: SerializeField]
         public GameObject ProjectilePrefab { get; private set; }
 
-        // Health
         public int CurrentHealth { get; set; }
         public bool IsInvincible { get; set; }
         public float DamageCooldown { get; set; }
 
-        // Movement
         public Vector2 MoveDirection { get; set; } = Vector2.up;
         public Vector2 CurrentVelocity { get; set; }
         public float DashCooldownTimer { get; set; }
 
-        // State
         public PlayerState CurrentState { get; private set; }
         public event Action<float> OnHealthChanged;
         public event Action OnDied;
 
-        // State instances
         public PlayerGroundedState GroundedState { get; private set; }
         public PlayerDashingState DashingState { get; private set; }
         public PlayerShootingState ShootingState { get; private set; }
@@ -76,12 +74,12 @@ namespace AdventureGame.Entities.Player
             Animator = GetComponent<Animator>();
             SpriteRenderer = GetComponent<SpriteRenderer>();
 
-            int health = SaveManager.Instance != null && SaveManager.Instance.HasSave && SaveManager.Instance.Current.playerHealth >= 0
-                ? SaveManager.Instance.Current.playerHealth
-                : data.startingHealth;
-            CurrentHealth = Mathf.Clamp(health, 0, data.maxHealth);
+            int health = SaveManager.Instance != null && SaveManager.Instance.HasSave && SaveManager.Instance.Current.PlayerHealth >= 0
+                ? SaveManager.Instance.Current.PlayerHealth
+                : m_PlayerData.StartingHealth;
+            CurrentHealth = Mathf.Clamp(health, 0, m_PlayerData.MaxHealth);
 
-            inputActions = InputManager.Instance.Actions;
+            m_InputActions = InputManager.Instance.Actions;
 
             GroundedState = new PlayerGroundedState();
             DashingState = new PlayerDashingState();

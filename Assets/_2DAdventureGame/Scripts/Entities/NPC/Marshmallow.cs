@@ -2,6 +2,7 @@ using System.Collections;
 using AdventureGame.Core.Constants;
 using AdventureGame.Core.Quest;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.NPC
 {
@@ -9,25 +10,32 @@ namespace AdventureGame.Entities.NPC
     [RequireComponent(typeof(Rigidbody2D))]
     public class Marshmallow : NPC
     {
-        [SerializeField] private QuestData boundQuest;
-        [SerializeField] private Transform exitPoint;
-        [SerializeField] private float walkSpeed = 2f;
-        [SerializeField] private Vector2 idleFacing = Vector2.down;
+        [FormerlySerializedAs("boundQuest")]
+        [SerializeField] private QuestData m_BoundQuestData;
 
-        private Animator animator;
-        private Rigidbody2D rb;
-        private Collider2D[] colliders;
-        private Vector2 startPosition;
-        private QuestController controller;
+        [FormerlySerializedAs("exitPoint")]
+        [SerializeField] private Transform m_ExitPointPosition;
+
+        [FormerlySerializedAs("walkSpeed")]
+        [SerializeField] private float m_WalkSpeed = 2f;
+
+        [FormerlySerializedAs("idleFacing")]
+        [SerializeField] private Vector2 m_IdleFacing = Vector2.down;
+
+        private Animator m_Animator;
+        private Rigidbody2D m_Rigidbody;
+        private Collider2D[] m_Colliders;
+        private Vector2 m_StartPosition;
+        private QuestController m_QuestController;
 
         void Awake()
         {
-            animator = GetComponent<Animator>();
-            rb = GetComponent<Rigidbody2D>();
-            colliders = GetComponents<Collider2D>();
-            startPosition = transform.position;
+            m_Animator = GetComponent<Animator>();
+            m_Rigidbody = GetComponent<Rigidbody2D>();
+            m_Colliders = GetComponents<Collider2D>();
+            m_StartPosition = transform.position;
 
-            SetFacing(idleFacing);
+            SetFacing(m_IdleFacing);
         }
 
         void Start()
@@ -35,20 +43,20 @@ namespace AdventureGame.Entities.NPC
             if (QuestManager.Instance == null) 
                 return;
         
-            controller = QuestManager.Instance.Get(boundQuest);
-            if (controller == null) 
+            m_QuestController = QuestManager.Instance.Get(m_BoundQuestData);
+            if (m_QuestController == null) 
                 return;
 
-            controller.OnPhaseChanged += HandlePhaseChanged;
-            controller.OnEpilogueFinished += HandleEpilogueFinished;
+            m_QuestController.OnPhaseChanged += HandlePhaseChanged;
+            m_QuestController.OnEpilogueFinished += HandleEpilogueFinished;
         }
 
         void OnDestroy()
         {
-            if (controller != null)
+            if (m_QuestController != null)
             {
-                controller.OnPhaseChanged -= HandlePhaseChanged;
-                controller.OnEpilogueFinished -= HandleEpilogueFinished;
+                m_QuestController.OnPhaseChanged -= HandlePhaseChanged;
+                m_QuestController.OnEpilogueFinished -= HandleEpilogueFinished;
             }
         }
 
@@ -64,44 +72,44 @@ namespace AdventureGame.Entities.NPC
 
         public void WalkToExit()
         {
-            if (exitPoint != null) 
-                StartCoroutine(WalkTo(exitPoint.position));
+            if (m_ExitPointPosition != null) 
+                StartCoroutine(WalkTo(m_ExitPointPosition.position));
         }
 
-        public void WalkBack() => StartCoroutine(WalkTo(startPosition));
+        public void WalkBack() => StartCoroutine(WalkTo(m_StartPosition));
 
         IEnumerator WalkTo(Vector2 target)
         {
             SetCollidersEnabled(false);
 
-            Vector2 direction = (target - rb.position).normalized;
+            Vector2 direction = (target - m_Rigidbody.position).normalized;
             SetFacing(direction);
-            animator.SetFloat(AnimatorHashes.Speed, 1f);
+            m_Animator.SetFloat(AnimatorHashes.Speed, 1f);
 
             WaitForFixedUpdate wait = new();
-            while (Vector2.Distance(rb.position, target) > 0.01f)
+            while (Vector2.Distance(m_Rigidbody.position, target) > 0.01f)
             {
-                Vector2 next = Vector2.MoveTowards(rb.position, target, walkSpeed * Time.fixedDeltaTime);
-                rb.MovePosition(next);
+                Vector2 next = Vector2.MoveTowards(m_Rigidbody.position, target, m_WalkSpeed * Time.fixedDeltaTime);
+                m_Rigidbody.MovePosition(next);
 
                 yield return wait;
             }
 
-            SetFacing(idleFacing);
-            animator.SetFloat(AnimatorHashes.Speed, 0f);
+            SetFacing(m_IdleFacing);
+            m_Animator.SetFloat(AnimatorHashes.Speed, 0f);
 
             SetCollidersEnabled(true);
         }
 
         void SetFacing(Vector2 direction)
         {
-            animator.SetFloat(AnimatorHashes.LookX, direction.x);
-            animator.SetFloat(AnimatorHashes.LookY, direction.y);
+            m_Animator.SetFloat(AnimatorHashes.LookX, direction.x);
+            m_Animator.SetFloat(AnimatorHashes.LookY, direction.y);
         }
 
         void SetCollidersEnabled(bool value)
         {
-            foreach (Collider2D collider in colliders)
+            foreach (Collider2D collider in m_Colliders)
                 collider.enabled = value;
         }
     }

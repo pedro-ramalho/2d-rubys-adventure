@@ -2,6 +2,7 @@ using System.Collections;
 using AdventureGame.Entities.Player;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.UI
@@ -10,45 +11,56 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(UIDocument))]
     public class DialoguePresenter : SceneSingleton<DialoguePresenter>
     {
-        [SerializeField] private float displayTime = 4.0f;
-        [SerializeField] private AudioClip clickClip;
+        [FormerlySerializedAs("displayTime")]
+        [SerializeField] private float m_DisplayTime = 4.0f;
+
+        [FormerlySerializedAs("clickClip")]
+        [SerializeField] private AudioClip m_ClickClip;
 
         [Header("Typewriter")]
-        [SerializeField] private float typeInterval = 0.03f;
-        [SerializeField] private AudioClip typeClip;
-        [Tooltip("Play the type SFX every Nth visible character.")]
-        [SerializeField] private int typeClipEveryNChars = 2;
-        [SerializeField] private float typeClipPitchJitter = 0.08f;
+        [FormerlySerializedAs("typeInterval")]
+        [SerializeField] private float m_TypeInterval = 0.03f;
 
-        private VisualElement dialoguePanel;
-        private Label dialogueText;
+        [FormerlySerializedAs("typeClip")]
+        [SerializeField] private AudioClip m_TypeClip;
+        [Tooltip("Play the type SFX every Nth visible character.")]
+
+        [FormerlySerializedAs("typeClipEveryNChars")]
+        [SerializeField] private int m_TypeClipEveryNChars = 2;
+
+        [FormerlySerializedAs("typeClipPitchJitter")]
+        [SerializeField] private float m_TypeClipPitchJitter = 0.08f;
+
+        private VisualElement m_DialoguePanel;
+        private Label m_DialogueLabel;
 
         [Header("Dialogue Range")]
-        [SerializeField] private float dialogueMaxDistance = 5f;
+        [FormerlySerializedAs("dialogueMaxDistance")]
+        [SerializeField] private float m_DialogueMaxDistance = 5f;
 
-        private Player player;
-        private Coroutine typeRoutine;
-        private string currentLine;
-        private bool dialogueActive;
-        private float originalOneShotVolume = 1f;
-        private Transform currentSpeaker;
+        private Player m_Player;
+        private Coroutine m_TypeCoroutine;
+        private string m_CurrentLine;
+        private bool m_IsDialogueActive;
+        private float m_OriginalOneShotVolume = 1f;
+        private Transform m_CurrentSpeaker;
 
-        public bool IsTyping => typeRoutine != null;
-        public bool IsDialogueActive => dialogueActive;
+        public bool IsTyping => m_TypeCoroutine != null;
+        public bool IsDialogueActive => m_IsDialogueActive;
 
-        AudioSource OneShot() => player != null ? player.OneShotSource : null;
+        AudioSource OneShot() => m_Player != null ? m_Player.OneShotSource : null;
 
         void Update()
         {
-            if (!dialogueActive || currentSpeaker == null)
+            if (!m_IsDialogueActive || m_CurrentSpeaker == null)
                 return;
 
             Player player = Player.Instance;
             if (player == null)
                 return;
 
-            float distance = (player.transform.position - currentSpeaker.position).sqrMagnitude;
-            if (distance > dialogueMaxDistance * dialogueMaxDistance)
+            float distance = (player.transform.position - m_CurrentSpeaker.position).sqrMagnitude;
+            if (distance > m_DialogueMaxDistance * m_DialogueMaxDistance)
                 HideDialogue();
         }
 
@@ -56,12 +68,12 @@ namespace AdventureGame.UI
         {
             UIDocument uiDocument = GetComponent<UIDocument>();
         
-            dialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
-            dialogueText = dialoguePanel.Q<Label>("DialogueText");
+            m_DialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
+            m_DialogueLabel = m_DialoguePanel.Q<Label>("DialogueText");
 
-            dialoguePanel.style.display = DisplayStyle.None;
+            m_DialoguePanel.style.display = DisplayStyle.None;
 
-            player = Player.Instance;
+            m_Player = Player.Instance;
         }
 
         void RestoreTypingAudio()
@@ -71,48 +83,48 @@ namespace AdventureGame.UI
                 return;
 
             audio.pitch = 1f;
-            audio.volume = originalOneShotVolume;
+            audio.volume = m_OriginalOneShotVolume;
         }
 
         public void DisplayDialogueWithLine(string line) => DisplayDialogueWithLine(line, null);
         public void DisplayDialogueWithLine(string line, Transform speaker)
         {
-            currentSpeaker = speaker;
+            m_CurrentSpeaker = speaker;
 
             if (InteractPromptPresenter.Instance != null)
                 InteractPromptPresenter.Instance.HideInteractPrompt();
 
             AudioSource audio = OneShot();
-            if (clickClip != null && audio != null)
-                audio.PlayOneShot(clickClip);
+            if (m_ClickClip != null && audio != null)
+                audio.PlayOneShot(m_ClickClip);
 
             CancelInvoke(nameof(HideDialogue));
         
-            if (typeRoutine != null)
-                StopCoroutine(typeRoutine);
+            if (m_TypeCoroutine != null)
+                StopCoroutine(m_TypeCoroutine);
 
-            dialogueActive = true;
-            currentLine = line;
-            dialogueText.text = string.Empty;
-            dialoguePanel.style.opacity = 1f;
-            dialoguePanel.style.display = DisplayStyle.Flex;
-            typeRoutine = StartCoroutine(TypeLine(line));
+            m_IsDialogueActive = true;
+            m_CurrentLine = line;
+            m_DialogueLabel.text = string.Empty;
+            m_DialoguePanel.style.opacity = 1f;
+            m_DialoguePanel.style.display = DisplayStyle.Flex;
+            m_TypeCoroutine = StartCoroutine(TypeLine(line));
         }
 
         public void Skip()
         {
-            if (typeRoutine == null) 
+            if (m_TypeCoroutine == null) 
                 return;
         
-            StopCoroutine(typeRoutine);
+            StopCoroutine(m_TypeCoroutine);
         
-            typeRoutine = null;
+            m_TypeCoroutine = null;
         
             RestoreTypingAudio();
         
-            dialogueText.text = currentLine;
+            m_DialogueLabel.text = m_CurrentLine;
         
-            Invoke(nameof(HideDialogue), displayTime);
+            Invoke(nameof(HideDialogue), m_DisplayTime);
         }
 
         private IEnumerator TypeLine(string line)
@@ -120,53 +132,53 @@ namespace AdventureGame.UI
             AudioSource audio = OneShot();
             if (audio != null)
             {
-                originalOneShotVolume = audio.volume;
+                m_OriginalOneShotVolume = audio.volume;
                 audio.volume = 0.75f;
             }
 
             int visibleCount = 0;
             for (int i = 1; i <= line.Length; i++)
             {
-                dialogueText.text = line.Substring(0, i);
+                m_DialogueLabel.text = line.Substring(0, i);
                 char c = line[i - 1];
 
                 if (!char.IsWhiteSpace(c))
                 {
                     visibleCount++;
-                    if (typeClip != null && audio != null && visibleCount % typeClipEveryNChars == 0)
+                    if (m_TypeClip != null && audio != null && visibleCount % m_TypeClipEveryNChars == 0)
                     {
-                        float pitch = 1f + Random.Range(-typeClipPitchJitter, typeClipPitchJitter);
+                        float pitch = 1f + Random.Range(-m_TypeClipPitchJitter, m_TypeClipPitchJitter);
                         audio.pitch = pitch;
-                        audio.PlayOneShot(typeClip);
+                        audio.PlayOneShot(m_TypeClip);
                     }
                 }
 
-                yield return new WaitForSeconds(typeInterval);
+                yield return new WaitForSeconds(m_TypeInterval);
             }
 
             RestoreTypingAudio();
         
-            typeRoutine = null;
+            m_TypeCoroutine = null;
         
-            Invoke(nameof(HideDialogue), displayTime);
+            Invoke(nameof(HideDialogue), m_DisplayTime);
         }
 
         public void HideDialogue()
         {
             CancelInvoke(nameof(HideDialogue));
-            if (typeRoutine != null)
+            if (m_TypeCoroutine != null)
             {
-                StopCoroutine(typeRoutine);
+                StopCoroutine(m_TypeCoroutine);
             
-                typeRoutine = null;
+                m_TypeCoroutine = null;
             
                 RestoreTypingAudio();
             }
 
-            dialoguePanel.style.display = DisplayStyle.None;
-            dialoguePanel.style.opacity = 1f;
-            dialogueActive = false;
-            currentSpeaker = null;
+            m_DialoguePanel.style.display = DisplayStyle.None;
+            m_DialoguePanel.style.opacity = 1f;
+            m_IsDialogueActive = false;
+            m_CurrentSpeaker = null;
         }
     }
 }

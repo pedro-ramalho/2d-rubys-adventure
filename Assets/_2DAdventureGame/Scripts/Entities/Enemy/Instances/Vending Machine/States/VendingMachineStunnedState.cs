@@ -4,11 +4,11 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
 {
     public class VendingMachineStunnedState : VendingMachineState
     {
-        private float timer;
+        private float m_Timer;
 
         public override void Enter(VendingMachine owner)
         {
-            timer = 0f;
+            m_Timer = 0f;
             owner.SpriteRenderer.color = owner.StunnedTint;
 
             owner.AudioSource.PlayOneShot(owner.StunnedClip);
@@ -16,12 +16,12 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
 
         public override void Update(VendingMachine owner)
         {
-            timer += Time.deltaTime;
+            m_Timer += Time.deltaTime;
 
-            float t = Mathf.Clamp01(timer / owner.StunnedDuration);
+            float t = Mathf.Clamp01(m_Timer / owner.StunnedDuration);
             owner.SpriteRenderer.color = Color.Lerp(owner.StunnedTint, owner.BaseColor, t);
 
-            if (timer >= owner.StunnedDuration)
+            if (m_Timer >= owner.StunnedDuration)
                 owner.ChangeState(owner.MovingState);
         }
     }

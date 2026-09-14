@@ -5,11 +5,11 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
 {
     public class VendingMachineWindupState : VendingMachineState
     {
-        private float timer;
+        private float m_Timer;
 
         public override void Enter(VendingMachine owner)
         {
-            timer = 0f;
+            m_Timer = 0f;
 
             owner.ChargeDirection = (Player.Player.Instance.Rigidbody.position - owner.Rigidbody.position).normalized;
 
@@ -23,12 +23,12 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
 
         public override void Update(VendingMachine owner)
         {
-            timer += Time.deltaTime;
+            m_Timer += Time.deltaTime;
 
-            float t = Mathf.Clamp01(timer / owner.WindupDuration);
+            float t = Mathf.Clamp01(m_Timer / owner.WindupDuration);
             owner.SpriteRenderer.color = Color.Lerp(owner.BaseColor, owner.ChargeTint, t);
 
-            if (timer >= owner.WindupDuration)
+            if (m_Timer >= owner.WindupDuration)
                 owner.ChangeState(owner.ChargingState);
         }
     }

@@ -9,16 +9,16 @@ namespace AdventureGame.Core.Managers
 {
     public class SaveManager : PersistentSingleton<SaveManager>
     {
-        private const string SaveFileName = "save.json";
-        private const int CurrentSaveVersion = 4;
-        private const int NoStoredHealth = -1;
+        private const string k_SaveFileName = "save.json";
+        private const int k_CurrentSaveVersion = 4;
+        private const int k_NoStoredHealth = -1;
 
         public bool HasSave { get; private set; }
         public Save Current { get; private set; }
 
         public event Action SaveDeleted;
 
-        private string SavePath => Path.Combine(Application.persistentDataPath, SaveFileName);
+        private string SavePath => Path.Combine(Application.persistentDataPath, k_SaveFileName);
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void Bootstrap() => BootstrapIfMissing();
@@ -43,7 +43,7 @@ namespace AdventureGame.Core.Managers
             try
             {
                 Save loaded = JsonUtility.FromJson<Save>(File.ReadAllText(SavePath));
-                if (loaded?.version != CurrentSaveVersion) 
+                if (loaded?.Version != k_CurrentSaveVersion) 
                     return;
 
                 Current = loaded;
@@ -60,10 +60,10 @@ namespace AdventureGame.Core.Managers
 
             Save save = new Save
             {
-                version = CurrentSaveVersion,
-                sceneName = sceneName,
-                playerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : NoStoredHealth,
-                quests = quests
+                Version = k_CurrentSaveVersion,
+                SceneName = sceneName,
+                PlayerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : k_NoStoredHealth,
+                Quests = quests
             };
 
             try
@@ -83,16 +83,16 @@ namespace AdventureGame.Core.Managers
 
         List<QuestSaveData> PreserveQuestsFromCurrent()
         {
-            if (Current?.quests == null) return new List<QuestSaveData>();
+            if (Current?.Quests == null) return new List<QuestSaveData>();
 
             List<QuestSaveData> copy = new();
         
-            foreach (QuestSaveData q in Current.quests)
+            foreach (QuestSaveData q in Current.Quests)
                 copy.Add(new QuestSaveData
                 {
-                    questId = q.questId,
-                    phase = q.phase,
-                    consumedIds = q.consumedIds != null ? new List<string>(q.consumedIds) : null
+                    QuestId = q.QuestId,
+                    Phase = q.Phase,
+                    ConsumedIds = q.ConsumedIds != null ? new List<string>(q.ConsumedIds) : null
                 });
 
             return copy;
