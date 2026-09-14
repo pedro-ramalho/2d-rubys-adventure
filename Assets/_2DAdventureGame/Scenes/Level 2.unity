@@ -1739,12 +1739,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695dab23de7058748b0d8724307728e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaManager
-  spawner: {fileID: 1665620913}
-  winQuest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
-  endGameDelay: 8
-  epilogueReadDelay: 3
-  stingerSource: {fileID: 986699248}
-  victoryStinger: {fileID: 8300000, guid: 45e02ad652f9229488487e319dd23a08, type: 3}
+  m_WaveSpawner: {fileID: 1665620913}
+  m_QuestData: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
+  m_EndGameDelayS: 8
+  m_EpilogueReadDelayS: 3
+  m_StingerAudioSource: {fileID: 986699248}
+  m_VictoryStingerSfx: {fileID: 8300000, guid: 45e02ad652f9229488487e319dd23a08, type: 3}
 --- !u!82 &986699248
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2583,7 +2583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50920f81f80be7e4483e60c73f39f8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityManager
-  startingAbilities: -1
+  m_StartingAbilities: -1
 --- !u!1 &1494178487
 GameObject:
   m_ObjectHideFlags: 0
@@ -6829,20 +6829,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4bb44bae633c84fb88b908e6242b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
-  waves:
-  - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
+  m_Waves:
+  - EnemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
       type: 3}
-    enemyCount: 2
-  - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
+    EnemyCount: 2
+  - EnemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
       type: 3}
-    enemyCount: 4
-  - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
+    EnemyCount: 4
+  - EnemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
       type: 3}
-    enemyCount: 8
-  - enemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
+    EnemyCount: 8
+  - EnemyPrefab: {fileID: 2038718542815312593, guid: 1dbd3e7b72f7b9448899d6da3d99804a,
       type: 3}
-    enemyCount: 16
-  spawnPoints:
+    EnemyCount: 16
+  m_SpawnPoints:
   - {fileID: 2082912690}
   - {fileID: 670852755}
   - {fileID: 1003400}
@@ -6860,16 +6860,16 @@ MonoBehaviour:
   - {fileID: 2089997008}
   - {fileID: 289134941}
   - {fileID: 1883637442}
-  minSpawnSpacing: 3
-  minDistanceFromPlayer: 4
-  maxSpawnAttempts: 30
-  telegraphPrefab: {fileID: 7695376012639680604, guid: 583eb039fd6663243a907c3bcabba72d,
+  m_MinSpawnSpacing: 3
+  m_MinDistanceFromPlayer: 4
+  m_MaxSpawnAttempts: 30
+  m_TelegraphPrefab: {fileID: 7695376012639680604, guid: 583eb039fd6663243a907c3bcabba72d,
     type: 3}
-  telegraphDuration: 0.6
-  spawnInterval: 0.3
-  initialDelay: 4
-  breatherDuration: 2
-  triggerQuest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
+  m_TelegraphDuration: 0.6
+  m_SpawnInterval: 0.3
+  m_InitialDelay: 4
+  m_BreatherDuration: 2
+  m_TriggerQuestData: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
 --- !u!1 &1665743783
 GameObject:
   m_ObjectHideFlags: 0
@@ -7640,8 +7640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c3aca5dcb714c43b1dd7a9ba6bc378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveQuestController
-  data: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
-  completionSfx: {fileID: 0}
+  m_QuestData: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
 --- !u!1 &2012837021
 GameObject:
   m_ObjectHideFlags: 0
@@ -9872,7 +9871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278b4f8bb834973488bc15eea09ccadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  data: {fileID: 11400000, guid: 60f9f239e50913a4a99b1a598ec3577e, type: 2}
+  m_PlayerData: {fileID: 11400000, guid: 60f9f239e50913a4a99b1a598ec3577e, type: 2}
   <OneShotSource>k__BackingField: {fileID: 2805295948606414395}
   <DashClip>k__BackingField: {fileID: 8300000, guid: eade2b41632d9dd4dba8a63b3384f50f,
     type: 3}

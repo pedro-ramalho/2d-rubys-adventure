@@ -1,6 +1,5 @@
 using System.Collections;
 using AdventureGame.Core.Constants;
-using AdventureGame.Core.Quest;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,9 +9,6 @@ namespace AdventureGame.Entities.NPC
     [RequireComponent(typeof(Rigidbody2D))]
     public class Marshmallow : NPC
     {
-        [FormerlySerializedAs("boundQuest")]
-        [SerializeField] private QuestData m_BoundQuestData;
-
         [FormerlySerializedAs("exitPoint")]
         [SerializeField] private Transform m_ExitPointPosition;
 
@@ -26,57 +22,27 @@ namespace AdventureGame.Entities.NPC
         private Rigidbody2D m_Rigidbody;
         private Collider2D[] m_Colliders;
         private Vector2 m_StartPosition;
-        private QuestController m_QuestController;
 
         void Awake()
         {
             m_Animator = GetComponent<Animator>();
             m_Rigidbody = GetComponent<Rigidbody2D>();
             m_Colliders = GetComponents<Collider2D>();
+            
             m_StartPosition = transform.position;
 
             SetFacing(m_IdleFacing);
         }
 
-        void Start()
-        {
-            if (QuestManager.Instance == null) 
-                return;
-        
-            m_QuestController = QuestManager.Instance.Get(m_BoundQuestData);
-            if (m_QuestController == null) 
-                return;
-
-            m_QuestController.OnPhaseChanged += HandlePhaseChanged;
-            m_QuestController.OnEpilogueFinished += HandleEpilogueFinished;
-        }
-
-        void OnDestroy()
-        {
-            if (m_QuestController != null)
-            {
-                m_QuestController.OnPhaseChanged -= HandlePhaseChanged;
-                m_QuestController.OnEpilogueFinished -= HandleEpilogueFinished;
-            }
-        }
-
-        void HandlePhaseChanged(QuestController c)
-        {
-            if (c.Phase == QuestPhase.During) 
-                WalkToExit();
-            else if (c.Phase == QuestPhase.After) 
-                WalkBack();
-        }
-
-        void HandleEpilogueFinished(QuestController c) => SetCollidersEnabled(false);
-
         public void WalkToExit()
         {
-            if (m_ExitPointPosition != null) 
+            if (m_ExitPointPosition != null)
                 StartCoroutine(WalkTo(m_ExitPointPosition.position));
         }
 
         public void WalkBack() => StartCoroutine(WalkTo(m_StartPosition));
+
+        public void DisableCollisions() => SetCollidersEnabled(false);
 
         IEnumerator WalkTo(Vector2 target)
         {

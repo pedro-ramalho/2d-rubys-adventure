@@ -12,9 +12,13 @@ namespace AdventureGame.Entities.Player
         [Serializable]
         private class SurfaceProfile
         {
+            [FormerlySerializedAs("tag")]
             public string Tag;
+
+            [FormerlySerializedAs("clips")]
             public AudioClip[] Clips;
         }
+
 
         [FormerlySerializedAs("source")]
         [SerializeField] private AudioSource m_AudioSource;
