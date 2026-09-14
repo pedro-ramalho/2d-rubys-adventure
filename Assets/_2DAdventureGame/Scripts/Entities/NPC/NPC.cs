@@ -42,7 +42,7 @@ namespace AdventureGame.Entities.NPC
 
                 lineIndex = 0;
 
-                if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
+                if (m_CurrentDialogue.IsEpilogue(m_CurrentDialoguePhase))
                     OnEpilogueStarted?.Invoke(m_CurrentDialogue.Quest);
             }
 
@@ -57,7 +57,7 @@ namespace AdventureGame.Entities.NPC
                         quest.Accept();
                 }
 
-                if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
+                if (m_CurrentDialogue.IsEpilogue(m_CurrentDialoguePhase))
                     OnEpilogueEnded?.Invoke(m_CurrentDialogue.Quest);
 
                 m_CurrentDialoguePhase.OnExhausted?.Invoke();

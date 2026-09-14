@@ -33,6 +33,6 @@ namespace AdventureGame.Core.Quests
             return chosen != null && !chosen.IsEmpty ? chosen : null;
         }
 
-        public bool IsAfterPhase(DialoguePhase phase) => phase == After && Quest != null;
+        public bool IsEpilogue(DialoguePhase phase) => phase == After && Quest != null;
     }
 }
