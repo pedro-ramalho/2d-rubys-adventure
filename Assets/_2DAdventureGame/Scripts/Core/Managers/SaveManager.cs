@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using AdventureGame.Entities.Player;
 using UnityEngine;
 

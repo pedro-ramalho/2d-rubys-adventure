@@ -1,4 +1,4 @@
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using UnityEngine;
 
 namespace AdventureGame.Entities.NPC
@@ -9,7 +9,7 @@ namespace AdventureGame.Entities.NPC
         [SerializeField] private QuestData m_QuestData;
 
         private Marshmallow m_Marshmallow;
-        private QuestController m_QuestController;
+        private Quest m_Quest;
 
         void Awake() => m_Marshmallow = GetComponent<Marshmallow>();
 
@@ -18,24 +18,24 @@ namespace AdventureGame.Entities.NPC
             if (QuestManager.Instance == null)
                 return;
 
-            m_QuestController = QuestManager.Instance.Get(m_QuestData);
-            if (m_QuestController == null)
+            m_Quest = QuestManager.Instance.Get(m_QuestData);
+            if (m_Quest == null)
                 return;
 
-            m_QuestController.OnPhaseChanged += OnQuestPhaseChanged;
-            m_QuestController.OnEpilogueFinished += OnQuestEpilogueFinished;
+            m_Quest.OnPhaseChanged += OnQuestPhaseChanged;
+            m_Quest.OnEpilogueFinished += OnQuestEpilogueFinished;
         }
 
         void OnDestroy()
         {
-            if (m_QuestController != null)
+            if (m_Quest != null)
             {
-                m_QuestController.OnPhaseChanged -= OnQuestPhaseChanged;
-                m_QuestController.OnEpilogueFinished -= OnQuestEpilogueFinished;
+                m_Quest.OnPhaseChanged -= OnQuestPhaseChanged;
+                m_Quest.OnEpilogueFinished -= OnQuestEpilogueFinished;
             }
         }
 
-        void OnQuestPhaseChanged(QuestController controller)
+        void OnQuestPhaseChanged(Quest controller)
         {
             if (controller.Phase == QuestPhase.During)
                 m_Marshmallow.WalkToExit();
@@ -43,6 +43,6 @@ namespace AdventureGame.Entities.NPC
                 m_Marshmallow.WalkBack();
         }
 
-        void OnQuestEpilogueFinished(QuestController _) => m_Marshmallow.DisableCollisions();
+        void OnQuestEpilogueFinished(Quest _) => m_Marshmallow.DisableCollisions();
     }
 }

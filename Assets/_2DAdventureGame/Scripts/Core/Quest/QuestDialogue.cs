@@ -2,7 +2,7 @@ using AdventureGame.Core.Dialogue;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace AdventureGame.Core.Quest
+namespace AdventureGame.Core.Quests
 {
     [CreateAssetMenu(fileName = "QuestDialogue", menuName = "Game/Quest Dialogue")]
     public class QuestDialogue : ScriptableObject
@@ -19,9 +19,9 @@ namespace AdventureGame.Core.Quest
         [FormerlySerializedAs("after")]
         public DialoguePhase After;
 
-        public DialoguePhase Pick(QuestController controller)
+        public DialoguePhase Pick(Quest quest)
         {
-            QuestPhase phase = controller != null ? controller.Phase : QuestPhase.Before;
+            QuestPhase phase = quest != null ? quest.Phase : QuestPhase.Before;
 
             DialoguePhase chosen = phase switch
             {

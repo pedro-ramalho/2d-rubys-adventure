@@ -2,7 +2,7 @@ using AdventureGame.Core.Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace AdventureGame.Core.Quest
+namespace AdventureGame.Core.Quests
 {
     [CreateAssetMenu(fileName = "QuestData", menuName = "Game/Quest")]
     public class QuestData : ScriptableObject
@@ -12,6 +12,8 @@ namespace AdventureGame.Core.Quest
 
         [FormerlySerializedAs("description")]
         public string Description;
+
+        public QuestCompletionMode CompletionMode;
 
         [FormerlySerializedAs("targetCount")]
         public int TargetCount;

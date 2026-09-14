@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.Serialization;
 
-namespace AdventureGame.Core.Quest
+namespace AdventureGame.Core.Quests
 {
     [MovedFrom(autoUpdateAPI: true, sourceClassName: "PhaseGateActivator")]
     public class QuestConclusionActivator : MonoBehaviour
@@ -13,34 +13,34 @@ namespace AdventureGame.Core.Quest
         [FormerlySerializedAs("m_TargetGameObject")]
         [SerializeField] private GameObject m_Target;
 
-        private QuestController m_Controller;
+        private Quest m_ActiveQuest;
 
         void Start()
         {
             if (QuestManager.Instance == null)
                 return;
 
-            m_Controller = QuestManager.Instance.Get(m_Quest);
-            if (m_Controller == null)
+            m_ActiveQuest = QuestManager.Instance.Get(m_Quest);
+            if (m_ActiveQuest == null)
                 return;
 
-            if (m_Controller.Phase == QuestPhase.After)
+            if (m_ActiveQuest.Phase == QuestPhase.After)
             {
                 ActivateSilent();
 
                 return;
             }
 
-            m_Controller.OnConcluded += OnQuestConcluded;
+            m_ActiveQuest.OnConcluded += OnQuestConcluded;
         }
 
         void OnDestroy()
         {
-            if (m_Controller != null)
-                m_Controller.OnConcluded -= OnQuestConcluded;
+            if (m_ActiveQuest != null)
+                m_ActiveQuest.OnConcluded -= OnQuestConcluded;
         }
 
-        void OnQuestConcluded(QuestController _)
+        void OnQuestConcluded(Quest _)
         {
             if (m_Target != null) 
                 m_Target.SetActive(true);

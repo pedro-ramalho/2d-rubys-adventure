@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using AdventureGame.Core.Dialogue;
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using AdventureGame.UI;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -22,8 +22,8 @@ namespace AdventureGame.Entities.NPC
             {
                 foreach (QuestDialogue dialogue in m_DialogueLines)
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.Quest) : null;
-                    DialoguePhase phase = dialogue.Pick(controller);
+                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.Quest) : null;
+                    DialoguePhase phase = dialogue.Pick(quest);
                     if (phase != null)
                     {
                         m_CurrentDialogue = dialogue;
@@ -40,9 +40,9 @@ namespace AdventureGame.Entities.NPC
 
                 if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
-                    if (controller != null) 
-                        controller.Conclude();
+                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
+                    if (quest != null)
+                        quest.Conclude();
                 }
             }
 
@@ -52,16 +52,16 @@ namespace AdventureGame.Entities.NPC
             {
                 if (m_CurrentDialoguePhase.QuestToGrantAfter != null)
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialoguePhase.QuestToGrantAfter) : null;
-                    if (controller != null) 
-                        controller.Accept();
+                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialoguePhase.QuestToGrantAfter) : null;
+                    if (quest != null)
+                        quest.Accept();
                 }
 
                 if (m_CurrentDialogue.IsAfterPhase(m_CurrentDialoguePhase))
                 {
-                    QuestController controller = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
-                    if (controller != null) 
-                        controller.EpilogueFinished();
+                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialogue.Quest) : null;
+                    if (quest != null)
+                        quest.EpilogueFinished();
                 }
 
                 m_CurrentDialoguePhase.OnExhausted?.Invoke();

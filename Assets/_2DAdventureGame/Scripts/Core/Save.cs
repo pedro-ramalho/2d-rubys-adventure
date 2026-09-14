@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 
 namespace AdventureGame.Core
 {

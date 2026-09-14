@@ -1,5 +1,5 @@
 using System;
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -30,12 +30,12 @@ namespace AdventureGame.Core.Managers
             if (Instance != this) 
                 return;
 
-            QuestController.OnAnyPhaseChanged += OnQuestPhaseChanged;
+            Quest.OnAnyPhaseChanged += OnQuestPhaseChanged;
 
             m_UnlockedAbilities = m_StartingAbilities;
         }
 
-        void OnQuestPhaseChanged(QuestController quest)
+        void OnQuestPhaseChanged(Quest quest)
         {
             if (quest.Phase != QuestPhase.During)
                 return;

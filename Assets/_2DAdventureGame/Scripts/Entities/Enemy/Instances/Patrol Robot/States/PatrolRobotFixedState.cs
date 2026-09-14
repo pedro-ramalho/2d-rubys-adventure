@@ -1,5 +1,5 @@
 using AdventureGame.Core.Constants;
-using AdventureGame.Core.Quest;
+using AdventureGame.Core.Quests;
 using UnityEngine;
 
 namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States
