@@ -301,16 +301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfeae033ff600f241a1c58a4e2fca108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrolRobot
-  data: {fileID: 0}
-  smokeEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
+  m_EnemyData: {fileID: 11400000, guid: cb749c19edfb5ce4590b2d70afef5160, type: 2}
+  m_SmokeEffect: {fileID: 1143592341643515301, guid: c4121383494e94343af7ee66e40abfbd,
     type: 3}
-  fixedEffectPrefab: {fileID: 7804789557617252717, guid: c072dc79414521c4f8f8a6a5ee60146e,
-    type: 3}
-  fixedClip: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
-  hitClip: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
-  patrolDirection: 0
-  patrolDuration: 0
-  speed: 0
+  m_PatrolDirection: 0
+  m_PatrolDuration: 0
+  m_PatrolSpeed: 0
 --- !u!1001 &8550109639471844839
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14295,8 +14295,7 @@ PrefabInstance:
         type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: aae692e55a3d5be4293a049968453da6,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: speed
@@ -14304,14 +14303,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
-      propertyPath: hitClip
+      propertyPath: m_EnemyData
       value: 
-      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
-    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
-        type: 3}
-      propertyPath: fixedClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+      objectReference: {fileID: 11400000, guid: cb749c19edfb5ce4590b2d70afef5160,
+        type: 2}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: smokeEffect
@@ -14320,7 +14315,17 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
+      propertyPath: m_PatrolSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
       propertyPath: patrolDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: m_PatrolDuration
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8176433548939661540, guid: 24916f3a589ccd6438db358b6aee46de,
@@ -14980,8 +14985,7 @@ PrefabInstance:
         type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: aae692e55a3d5be4293a049968453da6,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: speed
@@ -14989,14 +14993,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
-      propertyPath: hitClip
+      propertyPath: m_EnemyData
       value: 
-      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
-    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
-        type: 3}
-      propertyPath: fixedClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+      objectReference: {fileID: 11400000, guid: cb749c19edfb5ce4590b2d70afef5160,
+        type: 2}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: smokeEffect
@@ -15005,12 +15005,27 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
+      propertyPath: m_PatrolSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
       propertyPath: patrolDuration
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: patrolDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: m_PatrolDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: m_PatrolDirection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8176433548939661540, guid: 24916f3a589ccd6438db358b6aee46de,
@@ -15403,8 +15418,7 @@ PrefabInstance:
         type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: aae692e55a3d5be4293a049968453da6,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: speed
@@ -15412,14 +15426,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
-      propertyPath: hitClip
+      propertyPath: m_EnemyData
       value: 
-      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
-    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
-        type: 3}
-      propertyPath: fixedClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+      objectReference: {fileID: 11400000, guid: cb749c19edfb5ce4590b2d70afef5160,
+        type: 2}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: smokeEffect
@@ -15428,12 +15438,27 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
+      propertyPath: m_PatrolSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
       propertyPath: patrolDuration
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: patrolDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: m_PatrolDuration
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: m_PatrolDirection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8176433548939661540, guid: 24916f3a589ccd6438db358b6aee46de,
@@ -19782,8 +19807,7 @@ PrefabInstance:
         type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: aae692e55a3d5be4293a049968453da6,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: speed
@@ -19791,14 +19815,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
-      propertyPath: hitClip
+      propertyPath: m_EnemyData
       value: 
-      objectReference: {fileID: 8300000, guid: 683e01d57e63fe749866ca4fd3cc424c, type: 3}
-    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
-        type: 3}
-      propertyPath: fixedClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4e356d8e36201c14da953082c4d569ab, type: 3}
+      objectReference: {fileID: 11400000, guid: cb749c19edfb5ce4590b2d70afef5160,
+        type: 2}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
       propertyPath: smokeEffect
@@ -19807,7 +19827,17 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
         type: 3}
+      propertyPath: m_PatrolSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
       propertyPath: patrolDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355230372868098642, guid: 24916f3a589ccd6438db358b6aee46de,
+        type: 3}
+      propertyPath: m_PatrolDuration
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8176433548939661540, guid: 24916f3a589ccd6438db358b6aee46de,

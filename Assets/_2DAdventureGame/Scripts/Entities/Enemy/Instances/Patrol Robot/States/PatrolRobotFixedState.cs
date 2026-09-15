@@ -12,11 +12,11 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States
             owner.Animator.SetTrigger(AnimatorHashes.Fixed);
             owner.AudioSource.Stop();
         
-            if (owner.FixedClip != null) 
-                owner.AudioSource.PlayOneShot(owner.FixedClip);
+            if (owner.Data.FixedClip != null) 
+                owner.AudioSource.PlayOneShot(owner.Data.FixedClip);
         
-            if (owner.FixedEffectPrefab != null)
-                Object.Instantiate(owner.FixedEffectPrefab, owner.SpriteRenderer.bounds.center, Quaternion.identity);
+            if (owner.Data.FixedEffectPrefab != null)
+                Object.Instantiate(owner.Data.FixedEffectPrefab, owner.SpriteRenderer.bounds.center, Quaternion.identity);
         
             if (owner.SmokeEffect != null) 
                 owner.SmokeEffect.Stop();

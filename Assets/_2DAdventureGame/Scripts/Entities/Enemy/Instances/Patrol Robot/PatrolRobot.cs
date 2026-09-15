@@ -10,23 +10,12 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
 
     public class PatrolRobot : Enemy
     {
+        public new PatrolRobotData Data => (PatrolRobotData)base.Data;
+
         [Header("Patrol Robot Assets")]
-        
         [FormerlySerializedAs("smokeEffect")]
         [SerializeField] private ParticleSystem m_SmokeEffect;
-
-        [FormerlySerializedAs("fixedEffectPrefab")]
-        [SerializeField] private GameObject m_FixedEffectPrefab;
-
-        [FormerlySerializedAs("fixedClip")]
-        [SerializeField] private AudioClip m_FixedClip;
-
-        [FormerlySerializedAs("hitClip")]
-        [SerializeField] private AudioClip m_HitClip;
         public ParticleSystem SmokeEffect => m_SmokeEffect;
-        public GameObject FixedEffectPrefab => m_FixedEffectPrefab;
-        public AudioClip FixedClip => m_FixedClip;
-        public AudioClip HitClip => m_HitClip;
 
         [Header("Patrolling Properties")]
         [FormerlySerializedAs("patrolDirection")]
@@ -36,10 +25,10 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
         [SerializeField] private float m_PatrolDuration;
 
         [FormerlySerializedAs("speed")]
-        [SerializeField] private float m_Speed;
+        [SerializeField] private float m_PatrolSpeed;
         public PatrolDirection PatrolDirection => m_PatrolDirection;
         public float PatrolDuration => m_PatrolDuration;
-        public float Speed => m_Speed;
+        public float PatrolSpeed => m_PatrolSpeed;
 
         public int Direction { get; set; }
 
@@ -85,10 +74,10 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
             Rigidbody.simulated = false;
             Animator.SetTrigger(AnimatorHashes.Fixed);
             AudioSource.Stop();
-        
-            if (m_SmokeEffect != null) 
+
+            if (m_SmokeEffect != null)
                 m_SmokeEffect.Stop();
-        
+
             CurrentState = FixedState;
         }
 
@@ -96,18 +85,18 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
 
         void OnTriggerStay2D(Collider2D other)
         {
-            if (CurrentState == FixedState) 
+            if (CurrentState == FixedState)
                 return;
-        
-            if (!other.TryGetComponent(out Player.Player player)) 
+
+            if (!other.TryGetComponent(out Player.Player player))
                 return;
-        
-            if (player.IsInvincible) 
+
+            if (player.IsInvincible)
                 return;
 
             player.ApplyDamage(Data.ContactDamage);
-            if (m_HitClip != null) 
-                AudioSource.PlayOneShot(m_HitClip);
+            if (Data.HitClip != null)
+                AudioSource.PlayOneShot(Data.HitClip);
         }
     }
 }
