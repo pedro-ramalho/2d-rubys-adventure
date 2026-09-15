@@ -7,7 +7,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
     {
         public override void Enter(VendingMachine owner)
         {
-            owner.AudioSource.clip = owner.WalkingClip;
+            owner.AudioSource.clip = owner.Data.WalkClip;
             owner.AudioSource.loop = true;
             owner.AudioSource.Play();
         }
@@ -21,7 +21,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
                 Player.Player.Instance.Rigidbody.position
             );
 
-            if (distance <= owner.DetectionRadius)
+            if (distance <= owner.Data.DetectionRadius)
                 owner.ChangeState(owner.WindupState);
         }
 

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace AdventureGame.Entities.Enemy
 {
+    [CreateAssetMenu(fileName="VendingMachineData", menuName="Game/Vending Machine Data")]
     public class VendingMachineData : EnemyData
     {
         [Header("State Tints")]
