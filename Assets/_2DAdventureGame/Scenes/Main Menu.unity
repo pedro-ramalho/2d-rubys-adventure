@@ -860,16 +860,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281ff0b094622c249a61e24e16534686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuHandler
-  firstLevelSceneName: Level 0
-  backgroundPanSpeed: 0.15
-  backgroundPanAmplitudeX: 40
-  backgroundPanAmplitudeY: 20
-  backgroundScale: 1.15
-  titleBobSpeed: 1.5
-  titleBobAmplitude: 6
-  clickAudioSource: {fileID: 1702979294}
-  clickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
-  startGameFadeDuration: 5
+  m_FirstLevelSceneName: Level 0
+  m_BackgroundPanSpeed: 0.15
+  m_BackgroundPanAmplitudeX: 40
+  m_BackgroundPanAmplitudeY: 20
+  m_BackgroundScale: 1.15
+  m_TitleBobSpeed: 1.5
+  m_TitleBobAmplitude: 6
+  m_ClickAudioSource: {fileID: 1702979294}
+  m_ClickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
+  m_StartGameFadeDuration: 5
 --- !u!114 &1702979293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573375f049e0fa442b0d134104947527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsHandler
-  audioMixer: {fileID: 24100000, guid: 5cf4539cf7187af46b3744f35d1298b8, type: 2}
+  m_AudioMixer: {fileID: 24100000, guid: 5cf4539cf7187af46b3744f35d1298b8, type: 2}
 --- !u!82 &1702979294
 AudioSource:
   m_ObjectHideFlags: 0

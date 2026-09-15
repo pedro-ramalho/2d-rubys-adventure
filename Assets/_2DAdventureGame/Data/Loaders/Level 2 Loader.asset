@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebef12bbe98183743a0633ce8c9e6762, type: 3}
   m_Name: Level 2 Loader
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  sceneName: Level 2
-  preTransitionDelay: 4
+  m_SceneName: Level 2
+  m_PreTransitionDelay: 4

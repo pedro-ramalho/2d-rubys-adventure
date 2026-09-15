@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466b6caa05a0d02478f961cd11a1ef67, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  maxHealth: 5
-  startingHealth: 3
-  invincibilityDuration: 2
-  speed: 3
-  acceleration: 20
-  deceleration: 25
-  dashSpeed: 18
-  dashDuration: 0.15
-  dashCooldown: 0.5
-  projectileLaunchForce: 300
-  shootDuration: 0.35
-  afterimageColor: {r: 0.5, g: 0.8, b: 1, a: 0.6}
-  afterimageInterval: 0.05
-  afterimageLingerDuration: 0.3
+  MaxHealth: 5
+  StartingHealth: 3
+  InvincibilityDuration: 2
+  Speed: 3
+  Acceleration: 20
+  Deceleration: 25
+  DashSpeed: 15
+  DashDuration: 0.15
+  DashCooldown: 1
+  ProjectileLaunchForce: 300
+  ShootDuration: 0.35
+  AfterimageColor: {r: 0.5, g: 0.8, b: 1, a: 0.6}
+  AfterimageInterval: 0.05
+  AfterimageLingerDuration: 0.3

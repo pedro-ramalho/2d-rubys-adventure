@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
   m_Name: L1Q1 Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
-  quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
-  before:
-    lines:
+  Quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
+  Before:
+    Lines:
     - Oh no... My boxes... Where could they be...
     - Hm?
     - Wait a second... You're not stealing them, are you?
@@ -26,20 +26,20 @@ MonoBehaviour:
     - You can dash around by pressing E. While dashing, you are briefly immune to
       damage, so make the most of it!
     - Lastly, if you'd like to see how many boxes you've found, press TAB!
-    questToGrantAfter: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+    QuestToGrantAfter: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
       type: 2}
-    onExhausted:
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []
-  during:
-    lines:
+  During:
+    Lines:
     - These boxes are really important...
-    questToGrantAfter: {fileID: 0}
-    onExhausted:
+    QuestToGrantAfter: {fileID: 0}
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []
-  after:
-    lines:
+  After:
+    Lines:
     - You found them! Thank you so much!
     - I suppose you didn't come all this way just to help a merchant recover their
       lost cargo.
@@ -49,7 +49,7 @@ MonoBehaviour:
     - They know much more about the situation than I do.
     - Head east and follow the pavement. You should run into them before long!
     - Take care!
-    questToGrantAfter: {fileID: 0}
-    onExhausted:
+    QuestToGrantAfter: {fileID: 0}
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []

@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8375760135cc61340bf3df0c9508fa7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransitioner
-  transition: {fileID: 3674889081238835656}
+  m_TransitionAnimator: {fileID: 3674889081238835656}
+  m_StartTrigger: Start
+  m_FadeOutClipName: CrossfadeStart_Animation
+  m_PreTransitionDelay: 1.5
 --- !u!1 &784132902540217848
 GameObject:
   m_ObjectHideFlags: 0

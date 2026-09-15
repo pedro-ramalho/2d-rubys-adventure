@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50920f81f80be7e4483e60c73f39f8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityManager
-  startingAbilities: -1
+  m_StartingAbilities: -1

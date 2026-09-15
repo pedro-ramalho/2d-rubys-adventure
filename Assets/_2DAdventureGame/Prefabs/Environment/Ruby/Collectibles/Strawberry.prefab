@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a292d1066a6a5144aa5a19a01d99d958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthCollectible
-  collectibleClip: {fileID: 0}
-  healAmount: 0
+  m_CollectibleClip: {fileID: 0}
+  m_HealAmount: 0
 --- !u!95 &2984617056152578098
 Animator:
   serializedVersion: 7

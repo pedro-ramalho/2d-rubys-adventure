@@ -12,34 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
   m_Name: L2Q1 Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
-  quest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
-  before:
-    lines:
+  Quest: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13, type: 2}
+  Before:
+    Lines:
     - Ruby?! Ruby came all the way to Sugar Land!
     - But not to play with Marshmallow it seems!
     - Marshmallow did nothing wrong!
     - Marshmallow was just playing around!
     - Marshmallow will not stop! Ruby can't stop me!
-    questToGrantAfter: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13,
+    QuestToGrantAfter: {fileID: 11400000, guid: ce4d4dbd961978e4f8eb82d846b71b13,
       type: 2}
-    onExhausted:
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []
-  during:
-    lines:
+  During:
+    Lines:
     - This line will never be reached.
-    questToGrantAfter: {fileID: 0}
-    onExhausted:
+    QuestToGrantAfter: {fileID: 0}
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []
-  after:
-    lines:
+  After:
+    Lines:
     - ...Ruby broke all of Marshmallow's machines...
     - Now Marshmallow can't play anymore...
     - You win, Ruby...
     - 'Marshmallow won''t tinker with the machines... '
     - Everything will go back to normal...
-    questToGrantAfter: {fileID: 0}
-    onExhausted:
+    QuestToGrantAfter: {fileID: 0}
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []

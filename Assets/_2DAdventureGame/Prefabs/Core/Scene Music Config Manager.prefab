@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7defd65e1bb7b3e4abb3342171f59bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMusicConfigManager
-  defaultTrack: {fileID: 8300000, guid: bdc12d7cffa263244ab31e4789ea5052, type: 3}
+  m_DefaultTrack: {fileID: 8300000, guid: bdc12d7cffa263244ab31e4789ea5052, type: 3}

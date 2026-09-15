@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68dc5fe6796b57c4a95ea7329cd8453a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  dialogues:
+  m_DialogueLines:
   - {fileID: 11400000, guid: 6f7881bece595a14c95d495631269121, type: 2}
 --- !u!1001 &8864516324353799161
 PrefabInstance:
