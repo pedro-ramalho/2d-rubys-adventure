@@ -7,7 +7,8 @@ namespace AdventureGame.Entities.NPC
     [RequireComponent(typeof(Marshmallow))]
     public class MarshmallowChoreographer : MonoBehaviour
     {
-        [SerializeField] private QuestData m_QuestData;
+        [SerializeField]
+        private QuestData m_QuestData;
 
         private Marshmallow m_Marshmallow;
         private Quest m_Quest;

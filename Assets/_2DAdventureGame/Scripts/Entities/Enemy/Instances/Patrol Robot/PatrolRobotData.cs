@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AdventureGame.Entities.Enemy
 {
-    [CreateAssetMenu(fileName="PatrolRobotData", menuName="Game/Patrol Robot Data")]
+    [CreateAssetMenu(fileName = "PatrolRobotData", menuName = "Game/Patrol Robot Data")]
     public class PatrolRobotData : EnemyData
     {
         [Header("Fixed Properties")]

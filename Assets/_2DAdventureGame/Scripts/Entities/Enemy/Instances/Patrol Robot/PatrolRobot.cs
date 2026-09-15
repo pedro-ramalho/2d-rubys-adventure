@@ -6,22 +6,30 @@ using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
 {
-    public enum PatrolDirection { Horizontal, Vertical }
+    public enum PatrolDirection
+    {
+        Horizontal,
+        Vertical,
+    }
 
     public class PatrolRobot : Enemy
     {
         public new PatrolRobotData Data => (PatrolRobotData)base.Data;
 
         [Header("Patrol Robot Assets")]
-        [SerializeField] private ParticleSystem m_SmokeEffect;
+        [SerializeField]
+        private ParticleSystem m_SmokeEffect;
         public ParticleSystem SmokeEffect => m_SmokeEffect;
 
         [Header("Patrolling Properties")]
-        [SerializeField] private PatrolDirection m_PatrolDirection;
+        [SerializeField]
+        private PatrolDirection m_PatrolDirection;
 
-        [SerializeField] private float m_PatrolDuration;
+        [SerializeField]
+        private float m_PatrolDuration;
 
-        [SerializeField] private float m_PatrolSpeed;
+        [SerializeField]
+        private float m_PatrolSpeed;
         public PatrolDirection PatrolDirection => m_PatrolDirection;
         public float PatrolDuration => m_PatrolDuration;
         public float PatrolSpeed => m_PatrolSpeed;

@@ -6,9 +6,11 @@ namespace AdventureGame.Environment.Projectiles
     [RequireComponent(typeof(Rigidbody2D))]
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] private float m_MaxLifetime = 3f;
+        [SerializeField]
+        private float m_MaxLifetime = 3f;
 
-        [SerializeField] private GameObject m_HitEffectPrefab;
+        [SerializeField]
+        private GameObject m_HitEffectPrefab;
 
         private Rigidbody2D m_Rigidbody;
 
@@ -28,7 +30,7 @@ namespace AdventureGame.Environment.Projectiles
         {
             if (m_HitEffectPrefab != null)
                 Instantiate(m_HitEffectPrefab, transform.position, Quaternion.identity);
-        
+
             Destroy(gameObject);
         }
     }

@@ -1,6 +1,6 @@
 namespace AdventureGame.Entities
 {
-    public interface IDamageable 
+    public interface IDamageable
     {
         void ApplyDamage(int amount);
     }

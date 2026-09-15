@@ -10,25 +10,32 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(UIDocument))]
     public class DialoguePresenter : SceneSingleton<DialoguePresenter>
     {
-        [SerializeField] private float m_DisplayTime = 4.0f;
+        [SerializeField]
+        private float m_DisplayTime = 4.0f;
 
-        [SerializeField] private AudioClip m_ClickClip;
+        [SerializeField]
+        private AudioClip m_ClickClip;
 
         [Header("Typewriter")]
-        [SerializeField] private float m_TypeInterval = 0.03f;
+        [SerializeField]
+        private float m_TypeInterval = 0.03f;
 
-        [SerializeField] private AudioClip m_TypeClip;
+        [SerializeField]
+        private AudioClip m_TypeClip;
+
         [Tooltip("Play the type SFX every Nth visible character.")]
+        [SerializeField]
+        private int m_TypeClipEveryNChars = 2;
 
-        [SerializeField] private int m_TypeClipEveryNChars = 2;
-
-        [SerializeField] private float m_TypeClipPitchJitter = 0.08f;
+        [SerializeField]
+        private float m_TypeClipPitchJitter = 0.08f;
 
         private VisualElement m_DialoguePanel;
         private Label m_DialogueLabel;
 
         [Header("Dialogue Range")]
-        [SerializeField] private float m_DialogueMaxDistance = 5f;
+        [SerializeField]
+        private float m_DialogueMaxDistance = 5f;
 
         private Player m_Player;
         private Coroutine m_TypeCoroutine;
@@ -59,7 +66,7 @@ namespace AdventureGame.UI
         void Start()
         {
             UIDocument uiDocument = GetComponent<UIDocument>();
-        
+
             m_DialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
             m_DialogueLabel = m_DialoguePanel.Q<Label>("DialogueText");
 
@@ -79,6 +86,7 @@ namespace AdventureGame.UI
         }
 
         public void DisplayDialogueWithLine(string line) => DisplayDialogueWithLine(line, null);
+
         public void DisplayDialogueWithLine(string line, Transform speaker)
         {
             m_CurrentSpeaker = speaker;
@@ -91,7 +99,7 @@ namespace AdventureGame.UI
                 audio.PlayOneShot(m_ClickClip);
 
             CancelInvoke(nameof(HideDialogue));
-        
+
             if (m_TypeCoroutine != null)
                 StopCoroutine(m_TypeCoroutine);
 
@@ -105,17 +113,17 @@ namespace AdventureGame.UI
 
         public void Skip()
         {
-            if (m_TypeCoroutine == null) 
+            if (m_TypeCoroutine == null)
                 return;
-        
+
             StopCoroutine(m_TypeCoroutine);
-        
+
             m_TypeCoroutine = null;
-        
+
             RestoreTypingAudio();
-        
+
             m_DialogueLabel.text = m_CurrentLine;
-        
+
             Invoke(nameof(HideDialogue), m_DisplayTime);
         }
 
@@ -137,9 +145,14 @@ namespace AdventureGame.UI
                 if (!char.IsWhiteSpace(c))
                 {
                     visibleCount++;
-                    if (m_TypeClip != null && audio != null && visibleCount % m_TypeClipEveryNChars == 0)
+                    if (
+                        m_TypeClip != null
+                        && audio != null
+                        && visibleCount % m_TypeClipEveryNChars == 0
+                    )
                     {
-                        float pitch = 1f + Random.Range(-m_TypeClipPitchJitter, m_TypeClipPitchJitter);
+                        float pitch =
+                            1f + Random.Range(-m_TypeClipPitchJitter, m_TypeClipPitchJitter);
                         audio.pitch = pitch;
                         audio.PlayOneShot(m_TypeClip);
                     }
@@ -149,9 +162,9 @@ namespace AdventureGame.UI
             }
 
             RestoreTypingAudio();
-        
+
             m_TypeCoroutine = null;
-        
+
             Invoke(nameof(HideDialogue), m_DisplayTime);
         }
 
@@ -161,9 +174,9 @@ namespace AdventureGame.UI
             if (m_TypeCoroutine != null)
             {
                 StopCoroutine(m_TypeCoroutine);
-            
+
                 m_TypeCoroutine = null;
-            
+
                 RestoreTypingAudio();
             }
 

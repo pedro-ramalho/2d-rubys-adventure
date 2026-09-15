@@ -7,7 +7,8 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(UIDocument))]
     public class InteractPromptPresenter : SceneSingleton<InteractPromptPresenter>
     {
-        [SerializeField] private float m_PromptFadeDuration = 0.15f;
+        [SerializeField]
+        private float m_PromptFadeDuration = 0.15f;
 
         private VisualElement m_Panel;
         private Label m_Label;

@@ -10,14 +10,18 @@ namespace AdventureGame.Core.Scene
 {
     public class SceneTransitioner : SceneSingleton<SceneTransitioner>
     {
-        [SerializeField] private Animator m_TransitionAnimator;
+        [SerializeField]
+        private Animator m_TransitionAnimator;
 
-        [SerializeField] private string m_StartTrigger = "Start";
+        [SerializeField]
+        private string m_StartTrigger = "Start";
 
-        [SerializeField] private string m_FadeOutClipName = "CrossfadeStart_Animation";
-        
-        [SerializeField] private float m_PreTransitionDelay = 1.5f;
-        
+        [SerializeField]
+        private string m_FadeOutClipName = "CrossfadeStart_Animation";
+
+        [SerializeField]
+        private float m_PreTransitionDelay = 1.5f;
+
         private float m_FadeOutDuration = 1f;
 
         public bool IsTransitioning { get; private set; }
@@ -25,14 +29,18 @@ namespace AdventureGame.Core.Scene
         protected override void Awake()
         {
             base.Awake();
-            if (Instance != this) return;
+            if (Instance != this)
+                return;
 
             m_FadeOutDuration = ResolveClipLength(m_FadeOutClipName);
         }
 
         float ResolveClipLength(string clipName)
         {
-            if (m_TransitionAnimator == null || m_TransitionAnimator.runtimeAnimatorController == null)
+            if (
+                m_TransitionAnimator == null
+                || m_TransitionAnimator.runtimeAnimatorController == null
+            )
                 return 1f;
 
             foreach (var clip in m_TransitionAnimator.runtimeAnimatorController.animationClips)
@@ -65,7 +73,7 @@ namespace AdventureGame.Core.Scene
 
             if (HealthBarHUD.Instance != null)
                 HealthBarHUD.Instance.Hide();
-        
+
             m_TransitionAnimator.SetTrigger(m_StartTrigger);
 
             yield return new WaitForSeconds(m_FadeOutDuration);

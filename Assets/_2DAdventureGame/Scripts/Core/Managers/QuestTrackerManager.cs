@@ -10,7 +10,8 @@ namespace AdventureGame.Core.Managers
 {
     public class QuestTrackerManager : MonoBehaviour
     {
-        [SerializeField] private UIDocument m_TrackerUiDocument;
+        [SerializeField]
+        private UIDocument m_TrackerUiDocument;
 
         private PlayerInputActions m_InputActions;
         private VisualElement m_TrackerRoot;
@@ -79,7 +80,12 @@ namespace AdventureGame.Core.Managers
 
         void Update()
         {
-            if (PauseManager.IsPaused || (SceneTransitioner.Instance != null && SceneTransitioner.Instance.IsTransitioning))
+            if (
+                PauseManager.IsPaused
+                || (
+                    SceneTransitioner.Instance != null && SceneTransitioner.Instance.IsTransitioning
+                )
+            )
             {
                 SetVisible(false);
 
@@ -92,10 +98,10 @@ namespace AdventureGame.Core.Managers
 
         void OnTrackerPressed(InputAction.CallbackContext ctx)
         {
-            if (PauseManager.IsPaused) 
+            if (PauseManager.IsPaused)
                 return;
-        
-            if (m_CompletionPending != null) 
+
+            if (m_CompletionPending != null)
                 return;
 
             m_IsOpen = !m_IsOpen;
@@ -107,14 +113,14 @@ namespace AdventureGame.Core.Managers
         {
             if (m_CompletionPending != null)
             {
-                if (m_DescriptionLabel != null) 
+                if (m_DescriptionLabel != null)
                     m_DescriptionLabel.text = k_CompletionMessage;
-            
-                if (m_ProgressLabel != null) 
+
+                if (m_ProgressLabel != null)
                     m_ProgressLabel.text = string.Empty;
-            
+
                 SetVisible(true);
-            
+
                 return;
             }
 
@@ -151,7 +157,11 @@ namespace AdventureGame.Core.Managers
                 return null;
 
             foreach (Quest q in QuestManager.Instance.All)
-                if (q.Phase == QuestPhase.During && q.Data != null && q.Data.CompletionMode == QuestCompletionMode.Counted)
+                if (
+                    q.Phase == QuestPhase.During
+                    && q.Data != null
+                    && q.Data.CompletionMode == QuestCompletionMode.Counted
+                )
                     return q;
 
             return null;

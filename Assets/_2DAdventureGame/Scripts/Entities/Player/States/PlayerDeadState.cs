@@ -18,7 +18,8 @@ namespace AdventureGame.Entities.Player.States
 
             Time.timeScale = 0f;
 
-            if (EndScreenPresenter.Instance != null) EndScreenPresenter.Instance.DisplayLoseScreen();
+            if (EndScreenPresenter.Instance != null)
+                EndScreenPresenter.Instance.DisplayLoseScreen();
             owner.StartCoroutine(ReloadAfterDelay());
         }
 
@@ -29,7 +30,11 @@ namespace AdventureGame.Entities.Player.States
 
             string currentScene = SceneManager.GetActiveScene().name;
             if (SceneTransitioner.Instance != null)
-                SceneTransitioner.Instance.LoadSceneWithCrossfade(currentScene, 0f, writeSave: false);
+                SceneTransitioner.Instance.LoadSceneWithCrossfade(
+                    currentScene,
+                    0f,
+                    writeSave: false
+                );
             else
                 SceneManager.LoadScene(currentScene);
         }

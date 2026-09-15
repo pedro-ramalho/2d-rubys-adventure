@@ -20,8 +20,9 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
             owner.AudioSource.PlayOneShot(owner.Data.ChargeClip);
         }
 
-        public override void Exit(VendingMachine owner) => owner.Animator.SetBool(AnimatorHashes.ChargingHorizontal, false);
-    
+        public override void Exit(VendingMachine owner) =>
+            owner.Animator.SetBool(AnimatorHashes.ChargingHorizontal, false);
+
         public override void Update(VendingMachine owner)
         {
             m_Timer += Time.deltaTime;

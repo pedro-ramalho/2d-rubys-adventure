@@ -4,6 +4,6 @@ namespace AdventureGame.Core.Quests
     {
         Before,
         During,
-        After
+        After,
     }
 }

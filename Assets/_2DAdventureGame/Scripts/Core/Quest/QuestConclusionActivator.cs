@@ -9,10 +9,12 @@ namespace AdventureGame.Core.Quests
     public class QuestConclusionActivator : MonoBehaviour
     {
         [FormerlySerializedAs("m_QuestData")]
-        [SerializeField] private QuestData m_Quest;
+        [SerializeField]
+        private QuestData m_Quest;
 
         [FormerlySerializedAs("m_TargetGameObject")]
-        [SerializeField] private GameObject m_Target;
+        [SerializeField]
+        private GameObject m_Target;
 
         void Start()
         {

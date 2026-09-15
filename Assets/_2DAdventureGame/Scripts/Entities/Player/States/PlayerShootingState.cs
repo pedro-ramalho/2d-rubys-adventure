@@ -33,7 +33,7 @@ namespace AdventureGame.Entities.Player.States
             if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f)
             {
                 owner.ChangeState(owner.DashingState);
-            
+
                 return;
             }
 

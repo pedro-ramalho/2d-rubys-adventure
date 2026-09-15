@@ -14,13 +14,13 @@ namespace AdventureGame.UI
         void Start()
         {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-            
+
             m_Hud = root.Q<VisualElement>("HealthBarBackground");
             m_HealthBar = root.Q<VisualElement>("HealthBar");
 
             m_Player = Player.Instance;
             m_Player.OnHealthChanged += OnPlayerHealthChanged;
-            
+
             OnPlayerHealthChanged(m_Player.CurrentHealth / (float)m_Player.Data.MaxHealth);
         }
 
@@ -36,12 +36,12 @@ namespace AdventureGame.UI
         {
             if (m_Hud == null)
                 return;
-            
+
             m_Hud.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
-        
+
         public void Show() => SetVisible(true);
-        
+
         public void Hide() => SetVisible(false);
 
         private void OnPlayerHealthChanged(float percentage)

@@ -12,16 +12,17 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(UIDocument))]
     public class OptionsHandler : MonoBehaviour
     {
-        [SerializeField] private AudioMixer m_AudioMixer;
+        [SerializeField]
+        private AudioMixer m_AudioMixer;
 
         private const float k_DefaultVolume = 1f;
         private const float k_MinDb = -80f;
 
         private static readonly (string Slider, string Param)[] VolumeEntries =
         {
-            ("MasterVolumeSlider",  "MasterVolume"),
-            ("MusicVolumeSlider",   "MusicVolume"),
-            ("SfxVolumeSlider",     "SfxVolume"),
+            ("MasterVolumeSlider", "MasterVolume"),
+            ("MusicVolumeSlider", "MusicVolume"),
+            ("SfxVolumeSlider", "SfxVolume"),
             ("AmbientVolumeSlider", "AmbientVolume"),
         };
 
@@ -56,18 +57,18 @@ namespace AdventureGame.UI
 
             PlayerInputActions a = InputManager.Instance.Actions;
             InputAction move = a.Player.Movement;
-        
+
             rebindEntries = new (string, InputAction, int)[]
             {
-                ("DashRebindButton",           a.Player.Dash,  0),
-                ("ShootRebindButton",          a.Player.Shoot, 0),
-                ("UpPrimaryRebindButton",      move, 1),
-                ("DownPrimaryRebindButton",    move, 2),
-                ("LeftPrimaryRebindButton",    move, 3),
-                ("RightPrimaryRebindButton",   move, 4),
-                ("UpSecondaryRebindButton",    move, 6),
-                ("DownSecondaryRebindButton",  move, 7),
-                ("LeftSecondaryRebindButton",  move, 8),
+                ("DashRebindButton", a.Player.Dash, 0),
+                ("ShootRebindButton", a.Player.Shoot, 0),
+                ("UpPrimaryRebindButton", move, 1),
+                ("DownPrimaryRebindButton", move, 2),
+                ("LeftPrimaryRebindButton", move, 3),
+                ("RightPrimaryRebindButton", move, 4),
+                ("UpSecondaryRebindButton", move, 6),
+                ("DownSecondaryRebindButton", move, 7),
+                ("LeftSecondaryRebindButton", move, 8),
                 ("RightSecondaryRebindButton", move, 9),
             };
 
@@ -90,7 +91,7 @@ namespace AdventureGame.UI
         {
             Slider slider = m_OptionsRoot.Q<Slider>(sliderName);
             slider.SetValueWithoutNotify(k_DefaultVolume);
-        
+
             ApplyVolume(mixerParam, k_DefaultVolume);
             PlayerPrefs.DeleteKey(mixerParam);
         }
@@ -121,7 +122,12 @@ namespace AdventureGame.UI
             m_AudioMixer.SetFloat(mixerParam, dB);
         }
 
-        void WireRebindButton(VisualElement root, string buttonName, InputAction action, int bindingIndex)
+        void WireRebindButton(
+            VisualElement root,
+            string buttonName,
+            InputAction action,
+            int bindingIndex
+        )
         {
             Button button = root.Q<Button>(buttonName);
             button.text = GetBindingDisplayName(action, bindingIndex);
@@ -133,14 +139,16 @@ namespace AdventureGame.UI
 
         void StartRebind(InputAction action, int bindingIndex, Button button)
         {
-            if (m_IsRebinding) return;
+            if (m_IsRebinding)
+                return;
             m_IsRebinding = true;
 
             action.Disable();
             button.SetEnabled(false);
             button.text = "Press a key...";
 
-            action.PerformInteractiveRebinding(bindingIndex)
+            action
+                .PerformInteractiveRebinding(bindingIndex)
                 .WithControlsExcluding("Mouse")
                 .WithCancelingThrough("<Keyboard>/escape")
                 .OnComplete(op =>
@@ -166,25 +174,26 @@ namespace AdventureGame.UI
         static string GetBindingDisplayName(InputAction action, int bindingIndex)
         {
             string path = action.bindings[bindingIndex].effectivePath;
-            if (string.IsNullOrEmpty(path)) 
+            if (string.IsNullOrEmpty(path))
                 return string.Empty;
-        
+
             int slashIdx = path.LastIndexOf('/');
             string keyName = slashIdx >= 0 ? path.Substring(slashIdx + 1) : path;
-        
+
             return FormatKeyName(keyName);
         }
 
         static string FormatKeyName(string raw)
         {
-            if (string.IsNullOrEmpty(raw)) 
+            if (string.IsNullOrEmpty(raw))
                 return raw;
-        
+
             StringBuilder sb = new StringBuilder();
             sb.Append(char.ToUpperInvariant(raw[0]));
             for (int i = 1; i < raw.Length; i++)
             {
-                if (char.IsUpper(raw[i])) sb.Append(' ');
+                if (char.IsUpper(raw[i]))
+                    sb.Append(' ');
                 sb.Append(raw[i]);
             }
 
@@ -194,9 +203,9 @@ namespace AdventureGame.UI
         public void Open()
         {
             m_OptionsRoot.style.display = DisplayStyle.Flex;
-        
+
             RefreshDeleteSaveButton();
-        
+
             Opened?.Invoke();
         }
 
@@ -211,16 +220,16 @@ namespace AdventureGame.UI
         void RefreshDeleteSaveButton()
         {
             Button button = m_OptionsRoot.Q<Button>("DeleteSaveButton");
-        
+
             bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasSave;
-        
+
             button.SetEnabled(hasSave);
         }
 
         public void Close()
         {
             m_OptionsRoot.style.display = DisplayStyle.None;
-        
+
             Closed?.Invoke();
         }
     }

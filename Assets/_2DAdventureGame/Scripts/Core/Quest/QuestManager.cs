@@ -21,7 +21,9 @@ namespace AdventureGame.Core.Quests
                 return;
 
             if (m_Quests.TryGetValue(quest.Data.Id, out Quest existing) && existing != quest)
-                Debug.LogWarning($"[QuestManager] Duplicate quest id '{quest.Data.Id}' on '{quest.name}' overwrites '{existing.name}'.");
+                Debug.LogWarning(
+                    $"[QuestManager] Duplicate quest id '{quest.Data.Id}' on '{quest.name}' overwrites '{existing.name}'."
+                );
 
             m_Quests[quest.Data.Id] = quest;
         }

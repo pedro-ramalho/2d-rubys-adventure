@@ -7,14 +7,15 @@ using UnityEngine.Serialization;
 namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine
 {
     public class VendingMachine : Enemy
-    {  
+    {
         public new VendingMachineData Data => (VendingMachineData)base.Data;
 
         public SpriteRenderer SpriteRenderer { get; private set; }
         public Color BaseColor { get; private set; }
 
         public Vector2 ChargeDirection { get; set; }
-        public bool IsChargeHorizontal => Mathf.Abs(ChargeDirection.x) > Mathf.Abs(ChargeDirection.y);
+        public bool IsChargeHorizontal =>
+            Mathf.Abs(ChargeDirection.x) > Mathf.Abs(ChargeDirection.y);
 
         public VendingMachineState CurrentState { get; private set; }
         public VendingMachineMovingState MovingState { get; private set; }
@@ -49,7 +50,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine
                 SpawnExplosion(SpriteRenderer.bounds.center);
                 GetComponent<QuestReporter>()?.Report();
                 Destroy(gameObject);
-            
+
                 return;
             }
 
@@ -62,7 +63,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine
                     SpawnExplosion(collision.GetContact(0).point);
                     ChangeState(StunnedState);
                 }
-            
+
                 return;
             }
 

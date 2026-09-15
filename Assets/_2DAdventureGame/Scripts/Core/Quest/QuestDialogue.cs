@@ -21,9 +21,9 @@ namespace AdventureGame.Core.Quests
 
             DialoguePhase chosen = phase switch
             {
-                QuestPhase.After  => After,
+                QuestPhase.After => After,
                 QuestPhase.During => During,
-                _                 => Before
+                _ => Before,
             };
 
             return chosen != null && !chosen.IsEmpty ? chosen : null;

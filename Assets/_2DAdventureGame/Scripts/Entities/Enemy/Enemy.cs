@@ -10,7 +10,8 @@ namespace AdventureGame.Entities.Enemy
     public abstract class Enemy : MonoBehaviour
     {
         [Header("Enemy Data")]
-        [SerializeField] private EnemyData m_EnemyData;
+        [SerializeField]
+        private EnemyData m_EnemyData;
         public EnemyData Data => m_EnemyData;
 
         // Components
@@ -39,14 +40,18 @@ namespace AdventureGame.Entities.Enemy
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out Projectile _)) OnProjectileHit();
+            if (other.TryGetComponent(out Projectile _))
+                OnProjectileHit();
         }
 
         void HandlePlayerDied()
         {
-            if (AudioSource != null) AudioSource.Stop();
-            if (Animator != null) Animator.enabled = false;
-            if (Rigidbody != null) Rigidbody.simulated = false;
+            if (AudioSource != null)
+                AudioSource.Stop();
+            if (Animator != null)
+                Animator.enabled = false;
+            if (Rigidbody != null)
+                Rigidbody.simulated = false;
             enabled = false;
         }
 

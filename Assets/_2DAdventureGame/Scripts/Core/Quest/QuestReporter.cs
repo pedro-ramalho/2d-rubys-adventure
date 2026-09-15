@@ -5,16 +5,18 @@ namespace AdventureGame.Core.Quests
 {
     public class QuestReporter : MonoBehaviour
     {
-        [SerializeField] private QuestData m_QuestData;
+        [SerializeField]
+        private QuestData m_QuestData;
 
-        [SerializeField] private string m_WorldId;
+        [SerializeField]
+        private string m_WorldId;
 
         public QuestData Data => m_QuestData;
 
         public void Report()
         {
             Quest quest = GetQuest();
-            if (quest != null) 
+            if (quest != null)
                 quest.TryReport(m_WorldId);
         }
 

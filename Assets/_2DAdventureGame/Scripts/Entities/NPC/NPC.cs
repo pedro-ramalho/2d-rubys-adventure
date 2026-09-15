@@ -10,7 +10,8 @@ namespace AdventureGame.Entities.NPC
 {
     public class NPC : MonoBehaviour
     {
-        [SerializeField] private List<QuestDialogue> m_DialogueLines;
+        [SerializeField]
+        private List<QuestDialogue> m_DialogueLines;
 
         private DialoguePhase m_CurrentDialoguePhase;
         private QuestDialogue m_CurrentDialogue;
@@ -25,7 +26,10 @@ namespace AdventureGame.Entities.NPC
             {
                 foreach (QuestDialogue dialogue in m_DialogueLines)
                 {
-                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(dialogue.Quest) : null;
+                    Quest quest =
+                        QuestManager.Instance != null
+                            ? QuestManager.Instance.Get(dialogue.Quest)
+                            : null;
                     DialoguePhase phase = dialogue.Pick(quest);
                     if (phase != null)
                     {
@@ -45,13 +49,19 @@ namespace AdventureGame.Entities.NPC
                     OnEpilogueStarted?.Invoke(m_CurrentDialogue.Quest);
             }
 
-            DialoguePresenter.Instance.DisplayDialogueWithLine(m_CurrentDialoguePhase.Lines[lineIndex++], transform);
+            DialoguePresenter.Instance.DisplayDialogueWithLine(
+                m_CurrentDialoguePhase.Lines[lineIndex++],
+                transform
+            );
 
             if (lineIndex >= m_CurrentDialoguePhase.Lines.Count)
             {
                 if (m_CurrentDialoguePhase.QuestToGrantAfter != null)
                 {
-                    Quest quest = QuestManager.Instance != null ? QuestManager.Instance.Get(m_CurrentDialoguePhase.QuestToGrantAfter) : null;
+                    Quest quest =
+                        QuestManager.Instance != null
+                            ? QuestManager.Instance.Get(m_CurrentDialoguePhase.QuestToGrantAfter)
+                            : null;
                     if (quest != null)
                         quest.Accept();
                 }

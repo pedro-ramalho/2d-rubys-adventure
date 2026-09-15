@@ -11,18 +11,29 @@ namespace AdventureGame.UI
     {
         public static UIHandler Instance { get; private set; }
 
-        [SerializeField] private float displayTime = 4.0f;
-        [SerializeField] private AudioClip clickClip;
+        [SerializeField]
+        private float displayTime = 4.0f;
+
+        [SerializeField]
+        private AudioClip clickClip;
 
         [Header("Typewriter")]
-        [SerializeField] private float typeInterval = 0.03f;
-        [SerializeField] private AudioClip typeClip;
+        [SerializeField]
+        private float typeInterval = 0.03f;
+
+        [SerializeField]
+        private AudioClip typeClip;
+
         [Tooltip("Play the type SFX every Nth visible character.")]
-        [SerializeField] private int typeClipEveryNChars = 2;
-        [SerializeField] private float typeClipPitchJitter = 0.08f;
+        [SerializeField]
+        private int typeClipEveryNChars = 2;
+
+        [SerializeField]
+        private float typeClipPitchJitter = 0.08f;
 
         [Header("Prompt Fade")]
-        [SerializeField] private float promptFadeDuration = 0.15f;
+        [SerializeField]
+        private float promptFadeDuration = 0.15f;
 
         private VisualElement hud;
         private VisualElement healthBar;
@@ -32,12 +43,18 @@ namespace AdventureGame.UI
         private VisualElement loseScreen;
 
         [Header("Dialogue Range")]
-        [SerializeField] private float dialogueMaxDistance = 5f;
+        [SerializeField]
+        private float dialogueMaxDistance = 5f;
 
         [Header("End Screens")]
-        [SerializeField] private AudioSource stingerSource;
-        [SerializeField] private AudioClip defeatSting;
-        [SerializeField] private float musicFadeOnEndScreen = 2f;
+        [SerializeField]
+        private AudioSource stingerSource;
+
+        [SerializeField]
+        private AudioClip defeatSting;
+
+        [SerializeField]
+        private float musicFadeOnEndScreen = 2f;
 
         private Player player;
         private Coroutine typeRoutine;
@@ -54,7 +71,8 @@ namespace AdventureGame.UI
 
         void Awake()
         {
-            if (Instance == null) Instance = this;
+            if (Instance == null)
+                Instance = this;
         }
 
         void Update()
@@ -76,7 +94,7 @@ namespace AdventureGame.UI
             UIDocument uiDocument = GetComponent<UIDocument>();
             hud = uiDocument.rootVisualElement.Q<VisualElement>("HealthBarBackground");
             healthBar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
-        
+
             dialoguePanel = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
             dialogueText = dialoguePanel.Q<Label>("DialogueText");
 
@@ -105,9 +123,9 @@ namespace AdventureGame.UI
         void RestoreTypingAudio()
         {
             AudioSource audio = OneShot();
-            if (audio == null) 
+            if (audio == null)
                 return;
-        
+
             audio.pitch = 1f;
             audio.volume = originalOneShotVolume;
         }
@@ -116,15 +134,17 @@ namespace AdventureGame.UI
         {
             if (hud == null)
                 return;
-        
+
             hud.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         public void HideHUD() => SetHUDVisible(false);
+
         public void ShowHUD() => SetHUDVisible(true);
-    
+
         public void DisplayDialogueWithLine(string line) => DisplayDialogueWithLine(line, null);
-        public void DisplayDialogueWithLine(string line, Transform speaker) 
+
+        public void DisplayDialogueWithLine(string line, Transform speaker)
         {
             currentSpeaker = speaker;
 
@@ -133,8 +153,8 @@ namespace AdventureGame.UI
                 audio.PlayOneShot(clickClip);
 
             CancelInvoke(nameof(HideDialogue));
-        
-            if (typeRoutine != null) 
+
+            if (typeRoutine != null)
                 StopCoroutine(typeRoutine);
 
             StopPromptFade();
@@ -150,16 +170,16 @@ namespace AdventureGame.UI
 
         public void ShowInteractPrompt(string text)
         {
-            if (dialogueActive) 
+            if (dialogueActive)
                 return;
-        
-            if (isShowingPrompt && dialogueText.text == text && promptFadeRoutine == null) 
+
+            if (isShowingPrompt && dialogueText.text == text && promptFadeRoutine == null)
                 return;
 
             dialogueText.text = text;
             if (dialoguePanel.style.display == DisplayStyle.None)
                 dialoguePanel.style.opacity = 0f;
-            
+
             dialoguePanel.style.display = DisplayStyle.Flex;
             isShowingPrompt = true;
 
@@ -168,18 +188,18 @@ namespace AdventureGame.UI
 
         public void HideInteractPrompt()
         {
-            if (!isShowingPrompt) 
+            if (!isShowingPrompt)
                 return;
-        
+
             isShowingPrompt = false;
-        
+
             StartPromptFade(0f, hideAfter: true);
         }
 
         private void StartPromptFade(float targetOpacity, bool hideAfter)
         {
             StopPromptFade();
-        
+
             promptFadeRoutine = StartCoroutine(FadePrompt(targetOpacity, hideAfter));
         }
 
@@ -195,7 +215,7 @@ namespace AdventureGame.UI
         private IEnumerator FadePrompt(float targetOpacity, bool hideAfter)
         {
             float startOpacity = dialoguePanel.resolvedStyle.opacity;
-        
+
             float elapsed = 0f;
             while (elapsed < promptFadeDuration)
             {
@@ -206,26 +226,26 @@ namespace AdventureGame.UI
             }
 
             dialoguePanel.style.opacity = targetOpacity;
-        
-            if (hideAfter) 
+
+            if (hideAfter)
                 dialoguePanel.style.display = DisplayStyle.None;
-        
+
             promptFadeRoutine = null;
         }
 
         public void Skip()
         {
-            if (typeRoutine == null) 
+            if (typeRoutine == null)
                 return;
-        
+
             StopCoroutine(typeRoutine);
-        
+
             typeRoutine = null;
-        
+
             RestoreTypingAudio();
-        
+
             dialogueText.text = currentLine;
-        
+
             Invoke(nameof(HideDialogue), displayTime);
         }
 
@@ -247,7 +267,11 @@ namespace AdventureGame.UI
                 if (!char.IsWhiteSpace(c))
                 {
                     visibleCount++;
-                    if (typeClip != null && audio != null && visibleCount % typeClipEveryNChars == 0)
+                    if (
+                        typeClip != null
+                        && audio != null
+                        && visibleCount % typeClipEveryNChars == 0
+                    )
                     {
                         float pitch = 1f + Random.Range(-typeClipPitchJitter, typeClipPitchJitter);
                         audio.pitch = pitch;
@@ -259,9 +283,9 @@ namespace AdventureGame.UI
             }
 
             RestoreTypingAudio();
-        
+
             typeRoutine = null;
-        
+
             Invoke(nameof(HideDialogue), displayTime);
         }
 
@@ -271,26 +295,26 @@ namespace AdventureGame.UI
             if (typeRoutine != null)
             {
                 StopCoroutine(typeRoutine);
-            
+
                 typeRoutine = null;
-            
+
                 RestoreTypingAudio();
             }
 
             StopPromptFade();
-        
+
             dialoguePanel.style.display = DisplayStyle.None;
             dialoguePanel.style.opacity = 1f;
             isShowingPrompt = false;
             dialogueActive = false;
             currentSpeaker = null;
         }
-    
+
         public void DisplayWinScreen() => winScreen.style.opacity = 1.0f;
-    
+
         public void DisplayLoseScreen()
         {
-            if (loseScreen != null) 
+            if (loseScreen != null)
                 loseScreen.style.opacity = 1.0f;
 
             MusicManager.Instance?.FadeOutAndStop(musicFadeOnEndScreen);

@@ -22,7 +22,7 @@ namespace AdventureGame.UI
         void Start()
         {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-            
+
             m_WinScreen = root.Q<VisualElement>("WinScreenContainer");
             m_LoseScreen = root.Q<VisualElement>("LoseScreenContainer");
         }

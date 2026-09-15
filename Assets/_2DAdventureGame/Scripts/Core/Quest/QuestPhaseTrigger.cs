@@ -5,8 +5,11 @@ namespace AdventureGame.Core.Quests
 {
     public class QuestPhaseTrigger : MonoBehaviour
     {
-        [SerializeField] private QuestData m_QuestData;
-        [SerializeField] private QuestPhase m_EnableTriggerFrom = QuestPhase.During;
+        [SerializeField]
+        private QuestData m_QuestData;
+
+        [SerializeField]
+        private QuestPhase m_EnableTriggerFrom = QuestPhase.During;
 
         private readonly List<Collider2D> m_Colliders = new();
 
@@ -29,8 +32,7 @@ namespace AdventureGame.Core.Quests
                 SetTrigger(true);
         }
 
-        void OnDestroy()
-            => Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
+        void OnDestroy() => Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
 
         void OnQuestPhaseChanged(Quest quest)
         {
@@ -48,7 +50,6 @@ namespace AdventureGame.Core.Quests
                     collider.isTrigger = value;
         }
 
-        bool HasReached(QuestPhase current)
-            => (int)current >= (int)m_EnableTriggerFrom;
+        bool HasReached(QuestPhase current) => (int)current >= (int)m_EnableTriggerFrom;
     }
 }

@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace AdventureGame.Core
 {
-    public abstract class PersistentSingleton<T> : MonoBehaviour where T : PersistentSingleton<T>
+    public abstract class PersistentSingleton<T> : MonoBehaviour
+        where T : PersistentSingleton<T>
     {
         public static T Instance { get; private set; }
 
@@ -11,7 +12,7 @@ namespace AdventureGame.Core
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
-            
+
                 return;
             }
 
@@ -22,9 +23,9 @@ namespace AdventureGame.Core
 
         protected static void BootstrapIfMissing()
         {
-            if (Instance != null) 
+            if (Instance != null)
                 return;
-        
+
             new GameObject(typeof(T).Name).AddComponent<T>();
         }
     }
