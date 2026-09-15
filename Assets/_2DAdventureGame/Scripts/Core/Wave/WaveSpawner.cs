@@ -11,31 +11,42 @@ namespace AdventureGame.Core.Wave
     public class WaveSpawner : MonoBehaviour
     {
         [Header("Waves")]
-        [SerializeField] private List<Wave> m_Waves;
+        [SerializeField]
+        private List<Wave> m_Waves;
 
         [Header("Spawn Points")]
-        [SerializeField] private Transform[] m_SpawnPoints;
+        [SerializeField]
+        private Transform[] m_SpawnPoints;
 
-        [SerializeField] private float m_MinSpawnSpacing = 3f;
+        [SerializeField]
+        private float m_MinSpawnSpacing = 3f;
 
-        [SerializeField] private float m_MinDistanceFromPlayer = 4f;
+        [SerializeField]
+        private float m_MinDistanceFromPlayer = 4f;
 
-        [SerializeField] private int m_MaxSpawnAttempts = 30;
+        [SerializeField]
+        private int m_MaxSpawnAttempts = 30;
 
         [Header("Telegraph")]
-        [SerializeField] private GameObject m_TelegraphPrefab;
+        [SerializeField]
+        private GameObject m_TelegraphPrefab;
 
-        [SerializeField] private float m_TelegraphDuration = 0.6f;
+        [SerializeField]
+        private float m_TelegraphDuration = 0.6f;
 
-        [SerializeField] private float m_SpawnInterval = 0.3f;
+        [SerializeField]
+        private float m_SpawnInterval = 0.3f;
 
         [Header("Timing")]
-        [SerializeField] private float m_InitialDelay = 2f;
+        [SerializeField]
+        private float m_InitialDelay = 2f;
 
-        [SerializeField] private float m_BreatherDuration = 2f;
+        [SerializeField]
+        private float m_BreatherDuration = 2f;
 
         [Header("Trigger")]
-        [SerializeField] private QuestData m_TriggerQuestData;
+        [SerializeField]
+        private QuestData m_TriggerQuestData;
 
         private readonly List<GameObject> m_AliveEnemies = new();
         private bool m_HasStarted;
@@ -73,7 +84,7 @@ namespace AdventureGame.Core.Wave
                 return;
 
             m_HasStarted = true;
-        
+
             StartCoroutine(RunWaves());
         }
 
@@ -105,7 +116,7 @@ namespace AdventureGame.Core.Wave
 
         IEnumerator SpawnBonusWave()
         {
-            if (m_Waves.Count == 0) 
+            if (m_Waves.Count == 0)
                 yield break;
 
             GameObject prefab = m_Waves[^1].EnemyPrefab;
@@ -120,21 +131,22 @@ namespace AdventureGame.Core.Wave
         IEnumerator SpawnOne(GameObject enemyPrefab)
         {
             Transform point = PickSpawnPoint();
-            if (point == null) 
+            if (point == null)
                 yield break;
-        
+
             yield return StartCoroutine(SpawnAt(point, enemyPrefab));
         }
 
         IEnumerator SpawnAt(Transform point, GameObject enemyPrefab)
         {
-            GameObject telegraph = m_TelegraphPrefab != null
-                ? Instantiate(m_TelegraphPrefab, point.position, Quaternion.identity)
-                : null;
+            GameObject telegraph =
+                m_TelegraphPrefab != null
+                    ? Instantiate(m_TelegraphPrefab, point.position, Quaternion.identity)
+                    : null;
 
             yield return new WaitForSeconds(m_TelegraphDuration);
 
-            if (telegraph != null) 
+            if (telegraph != null)
                 Destroy(telegraph);
 
             GameObject enemy = Instantiate(enemyPrefab, point.position, Quaternion.identity);
@@ -145,10 +157,14 @@ namespace AdventureGame.Core.Wave
         {
             for (int attempt = 0; attempt < m_MaxSpawnAttempts; attempt++)
             {
-                Transform candidate = m_SpawnPoints[UnityEngine.Random.Range(0, m_SpawnPoints.Length)];
+                Transform candidate = m_SpawnPoints[
+                    UnityEngine.Random.Range(0, m_SpawnPoints.Length)
+                ];
 
-                if (IsTooCloseToPlayer(candidate.position)) continue;
-                if (IsTooCloseToAlive(candidate.position)) continue;
+                if (IsTooCloseToPlayer(candidate.position))
+                    continue;
+                if (IsTooCloseToAlive(candidate.position))
+                    continue;
 
                 return candidate;
             }
@@ -159,7 +175,8 @@ namespace AdventureGame.Core.Wave
         bool IsTooCloseToPlayer(Vector3 pos)
         {
             Player p = Player.Instance;
-            if (p == null) return false;
+            if (p == null)
+                return false;
             return Vector2.Distance(pos, p.transform.position) < m_MinDistanceFromPlayer;
         }
 
@@ -167,7 +184,7 @@ namespace AdventureGame.Core.Wave
         {
             foreach (GameObject e in m_AliveEnemies)
             {
-                if (e == null) 
+                if (e == null)
                     continue;
 
                 if (Vector2.Distance(pos, e.transform.position) < m_MinSpawnSpacing)
@@ -180,8 +197,9 @@ namespace AdventureGame.Core.Wave
         bool IsWaveCleared()
         {
             for (int i = m_AliveEnemies.Count - 1; i >= 0; i--)
-                if (m_AliveEnemies[i] == null) m_AliveEnemies.RemoveAt(i);
-        
+                if (m_AliveEnemies[i] == null)
+                    m_AliveEnemies.RemoveAt(i);
+
             return m_AliveEnemies.Count == 0;
         }
     }

@@ -10,7 +10,8 @@ namespace AdventureGame.Core.Effects
         protected override void Awake()
         {
             base.Awake();
-            if (Instance != this) return;
+            if (Instance != this)
+                return;
 
             m_ImpulseSource = GetComponent<CinemachineImpulseSource>();
         }

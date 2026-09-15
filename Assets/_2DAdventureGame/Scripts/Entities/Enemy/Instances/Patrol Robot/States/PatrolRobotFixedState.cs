@@ -11,18 +11,22 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States
             owner.Rigidbody.simulated = false;
             owner.Animator.SetTrigger(AnimatorHashes.Fixed);
             owner.AudioSource.Stop();
-        
-            if (owner.Data.FixedClip != null) 
+
+            if (owner.Data.FixedClip != null)
                 owner.AudioSource.PlayOneShot(owner.Data.FixedClip);
-        
+
             if (owner.Data.FixedEffectPrefab != null)
-                Object.Instantiate(owner.Data.FixedEffectPrefab, owner.SpriteRenderer.bounds.center, Quaternion.identity);
-        
-            if (owner.SmokeEffect != null) 
+                Object.Instantiate(
+                    owner.Data.FixedEffectPrefab,
+                    owner.SpriteRenderer.bounds.center,
+                    Quaternion.identity
+                );
+
+            if (owner.SmokeEffect != null)
                 owner.SmokeEffect.Stop();
 
             QuestReporter reporter = owner.GetComponent<QuestReporter>();
-            if (reporter != null) 
+            if (reporter != null)
                 reporter.Report();
         }
     }

@@ -12,17 +12,23 @@ namespace AdventureGame.Core.Managers
 {
     public class ArenaManager : MonoBehaviour
     {
-        [SerializeField] private WaveSpawner m_WaveSpawner;
+        [SerializeField]
+        private WaveSpawner m_WaveSpawner;
 
-        [SerializeField] private QuestData m_QuestData;
+        [SerializeField]
+        private QuestData m_QuestData;
 
-        [SerializeField] private float m_EndGameDelayS = 3f;
+        [SerializeField]
+        private float m_EndGameDelayS = 3f;
 
-        [SerializeField] private float m_EpilogueReadDelayS = 3f;
-        
-        [SerializeField] private AudioSource m_StingerAudioSource;
+        [SerializeField]
+        private float m_EpilogueReadDelayS = 3f;
 
-        [SerializeField] private AudioClip m_VictoryStingerSfx;
+        [SerializeField]
+        private AudioSource m_StingerAudioSource;
+
+        [SerializeField]
+        private AudioClip m_VictoryStingerSfx;
 
         private bool m_IsGameOver;
         private Quest m_Quest;
@@ -39,14 +45,16 @@ namespace AdventureGame.Core.Managers
 
         void OnDestroy()
         {
-            if (m_WaveSpawner != null) m_WaveSpawner.OnAllWavesCleared -= HandleAllWavesCleared;
+            if (m_WaveSpawner != null)
+                m_WaveSpawner.OnAllWavesCleared -= HandleAllWavesCleared;
 
             NPC.OnEpilogueEnded -= HandleEpilogueEnded;
         }
 
         void HandleAllWavesCleared()
         {
-            if (m_Quest != null) m_Quest.MarkComplete();
+            if (m_Quest != null)
+                m_Quest.MarkComplete();
         }
 
         void HandleEpilogueEnded(QuestData data)
@@ -59,9 +67,9 @@ namespace AdventureGame.Core.Managers
         {
             while (DialoguePresenter.Instance != null && DialoguePresenter.Instance.IsTyping)
                 yield return null;
-        
+
             yield return new WaitForSeconds(m_EpilogueReadDelayS);
-        
+
             Win();
         }
 
@@ -78,10 +86,11 @@ namespace AdventureGame.Core.Managers
 
             if (EndScreenPresenter.Instance != null)
                 EndScreenPresenter.Instance.DisplayWinScreen();
-        
+
             Invoke(nameof(ReloadScene), m_EndGameDelayS);
         }
 
-        void ReloadScene() => SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu, 0f);
+        void ReloadScene() =>
+            SceneTransitioner.Instance?.LoadSceneWithCrossfade(SceneNames.MainMenu, 0f);
     }
 }

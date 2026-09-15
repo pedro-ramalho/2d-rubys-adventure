@@ -27,9 +27,9 @@ namespace AdventureGame.Core.Managers
         {
             base.Awake();
 
-            if (Instance != this) 
+            if (Instance != this)
                 return;
-        
+
             ReadFromDisk();
         }
 
@@ -37,13 +37,13 @@ namespace AdventureGame.Core.Managers
         {
             HasSave = false;
 
-            if (!File.Exists(SavePath)) 
+            if (!File.Exists(SavePath))
                 return;
 
             try
             {
                 Save loaded = JsonUtility.FromJson<Save>(File.ReadAllText(SavePath));
-                if (loaded?.Version != k_CurrentSaveVersion) 
+                if (loaded?.Version != k_CurrentSaveVersion)
                     return;
 
                 Current = loaded;
@@ -54,24 +54,26 @@ namespace AdventureGame.Core.Managers
 
         public void WriteSave(string sceneName)
         {
-            List<QuestSaveData> quests = QuestManager.Instance != null
-                ? QuestManager.Instance.CaptureAll()
-                : PreserveQuestsFromCurrent();
+            List<QuestSaveData> quests =
+                QuestManager.Instance != null
+                    ? QuestManager.Instance.CaptureAll()
+                    : PreserveQuestsFromCurrent();
 
             Save save = new Save
             {
                 Version = k_CurrentSaveVersion,
                 SceneName = sceneName,
-                PlayerHealth = Player.Instance != null ? Player.Instance.CurrentHealth : k_NoStoredHealth,
-                Quests = quests
+                PlayerHealth =
+                    Player.Instance != null ? Player.Instance.CurrentHealth : k_NoStoredHealth,
+                Quests = quests,
             };
 
             try
             {
                 string json = JsonUtility.ToJson(save, true);
-            
+
                 File.WriteAllText(SavePath, json);
-            
+
                 Current = save;
                 HasSave = true;
             }
@@ -83,17 +85,21 @@ namespace AdventureGame.Core.Managers
 
         List<QuestSaveData> PreserveQuestsFromCurrent()
         {
-            if (Current?.Quests == null) return new List<QuestSaveData>();
+            if (Current?.Quests == null)
+                return new List<QuestSaveData>();
 
             List<QuestSaveData> copy = new();
-        
+
             foreach (QuestSaveData q in Current.Quests)
-                copy.Add(new QuestSaveData
-                {
-                    QuestId = q.QuestId,
-                    Phase = q.Phase,
-                    ConsumedIds = q.ConsumedIds != null ? new List<string>(q.ConsumedIds) : null
-                });
+                copy.Add(
+                    new QuestSaveData
+                    {
+                        QuestId = q.QuestId,
+                        Phase = q.Phase,
+                        ConsumedIds =
+                            q.ConsumedIds != null ? new List<string>(q.ConsumedIds) : null,
+                    }
+                );
 
             return copy;
         }
@@ -105,7 +111,7 @@ namespace AdventureGame.Core.Managers
 
             Current = null;
             HasSave = false;
-        
+
             SaveDeleted?.Invoke();
         }
     }

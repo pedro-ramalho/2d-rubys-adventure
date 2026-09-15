@@ -17,7 +17,8 @@ namespace AdventureGame.Entities.Player
         public SpriteRenderer SpriteRenderer { get; private set; }
 
         [Header("Player Data")]
-        [SerializeField] private PlayerData m_PlayerData;
+        [SerializeField]
+        private PlayerData m_PlayerData;
         public PlayerData Data => m_PlayerData;
 
         [Header("Player Input")]
@@ -33,16 +34,16 @@ namespace AdventureGame.Entities.Player
 
         [field: SerializeField]
         public AudioClip DashClip { get; private set; }
-    
+
         [field: SerializeField]
         public AudioClip HitClip { get; private set; }
-    
+
         [field: SerializeField]
         public AudioClip LaunchClip { get; private set; }
-    
+
         [field: SerializeField]
         public GameObject AfterimagePrefab { get; private set; }
-    
+
         [field: SerializeField]
         public GameObject ProjectilePrefab { get; private set; }
 
@@ -66,15 +67,19 @@ namespace AdventureGame.Entities.Player
         protected override void Awake()
         {
             base.Awake();
-            if (Instance != this) return;
+            if (Instance != this)
+                return;
 
             Rigidbody = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>();
             SpriteRenderer = GetComponent<SpriteRenderer>();
 
-            int health = SaveManager.Instance != null && SaveManager.Instance.HasSave && SaveManager.Instance.Current.PlayerHealth >= 0
-                ? SaveManager.Instance.Current.PlayerHealth
-                : m_PlayerData.StartingHealth;
+            int health =
+                SaveManager.Instance != null
+                && SaveManager.Instance.HasSave
+                && SaveManager.Instance.Current.PlayerHealth >= 0
+                    ? SaveManager.Instance.Current.PlayerHealth
+                    : m_PlayerData.StartingHealth;
             CurrentHealth = Mathf.Clamp(health, 0, m_PlayerData.MaxHealth);
 
             m_InputActions = InputManager.Instance.Actions;
@@ -90,11 +95,11 @@ namespace AdventureGame.Entities.Player
 
         void Update()
         {
-            if (PauseManager.IsPaused) 
+            if (PauseManager.IsPaused)
                 return;
-        
+
             UpdateTimers();
-        
+
             CurrentState.Update(this);
         }
 
@@ -110,7 +115,7 @@ namespace AdventureGame.Entities.Player
             }
 
             if (DashCooldownTimer > 0f)
-                DashCooldownTimer -= Time.deltaTime;    
+                DashCooldownTimer -= Time.deltaTime;
         }
 
         public void ChangeState(PlayerState newState)
@@ -125,6 +130,7 @@ namespace AdventureGame.Entities.Player
         public void ApplyDamage(int amount) => CurrentState.HandleDamage(this, amount);
 
         public void RaiseOnHealthChanged(float percentage) => OnHealthChanged?.Invoke(percentage);
+
         public void RaiseOnDied() => OnDied?.Invoke();
     }
 }

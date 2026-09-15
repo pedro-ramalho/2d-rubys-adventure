@@ -11,7 +11,9 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
         {
             m_Timer = 0f;
 
-            owner.ChargeDirection = (Player.Player.Instance.Rigidbody.position - owner.Rigidbody.position).normalized;
+            owner.ChargeDirection = (
+                Player.Player.Instance.Rigidbody.position - owner.Rigidbody.position
+            ).normalized;
 
             owner.Animator.SetFloat(AnimatorHashes.MoveX, owner.ChargeDirection.x);
             owner.Animator.SetFloat(AnimatorHashes.MoveY, owner.ChargeDirection.y);

@@ -7,8 +7,11 @@ namespace AdventureGame.Environment.Collectibles
 {
     public class Collectible : MonoBehaviour
     {
-        [SerializeField] protected AudioClip m_CollectibleClip;
+        [SerializeField]
+        protected AudioClip m_CollectibleClip;
+
         protected virtual void ApplyEffect(Player player) { }
+
         protected virtual void OnEffectApplied() => Destroy(gameObject);
 
         void Start()
@@ -20,7 +23,7 @@ namespace AdventureGame.Environment.Collectibles
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent(out Player player)) 
+            if (!other.TryGetComponent(out Player player))
                 return;
 
             QuestReporter reporter = GetComponent<QuestReporter>();
@@ -33,7 +36,7 @@ namespace AdventureGame.Environment.Collectibles
                 player.OneShotSource.PlayOneShot(m_CollectibleClip);
 
             OnEffectApplied();
-            if (reporter != null) 
+            if (reporter != null)
                 reporter.Report();
         }
     }

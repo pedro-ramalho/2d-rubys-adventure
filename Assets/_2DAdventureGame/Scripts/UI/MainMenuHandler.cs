@@ -12,29 +12,39 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(OptionsHandler))]
     public class MainMenuHandler : MonoBehaviour
     {
-        [SerializeField] private string m_FirstLevelSceneName = SceneNames.Level0;
+        [SerializeField]
+        private string m_FirstLevelSceneName = SceneNames.Level0;
 
         [Header("Background Pan")]
-        [SerializeField] private float m_BackgroundPanSpeed = 0.15f;
+        [SerializeField]
+        private float m_BackgroundPanSpeed = 0.15f;
 
-        [SerializeField] private float m_BackgroundPanAmplitudeX = 40f;
+        [SerializeField]
+        private float m_BackgroundPanAmplitudeX = 40f;
 
-        [SerializeField] private float m_BackgroundPanAmplitudeY = 20f;
+        [SerializeField]
+        private float m_BackgroundPanAmplitudeY = 20f;
 
-        [SerializeField] private float m_BackgroundScale = 1.15f;
+        [SerializeField]
+        private float m_BackgroundScale = 1.15f;
 
         [Header("Title Bob")]
-        [SerializeField] private float m_TitleBobSpeed = 1.5f;
+        [SerializeField]
+        private float m_TitleBobSpeed = 1.5f;
 
-        [SerializeField] private float m_TitleBobAmplitude = 12f;
+        [SerializeField]
+        private float m_TitleBobAmplitude = 12f;
 
         [Header("Click Sound")]
-        [SerializeField] private AudioSource m_ClickAudioSource;
+        [SerializeField]
+        private AudioSource m_ClickAudioSource;
 
-        [SerializeField] private AudioClip m_ClickClip;
+        [SerializeField]
+        private AudioClip m_ClickClip;
 
         [Header("Start Game")]
-        [SerializeField] private float m_StartGameFadeDuration = 3f;
+        [SerializeField]
+        private float m_StartGameFadeDuration = 3f;
 
         private VisualElement m_BackgroundPanel;
         private Label m_TitleLabel;
@@ -56,7 +66,9 @@ namespace AdventureGame.UI
             m_ButtonContainer = root.Q<VisualElement>("ButtonContainer");
 
             if (m_BackgroundPanel != null)
-                m_BackgroundPanel.style.scale = new Scale(new Vector3(m_BackgroundScale, m_BackgroundScale, 1f));
+                m_BackgroundPanel.style.scale = new Scale(
+                    new Vector3(m_BackgroundScale, m_BackgroundScale, 1f)
+                );
 
             m_StartButton = root.Q<Button>("StartButton");
             m_ContinueButton = root.Q<Button>("ContinueButton");
@@ -97,9 +109,9 @@ namespace AdventureGame.UI
 
         void OnSaveDeleted()
         {
-            if (m_ContinueButton == null) 
+            if (m_ContinueButton == null)
                 return;
-        
+
             m_ContinueButton.SetEnabled(false);
             m_ContinueButton.clicked -= ContinueGame;
         }
@@ -112,10 +124,10 @@ namespace AdventureGame.UI
 
         void ContinueGame()
         {
-            if (m_IsStartingGame) 
+            if (m_IsStartingGame)
                 return;
-        
-            if (SaveManager.Instance == null || !SaveManager.Instance.HasSave) 
+
+            if (SaveManager.Instance == null || !SaveManager.Instance.HasSave)
                 return;
 
             BeginSceneFadeAndLoad(SaveManager.Instance.Current.SceneName, writeSave: false);
@@ -126,27 +138,28 @@ namespace AdventureGame.UI
             if (m_BackgroundPanel != null)
             {
                 float bx = Mathf.Sin(Time.time * m_BackgroundPanSpeed) * m_BackgroundPanAmplitudeX;
-                float by = Mathf.Cos(Time.time * m_BackgroundPanSpeed * 0.7f) * m_BackgroundPanAmplitudeY;
-            
+                float by =
+                    Mathf.Cos(Time.time * m_BackgroundPanSpeed * 0.7f) * m_BackgroundPanAmplitudeY;
+
                 m_BackgroundPanel.style.translate = new Translate(bx, by);
             }
 
             if (m_TitleLabel != null)
             {
                 float ty = Mathf.Sin(Time.time * m_TitleBobSpeed) * m_TitleBobAmplitude;
-            
+
                 m_TitleLabel.style.translate = new Translate(0, ty);
             }
         }
 
         void StartGame()
         {
-            if (m_IsStartingGame) 
+            if (m_IsStartingGame)
                 return;
-        
-            if (SaveManager.Instance != null) 
+
+            if (SaveManager.Instance != null)
                 SaveManager.Instance.DeleteSave();
-        
+
             BeginSceneFadeAndLoad(m_FirstLevelSceneName, writeSave: true);
         }
 
@@ -176,11 +189,11 @@ namespace AdventureGame.UI
                 elapsed += Time.deltaTime;
                 if (overlay != null)
                     overlay.style.opacity = Mathf.Lerp(0f, 1f, elapsed / m_StartGameFadeDuration);
-            
+
                 yield return null;
             }
 
-            if (overlay != null) 
+            if (overlay != null)
                 overlay.style.opacity = 1f;
 
             if (writeSave && sceneName != SceneNames.MainMenu && SaveManager.Instance != null)
@@ -194,7 +207,7 @@ namespace AdventureGame.UI
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+            Application.Quit();
 #endif
         }
     }

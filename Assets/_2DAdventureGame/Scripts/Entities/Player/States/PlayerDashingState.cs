@@ -27,7 +27,7 @@ namespace AdventureGame.Entities.Player.States
             if (m_DashTimer <= 0)
             {
                 owner.ChangeState(owner.GroundedState);
-            
+
                 return;
             }
 

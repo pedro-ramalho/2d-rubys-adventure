@@ -14,11 +14,14 @@ namespace AdventureGame.Core.Managers
     {
         public static bool IsPaused { get; private set; }
 
-        [SerializeField] private UIDocument m_PauseUiDocument;
-        
-        [SerializeField] private AudioSource m_SfxAudioSource;
-        
-        [SerializeField] private AudioClip m_ToggleSfx;
+        [SerializeField]
+        private UIDocument m_PauseUiDocument;
+
+        [SerializeField]
+        private AudioSource m_SfxAudioSource;
+
+        [SerializeField]
+        private AudioClip m_ToggleSfx;
 
         private PlayerInputActions m_InputActions;
         private VisualElement m_PauseRoot;
@@ -112,6 +115,7 @@ namespace AdventureGame.Core.Managers
         }
 
         public void Pause() => SetPaused(true);
+
         public void Resume() => SetPaused(false);
 
         void SetPaused(bool paused)

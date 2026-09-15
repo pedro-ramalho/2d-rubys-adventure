@@ -9,11 +9,14 @@ namespace AdventureGame.Entities.NPC
     [RequireComponent(typeof(Rigidbody2D))]
     public class Marshmallow : NPC
     {
-        [SerializeField] private Transform m_ExitPointPosition;
+        [SerializeField]
+        private Transform m_ExitPointPosition;
 
-        [SerializeField] private float m_WalkSpeed = 2f;
+        [SerializeField]
+        private float m_WalkSpeed = 2f;
 
-        [SerializeField] private Vector2 m_IdleFacing = Vector2.down;
+        [SerializeField]
+        private Vector2 m_IdleFacing = Vector2.down;
 
         private Animator m_Animator;
         private Rigidbody2D m_Rigidbody;
@@ -25,7 +28,7 @@ namespace AdventureGame.Entities.NPC
             m_Animator = GetComponent<Animator>();
             m_Rigidbody = GetComponent<Rigidbody2D>();
             m_Colliders = GetComponents<Collider2D>();
-            
+
             m_StartPosition = transform.position;
 
             SetFacing(m_IdleFacing);
@@ -52,7 +55,11 @@ namespace AdventureGame.Entities.NPC
             WaitForFixedUpdate wait = new();
             while (Vector2.Distance(m_Rigidbody.position, target) > 0.01f)
             {
-                Vector2 next = Vector2.MoveTowards(m_Rigidbody.position, target, m_WalkSpeed * Time.fixedDeltaTime);
+                Vector2 next = Vector2.MoveTowards(
+                    m_Rigidbody.position,
+                    target,
+                    m_WalkSpeed * Time.fixedDeltaTime
+                );
                 m_Rigidbody.MovePosition(next);
 
                 yield return wait;

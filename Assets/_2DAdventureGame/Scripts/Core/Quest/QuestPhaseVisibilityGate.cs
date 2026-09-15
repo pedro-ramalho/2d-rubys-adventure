@@ -5,8 +5,11 @@ namespace AdventureGame.Core.Quests
 {
     public class QuestPhaseVisibilityGate : MonoBehaviour
     {
-        [SerializeField] private QuestData m_Quest;
-        [SerializeField] private QuestPhase m_ShowFrom = QuestPhase.During;
+        [SerializeField]
+        private QuestData m_Quest;
+
+        [SerializeField]
+        private QuestPhase m_ShowFrom = QuestPhase.During;
 
         private readonly List<SpriteRenderer> m_SpriteRenderers = new();
         private readonly List<Collider2D> m_Colliders = new();
@@ -31,8 +34,7 @@ namespace AdventureGame.Core.Quests
                 SetVisible(true);
         }
 
-        void OnDestroy()
-            => Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
+        void OnDestroy() => Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
 
         void OnQuestPhaseChanged(Quest quest)
         {
@@ -54,7 +56,6 @@ namespace AdventureGame.Core.Quests
                     collider.enabled = value;
         }
 
-        bool HasReached(QuestPhase current)
-            => (int)current >= (int)m_ShowFrom;
+        bool HasReached(QuestPhase current) => (int)current >= (int)m_ShowFrom;
     }
 }

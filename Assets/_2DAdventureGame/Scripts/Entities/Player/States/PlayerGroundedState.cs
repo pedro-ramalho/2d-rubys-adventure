@@ -20,14 +20,23 @@ namespace AdventureGame.Entities.Player.States
             UpdateAnimator(owner);
             HandleNPCInteraction(owner);
 
-            if (owner.ShootAction.WasPressedThisFrame() && AbilityManager.Instance != null && AbilityManager.Instance.CanShoot)
+            if (
+                owner.ShootAction.WasPressedThisFrame()
+                && AbilityManager.Instance != null
+                && AbilityManager.Instance.CanShoot
+            )
             {
                 owner.ChangeState(owner.ShootingState);
-            
+
                 return;
             }
 
-            if (owner.DashAction.WasPressedThisFrame() && owner.DashCooldownTimer <= 0f && AbilityManager.Instance != null && AbilityManager.Instance.CanDash)
+            if (
+                owner.DashAction.WasPressedThisFrame()
+                && owner.DashCooldownTimer <= 0f
+                && AbilityManager.Instance != null
+                && AbilityManager.Instance.CanDash
+            )
                 owner.ChangeState(owner.DashingState);
         }
 
@@ -35,9 +44,15 @@ namespace AdventureGame.Entities.Player.States
         {
             Vector2 targetVelocity = m_Move * owner.Data.Speed;
             float rate = m_Move.magnitude > 0f ? owner.Data.Acceleration : owner.Data.Deceleration;
-        
-            owner.CurrentVelocity = Vector2.MoveTowards(owner.CurrentVelocity, targetVelocity, rate * Time.fixedDeltaTime);
-            owner.Rigidbody.MovePosition(owner.Rigidbody.position + owner.CurrentVelocity * Time.fixedDeltaTime);
+
+            owner.CurrentVelocity = Vector2.MoveTowards(
+                owner.CurrentVelocity,
+                targetVelocity,
+                rate * Time.fixedDeltaTime
+            );
+            owner.Rigidbody.MovePosition(
+                owner.Rigidbody.position + owner.CurrentVelocity * Time.fixedDeltaTime
+            );
         }
 
         private void UpdateMoveDirection(Player owner)
@@ -71,7 +86,8 @@ namespace AdventureGame.Entities.Player.States
             );
 
             NPC.NPC npc = null;
-            if (hit.collider != null) hit.collider.TryGetComponent(out npc);
+            if (hit.collider != null)
+                hit.collider.TryGetComponent(out npc);
 
             if (InteractPromptPresenter.Instance != null)
             {
@@ -81,7 +97,7 @@ namespace AdventureGame.Entities.Player.States
                     InteractPromptPresenter.Instance.HideInteractPrompt();
             }
 
-            if (!owner.TalkAction.WasPressedThisFrame() || npc == null) 
+            if (!owner.TalkAction.WasPressedThisFrame() || npc == null)
                 return;
 
             if (DialoguePresenter.Instance != null && DialoguePresenter.Instance.IsTyping)
@@ -89,6 +105,5 @@ namespace AdventureGame.Entities.Player.States
             else
                 npc.Talk();
         }
-
     }
 }

@@ -8,7 +8,8 @@ namespace AdventureGame.Core.Quests
 {
     public class Quest : MonoBehaviour
     {
-        [SerializeField] private QuestData m_QuestData;
+        [SerializeField]
+        private QuestData m_QuestData;
 
         private readonly HashSet<string> m_ConsumedIds = new();
 
@@ -60,10 +61,10 @@ namespace AdventureGame.Core.Quests
             !string.IsNullOrEmpty(worldId) && m_ConsumedIds.Contains(worldId);
 
         public bool CanReport(string worldId) =>
-            IsCounted &&
-            Phase == QuestPhase.During &&
-            !string.IsNullOrEmpty(worldId) &&
-            !m_ConsumedIds.Contains(worldId);
+            IsCounted
+            && Phase == QuestPhase.During
+            && !string.IsNullOrEmpty(worldId)
+            && !m_ConsumedIds.Contains(worldId);
 
         public bool TryReport(string worldId)
         {
@@ -78,12 +79,13 @@ namespace AdventureGame.Core.Quests
             return true;
         }
 
-        public QuestSaveData Capture() => new()
-        {
-            QuestId = m_QuestData.Id,
-            Phase = ShouldResetDuring ? QuestPhase.Before : Phase,
-            ConsumedIds = IsCounted ? new List<string>(m_ConsumedIds) : null
-        };
+        public QuestSaveData Capture() =>
+            new()
+            {
+                QuestId = m_QuestData.Id,
+                Phase = ShouldResetDuring ? QuestPhase.Before : Phase,
+                ConsumedIds = IsCounted ? new List<string>(m_ConsumedIds) : null,
+            };
 
         public void Restore(QuestSaveData saved)
         {
@@ -98,9 +100,9 @@ namespace AdventureGame.Core.Quests
         }
 
         private bool ShouldResetDuring =>
-            m_QuestData != null &&
-            m_QuestData.CompletionMode == QuestCompletionMode.External &&
-            Phase == QuestPhase.During;
+            m_QuestData != null
+            && m_QuestData.CompletionMode == QuestCompletionMode.External
+            && Phase == QuestPhase.During;
 
         private bool IsCounted =>
             m_QuestData != null && m_QuestData.CompletionMode == QuestCompletionMode.Counted;

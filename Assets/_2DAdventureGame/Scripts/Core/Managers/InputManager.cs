@@ -15,18 +15,20 @@ namespace AdventureGame.Core.Managers
         protected override void Awake()
         {
             base.Awake();
-        
-            if (Instance != this) return;
+
+            if (Instance != this)
+                return;
 
             Actions = new PlayerInputActions();
-        
+
             LoadBindings();
-        
+
             Actions.Player.Enable();
         }
 
-        public void SaveBindings() => PlayerPrefs.SetString(k_BindingsKey, Actions.SaveBindingOverridesAsJson());
-    
+        public void SaveBindings() =>
+            PlayerPrefs.SetString(k_BindingsKey, Actions.SaveBindingOverridesAsJson());
+
         public void LoadBindings()
         {
             string json = PlayerPrefs.GetString(k_BindingsKey, string.Empty);
@@ -37,7 +39,7 @@ namespace AdventureGame.Core.Managers
         public void ResetBindings()
         {
             Actions.RemoveAllBindingOverrides();
-        
+
             PlayerPrefs.DeleteKey(k_BindingsKey);
         }
     }

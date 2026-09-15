@@ -36,7 +36,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States
                     owner.Animator.SetFloat(AnimatorHashes.MoveX, owner.Direction);
                     owner.Animator.SetFloat(AnimatorHashes.MoveY, 0f);
                     break;
-            
+
                 case PatrolDirection.Vertical:
                     position.y += offset;
                     owner.Animator.SetFloat(AnimatorHashes.MoveX, 0f);

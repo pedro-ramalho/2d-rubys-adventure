@@ -13,7 +13,7 @@ namespace AdventureGame.Entities.Player
             sr.flipX = flipX;
             transform.localScale = scale;
 
-            StartCoroutine(Fade(sr, duration));    
+            StartCoroutine(Fade(sr, duration));
         }
 
         IEnumerator Fade(SpriteRenderer sr, float duration)
