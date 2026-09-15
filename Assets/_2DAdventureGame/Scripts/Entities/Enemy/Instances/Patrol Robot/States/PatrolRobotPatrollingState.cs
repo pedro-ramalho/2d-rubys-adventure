@@ -27,7 +27,7 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot.States
         public override void FixedUpdate(PatrolRobot owner)
         {
             Vector2 position = owner.Rigidbody.position;
-            float offset = owner.Speed * owner.Direction * Time.fixedDeltaTime;
+            float offset = owner.PatrolSpeed * owner.Direction * Time.fixedDeltaTime;
 
             switch (owner.PatrolDirection)
             {

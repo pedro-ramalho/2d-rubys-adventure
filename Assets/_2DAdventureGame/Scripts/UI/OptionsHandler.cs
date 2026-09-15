@@ -58,7 +58,6 @@ namespace AdventureGame.UI
             PlayerInputActions a = InputManager.Instance.Actions;
             InputAction move = a.Player.Movement;
         
-            // Movement composite indices: 1-4 = primary WASD, 6-9 = secondary arrows (0 and 5 are composite roots)
             rebindEntries = new (string, InputAction, int)[]
             {
                 ("DashRebindButton",           a.Player.Dash,  0),
