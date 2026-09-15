@@ -6,19 +6,14 @@ namespace AdventureGame.Core.Managers
 {
     public class MusicManager : PersistentSingleton<MusicManager>
     {
-        [FormerlySerializedAs("source")]
         [SerializeField] private AudioSource m_AudioSource;
         
-        [FormerlySerializedAs("stingerSource")]
         [SerializeField] private AudioSource m_StingerAudioSource;
         
-        [FormerlySerializedAs("fadeOutDuration")]
         [SerializeField] private float m_FadeOutDurationS = 0.6f;
         
-        [FormerlySerializedAs("fadeInDuration")]
         [SerializeField] private float m_FadeInDurationS = 0.6f;
         
-        [FormerlySerializedAs("transitionDelay")]
         [SerializeField] private float m_TransitionDelayS = 1.0f;
 
         private Coroutine m_TransitionCoroutine;

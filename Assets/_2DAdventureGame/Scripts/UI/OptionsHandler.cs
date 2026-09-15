@@ -12,7 +12,6 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(UIDocument))]
     public class OptionsHandler : MonoBehaviour
     {
-        [FormerlySerializedAs("audioMixer")]
         [SerializeField] private AudioMixer m_AudioMixer;
 
         private const float k_DefaultVolume = 1f;

@@ -9,13 +9,10 @@ namespace AdventureGame.Entities.NPC
     [RequireComponent(typeof(Rigidbody2D))]
     public class Marshmallow : NPC
     {
-        [FormerlySerializedAs("exitPoint")]
         [SerializeField] private Transform m_ExitPointPosition;
 
-        [FormerlySerializedAs("walkSpeed")]
         [SerializeField] private float m_WalkSpeed = 2f;
 
-        [FormerlySerializedAs("idleFacing")]
         [SerializeField] private Vector2 m_IdleFacing = Vector2.down;
 
         private Animator m_Animator;

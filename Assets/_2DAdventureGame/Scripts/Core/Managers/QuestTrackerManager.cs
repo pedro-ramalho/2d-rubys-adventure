@@ -10,7 +10,6 @@ namespace AdventureGame.Core.Managers
 {
     public class QuestTrackerManager : MonoBehaviour
     {
-        [FormerlySerializedAs("trackerDocument")]
         [SerializeField] private UIDocument m_TrackerUiDocument;
 
         private PlayerInputActions m_InputActions;

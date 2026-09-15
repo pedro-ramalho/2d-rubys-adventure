@@ -7,16 +7,12 @@ namespace AdventureGame.Core.Quests
     [CreateAssetMenu(fileName = "QuestDialogue", menuName = "Game/Quest Dialogue")]
     public class QuestDialogue : ScriptableObject
     {
-        [FormerlySerializedAs("quest")]
         public QuestData Quest;
 
-        [FormerlySerializedAs("before")]
         public DialoguePhase Before;
 
-        [FormerlySerializedAs("during")]
         public DialoguePhase During;
 
-        [FormerlySerializedAs("after")]
         public DialoguePhase After;
 
         public DialoguePhase Pick(Quest quest)

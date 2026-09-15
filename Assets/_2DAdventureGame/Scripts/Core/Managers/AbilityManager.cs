@@ -15,7 +15,6 @@ namespace AdventureGame.Core.Managers
 
     public class AbilityManager : PersistentSingleton<AbilityManager>
     {
-        [FormerlySerializedAs("startingAbilities")]
         [SerializeField] private AbilityFlag m_StartingAbilities = AbilityFlag.None;
 
         private AbilityFlag m_UnlockedAbilities;

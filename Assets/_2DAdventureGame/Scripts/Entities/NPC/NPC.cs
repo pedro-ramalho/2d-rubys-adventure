@@ -10,7 +10,6 @@ namespace AdventureGame.Entities.NPC
 {
     public class NPC : MonoBehaviour
     {
-        [FormerlySerializedAs("dialogues")]
         [SerializeField] private List<QuestDialogue> m_DialogueLines;
 
         private DialoguePhase m_CurrentDialoguePhase;

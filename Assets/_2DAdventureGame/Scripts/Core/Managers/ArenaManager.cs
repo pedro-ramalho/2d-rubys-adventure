@@ -12,22 +12,16 @@ namespace AdventureGame.Core.Managers
 {
     public class ArenaManager : MonoBehaviour
     {
-        [FormerlySerializedAs("spawner")]
         [SerializeField] private WaveSpawner m_WaveSpawner;
 
-        [FormerlySerializedAs("winQuest")]
         [SerializeField] private QuestData m_QuestData;
 
-        [FormerlySerializedAs("endGameDelay")]
         [SerializeField] private float m_EndGameDelayS = 3f;
 
-        [FormerlySerializedAs("epilogueReadDelay")]
         [SerializeField] private float m_EpilogueReadDelayS = 3f;
         
-        [FormerlySerializedAs("stingerSource")]
         [SerializeField] private AudioSource m_StingerAudioSource;
 
-        [FormerlySerializedAs("victoryStinger")]
         [SerializeField] private AudioClip m_VictoryStingerSfx;
 
         private bool m_IsGameOver;

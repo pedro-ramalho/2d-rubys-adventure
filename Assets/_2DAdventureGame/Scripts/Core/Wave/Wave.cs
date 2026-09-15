@@ -7,10 +7,8 @@ namespace AdventureGame.Core.Wave
     [Serializable]
     public class Wave
     {
-        [FormerlySerializedAs("enemyPrefab")]
         public GameObject EnemyPrefab;
 
-        [FormerlySerializedAs("enemyCount")]
         public int EnemyCount;
     }
 }

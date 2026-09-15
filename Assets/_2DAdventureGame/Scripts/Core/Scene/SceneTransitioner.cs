@@ -10,16 +10,12 @@ namespace AdventureGame.Core.Scene
 {
     public class SceneTransitioner : SceneSingleton<SceneTransitioner>
     {
-        [FormerlySerializedAs("transition")]
         [SerializeField] private Animator m_TransitionAnimator;
 
-        [FormerlySerializedAs("startTrigger")]
         [SerializeField] private string m_StartTrigger = "Start";
 
-        [FormerlySerializedAs("fadeOutClipName")]
         [SerializeField] private string m_FadeOutClipName = "CrossfadeStart_Animation";
         
-        [FormerlySerializedAs("preTransitionDelay")]
         [SerializeField] private float m_PreTransitionDelay = 1.5f;
         
         private float m_FadeOutDuration = 1f;

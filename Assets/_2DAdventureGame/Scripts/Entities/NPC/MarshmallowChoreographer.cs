@@ -5,7 +5,6 @@ using UnityEngine.Scripting.APIUpdating;
 namespace AdventureGame.Entities.NPC
 {
     [RequireComponent(typeof(Marshmallow))]
-    [MovedFrom(autoUpdateAPI:true, sourceClassName:"MarshmallowChoreagrapher")]
     public class MarshmallowChoreographer : MonoBehaviour
     {
         [SerializeField] private QuestData m_QuestData;

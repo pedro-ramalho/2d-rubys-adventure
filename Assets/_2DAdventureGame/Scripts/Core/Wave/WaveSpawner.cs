@@ -11,41 +11,30 @@ namespace AdventureGame.Core.Wave
     public class WaveSpawner : MonoBehaviour
     {
         [Header("Waves")]
-        [FormerlySerializedAs("waves")]
         [SerializeField] private List<Wave> m_Waves;
 
         [Header("Spawn Points")]
-        [FormerlySerializedAs("spawnPoints")]
         [SerializeField] private Transform[] m_SpawnPoints;
 
-        [FormerlySerializedAs("minSpawnSpacing")]
         [SerializeField] private float m_MinSpawnSpacing = 3f;
 
-        [FormerlySerializedAs("minDistanceFromPlayer")]
         [SerializeField] private float m_MinDistanceFromPlayer = 4f;
 
-        [FormerlySerializedAs("maxSpawnAttempts")]
         [SerializeField] private int m_MaxSpawnAttempts = 30;
 
         [Header("Telegraph")]
-        [FormerlySerializedAs("telegraphPrefab")]
         [SerializeField] private GameObject m_TelegraphPrefab;
 
-        [FormerlySerializedAs("telegraphDuration")]
         [SerializeField] private float m_TelegraphDuration = 0.6f;
 
-        [FormerlySerializedAs("spawnInterval")]
         [SerializeField] private float m_SpawnInterval = 0.3f;
 
         [Header("Timing")]
-        [FormerlySerializedAs("initialDelay")]
         [SerializeField] private float m_InitialDelay = 2f;
 
-        [FormerlySerializedAs("breatherDuration")]
         [SerializeField] private float m_BreatherDuration = 2f;
 
         [Header("Trigger")]
-        [FormerlySerializedAs("triggerQuest")]
         [SerializeField] private QuestData m_TriggerQuestData;
 
         private readonly List<GameObject> m_AliveEnemies = new();

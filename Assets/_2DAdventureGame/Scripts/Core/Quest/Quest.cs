@@ -6,10 +6,8 @@ using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Quests
 {
-    [MovedFrom(autoUpdateAPI: true, sourceClassName: "CountedQuestController")]
     public class Quest : MonoBehaviour
     {
-        [FormerlySerializedAs("data")]
         [SerializeField] private QuestData m_QuestData;
 
         private readonly HashSet<string> m_ConsumedIds = new();
