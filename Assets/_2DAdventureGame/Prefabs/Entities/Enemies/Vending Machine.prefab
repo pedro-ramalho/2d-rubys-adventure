@@ -350,44 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492bd3f06e6431d4d9dc4d5064089b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VendingMachine
-  data: {fileID: 11400000, guid: a1e0dc0aa758f9647972954f4ad36eb6, type: 2}
-  chargeTint: {r: 0.990566, g: 0.4532307, b: 0.4532307, a: 1}
-  stunnedTint: {r: 0.6084906, g: 1, b: 0.9317475, a: 1}
-  walkingClip: {fileID: 8300000, guid: f2bd042fedd3e02449fe7ce851241323, type: 3}
-  windupClip: {fileID: 8300000, guid: 46455a1048fa7474ba99a4e875f62055, type: 3}
-  chargeClip: {fileID: 8300000, guid: f42b991edb4392d41bc46af3c2144e71, type: 3}
-  stunnedClip: {fileID: 8300000, guid: 53e15805f3efe69499a4997b6bc50ba5, type: 3}
-  explosionPrefab: {fileID: 3768179546986632569, guid: 7b74849dd50677e40b8f73b1d57de7de,
-    type: 3}
-  detectionRadius: 5
-  windupDuration: 0.75
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxSpeed: 8
-  chargeDuration: 1
-  stunnedDuration: 2
+  m_EnemyData: {fileID: 11400000, guid: 43c4da811af67e94a964bb0f51a5f0c3, type: 2}
 --- !u!114 &4461097336128668680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,8 +363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc7acc9913838545969a43476ed10e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
-  quest: {fileID: 0}
-  worldId: 
+  m_QuestData: {fileID: 0}
+  m_WorldId: 
 --- !u!1001 &5581598578453275785
 PrefabInstance:
   m_ObjectHideFlags: 0

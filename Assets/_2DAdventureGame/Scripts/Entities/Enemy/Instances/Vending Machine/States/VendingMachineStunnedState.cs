@@ -9,19 +9,19 @@ namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine.States
         public override void Enter(VendingMachine owner)
         {
             m_Timer = 0f;
-            owner.SpriteRenderer.color = owner.StunnedTint;
+            owner.SpriteRenderer.color = owner.Data.StunnedTint;
 
-            owner.AudioSource.PlayOneShot(owner.StunnedClip);
+            owner.AudioSource.PlayOneShot(owner.Data.StunnedClip);
         }
 
         public override void Update(VendingMachine owner)
         {
             m_Timer += Time.deltaTime;
 
-            float t = Mathf.Clamp01(m_Timer / owner.StunnedDuration);
-            owner.SpriteRenderer.color = Color.Lerp(owner.StunnedTint, owner.BaseColor, t);
+            float t = Mathf.Clamp01(m_Timer / owner.Data.StunnedDuration);
+            owner.SpriteRenderer.color = Color.Lerp(owner.Data.StunnedTint, owner.BaseColor, t);
 
-            if (m_Timer >= owner.StunnedDuration)
+            if (m_Timer >= owner.Data.StunnedDuration)
                 owner.ChangeState(owner.MovingState);
         }
     }
