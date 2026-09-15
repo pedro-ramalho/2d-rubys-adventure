@@ -12,38 +12,28 @@ namespace AdventureGame.UI
     [RequireComponent(typeof(OptionsHandler))]
     public class MainMenuHandler : MonoBehaviour
     {
-        [FormerlySerializedAs("firstLevelSceneName")]
         [SerializeField] private string m_FirstLevelSceneName = SceneNames.Level0;
 
         [Header("Background Pan")]
-        [FormerlySerializedAs("backgroundPanSpeed")]
         [SerializeField] private float m_BackgroundPanSpeed = 0.15f;
 
-        [FormerlySerializedAs("backgroundPanAmplitudeX")]
         [SerializeField] private float m_BackgroundPanAmplitudeX = 40f;
 
-        [FormerlySerializedAs("backgroundPanAmplitudeY")]
         [SerializeField] private float m_BackgroundPanAmplitudeY = 20f;
 
-        [FormerlySerializedAs("backgroundScale")]
         [SerializeField] private float m_BackgroundScale = 1.15f;
 
         [Header("Title Bob")]
-        [FormerlySerializedAs("titleBobSpeed")]
         [SerializeField] private float m_TitleBobSpeed = 1.5f;
 
-        [FormerlySerializedAs("titleBobAmplitude")]
         [SerializeField] private float m_TitleBobAmplitude = 12f;
 
         [Header("Click Sound")]
-        [FormerlySerializedAs("clickAudioSource")]
         [SerializeField] private AudioSource m_ClickAudioSource;
 
-        [FormerlySerializedAs("clickClip")]
         [SerializeField] private AudioClip m_ClickClip;
 
         [Header("Start Game")]
-        [FormerlySerializedAs("startGameFadeDuration")]
         [SerializeField] private float m_StartGameFadeDuration = 3f;
 
         private VisualElement m_BackgroundPanel;

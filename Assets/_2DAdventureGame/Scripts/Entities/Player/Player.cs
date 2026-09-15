@@ -12,13 +12,11 @@ namespace AdventureGame.Entities.Player
     [RequireComponent(typeof(SpriteRenderer))]
     public class Player : SceneSingleton<Player>, IDamageable
     {
-        // Components
         public Rigidbody2D Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
         public SpriteRenderer SpriteRenderer { get; private set; }
 
         [Header("Player Data")]
-        [FormerlySerializedAs("data")]
         [SerializeField] private PlayerData m_PlayerData;
         public PlayerData Data => m_PlayerData;
 

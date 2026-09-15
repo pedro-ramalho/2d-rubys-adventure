@@ -6,7 +6,6 @@ namespace AdventureGame.Environment.Collectibles
 {
     public class HealthCollectible : Collectible
     {
-        [FormerlySerializedAs("healAmount")]
         [SerializeField] private int m_HealAmount;
 
         protected override void ApplyEffect(Player player)

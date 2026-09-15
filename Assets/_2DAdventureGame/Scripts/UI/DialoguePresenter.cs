@@ -7,35 +7,27 @@ using UnityEngine.UIElements;
 
 namespace AdventureGame.UI
 {
-    [MovedFrom(autoUpdateAPI: true, sourceClassName: "UIHandler")]
     [RequireComponent(typeof(UIDocument))]
     public class DialoguePresenter : SceneSingleton<DialoguePresenter>
     {
-        [FormerlySerializedAs("displayTime")]
         [SerializeField] private float m_DisplayTime = 4.0f;
 
-        [FormerlySerializedAs("clickClip")]
         [SerializeField] private AudioClip m_ClickClip;
 
         [Header("Typewriter")]
-        [FormerlySerializedAs("typeInterval")]
         [SerializeField] private float m_TypeInterval = 0.03f;
 
-        [FormerlySerializedAs("typeClip")]
         [SerializeField] private AudioClip m_TypeClip;
         [Tooltip("Play the type SFX every Nth visible character.")]
 
-        [FormerlySerializedAs("typeClipEveryNChars")]
         [SerializeField] private int m_TypeClipEveryNChars = 2;
 
-        [FormerlySerializedAs("typeClipPitchJitter")]
         [SerializeField] private float m_TypeClipPitchJitter = 0.08f;
 
         private VisualElement m_DialoguePanel;
         private Label m_DialogueLabel;
 
         [Header("Dialogue Range")]
-        [FormerlySerializedAs("dialogueMaxDistance")]
         [SerializeField] private float m_DialogueMaxDistance = 5f;
 
         private Player m_Player;

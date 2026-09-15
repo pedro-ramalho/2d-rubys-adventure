@@ -10,7 +10,6 @@ namespace AdventureGame.Entities.Enemy
     public abstract class Enemy : MonoBehaviour
     {
         [Header("Enemy Data")]
-        [FormerlySerializedAs("data")]
         [SerializeField] private EnemyData m_EnemyData;
         public EnemyData Data => m_EnemyData;
 

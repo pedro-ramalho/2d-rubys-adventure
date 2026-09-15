@@ -7,7 +7,6 @@ namespace AdventureGame.Environment.Collectibles
 {
     public class Collectible : MonoBehaviour
     {
-        [FormerlySerializedAs("collectibleClip")]
         [SerializeField] protected AudioClip m_CollectibleClip;
         protected virtual void ApplyEffect(Player player) { }
         protected virtual void OnEffectApplied() => Destroy(gameObject);

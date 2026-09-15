@@ -6,10 +6,8 @@ namespace AdventureGame.Core.Scene
     [CreateAssetMenu(fileName = "SceneLoader", menuName = "Game/Scene Loader")]
     public class SceneLoader : ScriptableObject
     {
-        [FormerlySerializedAs("sceneName")]
         [SerializeField] private string m_SceneName;
         
-        [FormerlySerializedAs("preTransitionDelay")]
         [SerializeField] private float m_PreTransitionDelay = 4f;
 
         public void Load()

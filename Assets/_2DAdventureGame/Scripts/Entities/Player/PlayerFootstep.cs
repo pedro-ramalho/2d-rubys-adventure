@@ -12,25 +12,19 @@ namespace AdventureGame.Entities.Player
         [Serializable]
         private class SurfaceProfile
         {
-            [FormerlySerializedAs("tag")]
             public string Tag;
 
-            [FormerlySerializedAs("clips")]
             public AudioClip[] Clips;
         }
 
 
-        [FormerlySerializedAs("source")]
         [SerializeField] private AudioSource m_AudioSource;
 
-        [FormerlySerializedAs("surfaces")]
         [SerializeField] private SurfaceProfile[] m_Surfaces;
 
-        [FormerlySerializedAs("feetOffset")]
         [SerializeField] private Vector2 m_FeetOffset = new Vector2(0f, -0.3f);
 
         [Tooltip("Random pitch variation in either direction")]
-        [FormerlySerializedAs("pitchVariation")]
         [SerializeField, Range(0f, 0.3f)] private float m_PitchVariation = 0.05f;
 
         private readonly List<(Tilemap tilemap, AudioClip[] clips)> m_Resolved = new();

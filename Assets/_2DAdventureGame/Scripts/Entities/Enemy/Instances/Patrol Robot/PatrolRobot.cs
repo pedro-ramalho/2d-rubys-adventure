@@ -13,18 +13,14 @@ namespace AdventureGame.Entities.Enemy.Instances.Patrol_Robot
         public new PatrolRobotData Data => (PatrolRobotData)base.Data;
 
         [Header("Patrol Robot Assets")]
-        [FormerlySerializedAs("smokeEffect")]
         [SerializeField] private ParticleSystem m_SmokeEffect;
         public ParticleSystem SmokeEffect => m_SmokeEffect;
 
         [Header("Patrolling Properties")]
-        [FormerlySerializedAs("patrolDirection")]
         [SerializeField] private PatrolDirection m_PatrolDirection;
 
-        [FormerlySerializedAs("patrolDuration")]
         [SerializeField] private float m_PatrolDuration;
 
-        [FormerlySerializedAs("speed")]
         [SerializeField] private float m_PatrolSpeed;
         public PatrolDirection PatrolDirection => m_PatrolDirection;
         public float PatrolDuration => m_PatrolDuration;

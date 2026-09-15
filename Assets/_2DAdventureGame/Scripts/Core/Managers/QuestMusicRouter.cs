@@ -5,10 +5,8 @@ using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Managers
 {
-    [MovedFrom(autoUpdateAPI: true, sourceClassName: "SceneMusicConfigManager")]
     public class QuestMusicRouter : SceneSingleton<QuestMusicRouter>
     {
-        [FormerlySerializedAs("defaultTrack")]
         [SerializeField] private AudioClip m_DefaultTrack;
         public AudioClip DefaultTrack => m_DefaultTrack;
 
