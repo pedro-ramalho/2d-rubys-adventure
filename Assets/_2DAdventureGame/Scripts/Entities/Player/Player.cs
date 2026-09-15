@@ -3,7 +3,6 @@ using AdventureGame.Core.Managers;
 using AdventureGame.Entities.Player.States;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Player
 {

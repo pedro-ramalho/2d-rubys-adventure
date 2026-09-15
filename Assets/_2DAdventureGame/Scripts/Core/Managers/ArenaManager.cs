@@ -6,7 +6,6 @@ using AdventureGame.Core.Wave;
 using AdventureGame.Entities.NPC;
 using AdventureGame.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Managers
 {

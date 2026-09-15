@@ -1,6 +1,5 @@
 using AdventureGame.Environment.Projectiles;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Enemy
 {

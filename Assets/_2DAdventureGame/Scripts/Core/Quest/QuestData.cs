@@ -1,6 +1,5 @@
 using AdventureGame.Core.Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Quests
 {

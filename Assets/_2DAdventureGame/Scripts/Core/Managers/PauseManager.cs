@@ -5,7 +5,6 @@ using AdventureGame.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.Core.Managers

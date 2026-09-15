@@ -1,6 +1,5 @@
 using AdventureGame.Core.Quests;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace AdventureGame.Entities.NPC
 {

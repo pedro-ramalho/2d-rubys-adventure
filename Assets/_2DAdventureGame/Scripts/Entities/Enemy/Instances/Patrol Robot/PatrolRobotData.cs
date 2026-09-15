@@ -1,4 +1,3 @@
-using AdventureGame.Entities.Enemy;
 using UnityEngine;
 
 namespace AdventureGame.Entities.Enemy

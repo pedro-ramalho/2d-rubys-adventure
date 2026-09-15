@@ -1,7 +1,6 @@
 using System.Collections;
 using AdventureGame.Core.Constants;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.NPC
 {

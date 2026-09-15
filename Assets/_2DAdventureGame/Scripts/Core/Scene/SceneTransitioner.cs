@@ -4,7 +4,6 @@ using AdventureGame.Core.Managers;
 using AdventureGame.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Scene
 {

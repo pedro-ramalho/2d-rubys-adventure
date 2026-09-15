@@ -4,7 +4,6 @@ using AdventureGame.Core.Managers;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.UI

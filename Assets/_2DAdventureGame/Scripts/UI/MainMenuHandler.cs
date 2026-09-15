@@ -3,7 +3,6 @@ using AdventureGame.Core.Constants;
 using AdventureGame.Core.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.UI

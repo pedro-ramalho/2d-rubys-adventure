@@ -1,7 +1,6 @@
 using AdventureGame.Core.Quests;
 using AdventureGame.Entities.Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Environment.Collectibles
 {

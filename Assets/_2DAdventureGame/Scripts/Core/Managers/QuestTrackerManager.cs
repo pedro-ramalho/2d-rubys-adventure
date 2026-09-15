@@ -3,7 +3,6 @@ using AdventureGame.Core.Scene;
 using AdventureGame.Entities.NPC;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.Core.Managers

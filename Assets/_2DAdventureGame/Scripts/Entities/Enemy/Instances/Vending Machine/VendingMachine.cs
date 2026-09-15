@@ -2,7 +2,6 @@ using AdventureGame.Core.Constants;
 using AdventureGame.Core.Quests;
 using AdventureGame.Entities.Enemy.Instances.Vending_Machine.States;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.Enemy.Instances.Vending_Machine
 {

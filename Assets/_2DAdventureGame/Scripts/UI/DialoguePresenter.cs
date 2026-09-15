@@ -1,8 +1,6 @@
 using System.Collections;
 using AdventureGame.Entities.Player;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace AdventureGame.UI

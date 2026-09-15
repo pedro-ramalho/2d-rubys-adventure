@@ -4,7 +4,6 @@ using AdventureGame.Core.Dialogue;
 using AdventureGame.Core.Quests;
 using AdventureGame.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AdventureGame.Entities.NPC
 {
