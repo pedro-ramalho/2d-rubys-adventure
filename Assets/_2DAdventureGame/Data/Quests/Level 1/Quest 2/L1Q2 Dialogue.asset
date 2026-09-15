@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e109a12f585ae684d8b04bd69c300cd0, type: 3}
   m_Name: L1Q2 Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::QuestDialogue
-  quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
-  before:
-    lines:
+  Quest: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f, type: 2}
+  Before:
+    Lines:
     - My, Martha said someone was coming...
     - But I didn't think they'd be so small...
     - Well then, I suppose you came here to deal with these Patrol Robots.
@@ -24,20 +24,20 @@ MonoBehaviour:
     - Sure, they ain't gonna fix themselves.
     - You'll need to hit them with something first. Go on, try pressing C and look
       what happens.
-    questToGrantAfter: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f,
+    QuestToGrantAfter: {fileID: 11400000, guid: 20cae48561d7de44ab62f2c62cabac6f,
       type: 2}
-    onExhausted:
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []
-  during:
-    lines:
+  During:
+    Lines:
     - The robots ain't gonna fix themselves, you know.
-    questToGrantAfter: {fileID: 0}
-    onExhausted:
+    QuestToGrantAfter: {fileID: 0}
+    OnExhausted:
       m_PersistentCalls:
         m_Calls: []
-  after:
-    lines:
+  After:
+    Lines:
     - Much quieter now... Good.
     - You seem ready.
     - Something strange's going on with our machines lately.
@@ -49,8 +49,8 @@ MonoBehaviour:
     - Whatever it is they're plotting, you have to stop them!
     - Don't let their looks deceive you!
     - Come with me!
-    questToGrantAfter: {fileID: 0}
-    onExhausted:
+    QuestToGrantAfter: {fileID: 0}
+    OnExhausted:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 11400000, guid: 00de10106742a0a4a9d66f19712f2af1, type: 2}

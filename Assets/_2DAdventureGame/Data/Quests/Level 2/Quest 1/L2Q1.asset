@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f3e1dc421590b469119e7345035d6b, type: 3}
   m_Name: L2Q1
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  id: L2Q1
-  description: Defeat all Marhsmallow's machines!
-  targetCount: 47
-  unlockOnAccept: 0
-  backgroundTrack: {fileID: 8300000, guid: 437eb9bb2227efc4da40a05c2bcd0021, type: 3}
+  Id: L2Q1
+  Description: Defeat all Marhsmallow's machines!
+  CompletionMode: 0
+  TargetCount: 47
+  UnlockOnAccept: 0
+  BackgroundTrack: {fileID: 8300000, guid: 437eb9bb2227efc4da40a05c2bcd0021, type: 3}
+  CompletionStinger: {fileID: 0}

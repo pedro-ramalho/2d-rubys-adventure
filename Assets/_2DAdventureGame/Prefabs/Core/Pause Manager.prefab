@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f63dcc717840f948844f9acc8cddc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
-  pauseDocument: {fileID: 959615656875740724}
-  sfxSource: {fileID: 1275710714273016204}
-  toggleClip: {fileID: 8300000, guid: e9bdd9b3cfb4d0a46b9581132427e3f3, type: 3}
+  m_PauseUiDocument: {fileID: 959615656875740724}
+  m_SfxAudioSource: {fileID: 1275710714273016204}
+  m_ToggleSfx: {fileID: 8300000, guid: e9bdd9b3cfb4d0a46b9581132427e3f3, type: 3}
 --- !u!114 &959615656875740724
 MonoBehaviour:
   m_ObjectHideFlags: 0

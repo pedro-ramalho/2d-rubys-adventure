@@ -242,8 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce3329097a8650408d5e643e450a197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
-  source: {fileID: 6006839184456518079}
-  stingerSource: {fileID: 2891666487463513323}
-  fadeOutDuration: 1.5
-  fadeInDuration: 1.5
-  transitionDelay: 3
+  m_AudioSource: {fileID: 6006839184456518079}
+  m_StingerAudioSource: {fileID: 2891666487463513323}
+  m_FadeOutDurationS: 1.5
+  m_FadeInDurationS: 1.5
+  m_TransitionDelayS: 3

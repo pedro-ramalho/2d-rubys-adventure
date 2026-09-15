@@ -15865,8 +15865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d22addf5ba33344586adddc58896a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountedQuestController
-  data: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
-  completionSfx: {fileID: 8300000, guid: 0a24d50410aa64149ada74bb1507b02e, type: 3}
+  m_QuestData: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6, type: 2}
 --- !u!1 &981344404
 GameObject:
   m_ObjectHideFlags: 0

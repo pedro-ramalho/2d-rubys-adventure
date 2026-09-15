@@ -1,11 +1,5 @@
 fileFormatVersion: 2
 guid: 480dc6369f0c9a54e9093b775e144ebd
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 11400000
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 271239
@@ -13,3 +7,9 @@ AssetOrigin:
   packageVersion: 2.0.0
   assetPath: Assets/_2DAdventureGame/Settings/Renderer 2D.asset
   uploadId: 832758
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

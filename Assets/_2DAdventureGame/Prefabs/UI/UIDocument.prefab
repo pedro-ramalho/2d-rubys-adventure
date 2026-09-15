@@ -85,13 +85,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af218b8ac25ce20409d816144b31cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIHandler
-  displayTime: 4
-  clickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
-  typeInterval: 0.08
-  typeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
-  typeClipEveryNChars: 2
-  typeClipPitchJitter: 0.06
-  dialogueMaxDistance: 5
+  m_DisplayTime: 4
+  m_ClickClip: {fileID: 8300000, guid: 2f60e627cd06cd64a9c09f009423c4e6, type: 3}
+  m_TypeInterval: 0.08
+  m_TypeClip: {fileID: 8300000, guid: e7ef474e4756d4349b738a4e033bd37d, type: 3}
+  m_TypeClipEveryNChars: 2
+  m_TypeClipPitchJitter: 0.06
+  m_DialogueMaxDistance: 5
 --- !u!114 &4692784475991011820
 MonoBehaviour:
   m_ObjectHideFlags: 0
