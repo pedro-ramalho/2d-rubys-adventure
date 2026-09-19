@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Quests
 {
     public class QuestReporter : MonoBehaviour
     {
+        [FormerlySerializedAs("quest")]
         [SerializeField]
         private QuestDefinition m_QuestData;
 

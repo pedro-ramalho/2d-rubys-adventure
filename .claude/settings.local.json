@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git mv *)",
       "Bash(git rm *)",
-      "Bash(xargs -I {} cat {})"
+      "Bash(xargs -I {} cat {})",
+      "Bash(grep -v \"^--$\")"
     ]
   }
 }

@@ -39425,6 +39425,12 @@ PrefabInstance:
       propertyPath: worldId
       value: l0q1.kiwi
       objectReference: {fileID: 0}
+    - target: {fileID: 8754377893997399698, guid: 0a8469630bf7b23419f230fd55897f3b,
+        type: 3}
+      propertyPath: m_QuestData
+      value: 
+      objectReference: {fileID: 11400000, guid: f1a98252cbb012c4b9fda547d87d41e6,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

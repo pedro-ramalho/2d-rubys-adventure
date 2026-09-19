@@ -1168,6 +1168,11 @@ PrefabInstance:
       propertyPath: exitPoint
       value: 
       objectReference: {fileID: 2042272448}
+    - target: {fileID: 1187377033261619839, guid: e8e80d325ebfde4438e45ac48c0829ca,
+        type: 3}
+      propertyPath: m_ExitPointPosition
+      value: 
+      objectReference: {fileID: 2042272448}
     - target: {fileID: 2181834033830045229, guid: e8e80d325ebfde4438e45ac48c0829ca,
         type: 3}
       propertyPath: m_BodyType
