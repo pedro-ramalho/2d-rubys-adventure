@@ -992,11 +992,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 48257774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af886e9653b455049afd6a4d2febd6f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5251eddfd624e094f94599a82ac21b66, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: AdventureGame::AdventureGame.Core.Quest.PhaseGatedActivator
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.Core.Quests.QuestStateGate
   m_Quest: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
-  m_Target: {fileID: 59159636}
+  m_OpenFrom: 2
+  m_OnOpen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1950761559}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &59159636
 GameObject:
   m_ObjectHideFlags: 0
@@ -28862,7 +28877,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1950761560}
-  - component: {fileID: 1950761561}
   m_Layer: 0
   m_Name: L1Q1 Cargo
   m_TagString: Untagged
@@ -28885,20 +28899,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 108008129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1950761561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950761559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af886e9653b455049afd6a4d2febd6f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PhaseGatedActivator
-  m_Quest: {fileID: 0}
-  m_Target: {fileID: 0}
 --- !u!114 &1954623967 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3469440624432549009, guid: 51e1c83b411afaf4fb8c15695f2ce000,
