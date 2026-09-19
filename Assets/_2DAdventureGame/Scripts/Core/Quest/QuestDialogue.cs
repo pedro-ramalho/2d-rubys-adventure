@@ -34,7 +34,5 @@ namespace AdventureGame.Core.Quests
 
             return chosen != null && !chosen.IsEmpty ? chosen : null;
         }
-
-        public bool IsEpilogue(DialoguePhase phase) => phase == Complete && Quest != null;
     }
 }

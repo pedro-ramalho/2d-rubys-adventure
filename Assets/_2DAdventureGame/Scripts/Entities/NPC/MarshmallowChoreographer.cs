@@ -13,19 +13,9 @@ namespace AdventureGame.Entities.NPC
 
         void Awake() => m_Marshmallow = GetComponent<Marshmallow>();
 
-        void Start()
-        {
-            NPC.OnEpilogueEnded += HandleEpilogueEnded;
+        void Start() => Quest.OnStateChanged += HandleStateChanged;
 
-            Quest.OnStateChanged += HandleStateChanged;
-        }
-
-        void OnDestroy()
-        {
-            NPC.OnEpilogueEnded -= HandleEpilogueEnded;
-
-            Quest.OnStateChanged -= HandleStateChanged;
-        }
+        void OnDestroy() => Quest.OnStateChanged -= HandleStateChanged;
 
         void HandleStateChanged(Quest quest)
         {
@@ -36,11 +26,7 @@ namespace AdventureGame.Entities.NPC
                 m_Marshmallow.WalkToExit();
             else if (quest.State == QuestState.Complete)
                 m_Marshmallow.WalkBack();
-        }
-
-        void HandleEpilogueEnded(QuestDefinition data)
-        {
-            if (data == m_QuestData)
+            else if (quest.State == QuestState.Concluded)
                 m_Marshmallow.DisableCollisions();
         }
     }

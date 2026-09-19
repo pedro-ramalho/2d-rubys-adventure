@@ -1,6 +1,5 @@
 using AdventureGame.Core.Quests;
 using AdventureGame.Core.Scene;
-using AdventureGame.Entities.NPC;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -40,17 +39,10 @@ namespace AdventureGame.Core.Managers
 
             Quest.OnStateChanged += HandleStateChanged;
 
-            NPC.OnEpilogueStarted += HandleEpilogueStarted;
-
             SetVisible(false);
         }
 
-        void OnDestroy()
-        {
-            Quest.OnStateChanged -= HandleStateChanged;
-
-            NPC.OnEpilogueStarted -= HandleEpilogueStarted;
-        }
+        void OnDestroy() => Quest.OnStateChanged -= HandleStateChanged;
 
         void HandleStateChanged(Quest quest)
         {
@@ -59,18 +51,17 @@ namespace AdventureGame.Core.Managers
                 m_CompletionPending = quest.Data;
 
                 Refresh();
-            }
-        }
 
-        void HandleEpilogueStarted(QuestDefinition data)
-        {
-            if (data != m_CompletionPending)
                 return;
+            }
 
-            m_CompletionPending = null;
-            m_IsOpen = false;
+            if (quest.State == QuestState.Concluded && quest.Data == m_CompletionPending)
+            {
+                m_CompletionPending = null;
+                m_IsOpen = false;
 
-            Refresh();
+                Refresh();
+            }
         }
 
         void Update()

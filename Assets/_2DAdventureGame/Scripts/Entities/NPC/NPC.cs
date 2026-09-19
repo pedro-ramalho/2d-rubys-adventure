@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AdventureGame.Core.Dialogue;
 using AdventureGame.Core.Quests;
@@ -15,9 +14,6 @@ namespace AdventureGame.Entities.NPC
         private QuestDialogue m_CurrentDialogue;
         private DialoguePhase m_CurrentPhase;
         private int m_LineIndex;
-
-        public static event Action<QuestDefinition> OnEpilogueStarted;
-        public static event Action<QuestDefinition> OnEpilogueEnded;
 
         public void Talk()
         {
@@ -50,9 +46,6 @@ namespace AdventureGame.Entities.NPC
                 m_CurrentPhase = phase;
                 m_LineIndex = 0;
 
-                if (dialogue.IsEpilogue(phase))
-                    OnEpilogueStarted?.Invoke(dialogue.Quest);
-
                 return true;
             }
 
@@ -74,10 +67,8 @@ namespace AdventureGame.Entities.NPC
                     granted.Accept();
             }
 
-            if (dialogue.IsEpilogue(phase))
+            if (phase == dialogue.Complete && dialogue.Quest != null)
             {
-                OnEpilogueEnded?.Invoke(dialogue.Quest);
-
                 Quest quest =
                     QuestManager.Instance != null
                         ? QuestManager.Instance.Get(dialogue.Quest)

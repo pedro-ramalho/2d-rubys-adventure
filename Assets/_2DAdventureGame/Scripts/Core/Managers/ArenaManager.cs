@@ -3,7 +3,6 @@ using AdventureGame.Core.Constants;
 using AdventureGame.Core.Quests;
 using AdventureGame.Core.Scene;
 using AdventureGame.Core.Wave;
-using AdventureGame.Entities.NPC;
 using AdventureGame.UI;
 using UnityEngine;
 
@@ -36,7 +35,7 @@ namespace AdventureGame.Core.Managers
         {
             m_WaveSpawner.OnAllWavesCleared += HandleAllWavesCleared;
 
-            NPC.OnEpilogueEnded += HandleEpilogueEnded;
+            Quest.OnStateChanged += HandleStateChanged;
 
             if (QuestManager.Instance != null)
                 m_Quest = QuestManager.Instance.Get(m_QuestData);
@@ -47,7 +46,7 @@ namespace AdventureGame.Core.Managers
             if (m_WaveSpawner != null)
                 m_WaveSpawner.OnAllWavesCleared -= HandleAllWavesCleared;
 
-            NPC.OnEpilogueEnded -= HandleEpilogueEnded;
+            Quest.OnStateChanged -= HandleStateChanged;
         }
 
         void HandleAllWavesCleared()
@@ -56,9 +55,9 @@ namespace AdventureGame.Core.Managers
                 m_Quest.MarkComplete();
         }
 
-        void HandleEpilogueEnded(QuestDefinition data)
+        void HandleStateChanged(Quest quest)
         {
-            if (data == m_QuestData)
+            if (quest.Data == m_QuestData && quest.State == QuestState.Concluded)
                 StartCoroutine(DelayedWin());
         }
 
