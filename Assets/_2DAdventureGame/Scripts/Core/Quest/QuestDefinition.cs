@@ -10,8 +10,6 @@ namespace AdventureGame.Core.Quests
 
         public string Description;
 
-        public QuestCompletionMode CompletionMode;
-
         public int TargetCount;
 
         public AbilityFlag UnlockOnAccept = AbilityFlag.None;

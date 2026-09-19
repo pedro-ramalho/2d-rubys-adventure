@@ -95,13 +95,9 @@ namespace AdventureGame.Core.Quests
             SetState(saved.State);
         }
 
-        private bool ShouldResetActive =>
-            m_QuestData != null
-            && m_QuestData.CompletionMode == QuestCompletionMode.External
-            && State == QuestState.Active;
+        private bool ShouldResetActive => !IsCounted && State == QuestState.Active;
 
-        private bool IsCounted =>
-            m_QuestData != null && m_QuestData.CompletionMode == QuestCompletionMode.Counted;
+        private bool IsCounted => Target > 0;
 
         void SetState(QuestState next)
         {

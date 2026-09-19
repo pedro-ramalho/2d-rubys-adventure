@@ -152,11 +152,7 @@ namespace AdventureGame.Core.Managers
                 return null;
 
             foreach (Quest q in QuestManager.Instance.All)
-                if (
-                    q.State == QuestState.Active
-                    && q.Data != null
-                    && q.Data.CompletionMode == QuestCompletionMode.Counted
-                )
+                if (q.State == QuestState.Active && q.Data != null && q.Target > 0)
                     return q;
 
             return null;

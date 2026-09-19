@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   Id: L1Q2
   Description: Fix the Patrol Robots that have been causing a ruckus.
-  CompletionMode: 1
   TargetCount: 4
   UnlockOnAccept: 2
   BackgroundTrack: {fileID: 8300000, guid: ad6d68efc3e6bcc44b95d48ddba95ed1, type: 3}

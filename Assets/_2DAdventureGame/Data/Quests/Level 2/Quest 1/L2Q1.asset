@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   Id: L2Q1
   Description: Defeat all Marhsmallow's machines!
-  CompletionMode: 0
-  TargetCount: 47
+  TargetCount: 0
   UnlockOnAccept: 0
   BackgroundTrack: {fileID: 8300000, guid: 437eb9bb2227efc4da40a05c2bcd0021, type: 3}
   CompletionStinger: {fileID: 0}
