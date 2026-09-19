@@ -16,19 +16,19 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            Quest.OnAnyPhaseChanged += OnQuestPhaseChanged;
+            Quest.OnStateChanged += HandleStateChanged;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
+            Quest.OnStateChanged -= HandleStateChanged;
         }
 
         void Start() => PlayResolvedTrack();
 
-        void OnQuestPhaseChanged(Quest quest)
+        void HandleStateChanged(Quest quest)
         {
             if (MusicManager.Instance == null)
                 return;

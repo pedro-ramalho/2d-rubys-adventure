@@ -17,9 +17,7 @@ namespace AdventureGame.Core.Quests
         public int Count => m_ConsumedIds.Count;
         public int Target => m_QuestData != null ? m_QuestData.TargetCount : 0;
 
-        public event Action<Quest> OnPhaseChanged;
-
-        public static event Action<Quest> OnAnyPhaseChanged;
+        public static event Action<Quest> OnStateChanged;
 
         void Awake()
         {
@@ -112,8 +110,7 @@ namespace AdventureGame.Core.Quests
 
             State = next;
 
-            OnPhaseChanged?.Invoke(this);
-            OnAnyPhaseChanged?.Invoke(this);
+            OnStateChanged?.Invoke(this);
         }
     }
 }

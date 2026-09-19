@@ -38,9 +38,7 @@ namespace AdventureGame.Core.Managers
             m_DescriptionLabel = root.Q<Label>("Description");
             m_ProgressLabel = root.Q<Label>("Progress");
 
-            if (QuestManager.Instance != null)
-                foreach (Quest q in QuestManager.Instance.All)
-                    q.OnPhaseChanged += HandlePhaseChanged;
+            Quest.OnStateChanged += HandleStateChanged;
 
             NPC.OnEpilogueStarted += HandleEpilogueStarted;
 
@@ -49,18 +47,16 @@ namespace AdventureGame.Core.Managers
 
         void OnDestroy()
         {
-            if (QuestManager.Instance != null)
-                foreach (Quest q in QuestManager.Instance.All)
-                    q.OnPhaseChanged -= HandlePhaseChanged;
+            Quest.OnStateChanged -= HandleStateChanged;
 
             NPC.OnEpilogueStarted -= HandleEpilogueStarted;
         }
 
-        void HandlePhaseChanged(Quest q)
+        void HandleStateChanged(Quest quest)
         {
-            if (q.State == QuestState.Complete)
+            if (quest.State == QuestState.Complete)
             {
-                m_CompletionPending = q.Data;
+                m_CompletionPending = quest.Data;
 
                 Refresh();
             }

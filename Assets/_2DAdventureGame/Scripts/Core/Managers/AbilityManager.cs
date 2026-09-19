@@ -29,12 +29,12 @@ namespace AdventureGame.Core.Managers
             if (Instance != this)
                 return;
 
-            Quest.OnAnyPhaseChanged += OnQuestPhaseChanged;
+            Quest.OnStateChanged += HandleStateChanged;
 
             m_UnlockedAbilities = m_StartingAbilities;
         }
 
-        void OnQuestPhaseChanged(Quest quest)
+        void HandleStateChanged(Quest quest)
         {
             if (quest.State != QuestState.Active)
                 return;

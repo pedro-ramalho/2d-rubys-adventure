@@ -19,7 +19,7 @@ namespace AdventureGame.Core.Quests
 
             SetTrigger(false);
 
-            Quest.OnAnyPhaseChanged += OnQuestPhaseChanged;
+            Quest.OnStateChanged += HandleStateChanged;
         }
 
         void Start()
@@ -32,9 +32,9 @@ namespace AdventureGame.Core.Quests
                 SetTrigger(true);
         }
 
-        void OnDestroy() => Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
+        void OnDestroy() => Quest.OnStateChanged -= HandleStateChanged;
 
-        void OnQuestPhaseChanged(Quest quest)
+        void HandleStateChanged(Quest quest)
         {
             if (quest.Data != m_QuestData)
                 return;

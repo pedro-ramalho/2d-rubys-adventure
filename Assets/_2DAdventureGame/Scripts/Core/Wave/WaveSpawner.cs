@@ -49,7 +49,6 @@ namespace AdventureGame.Core.Wave
 
         private readonly List<GameObject> m_AliveEnemies = new();
         private bool m_HasStarted;
-        private Quest m_Quest;
 
         public event Action OnAllWavesCleared;
 
@@ -58,12 +57,7 @@ namespace AdventureGame.Core.Wave
             if (Player.Instance != null)
                 Player.Instance.OnDied += HandlePlayerDied;
 
-            if (QuestManager.Instance == null)
-                return;
-
-            m_Quest = QuestManager.Instance.Get(m_TriggerQuestData);
-            if (m_Quest != null)
-                m_Quest.OnPhaseChanged += HandlePhaseChanged;
+            Quest.OnStateChanged += HandleStateChanged;
         }
 
         void OnDestroy()
@@ -71,15 +65,17 @@ namespace AdventureGame.Core.Wave
             if (Player.Instance != null)
                 Player.Instance.OnDied -= HandlePlayerDied;
 
-            if (m_Quest != null)
-                m_Quest.OnPhaseChanged -= HandlePhaseChanged;
+            Quest.OnStateChanged -= HandleStateChanged;
         }
 
         void HandlePlayerDied() => StopAllCoroutines();
 
-        void HandlePhaseChanged(Quest q)
+        void HandleStateChanged(Quest quest)
         {
-            if (m_HasStarted || q.State != QuestState.Active)
+            if (quest.Data != m_TriggerQuestData)
+                return;
+
+            if (m_HasStarted || quest.State != QuestState.Active)
                 return;
 
             m_HasStarted = true;

@@ -21,7 +21,7 @@ namespace AdventureGame.Core.Quests
 
             SetVisible(false);
 
-            Quest.OnAnyPhaseChanged += OnQuestPhaseChanged;
+            Quest.OnStateChanged += HandleStateChanged;
         }
 
         void Start()
@@ -34,9 +34,9 @@ namespace AdventureGame.Core.Quests
                 SetVisible(true);
         }
 
-        void OnDestroy() => Quest.OnAnyPhaseChanged -= OnQuestPhaseChanged;
+        void OnDestroy() => Quest.OnStateChanged -= HandleStateChanged;
 
-        void OnQuestPhaseChanged(Quest quest)
+        void HandleStateChanged(Quest quest)
         {
             if (quest.Data != m_Quest)
                 return;
