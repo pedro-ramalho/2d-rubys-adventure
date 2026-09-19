@@ -2555,6 +2555,12 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[0]'
       value: 
       objectReference: {fileID: 217749244}
+    - target: {fileID: 4535910326726233062, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: m_Quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15585,6 +15591,12 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[0]'
       value: 
       objectReference: {fileID: 1954623967}
+    - target: {fileID: 4535910326726233062, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: m_Quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25954,6 +25966,12 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[0]'
       value: 
       objectReference: {fileID: 1737274178}
+    - target: {fileID: 4535910326726233062, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: m_Quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29539,6 +29557,12 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[0]'
       value: 
       objectReference: {fileID: 2033128727}
+    - target: {fileID: 4535910326726233062, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: m_Quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29765,6 +29789,12 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[0]'
       value: 
       objectReference: {fileID: 2045666460}
+    - target: {fileID: 4535910326726233062, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: m_Quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30450,6 +30480,12 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[0]'
       value: 
       objectReference: {fileID: 2120394538}
+    - target: {fileID: 4535910326726233062, guid: 51e1c83b411afaf4fb8c15695f2ce000,
+        type: 3}
+      propertyPath: m_Quest
+      value: 
+      objectReference: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f,
+        type: 2}
     - target: {fileID: 5227713236456716150, guid: 51e1c83b411afaf4fb8c15695f2ce000,
         type: 3}
       propertyPath: m_LocalPosition.x

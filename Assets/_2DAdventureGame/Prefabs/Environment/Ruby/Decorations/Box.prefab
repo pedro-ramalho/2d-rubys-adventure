@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7703455999881025297}
   - component: {fileID: 3469440624432549009}
   - component: {fileID: 1461250853656128103}
-  - component: {fileID: 4044184155452427843}
+  - component: {fileID: 4535910326726233062}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestReporter
   m_QuestData: {fileID: 0}
   m_WorldId: 
---- !u!114 &4044184155452427843
+--- !u!114 &4535910326726233062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,8 +177,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 169062407923011603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7216f53024ca8ad4ead35f88ecfd3aba, type: 3}
+  m_Script: {fileID: 11500000, guid: 5251eddfd624e094f94599a82ac21b66, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: AdventureGame::AdventureGame.Core.Quest.QuestPhaseTrigger
-  m_QuestData: {fileID: 11400000, guid: e1fc845db4b9c244a8094d9ead45e68f, type: 2}
-  m_EnableTriggerFrom: 1
+  m_EditorClassIdentifier: AdventureGame::AdventureGame.Core.Quests.QuestStateGate
+  m_Quest: {fileID: 0}
+  m_OpenFrom: 2
+  m_OnOpen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7703455999881025297}
+        m_TargetAssemblyTypeName: UnityEngine.BoxCollider2D, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
