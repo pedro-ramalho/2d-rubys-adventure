@@ -18,7 +18,7 @@ namespace AdventureGame.Core.Managers
         private Label m_ProgressLabel;
 
         private bool m_IsOpen;
-        private QuestData m_CompletionPending;
+        private QuestDefinition m_CompletionPending;
 
         private int m_LastCount = -1;
         private Quest m_LastTracked;
@@ -66,7 +66,7 @@ namespace AdventureGame.Core.Managers
             }
         }
 
-        void HandleEpilogueStarted(QuestData data)
+        void HandleEpilogueStarted(QuestDefinition data)
         {
             if (data != m_CompletionPending)
                 return;

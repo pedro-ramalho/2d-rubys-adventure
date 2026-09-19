@@ -7,11 +7,11 @@ namespace AdventureGame.Core.Quests
     public class Quest : MonoBehaviour
     {
         [SerializeField]
-        private QuestData m_QuestData;
+        private QuestDefinition m_QuestData;
 
         private readonly HashSet<string> m_ConsumedIds = new();
 
-        public QuestData Data => m_QuestData;
+        public QuestDefinition Data => m_QuestData;
         public QuestState State { get; private set; } = QuestState.Inactive;
 
         public int Count => m_ConsumedIds.Count;
@@ -25,7 +25,7 @@ namespace AdventureGame.Core.Quests
         {
             if (m_QuestData == null || string.IsNullOrEmpty(m_QuestData.Id))
             {
-                Debug.LogError($"[Quest:{name}] QuestData missing or has no id.");
+                Debug.LogError($"[Quest:{name}] QuestDefinition missing or has no id.");
                 return;
             }
 

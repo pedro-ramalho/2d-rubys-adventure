@@ -45,7 +45,7 @@ namespace AdventureGame.Core.Wave
 
         [Header("Trigger")]
         [SerializeField]
-        private QuestData m_TriggerQuestData;
+        private QuestDefinition m_TriggerQuestData;
 
         private readonly List<GameObject> m_AliveEnemies = new();
         private bool m_HasStarted;

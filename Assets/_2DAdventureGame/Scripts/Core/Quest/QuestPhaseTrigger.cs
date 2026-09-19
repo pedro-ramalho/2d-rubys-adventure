@@ -6,7 +6,7 @@ namespace AdventureGame.Core.Quests
     public class QuestPhaseTrigger : MonoBehaviour
     {
         [SerializeField]
-        private QuestData m_QuestData;
+        private QuestDefinition m_QuestData;
 
         [SerializeField]
         private QuestState m_EnableTriggerFrom = QuestState.Active;

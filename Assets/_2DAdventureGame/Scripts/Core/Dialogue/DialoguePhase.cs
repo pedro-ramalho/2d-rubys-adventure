@@ -10,7 +10,7 @@ namespace AdventureGame.Core.Dialogue
     {
         public List<string> Lines;
 
-        public QuestData QuestToGrantAfter;
+        public QuestDefinition QuestToGrantAfter;
 
         public UnityEvent OnExhausted;
 

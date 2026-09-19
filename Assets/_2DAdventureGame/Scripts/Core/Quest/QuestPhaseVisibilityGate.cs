@@ -6,7 +6,7 @@ namespace AdventureGame.Core.Quests
     public class QuestPhaseVisibilityGate : MonoBehaviour
     {
         [SerializeField]
-        private QuestData m_Quest;
+        private QuestDefinition m_Quest;
 
         [SerializeField]
         private QuestState m_ShowFrom = QuestState.Active;

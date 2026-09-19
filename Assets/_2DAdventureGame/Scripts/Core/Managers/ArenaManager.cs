@@ -15,7 +15,7 @@ namespace AdventureGame.Core.Managers
         private WaveSpawner m_WaveSpawner;
 
         [SerializeField]
-        private QuestData m_QuestData;
+        private QuestDefinition m_QuestData;
 
         [SerializeField]
         private float m_EndGameDelayS = 3f;
@@ -56,7 +56,7 @@ namespace AdventureGame.Core.Managers
                 m_Quest.MarkComplete();
         }
 
-        void HandleEpilogueEnded(QuestData data)
+        void HandleEpilogueEnded(QuestDefinition data)
         {
             if (data == m_QuestData)
                 StartCoroutine(DelayedWin());

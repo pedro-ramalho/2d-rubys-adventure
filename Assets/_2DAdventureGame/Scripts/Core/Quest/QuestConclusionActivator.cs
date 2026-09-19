@@ -10,7 +10,7 @@ namespace AdventureGame.Core.Quests
     {
         [FormerlySerializedAs("m_QuestData")]
         [SerializeField]
-        private QuestData m_Quest;
+        private QuestDefinition m_Quest;
 
         [FormerlySerializedAs("m_TargetGameObject")]
         [SerializeField]
@@ -36,7 +36,7 @@ namespace AdventureGame.Core.Quests
             NPC.OnEpilogueStarted -= HandleEpilogueStarted;
         }
 
-        void HandleEpilogueStarted(QuestData data)
+        void HandleEpilogueStarted(QuestDefinition data)
         {
             if (data != m_Quest)
                 return;

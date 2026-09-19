@@ -37,8 +37,8 @@ namespace AdventureGame.Core.Quests
                 m_Quests.Remove(quest.Data.Id);
         }
 
-        public Quest Get(QuestData questData) =>
-            questData != null && m_Quests.TryGetValue(questData.Id, out Quest q) ? q : null;
+        public Quest Get(QuestDefinition definition) =>
+            definition != null && m_Quests.TryGetValue(definition.Id, out Quest q) ? q : null;
 
         public IEnumerable<Quest> All => m_Quests.Values;
 

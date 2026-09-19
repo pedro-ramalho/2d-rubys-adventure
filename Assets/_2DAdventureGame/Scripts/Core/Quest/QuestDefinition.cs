@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace AdventureGame.Core.Quests
 {
-    [CreateAssetMenu(fileName = "QuestData", menuName = "Game/Quest")]
-    public class QuestData : ScriptableObject
+    [CreateAssetMenu(fileName = "QuestDefinition", menuName = "Game/Quest")]
+    public class QuestDefinition : ScriptableObject
     {
         public string Id;
 

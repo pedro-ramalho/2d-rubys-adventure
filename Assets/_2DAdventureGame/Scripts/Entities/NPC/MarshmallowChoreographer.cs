@@ -7,7 +7,7 @@ namespace AdventureGame.Entities.NPC
     public class MarshmallowChoreographer : MonoBehaviour
     {
         [SerializeField]
-        private QuestData m_QuestData;
+        private QuestDefinition m_QuestData;
 
         private Marshmallow m_Marshmallow;
         private Quest m_Quest;
@@ -44,7 +44,7 @@ namespace AdventureGame.Entities.NPC
                 m_Marshmallow.WalkBack();
         }
 
-        void HandleEpilogueEnded(QuestData data)
+        void HandleEpilogueEnded(QuestDefinition data)
         {
             if (data == m_QuestData)
                 m_Marshmallow.DisableCollisions();

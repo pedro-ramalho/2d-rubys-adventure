@@ -16,8 +16,8 @@ namespace AdventureGame.Entities.NPC
         private QuestDialogue m_CurrentDialogue;
         private int lineIndex;
 
-        public static event Action<QuestData> OnEpilogueStarted;
-        public static event Action<QuestData> OnEpilogueEnded;
+        public static event Action<QuestDefinition> OnEpilogueStarted;
+        public static event Action<QuestDefinition> OnEpilogueEnded;
 
         public void Talk()
         {
