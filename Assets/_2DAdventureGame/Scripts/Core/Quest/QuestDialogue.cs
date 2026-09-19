@@ -1,5 +1,6 @@
 using AdventureGame.Core.Dialogue;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AdventureGame.Core.Quests
 {
@@ -8,11 +9,16 @@ namespace AdventureGame.Core.Quests
     {
         public QuestDefinition Quest;
 
-        public DialoguePhase Before;
+        [FormerlySerializedAs("Before")]
+        public DialoguePhase Inactive;
 
-        public DialoguePhase During;
+        [FormerlySerializedAs("During")]
+        public DialoguePhase Active;
 
-        public DialoguePhase After;
+        [FormerlySerializedAs("After")]
+        public DialoguePhase Complete;
+
+        public DialoguePhase Concluded;
 
         public DialoguePhase Pick(Quest quest)
         {
@@ -20,14 +26,15 @@ namespace AdventureGame.Core.Quests
 
             DialoguePhase chosen = state switch
             {
-                QuestState.Complete => After,
-                QuestState.Active => During,
-                _ => Before,
+                QuestState.Concluded => Concluded,
+                QuestState.Complete => Complete,
+                QuestState.Active => Active,
+                _ => Inactive,
             };
 
             return chosen != null && !chosen.IsEmpty ? chosen : null;
         }
 
-        public bool IsEpilogue(DialoguePhase phase) => phase == After && Quest != null;
+        public bool IsEpilogue(DialoguePhase phase) => phase == Complete && Quest != null;
     }
 }
