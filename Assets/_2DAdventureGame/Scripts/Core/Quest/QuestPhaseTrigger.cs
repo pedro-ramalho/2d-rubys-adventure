@@ -9,7 +9,7 @@ namespace AdventureGame.Core.Quests
         private QuestData m_QuestData;
 
         [SerializeField]
-        private QuestPhase m_EnableTriggerFrom = QuestPhase.During;
+        private QuestState m_EnableTriggerFrom = QuestState.Active;
 
         private readonly List<Collider2D> m_Colliders = new();
 
@@ -28,7 +28,7 @@ namespace AdventureGame.Core.Quests
                 return;
 
             Quest quest = QuestManager.Instance.Get(m_QuestData);
-            if (quest != null && HasReached(quest.Phase))
+            if (quest != null && HasReached(quest.State))
                 SetTrigger(true);
         }
 
@@ -39,7 +39,7 @@ namespace AdventureGame.Core.Quests
             if (quest.Data != m_QuestData)
                 return;
 
-            if (HasReached(quest.Phase))
+            if (HasReached(quest.State))
                 SetTrigger(true);
         }
 
@@ -50,6 +50,6 @@ namespace AdventureGame.Core.Quests
                     collider.isTrigger = value;
         }
 
-        bool HasReached(QuestPhase current) => (int)current >= (int)m_EnableTriggerFrom;
+        bool HasReached(QuestState current) => (int)current >= (int)m_EnableTriggerFrom;
     }
 }

@@ -12,7 +12,7 @@ namespace AdventureGame.Core.Quests
         private readonly HashSet<string> m_ConsumedIds = new();
 
         public QuestData Data => m_QuestData;
-        public QuestPhase Phase { get; private set; } = QuestPhase.Before;
+        public QuestState State { get; private set; } = QuestState.Inactive;
 
         public int Count => m_ConsumedIds.Count;
         public int Target => m_QuestData != null ? m_QuestData.TargetCount : 0;
@@ -41,18 +41,18 @@ namespace AdventureGame.Core.Quests
 
         public void Accept()
         {
-            if (Phase != QuestPhase.Before)
+            if (State != QuestState.Inactive)
                 return;
 
-            SetPhase(QuestPhase.During);
+            SetState(QuestState.Active);
         }
 
         public void MarkComplete()
         {
-            if (Phase != QuestPhase.During)
+            if (State != QuestState.Active)
                 return;
 
-            SetPhase(QuestPhase.After);
+            SetState(QuestState.Complete);
         }
 
         public bool IsConsumed(string worldId) =>
@@ -60,7 +60,7 @@ namespace AdventureGame.Core.Quests
 
         public bool CanReport(string worldId) =>
             IsCounted
-            && Phase == QuestPhase.During
+            && State == QuestState.Active
             && !string.IsNullOrEmpty(worldId)
             && !m_ConsumedIds.Contains(worldId);
 
@@ -81,7 +81,7 @@ namespace AdventureGame.Core.Quests
             new()
             {
                 QuestId = m_QuestData.Id,
-                Phase = ShouldResetDuring ? QuestPhase.Before : Phase,
+                State = ShouldResetActive ? QuestState.Inactive : State,
                 ConsumedIds = IsCounted ? new List<string>(m_ConsumedIds) : null,
             };
 
@@ -94,23 +94,23 @@ namespace AdventureGame.Core.Quests
                     if (!string.IsNullOrEmpty(id))
                         m_ConsumedIds.Add(id);
 
-            SetPhase(saved.Phase);
+            SetState(saved.State);
         }
 
-        private bool ShouldResetDuring =>
+        private bool ShouldResetActive =>
             m_QuestData != null
             && m_QuestData.CompletionMode == QuestCompletionMode.External
-            && Phase == QuestPhase.During;
+            && State == QuestState.Active;
 
         private bool IsCounted =>
             m_QuestData != null && m_QuestData.CompletionMode == QuestCompletionMode.Counted;
 
-        void SetPhase(QuestPhase next)
+        void SetState(QuestState next)
         {
-            if (Phase == next)
+            if (State == next)
                 return;
 
-            Phase = next;
+            State = next;
 
             OnPhaseChanged?.Invoke(this);
             OnAnyPhaseChanged?.Invoke(this);

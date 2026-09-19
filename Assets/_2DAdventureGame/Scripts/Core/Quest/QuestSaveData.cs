@@ -7,7 +7,7 @@ namespace AdventureGame.Core.Quests
     public class QuestSaveData
     {
         public string QuestId;
-        public QuestPhase Phase;
+        public QuestState State;
         public List<string> ConsumedIds;
     }
 }

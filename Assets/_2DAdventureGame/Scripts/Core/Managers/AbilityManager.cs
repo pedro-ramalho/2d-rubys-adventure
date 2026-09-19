@@ -36,7 +36,7 @@ namespace AdventureGame.Core.Managers
 
         void OnQuestPhaseChanged(Quest quest)
         {
-            if (quest.Phase != QuestPhase.During)
+            if (quest.State != QuestState.Active)
                 return;
 
             if (quest.Data == null)

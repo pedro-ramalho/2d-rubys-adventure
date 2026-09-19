@@ -58,7 +58,7 @@ namespace AdventureGame.Core.Managers
 
         void HandlePhaseChanged(Quest q)
         {
-            if (q.Phase == QuestPhase.After)
+            if (q.State == QuestState.Complete)
             {
                 m_CompletionPending = q.Data;
 
@@ -157,7 +157,7 @@ namespace AdventureGame.Core.Managers
 
             foreach (Quest q in QuestManager.Instance.All)
                 if (
-                    q.Phase == QuestPhase.During
+                    q.State == QuestState.Active
                     && q.Data != null
                     && q.Data.CompletionMode == QuestCompletionMode.Counted
                 )

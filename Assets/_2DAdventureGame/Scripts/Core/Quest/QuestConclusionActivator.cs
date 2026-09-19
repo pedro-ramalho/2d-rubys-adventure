@@ -22,7 +22,7 @@ namespace AdventureGame.Core.Quests
                 return;
 
             Quest quest = QuestManager.Instance.Get(m_Quest);
-            if (quest != null && quest.Phase == QuestPhase.After)
+            if (quest != null && quest.State == QuestState.Complete)
             {
                 ActivateSilent();
                 return;

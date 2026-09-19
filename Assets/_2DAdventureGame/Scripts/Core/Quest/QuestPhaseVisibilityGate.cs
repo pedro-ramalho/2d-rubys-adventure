@@ -9,7 +9,7 @@ namespace AdventureGame.Core.Quests
         private QuestData m_Quest;
 
         [SerializeField]
-        private QuestPhase m_ShowFrom = QuestPhase.During;
+        private QuestState m_ShowFrom = QuestState.Active;
 
         private readonly List<SpriteRenderer> m_SpriteRenderers = new();
         private readonly List<Collider2D> m_Colliders = new();
@@ -30,7 +30,7 @@ namespace AdventureGame.Core.Quests
                 return;
 
             Quest quest = QuestManager.Instance.Get(m_Quest);
-            if (quest != null && HasReached(quest.Phase))
+            if (quest != null && HasReached(quest.State))
                 SetVisible(true);
         }
 
@@ -41,7 +41,7 @@ namespace AdventureGame.Core.Quests
             if (quest.Data != m_Quest)
                 return;
 
-            if (HasReached(quest.Phase))
+            if (HasReached(quest.State))
                 SetVisible(true);
         }
 
@@ -56,6 +56,6 @@ namespace AdventureGame.Core.Quests
                     collider.enabled = value;
         }
 
-        bool HasReached(QuestPhase current) => (int)current >= (int)m_ShowFrom;
+        bool HasReached(QuestState current) => (int)current >= (int)m_ShowFrom;
     }
 }

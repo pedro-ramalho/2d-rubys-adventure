@@ -38,9 +38,9 @@ namespace AdventureGame.Entities.NPC
 
         void OnQuestPhaseChanged(Quest quest)
         {
-            if (quest.Phase == QuestPhase.During)
+            if (quest.State == QuestState.Active)
                 m_Marshmallow.WalkToExit();
-            else if (quest.Phase == QuestPhase.After)
+            else if (quest.State == QuestState.Complete)
                 m_Marshmallow.WalkBack();
         }
 

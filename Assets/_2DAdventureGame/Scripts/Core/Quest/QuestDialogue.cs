@@ -16,12 +16,12 @@ namespace AdventureGame.Core.Quests
 
         public DialoguePhase Pick(Quest quest)
         {
-            QuestPhase phase = quest != null ? quest.Phase : QuestPhase.Before;
+            QuestState state = quest != null ? quest.State : QuestState.Inactive;
 
-            DialoguePhase chosen = phase switch
+            DialoguePhase chosen = state switch
             {
-                QuestPhase.After => After,
-                QuestPhase.During => During,
+                QuestState.Complete => After,
+                QuestState.Active => During,
                 _ => Before,
             };
 

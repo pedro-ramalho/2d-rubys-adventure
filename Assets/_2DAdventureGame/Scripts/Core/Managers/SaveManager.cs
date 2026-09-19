@@ -95,7 +95,7 @@ namespace AdventureGame.Core.Managers
                     new QuestSaveData
                     {
                         QuestId = q.QuestId,
-                        Phase = q.Phase,
+                        State = q.State,
                         ConsumedIds =
                             q.ConsumedIds != null ? new List<string>(q.ConsumedIds) : null,
                     }

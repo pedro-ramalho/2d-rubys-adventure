@@ -33,14 +33,14 @@ namespace AdventureGame.Core.Managers
             if (MusicManager.Instance == null)
                 return;
 
-            if (quest.Phase == QuestPhase.During)
+            if (quest.State == QuestState.Active)
             {
                 PlayResolvedTrack();
 
                 return;
             }
 
-            if (quest.Phase == QuestPhase.After)
+            if (quest.State == QuestState.Complete)
             {
                 AudioClip stinger = quest.Data != null ? quest.Data.CompletionStinger : null;
                 AudioClip next = ResolveTrack();
@@ -74,7 +74,7 @@ namespace AdventureGame.Core.Managers
 
             foreach (Quest quest in QuestManager.Instance.All)
                 if (
-                    quest.Phase == QuestPhase.During
+                    quest.State == QuestState.Active
                     && quest.Data != null
                     && quest.Data.BackgroundTrack != null
                 )

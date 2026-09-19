@@ -79,7 +79,7 @@ namespace AdventureGame.Core.Wave
 
         void HandlePhaseChanged(Quest q)
         {
-            if (m_HasStarted || q.Phase != QuestPhase.During)
+            if (m_HasStarted || q.State != QuestState.Active)
                 return;
 
             m_HasStarted = true;
