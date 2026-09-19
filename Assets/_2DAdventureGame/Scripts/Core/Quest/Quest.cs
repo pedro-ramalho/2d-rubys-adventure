@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdventureGame.Core.Quests
@@ -9,13 +8,15 @@ namespace AdventureGame.Core.Quests
         [SerializeField]
         private QuestDefinition m_QuestData;
 
-        private readonly HashSet<string> m_ConsumedIds = new();
+        private int m_Count;
 
         public QuestDefinition Data => m_QuestData;
         public QuestState State { get; private set; } = QuestState.Inactive;
 
-        public int Count => m_ConsumedIds.Count;
+        public int Count => m_Count;
         public int Target => m_QuestData != null ? m_QuestData.TargetCount : 0;
+
+        public bool CanReport => IsCounted && State == QuestState.Active;
 
         public static event Action<Quest> OnStateChanged;
 
@@ -61,23 +62,14 @@ namespace AdventureGame.Core.Quests
             SetState(QuestState.Concluded);
         }
 
-        public bool IsConsumed(string worldId) =>
-            !string.IsNullOrEmpty(worldId) && m_ConsumedIds.Contains(worldId);
-
-        public bool CanReport(string worldId) =>
-            IsCounted
-            && State == QuestState.Active
-            && !string.IsNullOrEmpty(worldId)
-            && !m_ConsumedIds.Contains(worldId);
-
-        public bool TryReport(string worldId)
+        public bool TryReport()
         {
-            if (!CanReport(worldId))
+            if (!CanReport)
                 return false;
 
-            m_ConsumedIds.Add(worldId);
+            m_Count++;
 
-            if (m_ConsumedIds.Count >= Target)
+            if (m_Count >= Target)
                 MarkComplete();
 
             return true;
@@ -87,23 +79,10 @@ namespace AdventureGame.Core.Quests
             new()
             {
                 QuestId = m_QuestData.Id,
-                State = ShouldResetActive ? QuestState.Inactive : State,
-                ConsumedIds = IsCounted ? new List<string>(m_ConsumedIds) : null,
+                State = State == QuestState.Active ? QuestState.Inactive : State,
             };
 
-        public void Restore(QuestSaveData saved)
-        {
-            m_ConsumedIds.Clear();
-
-            if (saved.ConsumedIds != null)
-                foreach (string id in saved.ConsumedIds)
-                    if (!string.IsNullOrEmpty(id))
-                        m_ConsumedIds.Add(id);
-
-            SetState(saved.State);
-        }
-
-        private bool ShouldResetActive => !IsCounted && State == QuestState.Active;
+        public void Restore(QuestSaveData saved) => SetState(saved.State);
 
         private bool IsCounted => Target > 0;
 

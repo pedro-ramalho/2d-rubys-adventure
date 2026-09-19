@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace AdventureGame.Core.Quests
 {
@@ -8,6 +7,5 @@ namespace AdventureGame.Core.Quests
     {
         public string QuestId;
         public QuestState State;
-        public List<string> ConsumedIds;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AdventureGame.Core.Quests
 {
-    public class QuestPhaseVisibilityGate : MonoBehaviour
+    public class QuestStateVisibilityGate : MonoBehaviour
     {
         [SerializeField]
         private QuestDefinition m_Quest;

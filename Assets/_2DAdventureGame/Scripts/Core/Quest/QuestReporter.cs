@@ -7,30 +7,27 @@ namespace AdventureGame.Core.Quests
         [SerializeField]
         private QuestDefinition m_QuestData;
 
-        [SerializeField]
-        private string m_WorldId;
-
         public QuestDefinition Data => m_QuestData;
 
         public void Report()
         {
             Quest quest = GetQuest();
             if (quest != null)
-                quest.TryReport(m_WorldId);
+                quest.TryReport();
         }
 
         public bool CanReport()
         {
             Quest quest = GetQuest();
 
-            return quest != null && quest.CanReport(m_WorldId);
+            return quest != null && quest.CanReport;
         }
 
         public bool IsConsumed()
         {
             Quest quest = GetQuest();
 
-            return quest != null && quest.IsConsumed(m_WorldId);
+            return quest != null && (int)quest.State >= (int)QuestState.Complete;
         }
 
         Quest GetQuest() =>

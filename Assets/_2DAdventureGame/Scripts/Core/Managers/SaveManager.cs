@@ -91,15 +91,7 @@ namespace AdventureGame.Core.Managers
             List<QuestSaveData> copy = new();
 
             foreach (QuestSaveData q in Current.Quests)
-                copy.Add(
-                    new QuestSaveData
-                    {
-                        QuestId = q.QuestId,
-                        State = q.State,
-                        ConsumedIds =
-                            q.ConsumedIds != null ? new List<string>(q.ConsumedIds) : null,
-                    }
-                );
+                copy.Add(new QuestSaveData { QuestId = q.QuestId, State = q.State });
 
             return copy;
         }
