@@ -5,5 +5,6 @@ namespace AdventureGame.Core.Quests
         Inactive,
         Active,
         Complete,
+        Concluded,
     }
 }

@@ -53,6 +53,14 @@ namespace AdventureGame.Core.Quests
             SetState(QuestState.Complete);
         }
 
+        public void Conclude()
+        {
+            if (State != QuestState.Complete)
+                return;
+
+            SetState(QuestState.Concluded);
+        }
+
         public bool IsConsumed(string worldId) =>
             !string.IsNullOrEmpty(worldId) && m_ConsumedIds.Contains(worldId);
 
